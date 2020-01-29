@@ -2,4 +2,8 @@
     <string name="app_name">Adventurio</string>
     <string name="title_activity_login">Login to Adventurio</string>
     <string name="title_activity_register">Register to Adventurio</string>
+    <string name="txt_login_email">Email</string>
+    <string name="txt_login_password">Password</string>
+    <string name="btn_login_loginBtn">Login</string>
+    <string name="btn_login_registerBtn">Register</string>
 </resources>
