@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Adventurio</string>
+    <string name="title_activity_login">Login to Adventurio</string>
+    <string name="title_activity_register">Register to Adventurio</string>
 </resources>

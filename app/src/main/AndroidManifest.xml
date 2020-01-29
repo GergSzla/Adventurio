@@ -9,7 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.Statistics"> <!--change to login-->
+        <activity android:name=".activities.ProfileActivity"></activity>
+
+        <activity
+            android:name=".activities.RegisterActivity"
+            android:label="@string/title_activity_register"/>
+
+        <activity
+            android:name=".activities.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".activities.Statistics"> <!-- change to login -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
