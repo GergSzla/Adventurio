@@ -6,4 +6,15 @@
     <string name="txt_login_password">Password</string>
     <string name="btn_login_loginBtn">Login</string>
     <string name="btn_login_registerBtn">Register</string>
+    <string name="text1">Dont have an account? Click On Register!</string>
+    <string name="txtUsername">Username</string>
+    <string name="txtFname">First Name</string>
+    <string name="txtSurname">Surname</string>
+    <string name="txtConfPass">Confirm Password</string>
+    <string name="text2">Already have an account? Click On Login!</string>
+
+    <!--Popup-->
+    <string name="btnLogout">Logout</string>
+    <string name="btnCancel">Cancel</string>
+    <string name="txtPopup">Are you sure you want to logout?</string>
 </resources>

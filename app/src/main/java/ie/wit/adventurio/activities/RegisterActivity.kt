@@ -2,10 +2,13 @@ package ie.wit.adventurio.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.widget.EditText
 import ie.wit.adventurio.R
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.startActivity
@@ -48,6 +51,16 @@ class RegisterActivity : AppCompatActivity() {
                     txtConfPasswordReg.selectAll()
                     toast("Error: Your passwords don't match!")
                 }
+            }
+        }
+
+        btnRegPass.setOnClickListener {
+            if(btnRegPass.text.toString().equals("Show")){
+                txtPasswordReg.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                btnRegPass.text = "Hide"
+            } else{
+                txtPasswordReg.transformationMethod = PasswordTransformationMethod.getInstance()
+                btnRegPass.text = "Show"
             }
         }
 

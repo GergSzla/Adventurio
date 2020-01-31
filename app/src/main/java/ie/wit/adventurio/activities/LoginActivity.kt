@@ -2,13 +2,15 @@ package ie.wit.adventurio.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import ie.wit.adventurio.R
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import kotlinx.android.synthetic.main.activity_login.*
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
-import org.jetbrains.anko.startActivity
+import kotlinx.android.synthetic.main.activity_register.*
+import org.jetbrains.anko.*
+import java.util.ArrayList
 
 class LoginActivity : AppCompatActivity(),AnkoLogger {
 
@@ -20,16 +22,58 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+
+
         info("Login Activity started..")
 
         app = application as MainApp
 
-        var existingUsers = (app.users.getAllAccounts())
-        existingUsers
-
+        val AccountList = app.users.getAllAccounts() as ArrayList<Account>
 
         btnGoToRegScreen.setOnClickListener{
             startActivity<RegisterActivity>()
+        }
+        btnLoginToAccount.setOnClickListener{
+            if(!(txtEmail.text.toString() == "" &&
+                        txtPassword.text.toString() == "")){
+                var existingUser = AccountList.find { p -> p.Email.toLowerCase() == txtEmail.text.toString().toLowerCase() }
+                if (existingUser != null){
+                    if (existingUser.Email == txtEmail.text.toString() && existingUser.Password == txtPassword.text.toString()){
+                        toast("Logging in to ${txtEmail.text.toString()}")
+                        loginToAccount(existingUser)
+                    }
+                } else {
+                    longToast("Error: The account ${txtEmail.text.toString()} does not exist!")
+                }
+            } else {
+                toast("Email and Password fields are required to login!")
+            }
+        }
+
+        btnLoginPass.setOnClickListener {
+            if(btnLoginPass.text.toString().equals("Show")){
+                txtPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                btnLoginPass.text = "Hide"
+            } else{
+                txtPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+                btnLoginPass.text = "Show"
+            }
+        }
+
+    }
+
+    override fun onBackPressed() {
+        finish();
+        System.exit(0)
+    }
+
+    fun loginToAccount(user:Account){
+        if(txtEmail.text.toString().contains("@") && txtEmail.text.toString().contains(".com")){
+            startActivity<Statistics>()
+            txtEmail.setText("")
+            txtPassword.setText("")
+        } else {
+            toast("Error: Invalid Email Address")
         }
     }
 }

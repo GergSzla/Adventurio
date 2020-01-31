@@ -29,8 +29,9 @@
                 android:layout_marginEnd="8dp"
                 android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890._-"
                 android:inputType="textFilter"
+                android:autofillHints="textFilter"
                 android:ems="10"
-                android:hint="Username" />
+                android:hint="@string/txtUsername" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -44,7 +45,8 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:ems="10"
-                    android:hint="First Name"
+                    android:hint="@string/txtFname"
+                    android:autofillHints="textPersonName"
                     android:inputType="textPersonName" />
 
                 <EditText
@@ -54,8 +56,10 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:ems="10"
-                    android:hint="Surname"
-                    android:inputType="textPersonName" />
+                    android:hint="@string/txtSurname"
+                    android:inputType="textPersonName"
+                    android:autofillHints="textPersonName"
+                    />
             </LinearLayout>
 
             <EditText
@@ -67,17 +71,35 @@
                 android:ems="10"
                 android:hint="@string/txt_login_email"
                 android:inputType="textEmailAddress"
+                android:autofillHints="textEmailAddress"
                 android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890@."/>
 
-            <EditText
-                android:id="@+id/txtPasswordReg"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="58dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:ems="10"
-                android:hint="@string/txt_login_password"
-                android:inputType="textPassword" />
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/txtPasswordReg"
+                    android:layout_width="0dp"
+                    android:layout_height="58dp"
+                    android:layout_marginStart="8dp"
+                    android:autofillHints="textPassword"
+                    android:ems="10"
+                    android:hint="@string/txt_login_password"
+                    android:inputType="textPassword"
+                    app:layout_constraintEnd_toStartOf="@+id/btnRegPass"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/btnRegPass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="Show"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <EditText
                 android:id="@+id/txtConfPasswordReg"
@@ -87,14 +109,15 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="15dp"
                 android:ems="10"
-                android:hint="Confirm Password"
-                android:inputType="textPassword"/>
+                android:hint="@string/txtConfPass"
+                android:inputType="textPassword"
+                android:autofillHints="textPassword"/>
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Already have an account? Click On Login!" />
+                android:text="@string/text2" />
 
             <Button
                 android:id="@+id/btnRegisterAccount"
