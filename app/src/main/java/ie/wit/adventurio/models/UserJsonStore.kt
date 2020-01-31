@@ -9,6 +9,7 @@ import ie.wit.adventurio.helpers.read
 import ie.wit.adventurio.helpers.write
 import org.jetbrains.anko.AnkoLogger
 import java.util.ArrayList
+import org.jetbrains.anko.toast
 
 val USERS_JSON_FILE = "users.json"
 val gsonBuilder = GsonBuilder().setPrettyPrinting().create()
@@ -29,19 +30,32 @@ class UserJsonStore : UserStore, AnkoLogger {
     }
 
     override fun registerAccount(user: Account) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        users.add(user)
+        serialize()
     }
 
     override fun getAllAccounts(): List<Account> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return users
     }
 
     override fun updateAccount(user: Account) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val AccountList = getAllAccounts() as ArrayList<Account>
+        var foundUser: Account? = AccountList.find { p -> p.id == user.id }
+        if (foundUser != null){
+            foundUser.Email = user.Email
+            foundUser.Password = user.Password
+            foundUser.firstName = user.firstName
+            foundUser.surname = user.surname
+            foundUser.username = user.username
+            foundUser.secondaryPW = user.secondaryPW
+            foundUser.secondaryPWType = user.secondaryPWType
+        }
+        serialize()
     }
 
     override fun deleteAccount(user: Account) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        users.remove(user)
+        serialize()
     }
 
 
