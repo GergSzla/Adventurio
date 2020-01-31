@@ -8,7 +8,6 @@ import ie.wit.adventurio.R
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_register.*
 import org.jetbrains.anko.*
 import java.util.ArrayList
 
@@ -59,7 +58,6 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
                 btnLoginPass.text = "Show"
             }
         }
-
     }
 
     override fun onBackPressed() {
@@ -70,10 +68,14 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
     fun loginToAccount(user:Account){
         if(txtEmail.text.toString().contains("@") && txtEmail.text.toString().contains(".com")){
             startActivity<Statistics>()
+            email("gergo.szla@gmail.com","test","testest")
+
             txtEmail.setText("")
             txtPassword.setText("")
         } else {
             toast("Error: Invalid Email Address")
         }
     }
+
+
 }
