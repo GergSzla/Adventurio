@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.logout_popup.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
-class Statistics : AppCompatActivity() {
+class WalkingStatsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_statistics)
