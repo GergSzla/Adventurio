@@ -11,16 +11,72 @@ import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.PopupWindow
+import androidx.fragment.app.FragmentTransaction
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import ie.wit.adventurio.R
-import kotlinx.android.synthetic.main.activity_statistics.*
-import kotlinx.android.synthetic.main.logout_popup.*
-import org.jetbrains.anko.startActivity
+import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
 
-class WalkingStatsActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
+
+    lateinit var statisticsFragment: StatisticsFragment
+    lateinit var tripsFragment: TripsFragment
+    lateinit var profileFragment: ProfileFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_statistics)
+        setContentView(R.layout.activity_main)
+
+        val bottomNavigation : BottomNavigationView = findViewById(R.id.btm_nav)
+        bottomNavigation.setSelectedItemId(R.id.statistics);
+
+        statisticsFragment = StatisticsFragment()
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.frame_layout,statisticsFragment)
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .commit()
+
+        bottomNavigation.setOnNavigationItemSelectedListener { item ->
+
+            when (item.itemId){
+
+
+                R.id.profile -> {
+
+                    profileFragment = ProfileFragment()
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.frame_layout,profileFragment)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .commit()
+
+                }
+                R.id.statistics -> {
+
+                    statisticsFragment = StatisticsFragment()
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.frame_layout,statisticsFragment)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .commit()
+
+                }
+                R.id.trips -> {
+
+                    tripsFragment = TripsFragment()
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.frame_layout,tripsFragment)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .commit()
+
+                }
+
+
+            }
+            true
+        }
     }
 
     override fun onBackPressed() {
@@ -36,7 +92,7 @@ class WalkingStatsActivity : AppCompatActivity() {
         )
 
 
-        toast("There is no back action")
+
         // Set an elevation for the popup window
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             popupWindow.elevation = 10.0F

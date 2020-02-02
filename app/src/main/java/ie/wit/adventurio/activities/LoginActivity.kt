@@ -67,8 +67,7 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
 
     fun loginToAccount(user:Account){
         if(txtEmail.text.toString().contains("@") && txtEmail.text.toString().contains(".com")){
-            startActivity<WalkingStatsActivity>()
-            email("gergo.szla@gmail.com","test","testest")
+            startActivity<MainActivity>()
 
             txtEmail.setText("")
             txtPassword.setText("")
