@@ -17,4 +17,8 @@
     <string name="btnLogout">Logout</string>
     <string name="btnCancel">Cancel</string>
     <string name="txtPopup">Are you sure you want to logout?</string>
+
+    <!--Login-->
+    <string name="forgotPW">Forgot Password</string>
+    <string name="getPass">Get Password</string>
 </resources>

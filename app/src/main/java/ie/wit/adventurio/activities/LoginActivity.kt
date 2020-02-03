@@ -37,7 +37,7 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
                         txtPassword.text.toString() == "")){
                 var existingUser = AccountList.find { p -> p.Email.toLowerCase() == txtEmail.text.toString().toLowerCase() }
                 if (existingUser != null){
-                    if (existingUser.Email == txtEmail.text.toString() && existingUser.Password == txtPassword.text.toString()){
+                    if (existingUser.Email == txtEmail.text.toString().toLowerCase() && existingUser.Password == txtPassword.text.toString().toLowerCase()){
                         toast("Logging in to ${txtEmail.text.toString()}")
                         loginToAccount(existingUser)
                     }
@@ -58,6 +58,10 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
                 btnLoginPass.text = "Show"
             }
         }
+
+        btnForgotPW.setOnClickListener{
+            startActivity<ForgotPasswordActivity>()
+        }
     }
 
     override fun onBackPressed() {
@@ -68,7 +72,6 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
     fun loginToAccount(user:Account){
         if(txtEmail.text.toString().contains("@") && txtEmail.text.toString().contains(".com")){
             startActivity<WalkingStatsActivity>()
-            email("gergo.szla@gmail.com","test","testest")
 
             txtEmail.setText("")
             txtPassword.setText("")
@@ -76,6 +79,4 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
             toast("Error: Invalid Email Address")
         }
     }
-
-
 }
