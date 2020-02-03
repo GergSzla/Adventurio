@@ -11,6 +11,8 @@
     <string name="txtFname">First Name</string>
     <string name="txtSurname">Surname</string>
     <string name="txtConfPass">Confirm Password</string>
+    <string name="btnAddImg">Add Image</string>
+    <string name="txtPhoneNo">Phone Number</string>
     <string name="text2">Already have an account? Click On Login!</string>
 
     <!--Popup-->

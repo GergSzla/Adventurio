@@ -5,24 +5,35 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import ie.wit.adventurio.R
+import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import kotlinx.android.synthetic.main.activity_profile.*
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
 
 class ProfileActivity : AppCompatActivity() {
 
     var user = Account()
+    lateinit var app: MainApp
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
+
+        app = application as MainApp
 
         if (intent.hasExtra("userLoggedIn")) {
             user = intent.extras.getParcelable<Account>("userLoggedIn")
             txtNameProf.setText(user.firstName + " " + user.surname)
             txtEmailProf.setText(user.Email)
             txtUsernameProf.setText(user.username)
+        }
+
+        btnDelAccount.setOnClickListener {
+            app.users.deleteAccount(user)
+            startActivity<LoginActivity>()
+            finish()
         }
     }
 
@@ -38,13 +49,14 @@ class ProfileActivity : AppCompatActivity() {
                 finish()
             }
             R.id.item_edit -> {
-                startActivity<ProfileEditActivity>()
+                startActivityForResult(intentFor<ProfileEditActivity>().putExtra("EditUserLoggedIn", user), 0)
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
     override fun onBackPressed() {
+        startActivityForResult(intentFor<WalkingStatsActivity>().putExtra("userLoggedIn", user), 0)
         finish()
     }
 }
