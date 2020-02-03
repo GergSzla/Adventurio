@@ -7,15 +7,17 @@ import android.view.MenuItem
 import ie.wit.adventurio.R
 import org.jetbrains.anko.startActivity
 
-class ProfileActivity : AppCompatActivity() {
+class TripsListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
+        setContentView(R.layout.activity_trips_list)
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_profile, menu)
+        menuInflater.inflate(R.menu.menu_trips, menu)
         if (menu != null) menu.getItem(0).setVisible(true)
         return super.onCreateOptionsMenu(menu)
     }
@@ -25,8 +27,8 @@ class ProfileActivity : AppCompatActivity() {
             R.id.item_cancel -> {
                 finish()
             }
-            R.id.item_edit -> {
-                startActivity<ProfileEditActivity>()
+            R.id.item_add -> {
+                startActivity<TripSelectActivity>()
             }
         }
         return super.onOptionsItemSelected(item)

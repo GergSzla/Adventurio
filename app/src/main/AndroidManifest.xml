@@ -10,8 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.ForgotPasswordActivity"></activity>
-        <activity android:name=".activities.TripsListAccount" />
+        <activity android:name=".activities.ProfileEditActivity"></activity>
+        <activity android:name=".activities.ForgotPasswordActivity" />
+        <activity android:name=".activities.TripsListActivity" />
         <activity android:name=".activities.DeleteAccountActivity" />
         <activity android:name=".activities.WalkingTripCreateActivity" />
         <activity android:name=".activities.WalkingTripTrackingActivity" />

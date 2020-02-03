@@ -22,4 +22,14 @@
     <string name="forgotPW">Forgot Password</string>
     <string name="getPass">Get Password</string>
     <string name="backToLogin">Login</string>
+
+    <!--Menus-->
+    <string name="menu_prof">Profile</string>
+    <string name="menu_trips">Trips</string>
+    <string name="menu_edit">Edit Profile</string>
+    <string name="menu_update">Update Profile</string>
+    <string name="menu_cancel">Cancel</string>
+    <string name="menu_add">Add Trip</string>
+
+
 </resources>

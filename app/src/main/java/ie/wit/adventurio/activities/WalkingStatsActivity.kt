@@ -8,6 +8,8 @@ import android.transition.Slide
 import android.transition.TransitionManager
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.PopupWindow
@@ -78,6 +80,24 @@ class WalkingStatsActivity : AppCompatActivity() {
         )
 
         return
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        if (menu != null) menu.getItem(0).setVisible(true)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.item_trips -> {
+                startActivity<TripsListActivity>()
+            }
+            R.id.item_profile -> {
+                startActivity<ProfileActivity>()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 
