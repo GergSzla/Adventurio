@@ -35,5 +35,9 @@ class ForgotPasswordActivity : AppCompatActivity() {
                 toast("This user does not exist!")
             }
         }
+
+        btnBackToLogin.setOnClickListener {
+            finish()
+        }
     }
 }

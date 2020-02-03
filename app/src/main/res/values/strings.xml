@@ -21,4 +21,5 @@
     <!--Login-->
     <string name="forgotPW">Forgot Password</string>
     <string name="getPass">Get Password</string>
+    <string name="backToLogin">Login</string>
 </resources>
