@@ -14,15 +14,25 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import ie.wit.adventurio.R
+import ie.wit.adventurio.models.Account
 import kotlinx.android.synthetic.main.activity_statistics.*
 import kotlinx.android.synthetic.main.logout_popup.*
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 class WalkingStatsActivity : AppCompatActivity() {
+
+    var user = Account()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_statistics)
+
+        if (intent.hasExtra("userLoggedIn")) {
+            user = intent.extras.getParcelable<Account>("userLoggedIn")
+            toast("Welcome ${user.username}")
+        }
     }
 
     override fun onBackPressed() {
@@ -94,7 +104,7 @@ class WalkingStatsActivity : AppCompatActivity() {
                 startActivity<TripsListActivity>()
             }
             R.id.item_profile -> {
-                startActivity<ProfileActivity>()
+                startActivityForResult(intentFor<ProfileActivity>().putExtra("userLoggedIn", user), 0)
             }
         }
         return super.onOptionsItemSelected(item)
