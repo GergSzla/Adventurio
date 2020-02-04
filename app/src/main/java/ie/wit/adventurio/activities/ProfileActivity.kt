@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import ie.wit.adventurio.R
+import ie.wit.adventurio.helpers.readImageFromPath
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import kotlinx.android.synthetic.main.activity_profile.*
@@ -28,6 +29,7 @@ class ProfileActivity : AppCompatActivity() {
             txtNameProf.setText(user.firstName + " " + user.surname)
             txtEmailProf.setText(user.Email)
             txtUsernameProf.setText(user.username)
+            imageView.setImageBitmap(readImageFromPath(this, user.image))
         }
 
         btnDelAccount.setOnClickListener {

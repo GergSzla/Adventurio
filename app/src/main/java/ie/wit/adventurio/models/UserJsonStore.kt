@@ -47,6 +47,8 @@ class UserJsonStore : UserStore, AnkoLogger {
             foundUser.firstName = user.firstName
             foundUser.surname = user.surname
             foundUser.username = user.username
+            foundUser.phoneNo = user.phoneNo
+            foundUser.image = user.image
             foundUser.secondaryPW = user.secondaryPW
             foundUser.secondaryPWType = user.secondaryPWType
         }

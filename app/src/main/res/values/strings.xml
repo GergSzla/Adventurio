@@ -35,6 +35,8 @@
 
     <!--Prof Strings-->
     <string name="btnDelUser">Delete Account</string>
+    <string name="btnChangeImage">Change Image</string>
+
 
     <!--Trip-->
     <string name="hint_StepGoal">Step Goal</string>

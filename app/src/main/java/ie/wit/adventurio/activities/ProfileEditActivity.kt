@@ -1,5 +1,6 @@
 package ie.wit.adventurio.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
@@ -7,6 +8,9 @@ import android.text.method.PasswordTransformationMethod
 import android.view.Menu
 import android.view.MenuItem
 import ie.wit.adventurio.R
+import ie.wit.adventurio.helpers.readImage
+import ie.wit.adventurio.helpers.readImageFromPath
+import ie.wit.adventurio.helpers.showImagePicker
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import kotlinx.android.synthetic.main.activity_login.*
@@ -20,6 +24,8 @@ class ProfileEditActivity : AppCompatActivity() {
 
     var user = Account()
     lateinit var app: MainApp
+    val IMAGE_REQUEST = 1
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +39,15 @@ class ProfileEditActivity : AppCompatActivity() {
             editFirstName.setText(user.firstName)
             editSurname.setText(user.surname)
             editEmail.setText(user.Email)
+            editPhoneNo.setText(user.phoneNo)
             editPassword.setText(user.Password)
             editUsername.setText(user.username)
+            profImage.setImageBitmap(readImageFromPath(this, user.image))
+            if (user.image != null) {
+                addImage.setText(R.string.btnChangeImage)
+            }else{
+                addImage.setText(R.string.btnAddImg)
+            }
         }
         btnLoginPass.setOnClickListener {
             if(btnLoginPass.text.toString().equals("Show")){
@@ -44,6 +57,10 @@ class ProfileEditActivity : AppCompatActivity() {
                 editPassword.transformationMethod = PasswordTransformationMethod.getInstance()
                 btnLoginPass.text = "Show"
             }
+        }
+
+        addImage.setOnClickListener {
+            showImagePicker(this, IMAGE_REQUEST)
         }
     }
 
@@ -69,6 +86,18 @@ class ProfileEditActivity : AppCompatActivity() {
         finish()
 
     }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            IMAGE_REQUEST -> {
+                if (data != null) {
+                    user.image = data.getData().toString()
+                    profImage.setImageBitmap(readImage(this, resultCode, data))
+                    addImage.setText(R.string.btnChangeImage)
+                }
+            }
+        }
+    }
 
     fun updateProfile(){
         if(editPassword.text.toString() == editPasswordConf.text.toString()){
@@ -77,6 +106,8 @@ class ProfileEditActivity : AppCompatActivity() {
             user.username = editUsername.text.toString()
             user.Email = editEmail.text.toString()
             user.Password = editPassword.text.toString()
+            user.phoneNo = editPhoneNo.text.toString()
+            user.image
             app.users.updateAccount(user.copy())
             finish()
             startActivityForResult(intentFor<ProfileActivity>().putExtra("userLoggedIn", user), 0)

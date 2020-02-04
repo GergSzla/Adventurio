@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/profImage"
                     android:layout_width="173dp"
                     android:layout_height="149dp"
                     app:layout_constraintStart_toStartOf="parent"
