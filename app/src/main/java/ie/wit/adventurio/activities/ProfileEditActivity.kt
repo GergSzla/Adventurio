@@ -43,7 +43,7 @@ class ProfileEditActivity : AppCompatActivity() {
             editPassword.setText(user.Password)
             editUsername.setText(user.username)
             profImage.setImageBitmap(readImageFromPath(this, user.image))
-            if (user.image != null) {
+            if (user.image != "") {
                 addImage.setText(R.string.btnChangeImage)
             }else{
                 addImage.setText(R.string.btnAddImg)
