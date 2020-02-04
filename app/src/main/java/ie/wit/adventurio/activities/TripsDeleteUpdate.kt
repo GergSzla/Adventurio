@@ -72,7 +72,23 @@ class TripsDeleteUpdate : AppCompatActivity() {
     fun updateTrip(){
         trip.tripDistance = (editDistance.text.toString()).toDouble()
         trip.tripSteps = (editSteps.text.toString()).toInt()
-        trip.tripTime = amountPickerHours.value.toString()+":"+amountPickerMinutes.value.toString()+":"+amountPickerSeconds.value.toString()
+        trip.tripTime = ""
+        if(amountPickerHours.value < 10){
+            trip.tripTime += "0" + amountPickerHours.value.toString() + ":"
+        } else {
+            trip.tripTime += amountPickerHours.value.toString() + ":"
+        }
+        if(amountPickerMinutes.value < 10){
+            trip.tripTime += "0" + amountPickerMinutes.value.toString() + ":"
+        } else {
+            trip.tripTime += amountPickerMinutes.value.toString() + ":"
+        }
+        if(amountPickerMinutes.value < 10){
+            trip.tripTime += "0" + amountPickerSeconds.value.toString()
+        } else {
+            trip.tripTime += amountPickerSeconds.value.toString()
+        }
+
 
 
         app.trips.update(trip.copy())
