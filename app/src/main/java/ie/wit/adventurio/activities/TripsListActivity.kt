@@ -37,6 +37,9 @@ class TripsListActivity : AppCompatActivity(), TripsListener {
     }
 
     private fun loadTrips(){
+        if(user.id == trip.tripOwner){
+
+        }
         showTrips(app.trips.getAllUserTrips())
     }
 
@@ -69,14 +72,10 @@ class TripsListActivity : AppCompatActivity(), TripsListener {
     }
 
     override fun onTripClick(trip: WalkingTrip) {
-        //view
-        //startActivityForResult(intentFor<MTAActivity>().putExtra("challenge_edit ", challenge), 0)
+        startActivityForResult(intentFor<TripsDeleteUpdate>().putExtra("tripEdit", trip), 0)
     }
 
-    override fun onTripHold(trip: WalkingTrip) {
-        //edit
-        //startActivityForResult(intentFor<MTAQuestionsListActivity>().putExtra("challenge_start ", challenge), 0) //change to MTAActivity? Start Challenge from there ?
-    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         loadTrips()
         super.onActivityResult(requestCode, resultCode, data)

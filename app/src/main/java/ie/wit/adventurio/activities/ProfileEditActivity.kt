@@ -42,6 +42,8 @@ class ProfileEditActivity : AppCompatActivity() {
             editPhoneNo.setText(user.phoneNo)
             editPassword.setText(user.Password)
             editUsername.setText(user.username)
+            editStepsGoal.setText(user.stepsGoal)
+            editDistanceGoal.setText(user.distanceGoal.toString())
             profImage.setImageBitmap(readImageFromPath(this, user.image))
             if (user.image != "") {
                 addImage.setText(R.string.btnChangeImage)

@@ -10,21 +10,42 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.ProfileEditActivity"></activity>
-        <activity android:name=".activities.ForgotPasswordActivity" />
-        <activity android:name=".activities.TripsListActivity" />
-        <activity android:name=".activities.DeleteAccountActivity" />
-        <activity android:name=".activities.WalkingTripCreateActivity" />
-        <activity android:name=".activities.WalkingTripTrackingActivity" />
-        <activity android:name=".activities.TripSelectActivity" />
-        <activity android:name=".activities.ProfileActivity" />
+        <activity android:name=".activities.TripsDeleteUpdate"></activity>
+        <activity
+            android:name=".activities.ProfileEditActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ForgotPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.TripsListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.DeleteAccountActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.WalkingTripCreateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.WalkingTripTrackingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.TripSelectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ProfileActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.RegisterActivity"
-            android:label="@string/title_activity_register" />
+            android:label="@string/title_activity_register"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.WalkingStatsActivity"
-            android:label="@string/title_activity_login" />
-        <activity android:name=".activities.LoginActivity"> <!-- change to login -->
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

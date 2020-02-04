@@ -32,6 +32,11 @@ class TripJsonStore : TripStore, AnkoLogger {
            return trips
     }
 
+    override fun getUsersTrips(id:String): List<WalkingTrip> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+
     override fun create(walkingTrip: WalkingTrip) {
         trips.add(walkingTrip)
         serialize()     }

@@ -36,10 +36,13 @@
     <!--Prof Strings-->
     <string name="btnDelUser">Delete Account</string>
     <string name="btnChangeImage">Change Image</string>
+    <string name="hint_stepGoal">Overall Step Goal</string>
+    <string name="hint_distanceGoal">Overall Distance Goal</string>
 
 
     <!--Trip-->
     <string name="hint_StepGoal">Step Goal</string>
+    <string name="btnDelTrip">Delete Trip</string>
 
     <!--Image Chooser-->
     <string name="imgPick">Select Profile Image</string>

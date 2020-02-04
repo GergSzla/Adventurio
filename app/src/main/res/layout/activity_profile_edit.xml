@@ -77,6 +77,31 @@
                 android:hint="@string/txt_login_email"
                 android:inputType="textEmailAddress" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editStepsGoal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:hint="@string/hint_stepGoal"/>
+
+                <EditText
+                    android:id="@+id/editDistanceGoal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:hint="@string/hint_distanceGoal"/>
+
+            </LinearLayout>
+
             <EditText
                 android:id="@+id/editPhoneNo"
                 android:layout_width="match_parent"

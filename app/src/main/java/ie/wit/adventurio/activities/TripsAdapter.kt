@@ -9,7 +9,6 @@ import ie.wit.adventurio.models.WalkingTrip
 import kotlinx.android.synthetic.main.card_trip.view.*
 
 interface TripsListener {
-    fun onTripHold(trip: WalkingTrip)
     fun onTripClick(trip: WalkingTrip)
 }
 
@@ -38,10 +37,6 @@ class TripsAdapter constructor(private var trips: List<WalkingTrip>,
             itemView.txtTimeElapsedTotal.text = trip.tripTime
             //itemView.mapView. = trip.make
 
-            itemView.setOnLongClickListener {
-                listener.onTripHold(trip)
-                true
-            }
 
             itemView.setOnClickListener {
                 listener.onTripClick(trip)
