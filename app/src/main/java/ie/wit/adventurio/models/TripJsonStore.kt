@@ -11,7 +11,7 @@ import org.jetbrains.anko.AnkoLogger
 import java.util.ArrayList
 
 
-val WALKINGTRIP_JSON_FILE = "trips.json"
+val WALKINGTRIP_JSON_FILE = "walking_trips.json"
 val gsonTripBuilder = GsonBuilder().setPrettyPrinting().create()
 val listTripType = object : TypeToken<ArrayList<WalkingTrip>>() {}.type
 
@@ -29,19 +29,29 @@ class TripJsonStore : TripStore, AnkoLogger {
     }
 
     override fun getAllUserTrips(): List<WalkingTrip> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+           return trips
     }
 
     override fun create(walkingTrip: WalkingTrip) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+        trips.add(walkingTrip)
+        serialize()     }
 
     override fun update(walkingTrip: WalkingTrip) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+        val TripsList = getAllUserTrips() as ArrayList<WalkingTrip>
+        var foundTrip: WalkingTrip? = TripsList.find { p -> p.tripID == walkingTrip.tripID }
+        if (foundTrip != null){
+            foundTrip.tripType = walkingTrip.tripType
+            foundTrip.tripDistance = walkingTrip.tripDistance
+            foundTrip.tripSteps = walkingTrip.tripSteps
+            foundTrip.trip = walkingTrip.trip
+            foundTrip.tripTime = walkingTrip.tripTime
+            foundTrip.zoom = walkingTrip.zoom
+        }
+        serialize()    }
 
     override fun delete(walkingTrip: WalkingTrip) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        trips.remove(walkingTrip)
+        serialize()
     }
 
     private fun serialize() {

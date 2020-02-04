@@ -31,7 +31,6 @@ class WalkingStatsActivity : AppCompatActivity() {
 
         if (intent.hasExtra("userLoggedIn")) {
             user = intent.extras.getParcelable<Account>("userLoggedIn")
-            toast("Welcome ${user.username}")
         }
     }
 
