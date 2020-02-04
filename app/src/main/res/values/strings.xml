@@ -39,5 +39,7 @@
     <!--Trip-->
     <string name="hint_StepGoal">Step Goal</string>
 
+    <!--Image Chooser-->
+    <string name="imgPick">Select Profile Image</string>
 
 </resources>

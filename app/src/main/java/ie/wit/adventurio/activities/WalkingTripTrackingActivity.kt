@@ -87,6 +87,7 @@ class WalkingTripTrackingActivity : AppCompatActivity(), SensorEventListener {
 
 
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
+
     }
 
 
@@ -99,7 +100,6 @@ class WalkingTripTrackingActivity : AppCompatActivity(), SensorEventListener {
 
 
         } else if(running && step_goal == 0){
-            progressBar!!.isVisible = false
             currentSteps += (event.values[0].toInt() - event.values[0].toInt()) + 1
             stepsValue.setText("" + currentSteps)
         }
