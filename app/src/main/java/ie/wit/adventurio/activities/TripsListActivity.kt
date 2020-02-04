@@ -28,7 +28,7 @@ class TripsListActivity : AppCompatActivity() {
                 finish()
             }
             R.id.item_add -> {
-                startActivity<TripSelectActivity>()
+                startActivity<WalkingTripTrackingActivity>()
             }
         }
         return super.onOptionsItemSelected(item)

@@ -67,6 +67,7 @@ class ProfileEditActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         finish()
+
     }
 
     fun updateProfile(){

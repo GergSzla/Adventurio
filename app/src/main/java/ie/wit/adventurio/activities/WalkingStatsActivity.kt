@@ -101,7 +101,7 @@ class WalkingStatsActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.item_trips -> {
-                startActivity<TripsListActivity>()
+                startActivityForResult(intentFor<TripsListActivity>().putExtra("userLoggedIn", user), 0)
             }
             R.id.item_profile -> {
                 startActivityForResult(intentFor<ProfileActivity>().putExtra("userLoggedIn", user), 0)
