@@ -32,9 +32,12 @@ class TripJsonStore : TripStore, AnkoLogger {
            return trips
     }
 
-    override fun getUsersTrips(id:String): List<WalkingTrip> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    /*override fun getUsersTrips(id:String): List<WalkingTrip> {
+        val TripsList = getAllUserTrips() as ArrayList<WalkingTrip>
+        var allTrips = TripsList.filter{ p -> p.tripOwner == id }
+
+        return allTrips
+    }*/
 
 
     override fun create(walkingTrip: WalkingTrip) {
@@ -52,7 +55,8 @@ class TripJsonStore : TripStore, AnkoLogger {
             foundTrip.tripTime = walkingTrip.tripTime
             foundTrip.zoom = walkingTrip.zoom
         }
-        serialize()    }
+        serialize()
+    }
 
     override fun delete(walkingTrip: WalkingTrip) {
         trips.remove(walkingTrip)

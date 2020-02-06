@@ -83,7 +83,7 @@ class TripsDeleteUpdate : AppCompatActivity() {
         } else {
             trip.tripTime += amountPickerMinutes.value.toString() + ":"
         }
-        if(amountPickerMinutes.value < 10){
+        if(amountPickerSeconds.value < 10){
             trip.tripTime += "0" + amountPickerSeconds.value.toString()
         } else {
             trip.tripTime += amountPickerSeconds.value.toString()

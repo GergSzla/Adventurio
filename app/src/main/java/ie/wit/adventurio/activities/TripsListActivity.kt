@@ -57,6 +57,7 @@ class TripsListActivity : AppCompatActivity(), TripsListener {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.item_cancel -> {
+                startActivityForResult(intentFor<WalkingStatsActivity>().putExtra("userLoggedIn", user), 0)
                 finish()
             }
             R.id.item_add -> {

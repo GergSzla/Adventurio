@@ -59,11 +59,16 @@ class WalkingStatsActivity : AppCompatActivity() {
         txtCurrentDistGoal.setText(user.distanceGoal.toString())
         txtAvgDist.setText((totalDistance/Trips.size).toString())
 
-        txtTotalTripsPrecentage.setText(getPercentage(totalSteps.toDouble(),user.stepsGoal.toDouble()))
+        txtTotalTripsPrecentage.setText(getPercentage(totalSteps.toDouble(),user.stepsGoal.toDouble())+"%")
+        txtTotalDistPrecentage.setText(getPercentage(totalDistance,user.distanceGoal)+"%")
+
+        progressBar.setProgress(getPercentage(totalSteps.toDouble(),user.stepsGoal.toDouble()).toInt())
+        progressBar7.setProgress(getPercentage(totalDistance,user.distanceGoal).toInt())
+
     }
 
     private fun getPercentage(v1:Double, v2:Double):String{
-        return  "${"%.1f".format(v1 * 100f / v2)}%"
+        return  "${"%.0f".format(v1 * 100f / v2)}"
     }
 
     override fun onBackPressed() {

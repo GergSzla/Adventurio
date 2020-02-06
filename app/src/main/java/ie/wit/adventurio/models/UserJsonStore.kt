@@ -38,6 +38,8 @@ class UserJsonStore : UserStore, AnkoLogger {
         return users
     }
 
+
+
     override fun updateAccount(user: Account) {
         val AccountList = getAllAccounts() as ArrayList<Account>
         var foundUser: Account? = AccountList.find { p -> p.id == user.id }
