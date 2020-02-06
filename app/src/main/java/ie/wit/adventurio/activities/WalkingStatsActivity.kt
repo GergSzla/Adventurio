@@ -14,24 +14,56 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import ie.wit.adventurio.R
+import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
+import ie.wit.adventurio.models.WalkingTrip
 import kotlinx.android.synthetic.main.activity_statistics.*
 import kotlinx.android.synthetic.main.logout_popup.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
+import java.util.ArrayList
 
 class WalkingStatsActivity : AppCompatActivity() {
 
+    lateinit var app: MainApp
     var user = Account()
+    var totalSteps=0
+    var totalDistance = 0.0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_statistics)
 
+        app = application as MainApp
+
         if (intent.hasExtra("userLoggedIn")) {
             user = intent.extras.getParcelable<Account>("userLoggedIn")
         }
+        var Trips = app.trips.getAllUserTrips() as ArrayList<WalkingTrip>
+
+
+        txtTotalTrips.setText(Trips.size.toString())
+        for(trip in Trips){
+            totalSteps += trip.tripSteps
+            totalDistance += trip.tripDistance
+
+        }
+        txtTotalStepsStats.setText(totalSteps.toString())
+        txtCurrentStepsGoal.setText(user.stepsGoal.toString())
+        txtAvgSteps.setText((totalSteps/Trips.size).toString())
+
+
+        txtTotalDistStats.setText(totalDistance.toString())
+        txtCurrentDistGoal.setText(user.distanceGoal.toString())
+        txtAvgDist.setText((totalDistance/Trips.size).toString())
+
+        txtTotalTripsPrecentage.setText(getPercentage(totalSteps.toDouble(),user.stepsGoal.toDouble()))
+    }
+
+    private fun getPercentage(v1:Double, v2:Double):String{
+        return  "${"%.1f".format(v1 * 100f / v2)}%"
     }
 
     override fun onBackPressed() {
