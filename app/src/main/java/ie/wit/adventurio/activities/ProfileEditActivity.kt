@@ -42,7 +42,7 @@ class ProfileEditActivity : AppCompatActivity() {
             editPhoneNo.setText(user.phoneNo)
             editPassword.setText(user.Password)
             editUsername.setText(user.username)
-            editStepsGoal.setText(user.stepsGoal)
+            editStepsGoal.setText(user.stepsGoal.toString())
             editDistanceGoal.setText(user.distanceGoal.toString())
             profImage.setImageBitmap(readImageFromPath(this, user.image))
             if (user.image != "") {
@@ -107,6 +107,8 @@ class ProfileEditActivity : AppCompatActivity() {
             user.surname = editSurname.text.toString()
             user.username = editUsername.text.toString()
             user.Email = editEmail.text.toString()
+            user.stepsGoal = (editStepsGoal.text.toString()).toInt()
+            user.distanceGoal = (editDistanceGoal.text.toString()).toDouble()
             user.Password = editPassword.text.toString()
             user.phoneNo = editPhoneNo.text.toString()
             user.image
