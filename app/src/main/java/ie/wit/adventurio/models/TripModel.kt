@@ -14,7 +14,9 @@ data class WalkingTrip (var tripID:String = "",
                         var startLng:Double = 0.0,
                         var endLat:Double = 0.0,
                         var endLng:Double = 0.0,*/
-                        var trip: String = "",
+                        //var x: List<String>,
+                        //var y: List<String>,
+
                         var zoom:Float = 0F) : Parcelable
 
 /*data class DrivingTrip (var tripID:Int,

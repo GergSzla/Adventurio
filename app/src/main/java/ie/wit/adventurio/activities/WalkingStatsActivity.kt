@@ -41,29 +41,36 @@ class WalkingStatsActivity : AppCompatActivity() {
         if (intent.hasExtra("userLoggedIn")) {
             user = intent.extras.getParcelable<Account>("userLoggedIn")
         }
+
         var Trips = app.trips.getAllUserTrips() as ArrayList<WalkingTrip>
 
 
-        txtTotalTrips.setText(Trips.size.toString())
-        for(trip in Trips){
-            totalSteps += trip.tripSteps
-            totalDistance += trip.tripDistance
+        if(Trips.size > 0){
+            txtTotalTrips.setText(Trips.size.toString())
+            for(trip in Trips){
+                totalSteps += trip.tripSteps
+                totalDistance += trip.tripDistance
 
+            }
+            txtTotalStepsStats.setText(totalSteps.toString())
+            txtCurrentStepsGoal.setText(user.stepsGoal.toString())
+            txtAvgSteps.setText((totalSteps/Trips.size).toString())
+
+
+            txtTotalDistStats.setText("%.1f".format(totalDistance).toString()+ "km")
+            txtCurrentDistGoal.setText("%.1f".format(user.distanceGoal).toString()+ "km")
+            txtAvgDist.setText("%.1f".format(totalDistance/Trips.size).toString() + "km")
+
+
+            if (user.stepsGoal != 0 ){
+                txtTotalTripsPrecentage.setText(getPercentage(totalSteps.toDouble(),user.stepsGoal.toDouble())+"%")
+                progressBar.setProgress(getPercentage(totalSteps.toDouble(),user.stepsGoal.toDouble()).toInt())
+            }
+            if (user.distanceGoal != 0.0){
+                progressBar7.setProgress(getPercentage(totalDistance,user.distanceGoal).toInt())
+                txtTotalDistPrecentage.setText(getPercentage(totalDistance,user.distanceGoal)+"%")
+            }
         }
-        txtTotalStepsStats.setText(totalSteps.toString())
-        txtCurrentStepsGoal.setText(user.stepsGoal.toString())
-        txtAvgSteps.setText((totalSteps/Trips.size).toString())
-
-
-        txtTotalDistStats.setText(totalDistance.toString())
-        txtCurrentDistGoal.setText(user.distanceGoal.toString())
-        txtAvgDist.setText((totalDistance/Trips.size).toString())
-
-        txtTotalTripsPrecentage.setText(getPercentage(totalSteps.toDouble(),user.stepsGoal.toDouble())+"%")
-        txtTotalDistPrecentage.setText(getPercentage(totalDistance,user.distanceGoal)+"%")
-
-        progressBar.setProgress(getPercentage(totalSteps.toDouble(),user.stepsGoal.toDouble()).toInt())
-        progressBar7.setProgress(getPercentage(totalDistance,user.distanceGoal).toInt())
 
     }
 

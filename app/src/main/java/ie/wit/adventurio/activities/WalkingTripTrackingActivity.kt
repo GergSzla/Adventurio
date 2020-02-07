@@ -5,10 +5,14 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.SystemClock
+import android.util.Log
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -18,9 +22,12 @@ import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.WalkingTrip
 import kotlinx.android.synthetic.main.activity_walking_trip_tracking.*
+import org.jetbrains.anko.toast
 import java.util.*
 
 class WalkingTripTrackingActivity : AppCompatActivity(), SensorEventListener {
+
+    private var locationManager : LocationManager? = null
 
     lateinit var app: MainApp
 
@@ -61,7 +68,7 @@ class WalkingTripTrackingActivity : AppCompatActivity(), SensorEventListener {
         if (intent.hasExtra("userLoggedIn")) {
             user = intent.extras.getParcelable<Account>("userLoggedIn")
         }
-
+        locationManager = getSystemService(LOCATION_SERVICE) as LocationManager?
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         stepsValue.setText("0")
         start_button.isVisible = true
@@ -88,6 +95,12 @@ class WalkingTripTrackingActivity : AppCompatActivity(), SensorEventListener {
         }
 
         start_button.setOnClickListener {
+            try {
+                // Request location updates
+                locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0L, 0f, locationListener)
+            } catch(ex: SecurityException) {
+                Log.d("myTag", "Security Exception, no location available")
+            }
             currentSteps = 0
             start_button.isVisible = false
             stop_button.isVisible = true
@@ -110,6 +123,17 @@ class WalkingTripTrackingActivity : AppCompatActivity(), SensorEventListener {
         if (intent.hasExtra("userLoggedIn")) {
             user = intent.extras.getParcelable<Account>("userLoggedIn")
         }
+
+        
+    }
+
+    private val locationListener: LocationListener = object : LocationListener {
+        override fun onLocationChanged(location: Location) {
+            toast("${location.longitude}: ${location.latitude}")
+        }
+        override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
+        override fun onProviderEnabled(provider: String) {}
+        override fun onProviderDisabled(provider: String) {}
     }
 
     override fun onResume() {

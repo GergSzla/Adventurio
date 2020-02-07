@@ -51,7 +51,6 @@ class TripJsonStore : TripStore, AnkoLogger {
             foundTrip.tripType = walkingTrip.tripType
             foundTrip.tripDistance = walkingTrip.tripDistance
             foundTrip.tripSteps = walkingTrip.tripSteps
-            foundTrip.trip = walkingTrip.trip
             foundTrip.tripTime = walkingTrip.tripTime
             foundTrip.zoom = walkingTrip.zoom
         }
