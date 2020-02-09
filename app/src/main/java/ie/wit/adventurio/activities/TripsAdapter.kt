@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.card_trip.view.*
 
 interface TripsListener {
     fun onTripClick(trip: WalkingTrip)
+    fun onTripHold(trip: WalkingTrip)
 }
 
 class TripsAdapter constructor(private var trips: List<WalkingTrip>,
@@ -34,12 +35,16 @@ class TripsAdapter constructor(private var trips: List<WalkingTrip>,
             itemView.txtTripType.text = trip.tripType
             itemView.txtTotalSteps.text = (trip.tripSteps).toString()
             itemView.txtDistanceTotal.text = "%.2f".format(num) +"km"
-            itemView.txtTimeElapsedTotal.text = trip.tripTime
+            itemView.txtTimeElapsedTotal.text = trip.tripLength
             //itemView.mapView. = trip.make
 
 
             itemView.setOnClickListener {
                 listener.onTripClick(trip)
+            }
+            itemView.setOnLongClickListener {
+                listener.onTripHold(trip)
+                true
             }
         }
     }

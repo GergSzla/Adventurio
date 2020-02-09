@@ -72,10 +72,13 @@ class TripsListActivity : AppCompatActivity(), TripsListener {
         finish()
     }
 
-    override fun onTripClick(trip: WalkingTrip) {
+    override fun onTripHold(trip: WalkingTrip) {
         startActivityForResult(intentFor<TripsDeleteUpdate>().putExtra("tripEdit", trip), 0)
     }
 
+    override fun onTripClick(trip: WalkingTrip) {
+        startActivityForResult(intentFor<ViewTrip>().putExtra("tripView", trip), 0)
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         loadTrips()

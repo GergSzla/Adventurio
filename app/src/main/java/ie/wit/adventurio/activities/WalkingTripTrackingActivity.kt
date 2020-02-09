@@ -45,6 +45,8 @@ class WalkingTripTrackingActivity : AppCompatActivity(), SensorEventListener {
     var minute: TextView? = null
     var seconds: TextView? = null
     var milli_seconds: TextView? = null
+    var lng : MutableList<String> = mutableListOf<String>()
+    var lat : MutableList<String> = mutableListOf<String>()
 
     internal var MillisecondTime: Long = 0
     internal var StartTime: Long = 0
@@ -130,6 +132,28 @@ class WalkingTripTrackingActivity : AppCompatActivity(), SensorEventListener {
     private val locationListener: LocationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
             toast("${location.longitude}: ${location.latitude}")
+            if(stop_button.isVisible == true){
+                lng.add("${location.longitude}")
+                lat.add("${location.latitude}")
+                ///Test
+                /*
+                lng.add("-7.251961")
+                lat.add("52.671500")
+
+                lng.add("-7.252154")
+                lat.add("52.672651")
+
+                lng.add("-7.253526")
+                lat.add("52.672515")
+
+                lng.add("-7.253162")
+                lat.add("52.671253")
+
+                lng.add("-7.252615")
+                lat.add("52.670244")
+                */
+
+            }
         }
         override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
         override fun onProviderEnabled(provider: String) {}
@@ -220,12 +244,14 @@ class WalkingTripTrackingActivity : AppCompatActivity(), SensorEventListener {
     }
 
     private fun saveTrip(){
-        trip.tripTime = "${hour!!.text.toString()}:${minute!!.text.toString()}:${seconds!!.text.toString()}"
+        trip.tripLength = "${hour!!.text.toString()}:${minute!!.text.toString()}:${seconds!!.text.toString()}"
         trip.tripID = UUID.randomUUID().toString()
         trip.tripType = "Walking"
         trip.tripOwner = user.id
         trip.tripSteps = currentSteps
         trip.tripDistance = 0.0008 * currentSteps
+        trip.lng = lng
+        trip.lat = lat
         app.trips.create(trip.copy())
         finish()
     }

@@ -6,7 +6,6 @@ import android.view.Menu
 import android.view.MenuItem
 import ie.wit.adventurio.R
 import ie.wit.adventurio.main.MainApp
-import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.WalkingTrip
 import kotlinx.android.synthetic.main.activity_trips_delete_update.*
 import org.jetbrains.anko.intentFor
@@ -37,9 +36,9 @@ class TripsDeleteUpdate : AppCompatActivity() {
         var num = trip.tripDistance
         editDistance.setText("%.2f".format(num))
         editSteps.setText(trip.tripSteps.toString())
-        amountPickerHours.value = trip.tripTime.substring(0,2).toInt()
-        amountPickerMinutes.value = trip.tripTime.substring(3,5).toInt()
-        amountPickerSeconds.value = trip.tripTime.substring(6,8).toInt()
+        amountPickerHours.value = trip.tripLength.substring(0,2).toInt()
+        amountPickerMinutes.value = trip.tripLength.substring(3,5).toInt()
+        amountPickerSeconds.value = trip.tripLength.substring(6,8).toInt()
 
         btnDelTrip.setOnClickListener {
             app.trips.delete(trip)
@@ -72,21 +71,21 @@ class TripsDeleteUpdate : AppCompatActivity() {
     fun updateTrip(){
         trip.tripDistance = (editDistance.text.toString()).toDouble()
         trip.tripSteps = (editSteps.text.toString()).toInt()
-        trip.tripTime = ""
+        trip.tripLength = ""
         if(amountPickerHours.value < 10){
-            trip.tripTime += "0" + amountPickerHours.value.toString() + ":"
+            trip.tripLength += "0" + amountPickerHours.value.toString() + ":"
         } else {
-            trip.tripTime += amountPickerHours.value.toString() + ":"
+            trip.tripLength += amountPickerHours.value.toString() + ":"
         }
         if(amountPickerMinutes.value < 10){
-            trip.tripTime += "0" + amountPickerMinutes.value.toString() + ":"
+            trip.tripLength += "0" + amountPickerMinutes.value.toString() + ":"
         } else {
-            trip.tripTime += amountPickerMinutes.value.toString() + ":"
+            trip.tripLength += amountPickerMinutes.value.toString() + ":"
         }
         if(amountPickerSeconds.value < 10){
-            trip.tripTime += "0" + amountPickerSeconds.value.toString()
+            trip.tripLength += "0" + amountPickerSeconds.value.toString()
         } else {
-            trip.tripTime += amountPickerSeconds.value.toString()
+            trip.tripLength += amountPickerSeconds.value.toString()
         }
 
 
