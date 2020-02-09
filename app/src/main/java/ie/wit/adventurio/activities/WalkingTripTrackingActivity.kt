@@ -8,7 +8,6 @@ import android.hardware.SensorManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.SystemClock
@@ -16,6 +15,7 @@ import android.util.Log
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import ie.wit.adventurio.R
 import ie.wit.adventurio.main.MainApp
@@ -23,7 +23,11 @@ import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.WalkingTrip
 import kotlinx.android.synthetic.main.activity_walking_trip_tracking.*
 import org.jetbrains.anko.toast
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
+
 
 class WalkingTripTrackingActivity : AppCompatActivity(), SensorEventListener {
 
@@ -48,6 +52,11 @@ class WalkingTripTrackingActivity : AppCompatActivity(), SensorEventListener {
     var lng : MutableList<String> = mutableListOf<String>()
     var lat : MutableList<String> = mutableListOf<String>()
 
+    var start = ""
+    var end = ""
+    var dow = ""
+    var date= ""
+
     internal var MillisecondTime: Long = 0
     internal var StartTime: Long = 0
     internal var TimeBuff: Long = 0
@@ -63,7 +72,14 @@ class WalkingTripTrackingActivity : AppCompatActivity(), SensorEventListener {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_walking_trip_tracking)
+
+        val d = Date()
+        val sdf = SimpleDateFormat("EEEE")
+        val cal = Calendar.getInstance()
+        val month_date = SimpleDateFormat("MMMM")
+        var currentDateTime= LocalDateTime.now()
 
         app = application as MainApp
 
@@ -81,6 +97,7 @@ class WalkingTripTrackingActivity : AppCompatActivity(), SensorEventListener {
 
 
         stop_button.setOnClickListener {
+            end = currentDateTime.format(DateTimeFormatter.ofPattern("HH:mm"))
 
             saveTrip()
 
@@ -89,6 +106,8 @@ class WalkingTripTrackingActivity : AppCompatActivity(), SensorEventListener {
             stop_button.isVisible = false
             linear1.isVisible = true
             linear2.isVisible = false
+
+
 
             handler?.removeCallbacks(runnable)
             flag=false
@@ -115,6 +134,10 @@ class WalkingTripTrackingActivity : AppCompatActivity(), SensorEventListener {
             linear2.isVisible = true
             bindViews()
 
+            start = currentDateTime.format(DateTimeFormatter.ofPattern("HH:mm"))
+            dow = sdf.format(d)
+            date = cal.get(Calendar.DAY_OF_MONTH).toString() + ", " + month_date.format(cal.getTime())
+
             StartTime = SystemClock.uptimeMillis()
             handler?.postDelayed(runnable, 0)
             flag=true
@@ -136,6 +159,7 @@ class WalkingTripTrackingActivity : AppCompatActivity(), SensorEventListener {
                 lng.add("${location.longitude}")
                 lat.add("${location.latitude}")
                 ///Test
+
                 /*
                 lng.add("-7.251961")
                 lat.add("52.671500")
@@ -151,7 +175,31 @@ class WalkingTripTrackingActivity : AppCompatActivity(), SensorEventListener {
 
                 lng.add("-7.252615")
                 lat.add("52.670244")
-                */
+
+                lng.add("-7.252473")
+                lat.add("52.669141")
+
+                lng.add("-7.252584")
+                lat.add("52.668460")
+
+                lng.add("-7.252649")
+                lat.add("52.667604")
+
+                lng.add("-7.251228")
+                lat.add("52.667754")
+
+                lng.add("-7.251126")
+                lat.add("52.668631")
+
+                lng.add("-7.250072")
+                lat.add("52.671575")
+
+                lng.add("-7.250801")
+                lat.add("52.671679")
+
+                lng.add("-7.252109")
+                lat.add("52.671431")
+*/
 
             }
         }
@@ -252,6 +300,11 @@ class WalkingTripTrackingActivity : AppCompatActivity(), SensorEventListener {
         trip.tripDistance = 0.0008 * currentSteps
         trip.lng = lng
         trip.lat = lat
+        trip.tripEndTime = end
+        trip.tripStartTime = start
+        trip.DayOfWeek = dow
+        trip.Date = date
+
         app.trips.create(trip.copy())
         finish()
     }

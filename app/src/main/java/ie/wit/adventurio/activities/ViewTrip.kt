@@ -68,6 +68,7 @@ class ViewTrip : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
                     .snippet("GPS : " + loc.toString())
                     .draggable(false)
                     .position(loc)
+                    .visible(false)
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
 
             }

@@ -19,6 +19,7 @@ class TripsAdapter constructor(private var trips: List<WalkingTrip>,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         return MainHolder(LayoutInflater.from(parent?.context).inflate(R.layout.card_trip, parent, false))
+
     }
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
@@ -36,6 +37,7 @@ class TripsAdapter constructor(private var trips: List<WalkingTrip>,
             itemView.txtTotalSteps.text = (trip.tripSteps).toString()
             itemView.txtDistanceTotal.text = "%.2f".format(num) +"km"
             itemView.txtTimeElapsedTotal.text = trip.tripLength
+            itemView.txtTimeAndDate.text = trip.DayOfWeek + ", " + trip.Date + ", " + trip.tripStartTime + " - " + trip.tripEndTime
             //itemView.mapView. = trip.make
 
 
