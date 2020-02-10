@@ -28,6 +28,7 @@ apply plugin: 'kotlin-android-extensions'
 
 dependencies {
     implementation 'com.beust:klaxon:0.30'
+    implementation 'com.github.anastr:speedviewlib:1.5.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

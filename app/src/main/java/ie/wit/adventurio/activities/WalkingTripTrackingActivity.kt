@@ -17,6 +17,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.github.anastr.speedviewlib.SpeedView
 import ie.wit.adventurio.R
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
@@ -133,7 +134,6 @@ class WalkingTripTrackingActivity : AppCompatActivity(), SensorEventListener {
             linear1.isVisible = false
             linear2.isVisible = true
             bindViews()
-
             start = currentDateTime.format(DateTimeFormatter.ofPattern("HH:mm"))
             dow = sdf.format(d)
             date = cal.get(Calendar.DAY_OF_MONTH).toString() + ", " + month_date.format(cal.getTime())
