@@ -22,7 +22,6 @@ import ie.wit.adventurio.R
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.WalkingTrip
-import kotlinx.android.synthetic.main.activity_walking_trip_tracking.*
 import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
@@ -30,9 +29,9 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 
-class WalkingTripTrackingActivity : AppCompatActivity(), SensorEventListener {
+//class WalkingTripTrackingActivity : AppCompatActivity(), SensorEventListener {
 
-    private var locationManager : LocationManager? = null
+    /*private var locationManager : LocationManager? = null
 
     lateinit var app: MainApp
 
@@ -307,7 +306,7 @@ class WalkingTripTrackingActivity : AppCompatActivity(), SensorEventListener {
 
         app.trips.create(trip.copy())
         finish()
-    }
+   // }
 
-
-}
+*/
+//}

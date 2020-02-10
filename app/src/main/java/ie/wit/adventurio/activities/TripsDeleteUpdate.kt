@@ -1,4 +1,4 @@
-package ie.wit.adventurio.activities
+/*package ie.wit.adventurio.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,7 +7,7 @@ import android.view.MenuItem
 import ie.wit.adventurio.R
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.WalkingTrip
-import kotlinx.android.synthetic.main.activity_trips_delete_update.*
+import kotlinx.android.synthetic.main.fragment_trips_delete_update.*
 import org.jetbrains.anko.intentFor
 
 class TripsDeleteUpdate : AppCompatActivity() {
@@ -18,7 +18,7 @@ class TripsDeleteUpdate : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_trips_delete_update)
+        setContentView(R.layout.fragment_trips_delete_update)
 
         app = application as MainApp
 
@@ -92,4 +92,4 @@ class TripsDeleteUpdate : AppCompatActivity() {
 
         app.trips.update(trip.copy())
     }
-}
+}*/

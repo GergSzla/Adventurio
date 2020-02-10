@@ -1,4 +1,4 @@
-package ie.wit.adventurio.activities
+/*package ie.wit.adventurio.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,7 +8,7 @@ import ie.wit.adventurio.R
 import ie.wit.adventurio.helpers.readImageFromPath
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
-import kotlinx.android.synthetic.main.activity_profile.*
+import kotlinx.android.synthetic.main.fragment_profile.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivity
 
@@ -20,7 +20,7 @@ class ProfileActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
+        setContentView(R.layout.fragment_profile)
 
         app = application as MainApp
 
@@ -61,4 +61,4 @@ class ProfileActivity : AppCompatActivity() {
         startActivityForResult(intentFor<WalkingStatsActivity>().putExtra("userLoggedIn", user), 0)
         finish()
     }
-}
+}*/

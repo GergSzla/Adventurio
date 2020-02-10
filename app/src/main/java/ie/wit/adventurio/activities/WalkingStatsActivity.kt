@@ -1,4 +1,4 @@
-package ie.wit.adventurio.activities
+/*package ie.wit.adventurio.activities
 
 import android.content.Context
 import android.os.Build
@@ -17,10 +17,8 @@ import ie.wit.adventurio.R
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.WalkingTrip
-import kotlinx.android.synthetic.main.activity_statistics.*
-import kotlinx.android.synthetic.main.logout_popup.*
+import kotlinx.android.synthetic.main.fragment_statistics.*
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import java.util.ArrayList
 
@@ -34,7 +32,7 @@ class WalkingStatsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_statistics)
+        setContentView(R.layout.fragment_statistics)
 
         app = application as MainApp
 
@@ -154,4 +152,4 @@ class WalkingStatsActivity : AppCompatActivity() {
     }
 
 
-}
+}*/

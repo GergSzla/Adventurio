@@ -7,7 +7,7 @@ import ie.wit.adventurio.models.UserJsonStore
 import ie.wit.adventurio.models.UserStore
 import org.jetbrains.anko.AnkoLogger
 
-class MainApp : Application(), AnkoLogger {
+class MainApp : Application() {
 
     lateinit var users: UserStore
     lateinit var trips: TripStore

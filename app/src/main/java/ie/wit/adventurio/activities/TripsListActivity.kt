@@ -1,4 +1,4 @@
-package ie.wit.adventurio.activities
+/*package ie.wit.adventurio.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,14 +7,16 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import ie.wit.adventurio.R
+import ie.wit.adventurio.adapters.TripsAdapter
+import ie.wit.adventurio.adapters.TripsListener
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.WalkingTrip
-import kotlinx.android.synthetic.main.activity_trips_list.*
+import kotlinx.android.synthetic.main.fragment_trips_list.*
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.startActivity
 
-class TripsListActivity : AppCompatActivity(), TripsListener {
+class TripsListActivity : AppCompatActivity(),
+    TripsListener {
 
     lateinit var app: MainApp
     var trip = WalkingTrip()
@@ -22,7 +24,7 @@ class TripsListActivity : AppCompatActivity(), TripsListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_trips_list)
+        setContentView(R.layout.fragment_trips_list)
 
         app = application as MainApp
 
@@ -32,7 +34,10 @@ class TripsListActivity : AppCompatActivity(), TripsListener {
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = TripsAdapter(app.trips.getAllUserTrips(), this)
+        recyclerView.adapter = TripsAdapter(
+            app.trips.getAllUserTrips(),
+            this
+        )
         loadTrips()
     }
 
@@ -44,7 +49,8 @@ class TripsListActivity : AppCompatActivity(), TripsListener {
     }
 
     private fun showTrips(trips: List<WalkingTrip>) {
-        recyclerView.adapter = TripsAdapter(trips, this)
+        recyclerView.adapter =
+            TripsAdapter(trips, this)
         recyclerView.adapter?.notifyDataSetChanged()
     }
 
@@ -84,4 +90,4 @@ class TripsListActivity : AppCompatActivity(), TripsListener {
         loadTrips()
         super.onActivityResult(requestCode, resultCode, data)
     }
-}
+}*/

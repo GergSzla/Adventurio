@@ -1,20 +1,15 @@
 package ie.wit.adventurio.activities
 
-import android.app.Activity
-import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import ie.wit.adventurio.R
 import ie.wit.adventurio.main.MainApp
-import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.WalkingTrip
-import kotlinx.android.synthetic.main.activity_view_trip.*
+import kotlinx.android.synthetic.main.fragment_view_trip.*
 
 class ViewTrip : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
 
@@ -26,7 +21,7 @@ class ViewTrip : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_view_trip)
+        setContentView(R.layout.fragment_view_trip)
 
         if (intent.hasExtra("tripView")) {
             trip = intent.extras.getParcelable<WalkingTrip>("tripView")

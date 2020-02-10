@@ -27,11 +27,22 @@
 
     <!--Menus-->
     <string name="menu_prof">Profile</string>
-    <string name="menu_trips">Trips</string>
-    <string name="menu_edit">Edit Profile</string>
-    <string name="menu_update">Update Profile</string>
+    <string name="menu_trips">Adventures</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_update">Update</string>
     <string name="menu_cancel">Cancel</string>
-    <string name="menu_add">Add Trip</string>
+    <string name="menu_add">Add Adventure</string>
+    <string name="menu_stats">Statistics</string>
+    <string name="menu_record">Record Adventure</string>
+    <string name="menu_list_trips">List Adventures</string>
+    <string name="menu_logout">Logout</string>
+
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_header_title">Adventurio</string>
+    <string name="nav_header_subtitle">voteforhomer@android.com</string>
+
+
+    <string name="account">Done for today?</string>
 
     <!--Prof Strings-->
     <string name="btnDelUser">Delete Account</string>
@@ -46,5 +57,10 @@
 
     <!--Image Chooser-->
     <string name="imgPick">Select Profile Image</string>
+
+
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+
 
 </resources>

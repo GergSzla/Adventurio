@@ -1,4 +1,4 @@
-package ie.wit.adventurio.activities
+package ie.wit.adventurio.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -14,11 +14,16 @@ interface TripsListener {
 }
 
 class TripsAdapter constructor(private var trips: List<WalkingTrip>,
-                             private val listener: TripsListener) : RecyclerView.Adapter<TripsAdapter.MainHolder>() {
+                             private val listener: TripsListener
+) : RecyclerView.Adapter<TripsAdapter.MainHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
-        return MainHolder(LayoutInflater.from(parent?.context).inflate(R.layout.card_trip, parent, false))
+        return MainHolder(
+            LayoutInflater.from(
+                parent?.context
+            ).inflate(R.layout.card_trip, parent, false)
+        )
 
     }
 

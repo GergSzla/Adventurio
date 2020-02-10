@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import ie.wit.adventurio.R
+import ie.wit.adventurio.fragments.StatisticsFragment
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import kotlinx.android.synthetic.main.activity_login.*
@@ -72,7 +73,7 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
     fun loginToAccount(user:Account){
         if(txtEmail.text.toString().contains("@") && txtEmail.text.toString().contains(".com")){
 
-            startActivityForResult(intentFor<WalkingStatsActivity>().putExtra("userLoggedIn", user), 0)
+            startActivityForResult(intentFor<Home>().putExtra("userLoggedIn", user), 0)
             txtEmail.setText("")
             txtPassword.setText("")
         } else {

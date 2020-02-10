@@ -1,4 +1,4 @@
-package ie.wit.adventurio.activities
+/*package ie.wit.adventurio.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -13,10 +13,7 @@ import ie.wit.adventurio.helpers.readImageFromPath
 import ie.wit.adventurio.helpers.showImagePicker
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_profile.*
-import kotlinx.android.synthetic.main.activity_profile_edit.*
-import kotlinx.android.synthetic.main.activity_profile_edit.btnLoginPass
+import kotlinx.android.synthetic.main.fragment_profile_edit.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 
@@ -29,7 +26,7 @@ class ProfileEditActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile_edit)
+        setContentView(R.layout.fragment_profile_edit)
 
         app = application as MainApp
 
@@ -121,4 +118,4 @@ class ProfileEditActivity : AppCompatActivity() {
 
 
     }
-}
+}*/
