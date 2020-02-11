@@ -1,21 +1,17 @@
 package ie.wit.adventurio.fragments
 
-import android.content.Context
-import android.net.Uri
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.fragment.app.Fragment
 import ie.wit.adventurio.R
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.WalkingTrip
-import kotlinx.android.synthetic.main.fragment_statistics.*
 import kotlinx.android.synthetic.main.fragment_statistics.view.*
-import java.util.ArrayList
-
+import java.util.*
 
 
 class StatisticsFragment : Fragment() {
@@ -25,13 +21,12 @@ class StatisticsFragment : Fragment() {
     var totalSteps=0
     var totalDistance = 0.0
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         app = activity?.application as MainApp
 
-        /*if (intent.hasExtra("userLoggedIn")) {
-            user = intent.extras.getParcelable<Account>("userLoggedIn")
-        }*/
+        /**/
 
 
     }
@@ -42,6 +37,7 @@ class StatisticsFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_statistics, container, false)
         activity?.title = getString(R.string.menu_stats)
+
 
         var Trips = app.trips.getAllUserTrips() as ArrayList<WalkingTrip>
 

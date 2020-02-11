@@ -1,10 +1,9 @@
 package ie.wit.adventurio.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -14,21 +13,30 @@ import ie.wit.adventurio.R
 import ie.wit.adventurio.fragments.ProfileFragment
 import ie.wit.adventurio.fragments.RecordTripFragment
 import ie.wit.adventurio.fragments.StatisticsFragment
+import ie.wit.adventurio.models.Account
 import ie.wit.fragments.TripsListFragment
 import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.home.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
+
 class Home : AppCompatActivity(),
     NavigationView.OnNavigationItemSelectedListener {
 
     lateinit var ft: FragmentTransaction
+    private val USER_KEY = "user_key"
+    var user = Account()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home)
         setSupportActionBar(toolbar)
+
+        if (intent.hasExtra("userLoggedIn")) {
+            user = intent.extras.getParcelable<Account>("userLoggedIn")
+
+        }
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action",
@@ -47,8 +55,16 @@ class Home : AppCompatActivity(),
 
         ft = supportFragmentManager.beginTransaction()
 
-        val fragment = StatisticsFragment.newInstance()
-        ft.replace(R.id.homeFrame, fragment)
+        var profileFragment = ProfileFragment()
+        val bundle = Bundle()
+        bundle.putParcelable("user_key",user)
+        profileFragment.arguments = bundle
+        profileFragment.user = user
+
+        var StatsFragment = StatisticsFragment.newInstance()
+        //fragment.arguments = bundle
+
+        ft.replace(R.id.homeFrame, StatsFragment)
         ft.commit()
     }
 
