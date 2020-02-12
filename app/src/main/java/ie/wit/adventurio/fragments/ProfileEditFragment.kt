@@ -44,7 +44,6 @@ class ProfileEditFragment : Fragment() {
         val bundle = arguments
         if (bundle != null) {
             user = bundle.getParcelable("user_key")
-            user
         }
 
         root.editFirstName.setText(user.firstName)

@@ -28,7 +28,7 @@
     <!--Menus-->
     <string name="menu_prof">Profile</string>
     <string name="menu_trips">Adventures</string>
-    <string name="menu_edit">Edit</string>
+    <string name="menu_edit">Edit Adventure</string>
     <string name="menu_update">Update</string>
     <string name="menu_cancel">Cancel</string>
     <string name="menu_add">Record Adventure</string>
@@ -37,6 +37,7 @@
     <string name="menu_list_trips">List Adventures</string>
     <string name="menu_logout">Logout</string>
     <string name="editProf">Edit Profile</string>
+    <string name="viewAdv">Your Adventure</string>
 
 
     <string name="nav_header_desc">Navigation header</string>

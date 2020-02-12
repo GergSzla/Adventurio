@@ -1,8 +1,6 @@
 package ie.wit.adventurio.fragments
 
-
 import android.content.Context
-import android.content.Context.LOCATION_SERVICE
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -14,31 +12,26 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.SystemClock
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import com.github.anastr.speedviewlib.SpeedView
 import ie.wit.adventurio.R
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.WalkingTrip
-import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.fragment_record_trip.*
-import kotlinx.android.synthetic.main.fragment_record_trip.view.*
 import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-class RecordTripFragment : FragmentActivity(), SensorEventListener {
+
+class RecordTripFragment : AppCompatActivity(), SensorEventListener {
+
     private var locationManager : LocationManager? = null
 
     lateinit var app: MainApp
@@ -47,7 +40,7 @@ class RecordTripFragment : FragmentActivity(), SensorEventListener {
     var trip = WalkingTrip()
 
     var running = false
-    var sensorManager: SensorManager? = null
+    var sensorManager:SensorManager? = null
     var step_goal = 0
     var currentSteps = 0
     private var progressBar: ProgressBar? = null
@@ -78,92 +71,90 @@ class RecordTripFragment : FragmentActivity(), SensorEventListener {
     /*
     ADD STEP GOAL PER TRIP (OPTIONAL
      */
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_record_trip)
 
-    app = application as MainApp
+        val d = Date()
+        val sdf = SimpleDateFormat("EEEE")
+        val cal = Calendar.getInstance()
+        val month_date = SimpleDateFormat("MMMM")
+        var currentDateTime= LocalDateTime.now()
 
-    setContentView(R.layout.fragment_record_trip)
+        app = application as MainApp
 
-    val d = Date()
-    val sdf = SimpleDateFormat("EEEE")
-    val cal = Calendar.getInstance()
-    val month_date = SimpleDateFormat("MMMM")
-
-    app = application as MainApp
-
-    if (intent.hasExtra("userLoggedIn")) {
-        user = intent.extras.getParcelable<Account>("user_key")
-    }
-    locationManager = getSystemService(AppCompatActivity.LOCATION_SERVICE) as LocationManager?
-    sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-    stepsValue.setText("0")
-    start_button.isVisible = true
-    stop_button.isVisible = false
-    linear1.isVisible = true
-    linear2.isVisible = false
-    progressBar = findViewById<ProgressBar>(R.id.progressBar) as ProgressBar
-
-
-    stop_button.setOnClickListener {
-        var currentEndDateTime = LocalDateTime.now()
-        end = currentEndDateTime.format(DateTimeFormatter.ofPattern("HH:mm"))
-
-        saveTrip()
-
-        currentSteps = 0
+        if (intent.hasExtra("userLoggedIn")) {
+            user = intent.extras.getParcelable<Account>("userLoggedIn")
+        }
+        locationManager = getSystemService(LOCATION_SERVICE) as LocationManager?
+        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        stepsValue.setText("0")
         start_button.isVisible = true
         stop_button.isVisible = false
         linear1.isVisible = true
         linear2.isVisible = false
+        progressBar = findViewById<ProgressBar>(R.id.progressBar) as ProgressBar
+
+
+        stop_button.setOnClickListener {
+            end = currentDateTime.format(DateTimeFormatter.ofPattern("HH:mm"))
+
+            saveTrip()
+
+            currentSteps = 0
+            start_button.isVisible = true
+            stop_button.isVisible = false
+            linear1.isVisible = true
+            linear2.isVisible = false
 
 
 
-        handler?.removeCallbacks(runnable)
-        flag=false
+            handler?.removeCallbacks(runnable)
+            flag=false
 
-        onPause()
-    }
-
-    start_button.setOnClickListener {
-        var currentDateTime= LocalDateTime.now()
-
-        try {
-            // Request location updates
-            locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0L, 0f, locationListener)
-        } catch(ex: SecurityException) {
-            Log.d("myTag", "Security Exception, no location available")
+            onPause()
         }
-        currentSteps = 0
-        start_button.isVisible = false
-        stop_button.isVisible = true
-        if(txtStepGoal.text.toString() != ""){
-            step_goal = (txtStepGoal.text.toString()).toInt()
-        }else{
-            step_goal = 0
+
+        start_button.setOnClickListener {
+            try {
+                // Request location updates
+                locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0L, 0f, locationListener)
+            } catch(ex: SecurityException) {
+                Log.d("myTag", "Security Exception, no location available")
+            }
+            currentSteps = 0
+            start_button.isVisible = false
+            stop_button.isVisible = true
+            if(txtStepGoal.text.toString() != ""){
+                step_goal = (txtStepGoal.text.toString()).toInt()
+            }else{
+                step_goal = 0
+            }
+            linear1.isVisible = false
+            linear2.isVisible = true
+            bindViews()
+            start = currentDateTime.format(DateTimeFormatter.ofPattern("HH:mm"))
+            dow = sdf.format(d)
+            date = cal.get(Calendar.DAY_OF_MONTH).toString() + ", " + month_date.format(cal.getTime())
+
+            StartTime = SystemClock.uptimeMillis()
+            handler?.postDelayed(runnable, 0)
+            flag=true
+
+            onResume()
         }
-        linear1.isVisible = false
-        linear2.isVisible = true
-        bindViews()
-        start = currentDateTime.format(DateTimeFormatter.ofPattern("HH:mm"))
-        dow = sdf.format(d)
-        date = cal.get(Calendar.DAY_OF_MONTH).toString() + ", " + month_date.format(cal.getTime())
 
-        StartTime = SystemClock.uptimeMillis()
-        handler?.postDelayed(runnable, 0)
-        flag=true
+        if (intent.hasExtra("userLoggedIn")) {
+            user = intent.extras.getParcelable<Account>("userLoggedIn")
+        }
 
-        onResume()
+
     }
-}
-
-
 
     private val locationListener: LocationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
-            toast("${location.longitude}: ${location.latitude}")
-            if(stop_button.isVisible){
+            if(stop_button.isVisible == true){
                 lng.add("${location.longitude}")
                 lat.add("${location.latitude}")
                 ///Test
@@ -236,9 +227,11 @@ override fun onCreate(savedInstanceState: Bundle?) {
     }
 
 
+
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
 
     }
+
 
     override fun onSensorChanged(event: SensorEvent) {
         if (running && step_goal != 0 ) {
@@ -313,8 +306,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
         app.trips.create(trip.copy())
         finish()
-    }
-
+   }
 
 
 }

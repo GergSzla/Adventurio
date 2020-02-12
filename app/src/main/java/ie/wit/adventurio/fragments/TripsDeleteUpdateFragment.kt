@@ -1,102 +1,120 @@
 package ie.wit.adventurio.fragments
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 
 import ie.wit.adventurio.R
+import ie.wit.adventurio.main.MainApp
+import ie.wit.adventurio.models.WalkingTrip
+import kotlinx.android.synthetic.main.fragment_trips_delete_update.view.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [TripsDeleteUpdateFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [TripsDeleteUpdateFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class TripsDeleteUpdateFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    private var listener: OnFragmentInteractionListener? = null
+
+    var trip = WalkingTrip()
+    lateinit var app: MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        app = activity?.application as MainApp
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_trips_delete_update, container, false)
-    }
+        val root = inflater.inflate(R.layout.fragment_trips_delete_update, container, false)
+        activity?.title = getString(R.string.menu_edit)
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            listener = context
-        } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
+        val bundle = arguments
+        if (bundle != null) {
+            trip = bundle.getParcelable("trip_key")
         }
-    }
 
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
-    }
+        root.amountPickerHours.minValue = 0
+        root.amountPickerHours.maxValue = 24
+        root.amountPickerMinutes.minValue = 0
+        root.amountPickerMinutes.maxValue = 59
+        root.amountPickerSeconds.minValue = 0
+        root.amountPickerSeconds.maxValue = 59
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
+        var num = trip.tripDistance
+        root.editDistance.setText("%.2f".format(num))
+        root.editSteps.setText(trip.tripSteps.toString())
+        root.amountPickerHours.value = trip.tripLength.substring(0,2).toInt()
+        root.amountPickerMinutes.value = trip.tripLength.substring(3,5).toInt()
+        root.amountPickerSeconds.value = trip.tripLength.substring(6,8).toInt()
+
+        //del button
+        root.deleteTripFab.setOnClickListener{
+            app.trips.delete(trip)
+            val toast =
+                Toast.makeText(
+                    activity!!.applicationContext,
+                    "Adventure Removed!",
+                    Toast.LENGTH_LONG
+                )
+            toast.show()
+            navigateTo(StatisticsFragment())
+        }
+
+        //update button
+        root.updateTripFab.setOnClickListener {
+            trip.tripDistance = (root.editDistance.text.toString()).toDouble()
+            trip.tripSteps = (root.editSteps.text.toString()).toInt()
+            trip.tripLength = ""
+            if(root.amountPickerHours.value < 10){
+                trip.tripLength += "0" + root.amountPickerHours.value.toString() + ":"
+            } else {
+                trip.tripLength += root.amountPickerHours.value.toString() + ":"
+            }
+            if(root.amountPickerMinutes.value < 10){
+                trip.tripLength += "0" + root.amountPickerMinutes.value.toString() + ":"
+            } else {
+                trip.tripLength += root.amountPickerMinutes.value.toString() + ":"
+            }
+            if(root.amountPickerSeconds.value < 10){
+                trip.tripLength += "0" + root.amountPickerSeconds.value.toString()
+            } else {
+                trip.tripLength += root.amountPickerSeconds.value.toString()
+            }
+            app.trips.update(trip.copy())
+            val toast =
+                Toast.makeText(
+                    activity!!.applicationContext,
+                    "Adventure Updated!",
+                    Toast.LENGTH_LONG
+                )
+            toast.show()
+            navigateTo(StatisticsFragment())
+        }
+
+
+        return root
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TripsDeleteUpdateFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(trip: WalkingTrip) =
             TripsDeleteUpdateFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putParcelable("trip_key", trip)
                 }
             }
+    }
+
+    private fun navigateTo(fragment: Fragment) {
+        val fragmentManager: FragmentManager = activity!!.supportFragmentManager
+        fragmentManager.beginTransaction()
+            .replace(R.id.homeFrame, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 }
