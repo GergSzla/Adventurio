@@ -11,6 +11,8 @@ import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.WalkingTrip
 import kotlinx.android.synthetic.main.fragment_statistics.view.*
+import kotlinx.android.synthetic.main.nav_header_home.*
+import kotlinx.android.synthetic.main.nav_header_home.view.*
 import java.util.*
 
 
@@ -37,6 +39,12 @@ class StatisticsFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_statistics, container, false)
         activity?.title = getString(R.string.menu_stats)
+
+        val bundle = arguments
+        if (bundle != null) {
+            user = bundle.getParcelable("user_key")
+        }
+
 
 
         var Trips = app.trips.getAllUserTrips() as ArrayList<WalkingTrip>
@@ -68,7 +76,7 @@ class StatisticsFragment : Fragment() {
                 root.txtTotalDistPrecentage.setText(getPercentage(totalDistance,user.distanceGoal)+"%")
             }
         }
-        return root;
+        return root
     }
 
 
@@ -78,9 +86,11 @@ class StatisticsFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() =
+        fun newInstance(account:Account) =
             StatisticsFragment().apply {
-                arguments = Bundle().apply {}
+                arguments = Bundle().apply {
+                    putParcelable("user_key", account)
+                }
             }
     }
 }

@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#212121</color>
+    <color name="colorPrimaryDark">#444444</color>
+    <color name="color2">#616161</color>
+    <color name="colorAccent">#1B1B1B</color>
+    <color name="primaryText">#000000</color>
+    <color name="buttonNormal">#e30425</color>
+    <color name="buttonHighlight">#ff554f</color>
+    <color name="buttonText">#FFFFFF</color>
 
     <!--Prof-->
-    <color name="btnDelRed">#990000</color>
+    <color name="btnDelRed">#862525</color>
     <color name="btnDelGrey">#747474</color>
 </resources>

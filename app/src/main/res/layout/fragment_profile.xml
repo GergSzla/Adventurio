@@ -96,14 +96,32 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="8dp">
 
-            <Button
-                android:id="@+id/btnDelAccount"
-                android:layout_width="match_parent"
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/editProfileFab"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/btnDelUser"
-                android:textColor="@color/btnDelRed"
-                android:background="@color/btnDelGrey"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                android:layout_gravity="bottom|end"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="16dp"
+                app:backgroundTint="#258632"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@android:drawable/ic_menu_edit" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/deleteProfileFab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_marginBottom="16dp"
+                app:backgroundTint="#862D25"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/editProfileFab"
+                app:layout_constraintHorizontal_bias="0.957"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@android:drawable/ic_menu_delete" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -21,6 +21,11 @@
             android:value="@string/google_maps_key" />
 
         <activity
+            android:name=".fragments.RecordTripFragment"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
             android:name=".activities.ForgotPasswordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>

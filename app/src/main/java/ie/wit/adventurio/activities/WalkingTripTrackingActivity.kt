@@ -1,4 +1,4 @@
-package ie.wit.adventurio.activities
+/*package ie.wit.adventurio.activities
 
 import android.content.Context
 import android.hardware.Sensor
@@ -29,9 +29,9 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 
-//class WalkingTripTrackingActivity : AppCompatActivity(), SensorEventListener {
+class WalkingTripTrackingActivity : AppCompatActivity(), SensorEventListener {
 
-    /*private var locationManager : LocationManager? = null
+    private var locationManager : LocationManager? = null
 
     lateinit var app: MainApp
 
@@ -306,7 +306,7 @@ import java.util.*
 
         app.trips.create(trip.copy())
         finish()
-   // }
+   }
 
-*/
-//}
+
+}*/

@@ -5,19 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/root_layout"
-    tools:context=".fragments.StatisticsFragment">
+    tools:context=".fragments.StatisticsFragment"
+    android:background="@color/colorAccent"
+    >
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="8dp"
+        android:background="@drawable/content_layout_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -45,7 +51,7 @@
                 android:background="@drawable/circle"
                 android:indeterminate="false"
                 android:max="100"
-                android:progress="0"
+                android:progress="50"
                 android:progressDrawable="@drawable/loading_circle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -138,7 +144,7 @@
                     android:id="@+id/divider"
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
-                    android:background="?android:attr/listDivider" />
+                    android:background="@color/colorAccent" />
 
             </LinearLayout>
 
@@ -150,7 +156,7 @@
                 android:background="@drawable/circle"
                 android:indeterminate="false"
                 android:max="100"
-                android:progress="0"
+                android:progress="100"
                 android:progressDrawable="@drawable/loading_circle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.502"

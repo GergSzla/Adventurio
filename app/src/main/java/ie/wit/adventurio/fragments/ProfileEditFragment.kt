@@ -1,102 +1,134 @@
 package ie.wit.adventurio.fragments
 
-import android.content.Context
-import android.net.Uri
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import ie.wit.adventurio.R
+import ie.wit.adventurio.helpers.readImage
+import ie.wit.adventurio.helpers.readImageFromPath
+import ie.wit.adventurio.helpers.showImagePicker
+import ie.wit.adventurio.main.MainApp
+import ie.wit.adventurio.models.Account
+import kotlinx.android.synthetic.main.fragment_profile_edit.*
+import kotlinx.android.synthetic.main.fragment_profile_edit.view.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [ProfileEditFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [ProfileEditFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ProfileEditFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    private var listener: OnFragmentInteractionListener? = null
+
+
+    lateinit var app: MainApp
+    var user = Account()
+    val IMAGE_REQUEST = 1
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        app = activity?.application as MainApp
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile_edit, container, false)
-    }
+        val root = inflater.inflate(R.layout.fragment_profile_edit, container, false)
+        activity?.title = getString(R.string.editProf)
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            listener = context
-        } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
+        val bundle = arguments
+        if (bundle != null) {
+            user = bundle.getParcelable("user_key")
+            user
         }
+
+        root.editFirstName.setText(user.firstName)
+        root.editSurname.setText(user.surname)
+        root.editEmail.setText(user.Email)
+        root.editPhoneNo.setText(user.phoneNo)
+        root.editPassword.setText(user.Password)
+        root.editUsername.setText(user.username)
+        root.editStepsGoal.setText(user.stepsGoal.toString())
+        root.editDistanceGoal.setText(user.distanceGoal.toString())
+        root.profImage.setImageBitmap(readImageFromPath(this.requireContext(), user.image))
+        if (user.image != "") {
+            root.addImage.setText(R.string.btnChangeImage)
+        }else{
+            root.addImage.setText(R.string.btnAddImg)
+        }
+
+        root.btnLoginPass.setOnClickListener {
+            if(root.btnLoginPass.text.toString().equals("Show")){
+                root.editPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                root.btnLoginPass.text = "Hide"
+            } else{
+                root.editPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+                root.btnLoginPass.text = "Show"
+            }
+        }
+
+        root.addImage.setOnClickListener {
+            showImagePicker(this, IMAGE_REQUEST)
+        }
+
+        root.updateProfileFab.setOnClickListener {
+            if(root.editPassword.text.toString() == root.editPasswordConf.text.toString()){
+                user.firstName = root.editFirstName.text.toString()
+                user.surname = root.editSurname.text.toString()
+                user.username = root.editUsername.text.toString()
+                user.Email = root.editEmail.text.toString()
+                user.stepsGoal = (root.editStepsGoal.text.toString()).toInt()
+                user.distanceGoal = (root.editDistanceGoal.text.toString()).toDouble()
+                user.Password = root.editPassword.text.toString()
+                user.phoneNo = root.editPhoneNo.text.toString()
+                user.image
+                app.users.updateAccount(user.copy())
+                val toast =
+                    Toast.makeText(
+                        activity!!.applicationContext,
+                        "Profile Updated!",
+                        Toast.LENGTH_LONG
+                    )
+                toast.show()
+                navigateTo(StatisticsFragment.newInstance(user))
+
+            }else{
+                val toast =
+                    Toast.makeText(
+                        activity!!.applicationContext,
+                        "Passwords Don't Match!",
+                        Toast.LENGTH_LONG
+                    )
+                toast.show()
+            }
+        }
+
+        return root
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
-    }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
-    }
+
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfileEditFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(account: Account) =
             ProfileEditFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putParcelable("user_key", account)
                 }
             }
+    }
+
+    private fun navigateTo(fragment: Fragment) {
+        val fragmentManager: FragmentManager = activity!!.supportFragmentManager
+        fragmentManager.beginTransaction()
+            .replace(R.id.homeFrame, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 }

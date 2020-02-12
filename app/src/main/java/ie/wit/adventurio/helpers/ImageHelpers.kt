@@ -7,10 +7,11 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.provider.MediaStore
+import androidx.fragment.app.Fragment
 import ie.wit.adventurio.R
 import java.io.IOException
 
-fun showImagePicker(parent: Activity, id: Int) {
+fun showImagePicker(parent: Fragment, id: Int) {
     val intent = Intent()
     intent.type = "image/*"
     intent.action = Intent.ACTION_OPEN_DOCUMENT

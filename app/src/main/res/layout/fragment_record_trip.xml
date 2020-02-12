@@ -151,12 +151,6 @@
                         app:layout_constraintTop_toBottomOf="@+id/stepsLbl" />
                 </LinearLayout>
 
-                <com.github.anastr.speedviewlib.ProgressiveGauge
-                    android:id="@+id/gauge"
-                    android:layout_width="378dp"
-                    android:layout_height="161dp" />
-
-
 
             </LinearLayout>
 
