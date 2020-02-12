@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ProfileEditFragment">
+    tools:context=".fragments.ProfileEditFragment"
+    android:background="@color/colorAccent">
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -17,9 +18,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:orientation="vertical">
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical"
+            android:background="@drawable/content_layout_bg"
+            android:padding="5dp"
+            >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -29,6 +35,8 @@
                     android:id="@+id/profImage"
                     android:layout_width="173dp"
                     android:layout_height="149dp"
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="true"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:srcCompat="@tools:sample/avatars" />

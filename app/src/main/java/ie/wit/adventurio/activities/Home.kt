@@ -47,6 +47,7 @@ class Home : AppCompatActivity(),
 
         navView.setNavigationItemSelectedListener(this)
 
+
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar,
             R.string.navigation_drawer_open,
             R.string.navigation_drawer_close
@@ -100,11 +101,7 @@ class Home : AppCompatActivity(),
         return true
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_home, menu)
 
-        return true
-    }
 
 
 

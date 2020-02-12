@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.RecordTripFragment">
+    tools:context=".fragments.RecordTripFragment"
+    android:background="@color/colorAccent">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -13,7 +14,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:background="@drawable/content_layout_bg"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="5dp">
 
 
             <LinearLayout
@@ -21,17 +28,6 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:id="@+id/linear1">
-
-                <TextView
-                    android:id="@+id/txt4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
-
-                <Spinner
-                    android:id="@+id/spinnerPicker"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
 
                 <EditText
                     android:id="@+id/txtStepGoal"
@@ -159,29 +155,29 @@
                 android:layout_height="250dp"
                 tools:layout_editor_absoluteY="43dp">
 
-                <Button
-                    android:id="@+id/start_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_bg_round"
-                    android:foreground="@drawable/ic_action_start"
-                    android:padding="15dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <!-- <Button
+                     android:id="@+id/start_button"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:background="@drawable/button_bg_round"
+                     android:foreground="@drawable/ic_action_start"
+                     android:padding="15dp"
+                     app:layout_constraintBottom_toBottomOf="parent"
+                     app:layout_constraintEnd_toEndOf="parent"
+                     app:layout_constraintStart_toStartOf="parent"
+                     app:layout_constraintTop_toTopOf="parent" />-->
 
-                <Button
-                    android:id="@+id/stop_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_bg_round2"
-                    android:foreground="@drawable/ic_action_stop"
-                    android:padding="15dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+             <Button
+                     android:id="@+id/stop_button"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:background="@drawable/button_bg_round2"
+                     android:foreground="@drawable/ic_action_stop"
+                     android:padding="15dp"
+                     app:layout_constraintBottom_toBottomOf="parent"
+                     app:layout_constraintEnd_toEndOf="parent"
+                     app:layout_constraintStart_toStartOf="parent"
+                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
