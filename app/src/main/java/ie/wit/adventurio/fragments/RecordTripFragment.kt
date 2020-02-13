@@ -126,6 +126,7 @@ class RecordTripFragment : AppCompatActivity(), SensorEventListener {
             currentSteps = 0
             start_button.isVisible = false
             stop_button.isVisible = true
+            txtHint.isVisible = true
             if(txtStepGoal.text.toString() != ""){
                 step_goal = (txtStepGoal.text.toString()).toInt()
             }else{
