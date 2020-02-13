@@ -55,7 +55,7 @@ class TripsListFragment : Fragment(),TripsListener {
         var root = inflater.inflate(R.layout.fragment_trips_list, container, false)
 
         root.addTripFab.setOnClickListener {
-            val intent = Intent(activity, RecordTripFragment::class.java)
+            val intent = Intent(activity, RecordTripFragment::class.java).putExtra("user_key",0)
             startActivity(intent)
         }
 

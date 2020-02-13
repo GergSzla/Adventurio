@@ -38,8 +38,8 @@ class Home : AppCompatActivity(),
         setContentView(R.layout.home)
         setSupportActionBar(toolbar)
 
-        if (intent.hasExtra("userLoggedIn")) {
-            user = intent.extras.getParcelable<Account>("userLoggedIn")
+        if (intent.hasExtra("user_key")) {
+            user = intent.extras.getParcelable<Account>("user_key")
         }
 
 

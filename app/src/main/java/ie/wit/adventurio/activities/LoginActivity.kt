@@ -71,7 +71,7 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
     fun loginToAccount(user:Account){
         if(txtEmail.text.toString().contains("@") && txtEmail.text.toString().contains(".com")){
 
-            startActivityForResult(intentFor<Home>().putExtra("userLoggedIn", user), 0)
+            startActivityForResult(intentFor<Home>().putExtra("user_key", user), 0)
             txtEmail.setText("")
             txtPassword.setText("")
         } else {

@@ -219,7 +219,7 @@ class RecordTripFragment : AppCompatActivity(), SensorEventListener {
         var stepsSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
 
         if (stepsSensor == null) {
-            Toast.makeText(this, "No Step Counter Sensor !", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "No Sensor Available", Toast.LENGTH_SHORT).show()
         } else {
             sensorManager?.registerListener(this, stepsSensor, SensorManager.SENSOR_DELAY_UI)
         }
@@ -311,9 +311,8 @@ class RecordTripFragment : AppCompatActivity(), SensorEventListener {
         trip.Date = date
 
         app.trips.create(trip.copy())
-        finish()
         startActivityForResult(intentFor<Home>().putExtra("user_key", user), 0)
-
+        finish()
     }
 
 

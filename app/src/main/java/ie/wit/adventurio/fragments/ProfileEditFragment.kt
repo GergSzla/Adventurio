@@ -1,23 +1,31 @@
 package ie.wit.adventurio.fragments
 
+import android.R.attr.data
+import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import ie.wit.adventurio.R
+import ie.wit.adventurio.activities.Home
 import ie.wit.adventurio.helpers.readImage
 import ie.wit.adventurio.helpers.readImageFromPath
 import ie.wit.adventurio.helpers.showImagePicker
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
+import kotlinx.android.synthetic.main.fragment_profile.view.*
 import kotlinx.android.synthetic.main.fragment_profile_edit.*
 import kotlinx.android.synthetic.main.fragment_profile_edit.view.*
+import java.io.IOException
 
 
 class ProfileEditFragment : Fragment() {
@@ -40,6 +48,9 @@ class ProfileEditFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_profile_edit, container, false)
         activity?.title = getString(R.string.editProf)
+
+
+
 
         val bundle = arguments
         if (bundle != null) {
@@ -72,7 +83,10 @@ class ProfileEditFragment : Fragment() {
         }
 
         root.addImage.setOnClickListener {
-            showImagePicker(this, IMAGE_REQUEST)
+            val intent = Intent()
+            intent.type = "image/*"
+            intent.action = Intent.ACTION_GET_CONTENT
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), IMAGE_REQUEST)
         }
 
         root.updateProfileFab.setOnClickListener {
@@ -110,6 +124,27 @@ class ProfileEditFragment : Fragment() {
         return root
     }
 
+    val home = Home()
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (!(requestCode !== IMAGE_REQUEST || resultCode !== Activity.RESULT_OK || data == null || data.getData() == null)) {
+            val uri: Uri = data.getData()
+            try {
+                val bitmap =
+                    MediaStore.Images.Media.getBitmap(activity!!.contentResolver, uri)
+                // Log.d(TAG, String.valueOf(bitmap));
+                val imageView: ImageView =
+                    activity!!.findViewById<View>(R.id.profImage) as ImageView
+                imageView.setImageBitmap(bitmap)
+                user.image = data.getData().toString()
+                addImage.setText(R.string.btnChangeImage)
+
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+    }
 
 
 

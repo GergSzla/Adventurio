@@ -23,6 +23,7 @@
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -32,9 +33,13 @@
                 android:layout_height="149dp"
                 android:adjustViewBounds="true"
                 android:cropToPadding="true"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/default_avatar"
+                tools:srcCompat="@drawable/default_avatar"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
