@@ -19,10 +19,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.github.anastr.speedviewlib.SpeedView
 import ie.wit.adventurio.R
+import ie.wit.adventurio.activities.Home
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.WalkingTrip
 import kotlinx.android.synthetic.main.fragment_record_trip.*
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
@@ -80,12 +82,11 @@ class RecordTripFragment : AppCompatActivity(), SensorEventListener {
         val sdf = SimpleDateFormat("EEEE")
         val cal = Calendar.getInstance()
         val month_date = SimpleDateFormat("MMMM")
-        var currentDateTime= LocalDateTime.now()
 
         app = application as MainApp
 
-        if (intent.hasExtra("userLoggedIn")) {
-            user = intent.extras.getParcelable<Account>("userLoggedIn")
+        if (intent.hasExtra("user_key")) {
+            user = intent.extras.getParcelable<Account>("user_key")
         }
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager?
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -98,7 +99,8 @@ class RecordTripFragment : AppCompatActivity(), SensorEventListener {
 
 
         stop_button.setOnClickListener {
-            end = currentDateTime.format(DateTimeFormatter.ofPattern("HH:mm"))
+            var currentEndDateTime= LocalDateTime.now()
+            end = currentEndDateTime.format(DateTimeFormatter.ofPattern("HH:mm"))
 
             saveTrip()
 
@@ -112,6 +114,7 @@ class RecordTripFragment : AppCompatActivity(), SensorEventListener {
 
             handler?.removeCallbacks(runnable)
             flag=false
+            txtHint.isVisible = true
 
             onPause()
         }
@@ -126,7 +129,7 @@ class RecordTripFragment : AppCompatActivity(), SensorEventListener {
             currentSteps = 0
             start_button.isVisible = false
             stop_button.isVisible = true
-            txtHint.isVisible = true
+            txtHint.isVisible = false
             if(txtStepGoal.text.toString() != ""){
                 step_goal = (txtStepGoal.text.toString()).toInt()
             }else{
@@ -135,7 +138,8 @@ class RecordTripFragment : AppCompatActivity(), SensorEventListener {
             linear1.isVisible = false
             linear2.isVisible = true
             bindViews()
-            start = currentDateTime.format(DateTimeFormatter.ofPattern("HH:mm"))
+            var currentStartDateTime= LocalDateTime.now()
+            start = currentStartDateTime.format(DateTimeFormatter.ofPattern("HH:mm"))
             dow = sdf.format(d)
             date = cal.get(Calendar.DAY_OF_MONTH).toString() + ", " + month_date.format(cal.getTime())
 
@@ -146,8 +150,8 @@ class RecordTripFragment : AppCompatActivity(), SensorEventListener {
             onResume()
         }
 
-        if (intent.hasExtra("userLoggedIn")) {
-            user = intent.extras.getParcelable<Account>("userLoggedIn")
+        if (intent.hasExtra("user_key")) {
+            user = intent.extras.getParcelable<Account>("user_key")
         }
 
 
@@ -156,6 +160,7 @@ class RecordTripFragment : AppCompatActivity(), SensorEventListener {
     private val locationListener: LocationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
             if(stop_button.isVisible == true){
+                toast("GPS Running ${location.longitude}")
                 lng.add("${location.longitude}")
                 lat.add("${location.latitude}")
                 ///Test
@@ -307,7 +312,9 @@ class RecordTripFragment : AppCompatActivity(), SensorEventListener {
 
         app.trips.create(trip.copy())
         finish()
-   }
+        startActivityForResult(intentFor<Home>().putExtra("user_key", user), 0)
+
+    }
 
 
 }

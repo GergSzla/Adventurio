@@ -65,7 +65,6 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
     }
 
     override fun onBackPressed() {
-        finish();
         System.exit(0)
     }
 

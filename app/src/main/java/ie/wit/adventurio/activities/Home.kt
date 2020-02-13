@@ -30,7 +30,6 @@ class Home : AppCompatActivity(),
     NavigationView.OnNavigationItemSelectedListener {
 
     lateinit var ft: FragmentTransaction
-    private val USER_KEY = "user_key"
     var user = Account()
     val IMAGE_REQUEST = 1
 
@@ -93,8 +92,10 @@ class Home : AppCompatActivity(),
             R.id.nav_profile -> {
                 navigateTo(ProfileFragment.newInstance(user))
             }
-
-            R.id.nav_logout -> startActivity<LoginActivity>()
+            R.id.nav_logout -> {
+                finish()
+                startActivity<LoginActivity>()
+            }
 
         }
         drawerLayout.closeDrawer(GravityCompat.START)
@@ -109,7 +110,7 @@ class Home : AppCompatActivity(),
         if (drawerLayout.isDrawerOpen(GravityCompat.START))
             drawerLayout.closeDrawer(GravityCompat.START)
         else
-            super.onBackPressed()
+            navigateTo(StatisticsFragment.newInstance(user))
 
     }
 

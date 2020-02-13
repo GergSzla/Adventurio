@@ -20,8 +20,7 @@ class StatisticsFragment : Fragment() {
 
     lateinit var app: MainApp
     var user = Account()
-    var totalSteps=0
-    var totalDistance = 0.0
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +39,9 @@ class StatisticsFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_statistics, container, false)
         activity?.title = getString(R.string.menu_stats)
 
+        var totalSteps=0
+        var totalDistance = 0.0
+
         val bundle = arguments
         if (bundle != null) {
             user = bundle.getParcelable("user_key")
@@ -53,8 +55,8 @@ class StatisticsFragment : Fragment() {
         if(Trips.size > 0){
             root.txtTotalTrips.setText(Trips.size.toString())
             for(trip in Trips){
-                totalSteps = trip.tripSteps
-                totalDistance = trip.tripDistance
+                totalSteps += trip.tripSteps
+                totalDistance += trip.tripDistance
 
             }
             root.txtTotalStepsStats.setText(totalSteps.toString())
