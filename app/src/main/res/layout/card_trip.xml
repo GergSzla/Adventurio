@@ -11,9 +11,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#B6B6B6"
-        android:padding="16dp"
-        >
+        android:background="#969696"
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/txtTripType"
@@ -23,8 +22,9 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="13dp"
             android:layout_marginTop="52dp"
-            android:text="Walking"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:text="@string/sample_category"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:fontFamily="@font/alike_angular" />
 
         <com.google.android.gms.maps.MapView
             android:id="@+id/mapView"
@@ -45,8 +45,9 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="25dp"
             android:layout_marginTop="13dp"
-            android:text="Steps:"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:text="@string/data_steps"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:fontFamily="@font/catamaran" />
 
         <TextView
             android:id="@+id/txtTotalSteps"
@@ -55,9 +56,10 @@
             android:layout_below="@+id/mapView"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="13dp"
-            android:layout_marginEnd="120dp"
-            android:text="2543"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:layout_marginEnd="50dp"
+            android:text="@string/sample_steps"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:fontFamily="@font/catamaran" />
 
         <TextView
             android:id="@+id/txtDistance"
@@ -67,8 +69,9 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="25dp"
             android:layout_marginTop="17dp"
-            android:text="Distance:"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:text="@string/data_distance"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:fontFamily="@font/catamaran" />
 
         <TextView
             android:id="@+id/txtDistanceTotal"
@@ -77,9 +80,10 @@
             android:layout_below="@+id/txtTotalSteps"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="17dp"
-            android:layout_marginEnd="120dp"
-            android:text="3.5km"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:layout_marginEnd="50dp"
+            android:text="@string/sample_distance"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:fontFamily="@font/catamaran" />
 
         <TextView
             android:id="@+id/txtTime"
@@ -89,8 +93,9 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="25dp"
             android:layout_marginTop="17dp"
-            android:text="Time Elapsed:"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:text="@string/data_time"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:fontFamily="@font/catamaran" />
 
         <TextView
             android:id="@+id/txtTimeElapsedTotal"
@@ -99,9 +104,10 @@
             android:layout_below="@+id/txtDistanceTotal"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="17dp"
-            android:layout_marginEnd="120dp"
-            android:text="00:24:45"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:layout_marginEnd="50dp"
+            android:text="@string/sample_time"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:fontFamily="@font/catamaran" />
 
         <TextView
             android:id="@+id/textView5"
@@ -111,10 +117,12 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="13dp"
             android:layout_marginTop="30dp"
-            android:text="Category:" />
+            android:text="@string/data_category"
+            app:fontFamily="@font/amethysta" />
 
         <TextView
             android:id="@+id/txtTimeAndDate"
+            android:padding="2dp"
             android:layout_width="231dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtTripType"
@@ -123,8 +131,7 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="-85dp"
             android:layout_marginEnd="0dp"
-            android:gravity="center"
-            android:text="TextView" />
+            android:gravity="center" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

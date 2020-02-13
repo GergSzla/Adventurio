@@ -49,6 +49,9 @@ class ProfileFragment : Fragment() {
         root.txtNameProf.text = user.firstName + " " + user.surname
         root.txtEmailProf.text = user.Email
         root.txtUsernameProf.text = user.username
+        root.txtStepsProf.text = user.stepsGoal.toString()
+        root.txtPhoneProf.text = user.phoneNo
+        root.txtDistanceProf.text = user.distanceGoal.toString()+"km"
         root.imageView.setImageBitmap(readImageFromPath(this.requireContext(), user.image))
 
         root.editProfileFab.setOnClickListener {

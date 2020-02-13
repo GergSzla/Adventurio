@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/alice</item>
+        <item>@font/alike_angular</item>
+        <item>@font/amethysta</item>
+        <item>@font/audiowide</item>
+        <item>@font/biryani</item>
+        <item>@font/catamaran</item>
+        <item>@font/denk_one</item>
+        <item>@font/meddon</item>
+    </array>
+</resources>

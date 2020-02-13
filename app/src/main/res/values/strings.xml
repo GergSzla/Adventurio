@@ -54,7 +54,7 @@
 
 
     <!--Trip-->
-    <string name="hint_StepGoal">Step Goal</string>
+    <string name="hint_StepGoal">Step Goal (Optional)</string>
     <string name="btnDelTrip">Delete Trip</string>
 
     <!--Image Chooser-->
@@ -63,6 +63,39 @@
 
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
+
+    <!--Password Button-->
+    <string name="btnShow">Show</string>
+    <string name="btnHide">Hide</string>
+
+    <!--Sample Data-->
+    <!--Stats-->
+    <string name="sample_category">Walking</string>
+    <string name="sample_steps">2543</string>
+    <string name="sample_time">00:24:45</string>
+    <string name="sample_distance">3.5km</string>
+
+
+
+
+    <!--Data Headers-->
+    <!--Stats-->
+    <string name="data_steps">Steps:</string>
+    <string name="data_distance">Distance:</string>
+    <string name="data_time">Time Elapsed:</string>
+    <string name="data_category">Category:</string>
+    <string name="data_timeStart">Time Initiated:</string>
+    <string name="data_timeEnd">Time Finished:</string>
+    <string name="data_phoneNo">Phone No.:</string>
+
+
+    <string name="play">Touch the record button to begin!</string>
+
+    <!--Profile-->
+    <string name="data_name">Name:</string>
+    <string name="data_username">Username:</string>
+    <string name="data_email">Email:</string>
+
 
 
 </resources>

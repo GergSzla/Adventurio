@@ -108,6 +108,13 @@ class ViewTripFragment : Fragment(),GoogleMap.OnMarkerClickListener  {
                 .color(Color.BLUE)
 
         )
+        root.txtTripCat.text = trip.tripType
+        root.txtTripSteps.text = trip.tripSteps.toString()
+        root.txtTripDist.text = trip.tripDistance.toString() +"km"
+        root.txtTripTime.text = trip.tripLength
+        root.txtTripTimeStart.text = trip.tripStartTime
+        root.txtTripTimeEnd.text = trip.tripEndTime
+
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {

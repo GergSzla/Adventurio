@@ -39,7 +39,6 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
                 var existingUser = AccountList.find { p -> p.Email.toLowerCase() == txtEmail.text.toString().toLowerCase() }
                 if (existingUser != null){
                     if (existingUser.Email == txtEmail.text.toString().toLowerCase() && existingUser.Password == txtPassword.text.toString().toLowerCase()){
-                        toast("Logging in to ${txtEmail.text.toString()}")
                         loginToAccount(existingUser)
                     }
                 } else {

@@ -53,8 +53,8 @@ class StatisticsFragment : Fragment() {
         if(Trips.size > 0){
             root.txtTotalTrips.setText(Trips.size.toString())
             for(trip in Trips){
-                totalSteps += trip.tripSteps
-                totalDistance += trip.tripDistance
+                totalSteps = trip.tripSteps
+                totalDistance = trip.tripDistance
 
             }
             root.txtTotalStepsStats.setText(totalSteps.toString())

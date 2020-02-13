@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentManager
 import ie.wit.adventurio.R
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.WalkingTrip
+import ie.wit.fragments.TripsListFragment
 import kotlinx.android.synthetic.main.fragment_trips_delete_update.view.*
 
 
@@ -93,7 +94,7 @@ class TripsDeleteUpdateFragment : Fragment() {
                     Toast.LENGTH_LONG
                 )
             toast.show()
-            navigateTo(StatisticsFragment())
+            navigateTo(TripsListFragment())
         }
 
 

@@ -110,6 +110,7 @@ class Home : AppCompatActivity(),
             drawerLayout.closeDrawer(GravityCompat.START)
         else
             super.onBackPressed()
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

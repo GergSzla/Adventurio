@@ -16,18 +16,17 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:padding="8dp"
         android:background="@drawable/content_layout_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            >
 
             <TextView
                 android:id="@+id/textView20"
@@ -36,6 +35,8 @@
                 android:layout_marginEnd="11dp"
                 android:text="Total Trips:"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="#000000"
+                app:fontFamily="@font/denk_one"
                 app:layout_constraintBottom_toBottomOf="@+id/progressBar"
                 app:layout_constraintEnd_toStartOf="@+id/progressBar"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -51,7 +52,7 @@
                 android:background="@drawable/circle"
                 android:indeterminate="false"
                 android:max="100"
-                android:progress="50"
+                android:progress="0"
                 android:progressDrawable="@drawable/loading_circle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -62,6 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0%"
+                android:textColor="#000000"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 app:layout_constraintBottom_toBottomOf="@+id/progressBar"
                 app:layout_constraintEnd_toEndOf="@+id/progressBar"
@@ -86,6 +88,7 @@
                         android:id="@+id/textView7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="#000000"
                         android:text="Total Steps:"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
@@ -93,6 +96,7 @@
                         android:id="@+id/txtTotalStepsStats"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="#000000"
                         android:text="0"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textDirection="rtl" />
@@ -106,6 +110,7 @@
                     <TextView
                         android:id="@+id/textView9"
                         android:layout_width="wrap_content"
+                        android:textColor="#000000"
                         android:layout_height="wrap_content"
                         android:text="Current Overall Step Goal:"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -114,6 +119,7 @@
                         android:id="@+id/txtCurrentStepsGoal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="#000000"
                         android:text="0"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textDirection="rtl" />
@@ -128,6 +134,7 @@
                         android:id="@+id/textView11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="#000000"
                         android:text="Average Step Per Trip:"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
@@ -135,6 +142,7 @@
                         android:id="@+id/txtAvgSteps"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="#000000"
                         android:text="0"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textDirection="rtl" />
@@ -156,7 +164,7 @@
                 android:background="@drawable/circle"
                 android:indeterminate="false"
                 android:max="100"
-                android:progress="100"
+                android:progress="0"
                 android:progressDrawable="@drawable/loading_circle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.502"
@@ -168,6 +176,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0%"
+                android:textColor="#000000"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 app:layout_constraintBottom_toBottomOf="@+id/progressBar7"
                 app:layout_constraintEnd_toEndOf="@+id/progressBar7"
@@ -192,6 +201,7 @@
                         android:id="@+id/textView14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="#000000"
                         android:text="Total Distance:"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
@@ -199,6 +209,7 @@
                         android:id="@+id/txtTotalDistStats"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="#000000"
                         android:text="0"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textDirection="rtl" />
@@ -214,12 +225,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Current Distance Goal:"
+                        android:textColor="#000000"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                     <TextView
                         android:id="@+id/txtCurrentDistGoal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="#000000"
                         android:text="0"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textDirection="rtl" />
@@ -234,6 +247,7 @@
                         android:id="@+id/textView18"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="#000000"
                         android:text="Average Distance Per Trip:"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
@@ -241,6 +255,7 @@
                         android:id="@+id/txtAvgDist"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="#000000"
                         android:text="0"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textDirection="rtl" />
@@ -253,6 +268,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="125dp"
                 android:text="0"
+                android:textColor="#000000"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
                 app:layout_constraintEnd_toStartOf="@+id/progressBar"

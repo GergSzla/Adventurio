@@ -30,6 +30,14 @@
                 android:orientation="vertical"
                 android:id="@+id/linear1">
 
+                <TextView
+                    android:id="@+id/textView15"
+                    style="@style/Widget.AppCompat.TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Add a step goal for this journey. \nOr just go with the flow!"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
                 <EditText
                     android:id="@+id/txtStepGoal"
                     android:layout_width="match_parent"
@@ -60,6 +68,7 @@
 
                     <TextView
                         android:id="@+id/TimeLbl"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -179,6 +188,18 @@
                      app:layout_constraintEnd_toEndOf="parent"
                      app:layout_constraintStart_toStartOf="parent"
                      app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/play"
+                    app:layout_constraintBottom_toTopOf="@+id/start_button"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
