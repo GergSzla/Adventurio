@@ -80,7 +80,7 @@ class RegisterActivity : AppCompatActivity() {
         account.secondaryPWType = 0 //none
         account.secondaryPW = ""
         app.users.registerAccount(account.copy())
-        toast("Your account as ${account.username} (${account.Email})")
+        toast("Your account as ${account.username} (${account.Email}) has been created")
         startActivity<LoginActivity>()
     }
 

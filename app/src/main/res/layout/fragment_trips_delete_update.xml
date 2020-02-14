@@ -22,8 +22,15 @@
             android:layout_marginBottom="10dp"
             android:orientation="vertical"
             android:background="@drawable/content_layout_bg"
-            android:padding="5dp">
+            android:padding="10dp">
 
+
+            <TextView
+                android:id="@+id/textView27"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Edit Distance" />
 
             <EditText
                 android:id="@+id/editDistance"
@@ -31,7 +38,16 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Edit Distance"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:background="@drawable/edit_text_bg"
+                android:padding="10dp"/>
+
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Edit Steps" />
 
             <EditText
                 android:id="@+id/editSteps"
@@ -39,24 +55,36 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Edit Steps"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:background="@drawable/edit_text_bg"
+                android:padding="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Time Initiated" />
+
+                <TextView
+                    android:id="@+id/textView31"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Time Finished"
+                    android:textDirection="rtl" />
+            </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
-                <NumberPicker
-                    android:id="@+id/amountPickerSeconds"
-                    style="@android:style/Widget.Material.NumberPicker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
                     android:id="@+id/textView"
@@ -66,33 +94,34 @@
                     android:text=":"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/amountPickerHours"
-                    app:layout_constraintStart_toEndOf="@+id/amountPickerMinutes"
+                    app:layout_constraintEnd_toStartOf="@+id/amountPickerHours1"
+                    app:layout_constraintStart_toEndOf="@+id/amountPickerMinutes1"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <NumberPicker
-                    android:id="@+id/amountPickerMinutes"
+                    android:id="@+id/amountPickerMinutes1"
                     style="@android:style/Widget.Material.NumberPicker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/amountPickerHours"
-                    app:layout_constraintStart_toEndOf="@+id/amountPickerSeconds"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toEndOf="@+id/amountPickerHours1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
 
                 <NumberPicker
-                    android:id="@+id/amountPickerHours"
+                    android:id="@+id/amountPickerHours1"
                     style="@android:style/Widget.Material.NumberPicker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="312dp"
                     android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintHorizontal_bias="0.015"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0" />
@@ -101,13 +130,51 @@
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="1"
+                    android:text="-"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/amountPickerHours2"
+                    app:layout_constraintHorizontal_bias="0.068"
+                    app:layout_constraintStart_toEndOf="@+id/amountPickerMinutes1"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <NumberPicker
+                    android:id="@+id/amountPickerMinutes2"
+                    style="@android:style/Widget.Material.NumberPicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="4dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
                     android:layout_weight="1"
                     android:text=":"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/amountPickerMinutes"
-                    app:layout_constraintStart_toEndOf="@+id/amountPickerSeconds"
+                    app:layout_constraintEnd_toStartOf="@+id/amountPickerMinutes2"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <NumberPicker
+                    android:id="@+id/amountPickerHours2"
+                    style="@android:style/Widget.Material.NumberPicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/textView3"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout

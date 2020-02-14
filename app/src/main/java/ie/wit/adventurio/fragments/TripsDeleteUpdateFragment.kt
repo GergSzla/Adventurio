@@ -1,19 +1,18 @@
 package ie.wit.adventurio.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.NumberPicker
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-
 import ie.wit.adventurio.R
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.WalkingTrip
 import ie.wit.fragments.TripsListFragment
 import kotlinx.android.synthetic.main.fragment_trips_delete_update.view.*
-
 
 
 class TripsDeleteUpdateFragment : Fragment() {
@@ -39,19 +38,31 @@ class TripsDeleteUpdateFragment : Fragment() {
             trip = bundle.getParcelable("trip_key")
         }
 
-        root.amountPickerHours.minValue = 0
-        root.amountPickerHours.maxValue = 24
-        root.amountPickerMinutes.minValue = 0
-        root.amountPickerMinutes.maxValue = 59
-        root.amountPickerSeconds.minValue = 0
-        root.amountPickerSeconds.maxValue = 59
+        root.amountPickerHours1.minValue = 0
+        root.amountPickerHours1.maxValue = 23
+        root.amountPickerHours1.setFormatter(NumberPicker.Formatter { i -> String.format("%02d", i) })
+        root.amountPickerMinutes1.minValue = 0
+        root.amountPickerMinutes1.maxValue = 59
+        root.amountPickerMinutes1.setFormatter(NumberPicker.Formatter { i -> String.format("%02d", i) })
+
+
+        root.amountPickerHours2.minValue = 0
+        root.amountPickerHours2.maxValue = 23
+        root.amountPickerHours2.setFormatter(NumberPicker.Formatter { i -> String.format("%02d", i) })
+        root.amountPickerMinutes2.minValue = 0
+        root.amountPickerMinutes2.maxValue = 59
+        root.amountPickerMinutes2.setFormatter(NumberPicker.Formatter { i -> String.format("%02d", i) })
+
 
         var num = trip.tripDistance
         root.editDistance.setText("%.2f".format(num))
         root.editSteps.setText(trip.tripSteps.toString())
-        root.amountPickerHours.value = trip.tripLength.substring(0,2).toInt()
-        root.amountPickerMinutes.value = trip.tripLength.substring(3,5).toInt()
-        root.amountPickerSeconds.value = trip.tripLength.substring(6,8).toInt()
+        root.amountPickerHours1.value = trip.tripStartTime.substring(0,2).toInt()
+        root.amountPickerMinutes1.value = trip.tripStartTime.substring(3,5).toInt()
+
+
+        root.amountPickerHours2.value = trip.tripEndTime.substring(0,2).toInt()
+        root.amountPickerMinutes2.value = trip.tripEndTime.substring(3,5).toInt()
 
         //del button
         root.deleteTripFab.setOnClickListener{
@@ -68,33 +79,70 @@ class TripsDeleteUpdateFragment : Fragment() {
 
         //update button
         root.updateTripFab.setOnClickListener {
-            trip.tripDistance = (root.editDistance.text.toString()).toDouble()
-            trip.tripSteps = (root.editSteps.text.toString()).toInt()
-            trip.tripLength = ""
-            if(root.amountPickerHours.value < 10){
-                trip.tripLength += "0" + root.amountPickerHours.value.toString() + ":"
+
+            if(root.amountPickerHours2.value < root.amountPickerHours1.value){
+                val toast =
+                    Toast.makeText(
+                        activity!!.applicationContext,
+                        "Time Ended is less than Time Initiated",
+                        Toast.LENGTH_LONG
+                    )
+                toast.show()
+            } else if((root.amountPickerHours2.value == root.amountPickerHours1.value) && (root.amountPickerMinutes2.value < root.amountPickerMinutes1.value)) {
+                val toast =
+                    Toast.makeText(
+                        activity!!.applicationContext,
+                        "Time Ended is less than Time Initiated",
+                        Toast.LENGTH_LONG
+                    )
+                toast.show()
             } else {
-                trip.tripLength += root.amountPickerHours.value.toString() + ":"
+                trip.tripDistance = (root.editDistance.text.toString()).toDouble()
+                trip.tripSteps = (root.editSteps.text.toString()).toInt()
+                trip.tripLength = ""
+
+                if ((root.amountPickerHours2.value-root.amountPickerHours1.value) < 10){
+                    trip.tripLength += "0"+(root.amountPickerHours2.value - root.amountPickerHours1.value).toString() + ":"
+                }else{
+                    trip.tripLength += (root.amountPickerHours2.value - root.amountPickerHours1.value).toString() + ":"
+                }
+
+                if(root.amountPickerMinutes2.value < root.amountPickerMinutes1.value){
+                    if ((root.amountPickerMinutes1.value - root.amountPickerMinutes2.value) < 10){
+
+                        trip.tripLength = ((root.amountPickerHours2.value - root.amountPickerHours1.value) - 1).toString() + ":"
+                        trip.tripLength += (60 - (root.amountPickerMinutes1.value - root.amountPickerMinutes2.value)).toString() + ":00"
+
+
+
+                    }else{
+                        trip.tripLength = ((root.amountPickerHours2.value - root.amountPickerHours1.value) - 1).toString()+ ":"
+                        trip.tripLength += (root.amountPickerMinutes1.value - root.amountPickerMinutes2.value).toString() + ":00"
+                    }
+                }else{
+                    if ((root.amountPickerMinutes2.value - root.amountPickerMinutes1.value) < 10){
+                        trip.tripLength += "0"+(root.amountPickerMinutes2.value - root.amountPickerMinutes1.value).toString() + ":00"
+                    }else{
+                        trip.tripLength += (root.amountPickerMinutes2.value - root.amountPickerMinutes1.value).toString() + ":00"
+                    }
+                }
+
+
+                trip.tripStartTime = root.amountPickerHours1.value.toString() + ":" + root.amountPickerMinutes1.value.toString()
+                trip.tripEndTime = root.amountPickerHours2.value.toString() + ":" + root.amountPickerMinutes2.value.toString()
+
+
+
+                app.trips.update(trip.copy())
+                val toast =
+                    Toast.makeText(
+                        activity!!.applicationContext,
+                        "Adventure Updated!",
+                        Toast.LENGTH_LONG
+                    )
+                toast.show()
+                navigateTo(TripsListFragment())
             }
-            if(root.amountPickerMinutes.value < 10){
-                trip.tripLength += "0" + root.amountPickerMinutes.value.toString() + ":"
-            } else {
-                trip.tripLength += root.amountPickerMinutes.value.toString() + ":"
-            }
-            if(root.amountPickerSeconds.value < 10){
-                trip.tripLength += "0" + root.amountPickerSeconds.value.toString()
-            } else {
-                trip.tripLength += root.amountPickerSeconds.value.toString()
-            }
-            app.trips.update(trip.copy())
-            val toast =
-                Toast.makeText(
-                    activity!!.applicationContext,
-                    "Adventure Updated!",
-                    Toast.LENGTH_LONG
-                )
-            toast.show()
-            navigateTo(TripsListFragment())
         }
 
 

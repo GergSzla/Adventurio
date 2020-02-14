@@ -15,7 +15,7 @@
         android:gravity="center"
         android:text="@string/app_name"
         android:textColor="@color/buttonText"
-        android:textSize="40dp"
+        android:textSize="40sp"
         app:autoSizeTextType="uniform"
         app:fontFamily="@font/meddon"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,14 +41,17 @@
             <EditText
                 android:id="@+id/txtUsernameReg"
                 android:layout_width="match_parent"
-                android:layout_height="58dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
                 android:autofillHints="textFilter"
                 android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890._-"
                 android:ems="10"
                 android:hint="@string/txtUsername"
-                android:inputType="textFilter" />
+                android:inputType="textFilter"
+                android:background="@drawable/edit_text_bg"
+                android:padding="10dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -58,37 +61,49 @@
                 <EditText
                     android:id="@+id/txtFirstNameReg"
                     android:layout_width="188dp"
-                    android:layout_height="58dp"
+                    android:layout_marginTop="8dp"
+
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:autofillHints="textPersonName"
                     android:ems="10"
                     android:hint="@string/txtFname"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:background="@drawable/edit_text_bg"
+                    android:padding="10dp"/>
 
                 <EditText
                     android:id="@+id/txtSurnameReg"
                     android:layout_width="wrap_content"
-                    android:layout_height="58dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:autofillHints="textPersonName"
                     android:ems="10"
                     android:hint="@string/txtSurname"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:background="@drawable/edit_text_bg"
+                    android:padding="10dp"/>
             </LinearLayout>
 
             <EditText
                 android:id="@+id/txtEmailReg"
                 android:layout_width="match_parent"
-                android:layout_height="58dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:autofillHints="textEmailAddress"
                 android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890@."
                 android:ems="10"
                 android:hint="@string/txt_login_email"
-                android:inputType="textEmailAddress" />
+                android:layout_marginTop="8dp"
+
+                android:inputType="textEmailAddress"
+                android:background="@drawable/edit_text_bg"
+                android:padding="10dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -97,20 +112,26 @@
                 <EditText
                     android:id="@+id/txtPasswordReg"
                     android:layout_width="0dp"
-                    android:layout_height="58dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:autofillHints="textPassword"
+                    android:layout_marginTop="8dp"
+
                     android:ems="10"
                     android:hint="@string/txt_login_password"
                     android:inputType="textPassword"
                     app:layout_constraintEnd_toStartOf="@+id/btnRegPass"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:background="@drawable/edit_text_bg"
+                    android:padding="10dp"/>
 
                 <Button
                     android:id="@+id/btnRegPass"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+
                     android:layout_marginEnd="8dp"
                     android:text="@string/btnShow"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -120,14 +141,18 @@
             <EditText
                 android:id="@+id/txtConfPasswordReg"
                 android:layout_width="match_parent"
-                android:layout_height="58dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="15dp"
                 android:autofillHints="textPassword"
                 android:ems="10"
                 android:hint="@string/txtConfPass"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:background="@drawable/edit_text_bg"
+                android:padding="10dp"/>
 
             <TextView
                 android:id="@+id/textView3"

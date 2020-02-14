@@ -108,9 +108,10 @@ class ViewTripFragment : Fragment(),GoogleMap.OnMarkerClickListener  {
                 .color(Color.BLUE)
 
         )
+        var num = trip.tripDistance
         root.txtTripCat.text = trip.tripType
         root.txtTripSteps.text = trip.tripSteps.toString()
-        root.txtTripDist.text = trip.tripDistance.toString() +"km"
+        root.txtTripDist.text = "%.2f".format(num) +"km"
         root.txtTripTime.text = trip.tripLength
         root.txtTripTimeStart.text = trip.tripStartTime
         root.txtTripTimeEnd.text = trip.tripEndTime

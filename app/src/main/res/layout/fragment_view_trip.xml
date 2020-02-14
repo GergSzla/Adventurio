@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/data_category"
-                android:textColor="#000000"
+                android:textColor="#313131"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:fontFamily="@font/catamaran" />
 
@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/data_steps"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#000000"
+                android:textColor="#313131"
                 app:fontFamily="@font/catamaran"
                 />
 
@@ -94,7 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/data_distance"
-                android:textColor="#000000"
+                android:textColor="#313131"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:fontFamily="@font/catamaran" />
 
@@ -119,7 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/data_timeStart"
-                android:textColor="#000000"
+                android:textColor="#313131"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:fontFamily="@font/catamaran" />
 
@@ -144,7 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/data_timeEnd"
-                android:textColor="#000000"
+                android:textColor="#313131"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:fontFamily="@font/catamaran" />
 
@@ -169,7 +169,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/data_time"
-                android:textColor="#000000"
+                android:textColor="#313131"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:fontFamily="@font/catamaran" />
 

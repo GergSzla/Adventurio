@@ -128,8 +128,8 @@ class ProfileEditFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (!(requestCode !== IMAGE_REQUEST || resultCode !== Activity.RESULT_OK || data == null || data.getData() == null)) {
-            val uri: Uri = data.getData()
+        if (!(requestCode !== IMAGE_REQUEST || resultCode !== Activity.RESULT_OK || data == null || data.data == null)) {
+            val uri: Uri = data.data
             try {
                 val bitmap =
                     MediaStore.Images.Media.getBitmap(activity!!.contentResolver, uri)
@@ -137,7 +137,7 @@ class ProfileEditFragment : Fragment() {
                 val imageView: ImageView =
                     activity!!.findViewById<View>(R.id.profImage) as ImageView
                 imageView.setImageBitmap(bitmap)
-                user.image = data.getData().toString()
+                user.image = data.data.toString()
                 addImage.setText(R.string.btnChangeImage)
 
             } catch (e: IOException) {
