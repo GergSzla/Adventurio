@@ -1,4 +1,4 @@
-package ie.wit.adventurio.fragments
+package ie.wit.adventurio.activities
 
 import android.content.Context
 import android.hardware.Sensor
@@ -17,13 +17,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import com.github.anastr.speedviewlib.SpeedView
 import ie.wit.adventurio.R
-import ie.wit.adventurio.activities.Home
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.WalkingTrip
-import kotlinx.android.synthetic.main.fragment_record_trip.*
+import kotlinx.android.synthetic.main.activity_record_trip.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
@@ -32,7 +30,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 
-class RecordTripFragment : AppCompatActivity(), SensorEventListener {
+class RecordTripActivity : AppCompatActivity(), SensorEventListener {
 
     private var locationManager : LocationManager? = null
 
@@ -76,7 +74,7 @@ class RecordTripFragment : AppCompatActivity(), SensorEventListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.fragment_record_trip)
+        setContentView(R.layout.activity_record_trip)
 
         val d = Date()
         val sdf = SimpleDateFormat("EEEE")
@@ -160,7 +158,6 @@ class RecordTripFragment : AppCompatActivity(), SensorEventListener {
     private val locationListener: LocationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
             if(stop_button.isVisible == true){
-                toast("GPS Running ${location.longitude}")
                 lng.add("${location.longitude}")
                 lat.add("${location.latitude}")
                 ///Test

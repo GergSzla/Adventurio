@@ -1,20 +1,16 @@
 package ie.wit.adventurio.activities
 
-import android.app.ActionBar
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationView
 import ie.wit.adventurio.R
 import ie.wit.adventurio.fragments.ProfileFragment
-import ie.wit.adventurio.fragments.RecordTripFragment
 import ie.wit.adventurio.fragments.StatisticsFragment
 import ie.wit.adventurio.helpers.readImage
 import ie.wit.adventurio.models.Account
@@ -86,7 +82,7 @@ class Home : AppCompatActivity(),
             }
 
             R.id.nav_record_trips -> {
-                startActivityForResult(intentFor<RecordTripFragment>().putExtra("user_key", user), 0)
+                startActivityForResult(intentFor<RecordTripActivity>().putExtra("user_key", user), 0)
             }
 
             R.id.nav_profile -> {

@@ -1,11 +1,7 @@
 package ie.wit.adventurio.fragments
 
-import android.content.Context
 import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
-import android.os.Parcel
-import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,11 +11,8 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.*
 
 import ie.wit.adventurio.R
-import ie.wit.adventurio.activities.ViewTrip
 import ie.wit.adventurio.main.MainApp
-import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.WalkingTrip
-import kotlinx.android.synthetic.main.fragment_view_trip.*
 import kotlinx.android.synthetic.main.fragment_view_trip.view.*
 
 

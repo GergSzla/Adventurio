@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ie.wit.adventurio.R
 import ie.wit.adventurio.adapters.TripsAdapter
 import ie.wit.adventurio.adapters.TripsListener
-import ie.wit.adventurio.fragments.RecordTripFragment
+import ie.wit.adventurio.activities.RecordTripActivity
 import ie.wit.adventurio.fragments.TripsDeleteUpdateFragment
 import ie.wit.adventurio.fragments.ViewTripFragment
 import ie.wit.adventurio.main.MainApp
@@ -55,7 +55,7 @@ class TripsListFragment : Fragment(),TripsListener {
         var root = inflater.inflate(R.layout.fragment_trips_list, container, false)
 
         root.addTripFab.setOnClickListener {
-            val intent = Intent(activity, RecordTripFragment::class.java).putExtra("user_key",0)
+            val intent = Intent(activity, RecordTripActivity::class.java).putExtra("user_key",0)
             startActivity(intent)
         }
 
