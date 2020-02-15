@@ -111,13 +111,13 @@ class TripsDeleteUpdateFragment : Fragment() {
                     if ((root.amountPickerMinutes1.value - root.amountPickerMinutes2.value) < 10){
 
                         trip.tripLength = ((root.amountPickerHours2.value - root.amountPickerHours1.value) - 1).toString() + ":"
-                        trip.tripLength += (60 - (root.amountPickerMinutes1.value - root.amountPickerMinutes2.value)).toString() + ":00"
+                        trip.tripLength += (0 + (root.amountPickerMinutes1.value - root.amountPickerMinutes2.value)).toString() + ":00"
 
 
 
                     }else{
                         trip.tripLength = ((root.amountPickerHours2.value - root.amountPickerHours1.value) - 1).toString()+ ":"
-                        trip.tripLength += (root.amountPickerMinutes1.value - root.amountPickerMinutes2.value).toString() + ":00"
+                        trip.tripLength += "0"+(60-(root.amountPickerMinutes1.value - root.amountPickerMinutes2.value)).toString() + ":00"
                     }
                 }else{
                     if ((root.amountPickerMinutes2.value - root.amountPickerMinutes1.value) < 10){
@@ -128,8 +128,16 @@ class TripsDeleteUpdateFragment : Fragment() {
                 }
 
 
-                trip.tripStartTime = root.amountPickerHours1.value.toString() + ":" + root.amountPickerMinutes1.value.toString()
-                trip.tripEndTime = root.amountPickerHours2.value.toString() + ":" + root.amountPickerMinutes2.value.toString()
+                if ( root.amountPickerMinutes1.value < 10){
+                    trip.tripStartTime = root.amountPickerHours1.value.toString() + ":0" + root.amountPickerMinutes1.value.toString()
+                }else{
+                    trip.tripStartTime = root.amountPickerHours1.value.toString() + ":" + root.amountPickerMinutes1.value.toString()
+                }
+                if(root.amountPickerMinutes2.value < 10){
+                    trip.tripEndTime = root.amountPickerHours2.value.toString() + ":0" + root.amountPickerMinutes2.value.toString()
+                }else{
+                    trip.tripEndTime = root.amountPickerHours2.value.toString() + ":" + root.amountPickerMinutes2.value.toString()
+                }
 
 
 
