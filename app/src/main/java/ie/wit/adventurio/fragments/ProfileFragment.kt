@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -58,14 +59,14 @@ class ProfileFragment : Fragment() {
 
         root.deleteProfileFab.setOnClickListener {
             app.users.deleteAccount(user)
-            /*val toast =
+            val toast =
                 Toast.makeText(
                     activity!!.applicationContext,
                     "Account Removed! Application Restarting . . .",
                     Toast.LENGTH_LONG
                 )
             toast.show()
-            restartApp()*/
+            restartApp()
         }
 
         return root

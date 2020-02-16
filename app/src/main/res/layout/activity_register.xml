@@ -53,41 +53,35 @@
                 android:background="@drawable/edit_text_bg"
                 android:padding="10dp"/>
 
-            <LinearLayout
+            <EditText
+                android:id="@+id/txtFirstNameReg"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
 
-                <EditText
-                    android:id="@+id/txtFirstNameReg"
-                    android:layout_width="188dp"
-                    android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:autofillHints="textPersonName"
+                android:background="@drawable/edit_text_bg"
+                android:ems="10"
+                android:hint="@string/txtFname"
+                android:inputType="textPersonName"
+                android:padding="10dp" />
 
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:autofillHints="textPersonName"
-                    android:ems="10"
-                    android:hint="@string/txtFname"
-                    android:inputType="textPersonName"
-                    android:background="@drawable/edit_text_bg"
-                    android:padding="10dp"/>
+            <EditText
+                android:id="@+id/txtSurnameReg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
 
-                <EditText
-                    android:id="@+id/txtSurnameReg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:autofillHints="textPersonName"
-                    android:ems="10"
-                    android:hint="@string/txtSurname"
-                    android:inputType="textPersonName"
-                    android:background="@drawable/edit_text_bg"
-                    android:padding="10dp"/>
-            </LinearLayout>
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:autofillHints="textPersonName"
+                android:background="@drawable/edit_text_bg"
+                android:ems="10"
+                android:hint="@string/txtSurname"
+                android:inputType="textPersonName"
+                android:padding="10dp" />
 
             <EditText
                 android:id="@+id/txtEmailReg"

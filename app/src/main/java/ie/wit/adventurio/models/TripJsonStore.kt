@@ -29,9 +29,12 @@ class TripJsonStore : TripStore, AnkoLogger {
     }
 
     override fun getAllUserTrips(): List<WalkingTrip> {
-           return trips
+        return trips
     }
 
+    override fun getAllUserTripsById(id: String): List<WalkingTrip> {
+        return trips.filter { p -> p.tripOwner == id }
+    }
     /*override fun getUsersTrips(id:String): List<WalkingTrip> {
         val TripsList = getAllUserTrips() as ArrayList<WalkingTrip>
         var allTrips = TripsList.filter{ p -> p.tripOwner == id }

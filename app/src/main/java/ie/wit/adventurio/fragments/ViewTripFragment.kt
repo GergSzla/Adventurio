@@ -62,7 +62,7 @@ class ViewTripFragment : Fragment(),GoogleMap.OnMarkerClickListener  {
             if (i == 0 ){
                 options = MarkerOptions()
                     .title("Start")
-                    .snippet("GPS : " + loc.toString())
+                    .snippet("Started at : " + trip.tripStartTime)
                     .draggable(false)
                     .position(loc)
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
@@ -71,7 +71,7 @@ class ViewTripFragment : Fragment(),GoogleMap.OnMarkerClickListener  {
             } else if (i == trip.lat.size - 1){
                 options = MarkerOptions()
                     .title("Finish")
-                    .snippet("GPS : " + loc.toString())
+                    .snippet("Finished at : " + trip.tripEndTime)
                     .draggable(false)
                     .position(loc)
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))

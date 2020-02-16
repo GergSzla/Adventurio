@@ -44,6 +44,8 @@ class TripsListFragment : Fragment(),TripsListener {
         }
 
 
+
+
         var viewTripFragment = ViewTripFragment()
         var tripDeleteUpdateFragment = TripsDeleteUpdateFragment()
         val bundleForTrips = Bundle()
@@ -55,12 +57,12 @@ class TripsListFragment : Fragment(),TripsListener {
         var root = inflater.inflate(R.layout.fragment_trips_list, container, false)
 
         root.addTripFab.setOnClickListener {
-            val intent = Intent(activity, RecordTripActivity::class.java).putExtra("user_key",0)
+            val intent = Intent(activity, RecordTripActivity::class.java).putExtra("user_key",user)
             startActivity(intent)
         }
 
-        root.recyclerView.setLayoutManager(LinearLayoutManager(activity))
-        root.recyclerView.adapter = TripsAdapter(app.trips.getAllUserTrips(),this)
+        root.recyclerView.layoutManager = LinearLayoutManager(activity)
+        root.recyclerView.adapter = TripsAdapter(app.trips.getAllUserTripsById(user.id),this)
 
         return root
     }

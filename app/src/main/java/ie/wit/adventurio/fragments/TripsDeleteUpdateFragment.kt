@@ -10,14 +10,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import ie.wit.adventurio.R
 import ie.wit.adventurio.main.MainApp
+import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.WalkingTrip
 import ie.wit.fragments.TripsListFragment
 import kotlinx.android.synthetic.main.fragment_trips_delete_update.view.*
+import java.util.ArrayList
 
 
 class TripsDeleteUpdateFragment : Fragment() {
 
     var trip = WalkingTrip()
+    var user = Account()
     lateinit var app: MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +39,13 @@ class TripsDeleteUpdateFragment : Fragment() {
         val bundle = arguments
         if (bundle != null) {
             trip = bundle.getParcelable("trip_key")
+        }
+        val AccountList = app.users.getAllAccounts() as ArrayList<Account>
+
+        for (account in AccountList){
+            if(account.id == trip.tripOwner){
+                user = account
+            }
         }
 
         root.amountPickerHours1.minValue = 0
@@ -149,7 +159,7 @@ class TripsDeleteUpdateFragment : Fragment() {
                         Toast.LENGTH_LONG
                     )
                 toast.show()
-                navigateTo(TripsListFragment())
+                navigateTo(TripsListFragment.newInstance(user))
             }
         }
 

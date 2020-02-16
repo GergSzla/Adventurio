@@ -50,23 +50,23 @@ class StatisticsFragment : Fragment() {
 
 
         var Trips = app.trips.getAllUserTrips() as ArrayList<WalkingTrip>
+        var UserTrips= app.trips.getAllUserTripsById(user.id) as ArrayList<WalkingTrip>
 
-
-        if(Trips.size > 0){
-            root.txtTotalTrips.setText(Trips.size.toString())
-            for(trip in Trips){
+        if(UserTrips.size > 0){
+            root.txtTotalTrips.setText(UserTrips.size.toString())
+            for(trip in UserTrips){
                 totalSteps += trip.tripSteps
                 totalDistance += trip.tripDistance
 
             }
             root.txtTotalStepsStats.setText(totalSteps.toString())
             root.txtCurrentStepsGoal.setText(user.stepsGoal.toString())
-            root.txtAvgSteps.setText((totalSteps/Trips.size).toString())
+            root.txtAvgSteps.setText((totalSteps/UserTrips.size).toString())
 
 
             root.txtTotalDistStats.setText("%.1f".format(totalDistance).toString()+ "km")
             root.txtCurrentDistGoal.setText("%.1f".format(user.distanceGoal).toString()+ "km")
-            root.txtAvgDist.setText("%.1f".format(totalDistance/Trips.size).toString() + "km")
+            root.txtAvgDist.setText("%.1f".format(totalDistance/UserTrips.size).toString() + "km")
 
 
             if (user.stepsGoal != 0 ){
