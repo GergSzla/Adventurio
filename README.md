@@ -1,4 +1,5 @@
 
+
 # Adventurio
 ## Description:
 
@@ -6,6 +7,11 @@ Adventurio aims to allow its users to create their own account within the applic
 
 ![Logo.png](https://res.cloudinary.com/dkdptqakb/image/upload/c_scale,w_650/v1581811426/icon.png)
 ## Walkthrough:
+### 0.) Permissions:
+Before getting started with the application, location permissions need to be granted to the application in order to get the full Adventurio experience. 
+
+![https://res.cloudinary.com/dkdptqakb/image/upload/v1581867226/Screenshot_20200216-151410_Package_installer.jpg](https://res.cloudinary.com/dkdptqakb/image/upload/c_scale,w_290/v1581867226/Screenshot_20200216-151410_Package_installer.jpg)
+
 ### 1.) Account creation and login:
 Firstly, the user will need to create their accounts through the registration page. Once this has been done, the user's account is sent to a JSON file from which the application can take their details and give them full access upon logging in.
 Should the user require a password reminder, "Forgot Password" should be then clicked. This is not yet totally secure and security questions will be added in the future.
