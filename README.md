@@ -30,3 +30,8 @@ Once the stop button is clicked, the application will automatically save the tri
 These trips can also be edited (if for some reason, the phone does not have sensor or GPS options). Distance and Steps taken in can be edited, along with two sets of NumberPickers to change "time started" and "time finished" fields. Time elapsed is automatically calculated if the trip is edited.
 
 ![https://res.cloudinary.com/dkdptqakb/image/upload/v1581811289/Screenshot_20200215-205630_Adventurio.jpg](https://res.cloudinary.com/dkdptqakb/image/upload/c_scale,w_280/v1581811289/Screenshot_20200215-205630_Adventurio.jpg)![https://res.cloudinary.com/dkdptqakb/image/upload/v1581811291/Screenshot_20200215-205649_Adventurio.jpg](https://res.cloudinary.com/dkdptqakb/image/upload/c_scale,w_280/v1581811291/Screenshot_20200215-205649_Adventurio.jpg)![https://res.cloudinary.com/dkdptqakb/image/upload/v1581811291/Screenshot_20200215-205822_Adventurio.jpg](https://res.cloudinary.com/dkdptqakb/image/upload/c_scale,w_280/v1581811291/Screenshot_20200215-205822_Adventurio.jpg)
+
+## References
+### 1.) [Step Counter](https://medium.com/@ssaurel/create-a-step-counter-fitness-app-for-android-with-kotlin-bbfb6ffe3ea7)
+### 2.) [Getting Coordinates Constantly](https://stackoverflow.com/questions/45958226/get-location-android-kotlin)
+### 3.) [Stopwatch](https://github.com/ajithvgiri/Stopwatch)
