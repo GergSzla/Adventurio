@@ -24,7 +24,7 @@ When a trip is started, a chronometer will appear along with a step counter and 
 Once the stop button is clicked, the application will automatically save the trip to a JSON file with details such as Time Started/Ended, The result of the Chronometer, and two lists containing Lat/Long coordinates.
 
 ![https://res.cloudinary.com/dkdptqakb/image/upload/v1581817111/Screenshot_20200216-013644_Adventurio.jpg](https://res.cloudinary.com/dkdptqakb/image/upload/c_scale,w_280/v1581817111/Screenshot_20200216-013644_Adventurio.jpg)![https://res.cloudinary.com/dkdptqakb/image/upload/v1581817111/Screenshot_20200216-013653_Adventurio.jpg](https://res.cloudinary.com/dkdptqakb/image/upload/c_scale,w_280/v1581817111/Screenshot_20200216-013653_Adventurio.jpg)![https://res.cloudinary.com/dkdptqakb/image/upload/v1581811291/Screenshot_20200215-205712_Adventurio.jpg](https://res.cloudinary.com/dkdptqakb/image/upload/c_scale,w_280/v1581811291/Screenshot_20200215-205712_Adventurio.jpg)
-### 4.) Recording A Trip
+### 4.) Viewing/Deleting/Editing A Trip
  Once the trip is finished recording and saving, the trip/adventure will be added and listed in a RecyclerView within a card in the "List Adventures" fragment. Each of these trips can be view and edited. To view a trip, the user can tap the Trip Card which will then show, the route they took on their journey in google maps (plotted through coordinates saved to the journey with polylines) along with additional statistics. 
  
 These trips can also be edited (if for some reason, the phone does not have sensor or GPS options). Distance and Steps taken in can be edited, along with two sets of NumberPickers to change "time started" and "time finished" fields. Time elapsed is automatically calculated if the trip is edited.
