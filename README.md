@@ -42,5 +42,3 @@ These trips can also be edited (if for some reason, the phone does not have sens
 ### 2.) [Getting Coordinates Constantly](https://stackoverflow.com/questions/45958226/get-location-android-kotlin)
 ### 3.) [Stopwatch](https://github.com/ajithvgiri/Stopwatch)
 
-## Video
-### [Video Demo](https://www.youtube.com/watch?v=3lxLHU4wIV4)
