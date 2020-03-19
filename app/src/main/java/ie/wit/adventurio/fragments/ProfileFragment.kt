@@ -9,27 +9,38 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import ie.wit.adventurio.R
 import ie.wit.adventurio.activities.LoginActivity
 import ie.wit.adventurio.helpers.readImageFromPath
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
+import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
+import kotlinx.android.synthetic.main.fragment_profile.view.txtNameProf
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(), AnkoLogger {
 
     lateinit var app: MainApp
+    lateinit var eventListener : ValueEventListener
     var user = Account()
+    var userProfile: Account? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         app = activity?.application as MainApp
 
-
+        arguments?.let {
+            userProfile = it.getParcelable("user-profile")
+        }
     }
 
     override fun onCreateView(
@@ -40,25 +51,33 @@ class ProfileFragment : Fragment() {
         activity?.title = getString(R.string.menu_prof)
 
 
-        val bundle = arguments
+        /*val bundle = arguments
         if (bundle != null) {
             user = bundle.getParcelable("user_key")
-        }
+        }*/
 
-        root.txtNameProf.text = user.firstName + " " + user.surname
-        root.txtEmailProf.text = user.Email
-        root.txtUsernameProf.text = user.username
-        root.txtStepsProf.text = user.stepsGoal.toString()
-        root.txtPhoneProf.text = user.phoneNo
-        root.txtDistanceProf.text = user.distanceGoal.toString()+"km"
-        root.imageView.setImageBitmap(readImageFromPath(this.requireContext(), user.image))
+
+
+        root.txtNameProf.text = userProfile!!.firstName + " " + userProfile!!.surname
+        root.txtEmailProf.text = userProfile!!.Email
+        root.txtUsernameProf.text = userProfile!!.username
+        root.txtStepsProf.text = userProfile!!.stepsGoal.toString()
+        root.txtPhoneProf.text = userProfile!!.phoneNo
+        root.txtDistanceProf.text = userProfile!!.distanceGoal.toString()+"km"
+        root.imageView.setImageBitmap(readImageFromPath(this.requireContext(), userProfile!!.image))
 
         root.editProfileFab.setOnClickListener {
-            navigateTo(ProfileEditFragment.newInstance(user))
+            navigateTo(ProfileEditFragment.newInstance(userProfile!!))
         }
 
         root.deleteProfileFab.setOnClickListener {
-            app.users.deleteAccount(user)
+            /*TO DO:*/
+            /*Delete user stats*/
+            /*Delete login details*/
+
+
+
+            /*app.users.deleteAccount(user)
             val toast =
                 Toast.makeText(
                     activity!!.applicationContext,
@@ -66,11 +85,13 @@ class ProfileFragment : Fragment() {
                     Toast.LENGTH_LONG
                 )
             toast.show()
-            restartApp()
+            restartApp()*/
         }
 
         return root
     }
+
+
 
     private fun restartApp() {
         val mStartActivity = Intent(context, LoginActivity::class.java)
@@ -89,10 +110,10 @@ class ProfileFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(account:Account) =
+        fun newInstance(user: Account) =
             ProfileFragment().apply {
                 arguments = Bundle().apply {
-                    putParcelable("user_key", account)
+                    putParcelable("user-profile",user)
                 }
             }
     }

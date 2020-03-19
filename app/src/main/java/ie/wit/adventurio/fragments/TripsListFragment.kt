@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import ie.wit.adventurio.R
-import ie.wit.adventurio.adapters.TripsAdapter
 import ie.wit.adventurio.adapters.TripsListener
 import ie.wit.adventurio.activities.RecordTripActivity
 import ie.wit.adventurio.fragments.TripsDeleteUpdateFragment
@@ -25,25 +24,21 @@ class TripsListFragment : Fragment(),TripsListener {
 
     lateinit var app: MainApp
     var trip = WalkingTrip()
-    var user = Account()
+    var userTripsList: Account? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         app = activity?.application as MainApp
 
+        arguments?.let {
+            userTripsList = it.getParcelable("user-profile-edit")
+        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        val bundle = arguments
-        if (bundle != null) {
-            user = bundle.getParcelable("user_key")
-        }
-
-
 
 
         var viewTripFragment = ViewTripFragment()
@@ -57,22 +52,22 @@ class TripsListFragment : Fragment(),TripsListener {
         var root = inflater.inflate(R.layout.fragment_trips_list, container, false)
 
         root.addTripFab.setOnClickListener {
-            val intent = Intent(activity, RecordTripActivity::class.java).putExtra("user_key",user)
+            val intent = Intent(activity, RecordTripActivity::class.java).putExtra("user_key",userTripsList /*user*/)
             startActivity(intent)
         }
 
         root.recyclerView.layoutManager = LinearLayoutManager(activity)
-        root.recyclerView.adapter = TripsAdapter(app.trips.getAllUserTripsById(user.id),this)
+        //root.recyclerView.adapter = TripsAdapter(app.trips.getAllUserTripsById(user.id),this)
 
         return root
     }
 
     companion object {
         @JvmStatic
-        fun newInstance(account: Account) =
+        fun newInstance(user: Account) =
             TripsListFragment().apply {
                 arguments = Bundle().apply {
-                    putParcelable("user_key", account)
+                    putParcelable("user-trips-list", user)
                 }
             }
     }

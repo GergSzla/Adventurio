@@ -14,7 +14,6 @@ import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.WalkingTrip
 import ie.wit.fragments.TripsListFragment
 import kotlinx.android.synthetic.main.fragment_trips_delete_update.view.*
-import java.util.ArrayList
 
 
 class TripsDeleteUpdateFragment : Fragment() {
@@ -40,13 +39,13 @@ class TripsDeleteUpdateFragment : Fragment() {
         if (bundle != null) {
             trip = bundle.getParcelable("trip_key")
         }
-        val AccountList = app.users.getAllAccounts() as ArrayList<Account>
+        //val AccountList = app.users.getAllAccounts() as ArrayList<Account>
 
-        for (account in AccountList){
-            if(account.id == trip.tripOwner){
-                user = account
-            }
-        }
+        //for (account in AccountList){
+        //    if(account.id == trip.tripOwner){
+         //       user = account
+        //   }
+        //}
 
         root.amountPickerHours1.minValue = 0
         root.amountPickerHours1.maxValue = 23
@@ -76,7 +75,7 @@ class TripsDeleteUpdateFragment : Fragment() {
 
         //del button
         root.deleteTripFab.setOnClickListener{
-            app.trips.delete(trip)
+            //app.trips.delete(trip)
             val toast =
                 Toast.makeText(
                     activity!!.applicationContext,
@@ -151,7 +150,7 @@ class TripsDeleteUpdateFragment : Fragment() {
 
 
 
-                app.trips.update(trip.copy())
+                //app.trips.update(trip.copy())
                 val toast =
                     Toast.makeText(
                         activity!!.applicationContext,

@@ -24,9 +24,11 @@ android {
 }
 
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
 
 
 dependencies {
+    implementation 'com.google.firebase:firebase-database:19.2.1'
     implementation 'com.beust:klaxon:0.30'
     implementation 'com.github.anastr:speedviewlib:1.5.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -46,6 +48,9 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.firebase:firebase-auth:19.3.0'
+    implementation 'com.google.firebase:firebase-database:19.2.0'
+    implementation 'com.google.firebase:firebase-analytics:17.2.2'
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

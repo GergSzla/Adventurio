@@ -76,6 +76,7 @@
     <string name="sample_distance">3.5km</string>
 
 
+    <string name="messageLoading">Loading User . . . </string>
 
 
     <!--Data Headers-->

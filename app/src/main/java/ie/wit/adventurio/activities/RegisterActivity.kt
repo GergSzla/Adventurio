@@ -4,13 +4,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
-import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import com.google.firebase.database.FirebaseDatabase
 import ie.wit.adventurio.R
+import ie.wit.adventurio.helpers.createLoader
+import ie.wit.adventurio.helpers.hideLoader
+import ie.wit.adventurio.helpers.showLoader
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
-import org.jetbrains.anko.longToast
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import java.util.*
@@ -19,6 +22,8 @@ class RegisterActivity : AppCompatActivity() {
 
     var account = Account()
     lateinit var app: MainApp
+    lateinit var loader : AlertDialog
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,12 +32,13 @@ class RegisterActivity : AppCompatActivity() {
 
 
         app = application as MainApp
+        loader = createLoader(this)
 
         btnGoToLoginScreen.setOnClickListener{
             startActivity<LoginActivity>()
         }
         btnRegisterAccount.setOnClickListener{
-            val AccountList = app.users.getAllAccounts() as ArrayList<Account>
+            //val AccountList = app.users.getAllAccounts() as ArrayList<Account>
 
             if(!(txtUsernameReg.text.toString() == "" ||
                     txtEmailReg.text.toString() == "" ||
@@ -41,12 +47,8 @@ class RegisterActivity : AppCompatActivity() {
                     txtPasswordReg.text.toString() == "" ||
                     txtConfPasswordReg.text.toString() == "")){
                 if(txtPasswordReg.text.toString() == txtConfPasswordReg.text.toString()){
-                    var existingUser = AccountList.find { p -> p.Email.toLowerCase() == txtEmailReg.text.toString().toLowerCase() }
-                    if (existingUser == null){
-                        createAccount()
-                    } else {
-                        longToast("Error: The account already exists!")
-                    }
+                        createAccount(txtEmailReg.text.toString(),txtPasswordReg.text.toString())
+
                 } else {
                     txtConfPasswordReg.selectAll()
                     toast("Error: Your passwords don't match!")
@@ -66,8 +68,52 @@ class RegisterActivity : AppCompatActivity() {
 
 
     }
-    fun createAccount(){
-        if(txtEmailReg.text.toString().contains("@") && txtEmailReg.text.toString().contains(".com")){
+
+    fun writeNewUserStats(user: Account) {
+        showLoader(loader, "Adding User to Firebase")
+        //val uid = app.auth.currentUser!!.uid
+        val key = app.database.child("user-stats").push().key
+        val uid = app.auth.currentUser!!.uid
+        val userValues = user.toMap()
+
+        val childUpdates = HashMap<String, Any>()
+        childUpdates["/user-stats/$uid"] = userValues
+        //childUpdates["/user-trips/${user.Email}/$key"] = userValues
+
+        app.database.updateChildren(childUpdates)
+        hideLoader(loader)
+    }
+
+    private fun createAccount(email: String, password: String) {
+        /*if (!validateForm()) {
+            return
+        }*/
+
+        showLoader(loader, "Creating Account...")
+        // [START create_user_with_email]
+        app.auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    val user = app.auth.currentUser
+                    app.database = FirebaseDatabase.getInstance().reference
+                    writeNewUserStats(Account(id = UUID.randomUUID().toString(), Email = app.auth.currentUser!!.email.toString(), firstName = txtFirstNameReg.text.toString(),
+                    surname = txtSurnameReg.text.toString(), username = txtUsernameReg.text.toString(), Password = txtPasswordReg.text.toString()))
+                    startActivity<LoginActivity>()
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Toast.makeText(baseContext, "Authentication failed.",
+                        Toast.LENGTH_SHORT).show()
+                }
+                // [START_EXCLUDE]
+                hideLoader(loader)
+                // [END_EXCLUDE]
+            }
+        // [END create_user_with_email]
+    }
+
+    /*fun createAccount(){
+        /*if(txtEmailReg.text.toString().contains("@") && txtEmailReg.text.toString().contains(".com")){
             account.Email = txtEmailReg.text.toString()
         } else {
             toast("Error: Invalid Email Address")
@@ -81,7 +127,7 @@ class RegisterActivity : AppCompatActivity() {
         account.secondaryPW = ""
         app.users.registerAccount(account.copy())
         toast("Your account as ${account.username} (${account.Email}) has been created")
-        startActivity<LoginActivity>()
-    }
+        startActivity<LoginActivity>()*/
+    }*/
 
 }

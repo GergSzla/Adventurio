@@ -20,11 +20,11 @@ class ForgotPasswordActivity : AppCompatActivity() {
         setContentView(R.layout.activity_forgot_password)
 
         app = application as MainApp
-        val AccountList = app.users.getAllAccounts() as ArrayList<Account>
+        //val AccountList = app.users.getAllAccounts() as ArrayList<Account>
 
 
         btnGetPassword.setOnClickListener{
-            var existingUser = AccountList.find { p -> p.Email.toLowerCase() == txtEmailPWRem.text.toString().toLowerCase() }
+            /*var existingUser = AccountList.find { p -> p.Email.toLowerCase() == txtEmailPWRem.text.toString().toLowerCase() }
             if (existingUser != null) {
                 if (existingUser.Email.toLowerCase() == txtEmailPWRem.text.toString().toLowerCase() ){
                     UserPasswordDisplay.setText("Your password: ${existingUser.Password.toString()}")
@@ -33,7 +33,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
                 }
             } else {
                 toast("This user does not exist!")
-            }
+            }*/
         }
 
         btnBackToLogin.setOnClickListener {

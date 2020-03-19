@@ -23,7 +23,6 @@ import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.WalkingTrip
 import kotlinx.android.synthetic.main.activity_record_trip.*
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -307,7 +306,7 @@ class RecordTripActivity : AppCompatActivity(), SensorEventListener {
         trip.DayOfWeek = dow
         trip.Date = date
 
-        app.trips.create(trip.copy())
+        //app.trips.create(trip.copy())
         startActivityForResult(intentFor<Home>().putExtra("user_key", user), 0)
         finish()
     }
