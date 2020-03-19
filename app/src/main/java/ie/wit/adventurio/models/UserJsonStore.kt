@@ -45,7 +45,7 @@ class UserJsonStore : UserStore, AnkoLogger {
         var foundUser: Account? = AccountList.find { p -> p.id == user.id }
         if (foundUser != null){
             foundUser.Email = user.Email
-            foundUser.Password = user.Password
+            //foundUser.Password = user.Password
             foundUser.firstName = user.firstName
             foundUser.surname = user.surname
             foundUser.username = user.username

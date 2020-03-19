@@ -248,16 +248,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <EditText
-                android:id="@+id/editPasswordConf"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/txtConfPass"
-                android:inputType="textPassword"
-                android:background="@drawable/edit_text_bg"
-                android:padding="10dp"/>
-
         </LinearLayout>
 
 

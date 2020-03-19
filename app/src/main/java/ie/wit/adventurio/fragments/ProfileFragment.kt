@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.google.firebase.auth.EmailAuthProvider
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -19,9 +21,7 @@ import ie.wit.adventurio.activities.LoginActivity
 import ie.wit.adventurio.helpers.readImageFromPath
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
-import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
-import kotlinx.android.synthetic.main.fragment_profile.view.txtNameProf
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
@@ -71,27 +71,59 @@ class ProfileFragment : Fragment(), AnkoLogger {
         }
 
         root.deleteProfileFab.setOnClickListener {
-            /*TO DO:*/
-            /*Delete user stats*/
-            /*Delete login details*/
-
-
-
-            /*app.users.deleteAccount(user)
-            val toast =
-                Toast.makeText(
-                    activity!!.applicationContext,
-                    "Account Removed! Application Restarting . . .",
-                    Toast.LENGTH_LONG
-                )
-            toast.show()
-            restartApp()*/
+            deleteUser(app.auth.currentUser!!.uid) //removes user stats from database
+            deleteUserTrips(app.auth.currentUser!!.uid) //removes user's trips from db
+            removeUserFirebaseAuth() //removes user auth
         }
 
         return root
     }
 
+    fun removeUserFirebaseAuth(){
+        val user = FirebaseAuth.getInstance().currentUser
+        user!!.delete()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val toast =
+                        Toast.makeText(
+                            activity!!.applicationContext,
+                            "Account Removed! Application Restarting . . .",
+                            Toast.LENGTH_LONG
+                        )
+                    toast.show()
+                    restartApp()
+                }
+            }
 
+    }
+
+    fun deleteUser(uid: String?) {
+        app.database.child("user-stats").child(uid!!)
+            .addListenerForSingleValueEvent(
+                object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.ref.removeValue()
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        info("Firebase User error : ${error.message}")
+                    }
+                })
+    }
+
+    fun deleteUserTrips(uid: String?) {
+        app.database.child("user-trips").child(uid!!)
+            .addListenerForSingleValueEvent(
+                object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.ref.removeValue()
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        info("Firebase User error : ${error.message}")
+                    }
+                })
+    }
 
     private fun restartApp() {
         val mStartActivity = Intent(context, LoginActivity::class.java)

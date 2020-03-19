@@ -20,7 +20,6 @@ data class Account(
     var avgDistance:Double = 0.0,
     var distanceGoal:Double = 0.0,
     var phoneNo: String = "",
-    var Password:String = "",
     var secondaryPWType:Int = 0 /*eg: None:0 PIN:1 or FINGERPRINT:2*/,
     var secondaryPW:String = ""/*1234 or FingerPrint*/) : Parcelable
 
@@ -38,7 +37,6 @@ data class Account(
             "avgSteps" to avgSteps,
             "avgDistance" to avgDistance,
             "distanceGoal" to distanceGoal,
-            "Password" to Password,
             "secondaryPWType" to secondaryPWType,
             "secondaryPW" to secondaryPW
         )

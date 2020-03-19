@@ -1,6 +1,8 @@
 package ie.wit.adventurio.activities
 
+import android.Manifest
 import android.content.Context
+import android.content.pm.PackageManager
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -15,13 +17,21 @@ import android.util.Log
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import com.google.firebase.database.FirebaseDatabase
 import ie.wit.adventurio.R
+import ie.wit.adventurio.helpers.createLoader
+import ie.wit.adventurio.helpers.hideLoader
+import ie.wit.adventurio.helpers.showLoader
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.WalkingTrip
 import kotlinx.android.synthetic.main.activity_record_trip.*
+import kotlinx.android.synthetic.main.activity_register.*
 import org.jetbrains.anko.intentFor
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
@@ -32,6 +42,7 @@ import java.util.*
 class RecordTripActivity : AppCompatActivity(), SensorEventListener {
 
     private var locationManager : LocationManager? = null
+    lateinit var loader : AlertDialog
 
     lateinit var app: MainApp
 
@@ -81,6 +92,15 @@ class RecordTripActivity : AppCompatActivity(), SensorEventListener {
         val month_date = SimpleDateFormat("MMMM")
 
         app = application as MainApp
+        loader = createLoader(this)
+
+
+        if (ContextCompat.checkSelfPermission(app, Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED) {
+            val permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION)
+            ActivityCompat.requestPermissions(this, permissions,0)
+        }
+
 
         if (intent.hasExtra("user_key")) {
             user = intent.extras.getParcelable<Account>("user_key")
@@ -157,11 +177,11 @@ class RecordTripActivity : AppCompatActivity(), SensorEventListener {
     private val locationListener: LocationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
             if(stop_button.isVisible == true){
-                lng.add("${location.longitude}")
-                lat.add("${location.latitude}")
+                //lng.add("${location.longitude}")
+                //lat.add("${location.latitude}")
                 ///Test
 
-                /*
+
                 lng.add("-7.251961")
                 lat.add("52.671500")
 
@@ -200,7 +220,7 @@ class RecordTripActivity : AppCompatActivity(), SensorEventListener {
 
                 lng.add("-7.252109")
                 lat.add("52.671431")
-*/
+
 
             }
         }
@@ -307,9 +327,43 @@ class RecordTripActivity : AppCompatActivity(), SensorEventListener {
         trip.Date = date
 
         //app.trips.create(trip.copy())
+        createTrip()
         startActivityForResult(intentFor<Home>().putExtra("user_key", user), 0)
         finish()
     }
 
+    fun writeNewTrip(trip: WalkingTrip) {
+        //showLoader(loader, "Adding User to Firebase")
+        //val uid = app.auth.currentUser!!.uid
+        val key = app.database.child("user-trips").push().key
+        val uid = app.auth.currentUser!!.uid
+        val tripValues = trip.toMap()
+
+        val childUpdates = HashMap<String, Any>()
+        childUpdates["/user-trips/$uid/$key"] = tripValues
+        //childUpdates["/user-trips/${user.Email}/$key"] = userValues
+
+        app.database.updateChildren(childUpdates)
+        //hideLoader(loader)
+    }
+
+    private fun createTrip() {
+        /*if (!validateForm()) {
+            return
+        }*/
+
+        showLoader(loader, "Creating Account...")
+
+        //val user = app.auth.currentUser
+        app.database = FirebaseDatabase.getInstance().reference
+        writeNewTrip(trip)
+        //startActivity<LoginActivity>()
+
+        // [START_EXCLUDE]
+        hideLoader(loader)
+        // [END_EXCLUDE]
+
+        // [END create_user_with_email]
+    }
 
 }

@@ -14,18 +14,18 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.google.firebase.auth.EmailAuthProvider
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import ie.wit.adventurio.R
 import ie.wit.adventurio.activities.Home
-import ie.wit.adventurio.helpers.hideLoader
 import ie.wit.adventurio.helpers.readImageFromPath
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import kotlinx.android.synthetic.main.fragment_profile_edit.*
 import kotlinx.android.synthetic.main.fragment_profile_edit.view.*
-import org.jetbrains.anko.info
 import java.io.IOException
 
 
@@ -59,7 +59,6 @@ class ProfileEditFragment : Fragment() {
         root.editSurname.setText(userProfileEdit!!.surname)
         root.editEmail.setText(userProfileEdit!!.Email)
         root.editPhoneNo.setText(userProfileEdit!!.phoneNo)
-        root.editPassword.setText(userProfileEdit!!.Password)
         root.editUsername.setText(userProfileEdit!!.username)
         root.editStepsGoal.setText(userProfileEdit!!.stepsGoal.toString())
         root.editDistanceGoal.setText(userProfileEdit!!.distanceGoal.toString())
@@ -88,39 +87,46 @@ class ProfileEditFragment : Fragment() {
         }
 
         root.updateProfileFab.setOnClickListener {
-            if(root.editPassword.text.toString() == root.editPasswordConf.text.toString()){
-                userProfileEdit!!.firstName = root.editFirstName.text.toString()
-                userProfileEdit!!.surname = root.editSurname.text.toString()
-                userProfileEdit!!.username = root.editUsername.text.toString()
-                userProfileEdit!!.Email = root.editEmail.text.toString()
-                userProfileEdit!!.stepsGoal = (root.editStepsGoal.text.toString()).toInt()
-                userProfileEdit!!.distanceGoal = (root.editDistanceGoal.text.toString()).toDouble()
-                userProfileEdit!!.Password = root.editPassword.text.toString()
-                userProfileEdit!!.phoneNo = root.editPhoneNo.text.toString()
-                userProfileEdit!!.image
-                //app.users.updateAccount(user.copy())
-                updateUserDonation(app.auth.currentUser!!.uid, userProfileEdit!!)
-                val toast =
-                    Toast.makeText(
-                        activity!!.applicationContext,
-                        "Profile Updated!",
-                        Toast.LENGTH_LONG
-                    )
-                toast.show()
-                navigateTo(StatisticsFragment.newInstance(userProfileEdit!!))
-
-            }else{
-                val toast =
-                    Toast.makeText(
-                        activity!!.applicationContext,
-                        "Passwords Don't Match!",
-                        Toast.LENGTH_LONG
-                    )
-                toast.show()
-            }
+            reauthenticateUser(app.auth.currentUser!!.email.toString(),root.editPassword.text.toString())
         }
 
         return root
+    }
+
+    private fun reauthenticateUser(email: String, password: String) {
+        val firebaseUser = FirebaseAuth.getInstance().currentUser
+        val authCredential = EmailAuthProvider.getCredential(email, password)
+        firebaseUser!!.reauthenticate(authCredential)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    userProfileEdit!!.firstName = root.editFirstName.text.toString()
+                    userProfileEdit!!.surname = root.editSurname.text.toString()
+                    userProfileEdit!!.username = root.editUsername.text.toString()
+                    userProfileEdit!!.Email = root.editEmail.text.toString()
+                    userProfileEdit!!.stepsGoal = (root.editStepsGoal.text.toString()).toInt()
+                    userProfileEdit!!.distanceGoal = (root.editDistanceGoal.text.toString()).toDouble()
+                    userProfileEdit!!.phoneNo = root.editPhoneNo.text.toString()
+                    userProfileEdit!!.image
+                    //app.users.updateAccount(user.copy())
+                    updateUserDonation(app.auth.currentUser!!.uid, userProfileEdit!!)
+                    val toast =
+                        Toast.makeText(
+                            activity!!.applicationContext,
+                            "Profile Updated!",
+                            Toast.LENGTH_LONG
+                        )
+                    toast.show()
+                    navigateTo(StatisticsFragment.newInstance(userProfileEdit!!))
+                } else {
+                    val toast =
+                        Toast.makeText(
+                            activity!!.applicationContext,
+                            "Something Went Wrong: Please check your password and try again!",
+                            Toast.LENGTH_LONG
+                        )
+                    toast.show()
+                }
+            }
     }
 
     val home = Home()

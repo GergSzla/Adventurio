@@ -1,8 +1,11 @@
 package ie.wit.adventurio.models
 
 import android.os.Parcelable
+import com.google.firebase.database.Exclude
+import com.google.firebase.database.IgnoreExtraProperties
 import kotlinx.android.parcel.Parcelize
 
+@IgnoreExtraProperties
 @Parcelize
 data class WalkingTrip (var tripID:String = "",
                         var tripType:String = "",
@@ -27,3 +30,24 @@ data class WalkingTrip (var tripID:String = "",
                         //var tripType:String,
                         var tripDistance:Double,
                         var fuelLevel:Int)*/
+
+{
+    @Exclude
+    fun toMap(): Map<String, Any?> {
+        return mapOf(
+            "tripID" to tripID,
+            "tripType" to tripType,
+            "tripDistance" to tripDistance,
+            "tripSteps" to tripSteps,
+            "tripLength" to tripLength,
+            "tripOwner" to tripOwner,
+            "tripStartTime" to tripStartTime,
+            "tripEndTime" to tripEndTime,
+            "DayOfWeek" to DayOfWeek,
+            "Date" to Date,
+            "lng" to lng,
+            "lat" to lat,
+            "zoom" to zoom
+        )
+    }
+}
