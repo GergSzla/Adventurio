@@ -34,7 +34,6 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
 
     lateinit var app: MainApp
     var trip = WalkingTrip()
-    var userTripsList: Account? = null
     lateinit var root: View
     lateinit var loader : AlertDialog
 
@@ -44,9 +43,7 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
         super.onCreate(savedInstanceState)
         app = activity?.application as MainApp
 
-        arguments?.let {
-            userTripsList = it.getParcelable("user-profile-edit")
-        }
+
     }
 
     override fun onCreateView(
@@ -66,7 +63,7 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
         root = inflater.inflate(R.layout.fragment_trips_list, container, false)
 
         root.addTripFab.setOnClickListener {
-            val intent = Intent(activity, RecordTripActivity::class.java).putExtra("user_key",userTripsList /*user*/)
+            val intent = Intent(activity, RecordTripActivity::class.java)
             startActivity(intent)
         }
 
@@ -78,10 +75,10 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
 
     companion object {
         @JvmStatic
-        fun newInstance(user: Account) =
+        fun newInstance() =
             TripsListFragment().apply {
                 arguments = Bundle().apply {
-                    putParcelable("user-trips-list", user)
+
                 }
             }
     }
@@ -110,7 +107,7 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
 
                         tripsList.add(trip!!)
                         root.recyclerView.adapter =
-                            TripsAdapter(tripsList, this@TripsListFragment)
+                            TripsAdapter(tripsList.reversed(), this@TripsListFragment)
                         root.recyclerView.adapter?.notifyDataSetChanged()
                         //checkSwipeRefresh()
 

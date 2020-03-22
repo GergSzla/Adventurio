@@ -121,28 +121,28 @@ class TripsDeleteUpdateFragment : Fragment() {
                 trip.tripLength = ""
 
                 if ((root.amountPickerHours2.value-root.amountPickerHours1.value) < 10){
-                    trip.tripLength += "0"+(root.amountPickerHours2.value - root.amountPickerHours1.value).toString() + ":"
+                    trip.tripLength += (root.amountPickerHours2.value - root.amountPickerHours1.value).toString() + "Hours"
                 }else{
-                    trip.tripLength += (root.amountPickerHours2.value - root.amountPickerHours1.value).toString() + ":"
+                    trip.tripLength += (root.amountPickerHours2.value - root.amountPickerHours1.value).toString() + "Hours"
                 }
 
                 if(root.amountPickerMinutes2.value < root.amountPickerMinutes1.value){
                     if ((root.amountPickerMinutes1.value - root.amountPickerMinutes2.value) < 10){
 
-                        trip.tripLength = ((root.amountPickerHours2.value - root.amountPickerHours1.value) - 1).toString() + ":"
-                        trip.tripLength += (0 + (root.amountPickerMinutes1.value - root.amountPickerMinutes2.value)).toString() + ":00"
+                        trip.tripLength = ((root.amountPickerHours2.value - root.amountPickerHours1.value) - 1).toString() + "Hours"
+                        trip.tripLength += ", " +(0 + (root.amountPickerMinutes1.value - root.amountPickerMinutes2.value)).toString() + "Minutes"
 
 
 
                     }else{
-                        trip.tripLength = ((root.amountPickerHours2.value - root.amountPickerHours1.value) - 1).toString()+ ":"
-                        trip.tripLength += "0"+(60-(root.amountPickerMinutes1.value - root.amountPickerMinutes2.value)).toString() + ":00"
+                        trip.tripLength = ((root.amountPickerHours2.value - root.amountPickerHours1.value) - 1).toString()+ "Hours"
+                        trip.tripLength += ", " + (60-(root.amountPickerMinutes1.value - root.amountPickerMinutes2.value)).toString() + "Minutes"
                     }
                 }else{
                     if ((root.amountPickerMinutes2.value - root.amountPickerMinutes1.value) < 10){
-                        trip.tripLength += "0"+(root.amountPickerMinutes2.value - root.amountPickerMinutes1.value).toString() + ":00"
+                        trip.tripLength += ", " +(root.amountPickerMinutes2.value - root.amountPickerMinutes1.value).toString() + "Minutes"
                     }else{
-                        trip.tripLength += (root.amountPickerMinutes2.value - root.amountPickerMinutes1.value).toString() + ":00"
+                        trip.tripLength += ", " + (root.amountPickerMinutes2.value - root.amountPickerMinutes1.value).toString() + "Minutes"
                     }
                 }
 
@@ -182,7 +182,7 @@ class TripsDeleteUpdateFragment : Fragment() {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         snapshot.ref.setValue(trip)
                         activity!!.supportFragmentManager.beginTransaction()
-                            .replace(R.id.homeFrame, TripsListFragment.newInstance(user!!))
+                            .replace(R.id.homeFrame, TripsListFragment.newInstance())
                             .addToBackStack(null)
                             .commit()
                         //hideLoader(loader)
@@ -195,13 +195,13 @@ class TripsDeleteUpdateFragment : Fragment() {
     }
 
     fun deleteUserTrip(uid: String?, trip: WalkingTrip) {
-        app.database.child("user-trips").child(uid!!).child(trip.tripID)
+        app.database.child("user-trips").child(uid!!).child(trip.dtID)
             .addListenerForSingleValueEvent(
                 object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         snapshot.ref.removeValue()
                         activity!!.supportFragmentManager.beginTransaction()
-                            .replace(R.id.homeFrame, TripsListFragment.newInstance(user!!))
+                            .replace(R.id.homeFrame, TripsListFragment.newInstance())
                             .addToBackStack(null)
                             .commit()
                     }

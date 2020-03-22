@@ -22,7 +22,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import ie.wit.adventurio.R
 import ie.wit.adventurio.helpers.createLoader
 import ie.wit.adventurio.helpers.hideLoader
@@ -43,11 +47,13 @@ class RecordTripActivity : AppCompatActivity(), SensorEventListener {
 
     private var locationManager : LocationManager? = null
     lateinit var loader : AlertDialog
+    lateinit var eventListener : ValueEventListener
 
     lateinit var app: MainApp
 
     var user = Account()
     var trip = WalkingTrip()
+    var dateId: String = ""
 
     var running = false
     var sensorManager:SensorManager? = null
@@ -101,10 +107,8 @@ class RecordTripActivity : AppCompatActivity(), SensorEventListener {
             ActivityCompat.requestPermissions(this, permissions,0)
         }
 
+        getUser()
 
-        if (intent.hasExtra("user_key")) {
-            user = intent.extras.getParcelable<Account>("user_key")
-        }
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager?
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         stepsValue.setText("0")
@@ -119,6 +123,7 @@ class RecordTripActivity : AppCompatActivity(), SensorEventListener {
             var currentEndDateTime= LocalDateTime.now()
             end = currentEndDateTime.format(DateTimeFormatter.ofPattern("HH:mm"))
 
+            generateDateID()
             saveTrip()
 
             currentSteps = 0
@@ -165,10 +170,6 @@ class RecordTripActivity : AppCompatActivity(), SensorEventListener {
             flag=true
 
             onResume()
-        }
-
-        if (intent.hasExtra("user_key")) {
-            user = intent.extras.getParcelable<Account>("user_key")
         }
 
 
@@ -312,8 +313,23 @@ class RecordTripActivity : AppCompatActivity(), SensorEventListener {
 
     }
 
+    fun getUser(){
+        val uid = FirebaseAuth.getInstance().currentUser!!.uid
+        val rootRef = FirebaseDatabase.getInstance().reference
+        val uidRef = rootRef.child("user-stats").child(uid)
+        eventListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                user = dataSnapshot.getValue(Account::class.java)!!
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+            }
+        }
+        uidRef.addListenerForSingleValueEvent(eventListener)
+    }
+
     private fun saveTrip(){
-        trip.tripLength = "${hour!!.text.toString()}:${minute!!.text.toString()}:${seconds!!.text.toString()}"
+        trip.tripLength = "${hour!!.text.toString()}Hours, ${minute!!.text.toString()}Minutes, ${seconds!!.text.toString()}Seconds"
         trip.tripID = UUID.randomUUID().toString()
         trip.tripType = "Walking"
         trip.tripOwner = user.id
@@ -325,6 +341,7 @@ class RecordTripActivity : AppCompatActivity(), SensorEventListener {
         trip.tripStartTime = start
         trip.DayOfWeek = dow
         trip.Date = date
+        trip.dtID = dateId
 
         //app.trips.create(trip.copy())
         createTrip()
@@ -335,7 +352,7 @@ class RecordTripActivity : AppCompatActivity(), SensorEventListener {
     fun writeNewTrip(trip: WalkingTrip) {
         //showLoader(loader, "Adding User to Firebase")
         //val uid = app.auth.currentUser!!.uid
-        val key = trip.tripID
+        val key = dateId
         val uid = app.auth.currentUser!!.uid
         val tripValues = trip.toMap()
 
@@ -345,6 +362,24 @@ class RecordTripActivity : AppCompatActivity(), SensorEventListener {
 
         app.database.updateChildren(childUpdates)
         //hideLoader(loader)
+    }
+
+    fun generateDateID(){
+        var currentEndDateTime= LocalDateTime.now()
+        var year = Calendar.getInstance().get(Calendar.YEAR).toString()
+        var month = ""
+        if (Calendar.getInstance().get(Calendar.MONTH)+1 < 10){
+            month = "0"+(Calendar.getInstance().get(Calendar.MONTH)+1).toString()
+        }else{
+            month = (Calendar.getInstance().get(Calendar.MONTH)+1).toString()
+        }
+        var day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH).toString()
+        var hour = currentEndDateTime.format(DateTimeFormatter.ofPattern("HH")).toString()
+        var minutes = currentEndDateTime.format(DateTimeFormatter.ofPattern("mm")).toString()
+        var seconds = currentEndDateTime.format(DateTimeFormatter.ofPattern("ss")).toString()
+
+
+        dateId = year+month+day+hour+minutes+seconds
     }
 
     private fun createTrip() {

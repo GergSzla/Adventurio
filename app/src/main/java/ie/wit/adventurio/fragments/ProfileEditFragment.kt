@@ -66,6 +66,8 @@ class ProfileEditFragment : Fragment() {
         root.editFirstName.setText(userProfileEdit!!.firstName)
         root.editSurname.setText(userProfileEdit!!.surname)
         root.editEmail.setText(userProfileEdit!!.Email)
+        root.editEmail.isEnabled = false
+
         root.editPhoneNo.setText(userProfileEdit!!.phoneNo)
         root.editUsername.setText(userProfileEdit!!.username)
         root.editStepsGoal.setText(userProfileEdit!!.stepsGoal.toString())

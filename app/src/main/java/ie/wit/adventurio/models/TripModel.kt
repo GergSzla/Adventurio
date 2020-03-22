@@ -17,6 +17,7 @@ data class WalkingTrip (var tripID:String = "",
                         var tripEndTime:String = "",
                         var DayOfWeek:String = "", //eg Wed
                         var Date:String = "", //eg. 5 Feb
+                        var dtID:String = "",
                         /*var startLat:Double = 0.0,
                         var startLng:Double = 0.0,
                         var endLat:Double = 0.0,
@@ -45,6 +46,7 @@ data class WalkingTrip (var tripID:String = "",
             "tripEndTime" to tripEndTime,
             "DayOfWeek" to DayOfWeek,
             "Date" to Date,
+            "dtID" to dtID,
             "lng" to lng,
             "lat" to lat,
             "zoom" to zoom

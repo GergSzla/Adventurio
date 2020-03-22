@@ -125,11 +125,11 @@ class Home : AppCompatActivity(),
             }
 
             R.id.nav_trips_list -> {
-                navigateTo(TripsListFragment.newInstance(user))
+                navigateTo(TripsListFragment.newInstance())
             }
 
             R.id.nav_record_trips -> {
-                startActivityForResult(intentFor<RecordTripActivity>().putExtra("user_key", user), 0)
+                startActivity(intentFor<RecordTripActivity>())
             }
 
             R.id.nav_profile -> {

@@ -86,26 +86,17 @@
             app:fontFamily="@font/catamaran" />
 
         <TextView
-            android:id="@+id/txtTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtDistance"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="17dp"
-            android:text="@string/data_time"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:fontFamily="@font/catamaran" />
-
-        <TextView
             android:id="@+id/txtTimeElapsedTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtDistanceTotal"
+            android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="17dp"
             android:layout_marginEnd="50dp"
             android:text="@string/sample_time"
+            android:gravity="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:fontFamily="@font/catamaran" />
 
@@ -122,7 +113,6 @@
 
         <TextView
             android:id="@+id/txtTimeAndDate"
-            android:padding="2dp"
             android:layout_width="231dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtTripType"
@@ -131,7 +121,8 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="-85dp"
             android:layout_marginEnd="0dp"
-            android:gravity="center" />
+            android:gravity="center"
+            android:padding="2dp" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
