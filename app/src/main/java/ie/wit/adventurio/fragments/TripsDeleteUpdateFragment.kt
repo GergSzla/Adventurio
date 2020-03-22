@@ -8,12 +8,18 @@ import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import ie.wit.adventurio.R
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.WalkingTrip
 import ie.wit.fragments.TripsListFragment
 import kotlinx.android.synthetic.main.fragment_trips_delete_update.view.*
+import org.jetbrains.anko.info
 
 
 class TripsDeleteUpdateFragment : Fragment() {
@@ -21,6 +27,8 @@ class TripsDeleteUpdateFragment : Fragment() {
     var trip = WalkingTrip()
     var user = Account()
     lateinit var app: MainApp
+    lateinit var root: View
+    lateinit var eventListener : ValueEventListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,13 +40,16 @@ class TripsDeleteUpdateFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_trips_delete_update, container, false)
+        root = inflater.inflate(R.layout.fragment_trips_delete_update, container, false)
         activity?.title = getString(R.string.menu_edit)
 
         val bundle = arguments
         if (bundle != null) {
             trip = bundle.getParcelable("trip_key")
         }
+
+        getUser()
+
         //val AccountList = app.users.getAllAccounts() as ArrayList<Account>
 
         //for (account in AccountList){
@@ -75,7 +86,7 @@ class TripsDeleteUpdateFragment : Fragment() {
 
         //del button
         root.deleteTripFab.setOnClickListener{
-            //app.trips.delete(trip)
+            deleteUserTrip(app.auth.currentUser!!.uid,trip)
             val toast =
                 Toast.makeText(
                     activity!!.applicationContext,
@@ -83,7 +94,6 @@ class TripsDeleteUpdateFragment : Fragment() {
                     Toast.LENGTH_LONG
                 )
             toast.show()
-            navigateTo(StatisticsFragment())
         }
 
         //update button
@@ -150,7 +160,7 @@ class TripsDeleteUpdateFragment : Fragment() {
 
 
 
-                //app.trips.update(trip.copy())
+                updateUserDonation(app.auth.currentUser!!.uid,trip)
                 val toast =
                     Toast.makeText(
                         activity!!.applicationContext,
@@ -158,12 +168,62 @@ class TripsDeleteUpdateFragment : Fragment() {
                         Toast.LENGTH_LONG
                     )
                 toast.show()
-                navigateTo(TripsListFragment.newInstance(user))
             }
         }
 
 
         return root
+    }
+
+    fun updateUserDonation(uid: String?, trip: WalkingTrip) {
+        app.database.child("user-trips").child(uid!!).child(trip.tripID)
+            .addListenerForSingleValueEvent(
+                object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.ref.setValue(trip)
+                        activity!!.supportFragmentManager.beginTransaction()
+                            .replace(R.id.homeFrame, TripsListFragment.newInstance(user!!))
+                            .addToBackStack(null)
+                            .commit()
+                        //hideLoader(loader)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        //info("Firebase Donation error : ${error.message}")
+                    }
+                })
+    }
+
+    fun deleteUserTrip(uid: String?, trip: WalkingTrip) {
+        app.database.child("user-trips").child(uid!!).child(trip.tripID)
+            .addListenerForSingleValueEvent(
+                object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.ref.removeValue()
+                        activity!!.supportFragmentManager.beginTransaction()
+                            .replace(R.id.homeFrame, TripsListFragment.newInstance(user!!))
+                            .addToBackStack(null)
+                            .commit()
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+                })
+    }
+
+    fun getUser(){
+        val uid = FirebaseAuth.getInstance().currentUser!!.uid
+        val rootRef = FirebaseDatabase.getInstance().reference
+        val uidRef = rootRef.child("user-stats").child(uid)
+        eventListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                user = dataSnapshot.getValue(Account::class.java)!!
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+            }
+        }
+        uidRef.addListenerForSingleValueEvent(eventListener)
     }
 
     companion object {

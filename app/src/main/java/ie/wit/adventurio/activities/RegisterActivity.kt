@@ -72,7 +72,7 @@ class RegisterActivity : AppCompatActivity() {
     fun writeNewUserStats(user: Account) {
         showLoader(loader, "Adding User to Firebase")
         //val uid = app.auth.currentUser!!.uid
-        val key = app.database.child("user-stats").push().key
+        //val key = app.database.child("user-stats").push().key
         val uid = app.auth.currentUser!!.uid
         val userValues = user.toMap()
 

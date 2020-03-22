@@ -177,12 +177,12 @@ class RecordTripActivity : AppCompatActivity(), SensorEventListener {
     private val locationListener: LocationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
             if(stop_button.isVisible == true){
-                //lng.add("${location.longitude}")
-                //lat.add("${location.latitude}")
+                lng.add("${location.longitude}")
+                lat.add("${location.latitude}")
                 ///Test
 
 
-                lng.add("-7.251961")
+                /*lng.add("-7.251961")
                 lat.add("52.671500")
 
                 lng.add("-7.252154")
@@ -219,7 +219,7 @@ class RecordTripActivity : AppCompatActivity(), SensorEventListener {
                 lat.add("52.671679")
 
                 lng.add("-7.252109")
-                lat.add("52.671431")
+                lat.add("52.671431")*/
 
 
             }
@@ -335,7 +335,7 @@ class RecordTripActivity : AppCompatActivity(), SensorEventListener {
     fun writeNewTrip(trip: WalkingTrip) {
         //showLoader(loader, "Adding User to Firebase")
         //val uid = app.auth.currentUser!!.uid
-        val key = app.database.child("user-trips").push().key
+        val key = trip.tripID
         val uid = app.auth.currentUser!!.uid
         val tripValues = trip.toMap()
 
