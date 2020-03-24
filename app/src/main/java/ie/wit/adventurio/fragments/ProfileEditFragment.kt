@@ -166,7 +166,7 @@ class ProfileEditFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (!(requestCode !== IMAGE_REQUEST || resultCode !== Activity.RESULT_OK || data == null || data.data == null)) {
-            val uri: Uri = data.data
+            val uri: Uri = data.data!!
             try {
                 val bitmap =
                     MediaStore.Images.Media.getBitmap(activity!!.contentResolver, uri)

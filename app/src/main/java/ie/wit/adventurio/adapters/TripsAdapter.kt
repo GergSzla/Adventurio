@@ -10,12 +10,11 @@ import kotlinx.android.synthetic.main.card_trip.view.*
 
 interface TripsListener {
     fun onTripClick(trip: WalkingTrip)
-    fun onTripHold(trip: WalkingTrip)
+
 }
 
-class TripsAdapter constructor(private var trips: List<WalkingTrip>,
-                             private val listener: TripsListener
-) : RecyclerView.Adapter<TripsAdapter.MainHolder>() {
+class TripsAdapter constructor(var trips: ArrayList<WalkingTrip>,
+                             private val listener: TripsListener) : RecyclerView.Adapter<TripsAdapter.MainHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
@@ -34,10 +33,16 @@ class TripsAdapter constructor(private var trips: List<WalkingTrip>,
 
     override fun getItemCount(): Int = trips.size
 
+    fun removeAt(position: Int) {
+        trips.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
     class MainHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(trip: WalkingTrip, listener: TripsListener) {
             var num = trip.tripDistance
+            itemView.tag = trip
             itemView.txtTripType.text = trip.tripType
             itemView.txtTotalSteps.text = (trip.tripSteps).toString()
             itemView.txtDistanceTotal.text = "%.2f".format(num) +"km"
@@ -48,10 +53,6 @@ class TripsAdapter constructor(private var trips: List<WalkingTrip>,
 
             itemView.setOnClickListener {
                 listener.onTripClick(trip)
-            }
-            itemView.setOnLongClickListener {
-                listener.onTripHold(trip)
-                true
             }
         }
     }

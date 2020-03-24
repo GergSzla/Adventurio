@@ -38,7 +38,7 @@ class ViewTripFragment : Fragment(),GoogleMap.OnMarkerClickListener  {
 
         val bundle = arguments
         if (bundle != null) {
-            trip = bundle.getParcelable("trip_key")
+            trip = bundle.getParcelable("trip_key")!!
         }
 
         root.mapView2.onCreate(savedInstanceState)

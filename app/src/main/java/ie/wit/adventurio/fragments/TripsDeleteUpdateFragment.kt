@@ -45,7 +45,7 @@ class TripsDeleteUpdateFragment : Fragment() {
 
         val bundle = arguments
         if (bundle != null) {
-            trip = bundle.getParcelable("trip_key")
+            trip = bundle.getParcelable("trip_key")!!
         }
 
         getUser()

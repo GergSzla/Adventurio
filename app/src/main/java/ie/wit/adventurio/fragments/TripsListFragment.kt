@@ -9,7 +9,10 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -25,6 +28,8 @@ import ie.wit.adventurio.helpers.showLoader
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.WalkingTrip
+import ie.wit.utils.SwipeToDeleteCallback
+import ie.wit.utils.SwipeToEditCallback
 import kotlinx.android.synthetic.main.fragment_trips_list.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
@@ -68,10 +73,46 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
         }
 
         root.recyclerView.layoutManager = LinearLayoutManager(activity)
+        setSwipeRefresh()
+
+        val swipeDeleteHandler = object : SwipeToDeleteCallback(activity!!) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val adapter = root.recyclerView.adapter as TripsAdapter
+                adapter.removeAt(viewHolder.adapterPosition)
+                deleteTrip((viewHolder.itemView.tag as WalkingTrip).dtID)
+            }
+        }
+        val itemTouchDeleteHelper = ItemTouchHelper(swipeDeleteHandler)
+        itemTouchDeleteHelper.attachToRecyclerView(root.recyclerView)
+
+
+        val swipeEditHandler = object : SwipeToEditCallback(activity!!) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                navigateTo(TripsDeleteUpdateFragment.newInstance(viewHolder.itemView.tag as WalkingTrip))
+            }
+        }
+        val itemTouchEditHelper = ItemTouchHelper(swipeEditHandler)
+        itemTouchEditHelper.attachToRecyclerView(root.recyclerView)
         //root.recyclerView.adapter = TripsAdapter(app.trips.getAllUserTripsById(user.id),this)
 
         return root
     }
+
+    fun deleteTrip(tripId: String?) {
+        val uid = app.auth.currentUser!!.uid
+        app.database.child("user-trips").child(uid).child(tripId!!)
+            .addListenerForSingleValueEvent(
+                object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.ref.removeValue()
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+                })
+    }
+
+
 
     companion object {
         @JvmStatic
@@ -81,6 +122,19 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
 
                 }
             }
+    }
+
+    fun setSwipeRefresh() {
+        root.swiperefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
+            override fun onRefresh() {
+                root.swiperefresh.isRefreshing = true
+                getAllTrips(app.auth.currentUser!!.uid)
+            }
+        })
+    }
+
+    fun checkSwipeRefresh() {
+        if (root.swiperefresh.isRefreshing) root.swiperefresh.isRefreshing = false
     }
 
     override fun onResume() {
@@ -107,9 +161,9 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
 
                         tripsList.add(trip!!)
                         root.recyclerView.adapter =
-                            TripsAdapter(tripsList.reversed(), this@TripsListFragment)
+                            TripsAdapter(tripsList, this@TripsListFragment)
                         root.recyclerView.adapter?.notifyDataSetChanged()
-                        //checkSwipeRefresh()
+                        checkSwipeRefresh()
 
                         app.database.child("user-trips").child(userId)
                             .removeEventListener(this)
@@ -127,9 +181,5 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
     }
     override fun onTripClick(trip: WalkingTrip) {
         navigateTo(ViewTripFragment.newInstance(trip))
-    }
-
-    override fun onTripHold(trip: WalkingTrip) {
-        navigateTo(TripsDeleteUpdateFragment.newInstance(trip))
     }
 }
