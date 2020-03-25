@@ -85,16 +85,7 @@ class TripsDeleteUpdateFragment : Fragment() {
         root.amountPickerMinutes2.value = trip.tripEndTime.substring(3,5).toInt()
 
         //del button
-        root.deleteTripFab.setOnClickListener{
-            deleteUserTrip(app.auth.currentUser!!.uid,trip)
-            val toast =
-                Toast.makeText(
-                    activity!!.applicationContext,
-                    "Adventure Removed!",
-                    Toast.LENGTH_LONG
-                )
-            toast.show()
-        }
+
 
         //update button
         root.updateTripFab.setOnClickListener {
@@ -118,6 +109,7 @@ class TripsDeleteUpdateFragment : Fragment() {
             } else {
                 trip.tripDistance = (root.editDistance.text.toString()).toDouble()
                 trip.tripSteps = (root.editSteps.text.toString()).toInt()
+                trip.tripName = root.editTripName.text.toString()
                 trip.tripLength = ""
 
                 if ((root.amountPickerHours2.value-root.amountPickerHours1.value) < 10){
@@ -176,7 +168,7 @@ class TripsDeleteUpdateFragment : Fragment() {
     }
 
     fun updateUserDonation(uid: String?, trip: WalkingTrip) {
-        app.database.child("user-trips").child(uid!!).child(trip.tripID)
+        app.database.child("user-trips").child(uid!!).child(trip.dtID)
             .addListenerForSingleValueEvent(
                 object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {

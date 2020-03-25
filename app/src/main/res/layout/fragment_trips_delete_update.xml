@@ -24,6 +24,22 @@
             android:background="@drawable/content_layout_bg"
             android:padding="10dp">
 
+            <TextView
+                android:id="@+id/textView29"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Edit Distance" />
+
+            <EditText
+                android:id="@+id/editTripName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Edit Trip Name"
+                android:inputType="textPersonName"
+                android:background="@drawable/edit_text_bg"
+                android:padding="10dp"/>
 
             <TextView
                 android:id="@+id/textView27"
@@ -207,18 +223,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/ic_action_update"  />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/deleteTripFab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginBottom="16dp"
-            app:backgroundTint="#862D25"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/updateTripFab"
-            app:layout_constraintHorizontal_bias="0.957"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_delete" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

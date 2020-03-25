@@ -8,6 +8,7 @@ import kotlinx.android.parcel.Parcelize
 @IgnoreExtraProperties
 @Parcelize
 data class WalkingTrip (var tripID:String = "",
+                        var tripName:String = "",
                         var tripType:String = "",
                         var tripDistance:Double = 0.0,
                         var tripSteps:Int = 0,

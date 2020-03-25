@@ -43,6 +43,7 @@ class TripsAdapter constructor(var trips: ArrayList<WalkingTrip>,
         fun bind(trip: WalkingTrip, listener: TripsListener) {
             var num = trip.tripDistance
             itemView.tag = trip
+            itemView.txtTripName.text = trip.tripName
             itemView.txtTripType.text = trip.tripType
             itemView.txtTotalSteps.text = (trip.tripSteps).toString()
             itemView.txtDistanceTotal.text = "%.2f".format(num) +"km"

@@ -57,6 +57,7 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
     ): View? {
 
 
+
         var viewTripFragment = ViewTripFragment()
         var tripDeleteUpdateFragment = TripsDeleteUpdateFragment()
         val bundleForTrips = Bundle()

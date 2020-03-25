@@ -26,6 +26,17 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:fontFamily="@font/alike_angular" />
 
+        <TextView
+            android:id="@+id/txtTripName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtTripType"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="10dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:fontFamily="@font/alike_angular" />
+
         <com.google.android.gms.maps.MapView
             android:id="@+id/mapView"
             android:layout_width="wrap_content"
@@ -106,8 +117,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="13dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginStart="97dp"
+            android:layout_marginTop="230dp"
             android:text="@string/data_category"
             app:fontFamily="@font/amethysta" />
 

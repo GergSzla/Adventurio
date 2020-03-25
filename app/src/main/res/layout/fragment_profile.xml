@@ -206,36 +206,37 @@
 
     </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="8dp">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/editProfileFab"
+        <com.getbase.floatingactionbutton.FloatingActionsMenu
+            android:id="@+id/profileFab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="16dp"
-            app:backgroundTint="#258632"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_edit" />
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            app:fab_labelStyle="@style/custom_fab"
+            app:fab_addButtonColorNormal="@color/floatBtn"
+            app:fab_addButtonColorPressed="@color/floatBtnPressed"
+            >
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/deleteProfileFab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginBottom="16dp"
-            app:backgroundTint="#862D25"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/editProfileFab"
-            app:layout_constraintHorizontal_bias="0.957"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_delete" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/deleteProfileFab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_size="mini"
+                app:fab_colorNormal="@color/btnDelRed"
+                app:fab_icon="@android:drawable/ic_menu_delete"
+                app:fab_title="Delete Profile"/>
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/editProfileFab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_size="mini"
+                app:fab_colorNormal="@color/btnEdit"
+                app:fab_icon="@android:drawable/ic_menu_edit"
+
+                app:fab_title="Edit Profile"/>
+
+        </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
 </RelativeLayout>

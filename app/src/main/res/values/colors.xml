@@ -12,4 +12,12 @@
     <!--Prof-->
     <color name="btnDelRed">#862525</color>
     <color name="btnDelGrey">#747474</color>
+
+    <color name="btnEdit">#378625</color>
+
+    <color name="trasnpBlack">#990C0C0C</color>
+
+    <color name="floatBtn">#FF9800</color>
+    <color name="floatBtnPressed">#B16A00</color>
+
 </resources>

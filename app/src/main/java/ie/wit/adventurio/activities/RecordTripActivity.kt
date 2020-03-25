@@ -3,6 +3,7 @@ package ie.wit.adventurio.activities
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -36,6 +37,7 @@ import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.WalkingTrip
 import kotlinx.android.synthetic.main.activity_record_trip.*
 import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.fragment_profile_edit.view.*
 import org.jetbrains.anko.intentFor
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
@@ -105,10 +107,14 @@ class RecordTripActivity : AppCompatActivity(), SensorEventListener {
             != PackageManager.PERMISSION_GRANTED) {
             val permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION)
             ActivityCompat.requestPermissions(this, permissions,0)
+        } else {
+            txtWarning.text = ""
         }
 
-        getUser()
 
+
+        getUser()
+        //checkWarningPermission()
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager?
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         stepsValue.setText("0")
@@ -173,6 +179,18 @@ class RecordTripActivity : AppCompatActivity(), SensorEventListener {
         }
 
 
+    }
+
+    fun checkWarningPermission(){
+        var permissionEnabled =
+            ContextCompat.checkSelfPermission(app, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+
+        if (permissionEnabled == false){
+            txtWarning.text = "GPS Permissions are not Granted! Trip Locations Aren't Recorded! "
+            txtWarning.setTextColor(Color.parseColor("#970000"))
+        } else {
+            txtWarning.text = ""
+        }
     }
 
     private val locationListener: LocationListener = object : LocationListener {

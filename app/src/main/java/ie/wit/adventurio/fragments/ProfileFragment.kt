@@ -1,8 +1,10 @@
 package ie.wit.adventurio.fragments
 
 import android.app.AlarmManager
+import android.app.AlertDialog
 import android.app.PendingIntent
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -41,6 +43,8 @@ class ProfileFragment : Fragment(), AnkoLogger {
         arguments?.let {
             userProfile = it.getParcelable("user-profile")
         }
+
+
     }
 
     override fun onCreateView(
@@ -71,12 +75,33 @@ class ProfileFragment : Fragment(), AnkoLogger {
         }
 
         root.deleteProfileFab.setOnClickListener {
-            deleteUser(app.auth.currentUser!!.uid) //removes user stats from database
-            deleteUserTrips(app.auth.currentUser!!.uid) //removes user's trips from db
-            removeUserFirebaseAuth() //removes user auth
+            showDialog()
         }
 
         return root
+    }
+
+    fun showDialog(){
+        //https://www.tutorialkart.com/kotlin-android/android-alert-dialog-example/
+        val dialogBuilder = AlertDialog.Builder(activity)
+        dialogBuilder.setMessage("Are you sure you wish to delete your account and all of your Adventurio data?")
+            .setCancelable(false)
+            .setPositiveButton("Delete Account", DialogInterface.OnClickListener {
+                    dialog, id -> deleteProfile()
+            })
+            .setNegativeButton("Cancel", DialogInterface.OnClickListener {
+                    dialog, id -> dialog.cancel()
+            })
+
+        val alert = dialogBuilder.create()
+        alert.setTitle("Warning")
+        alert.show()
+    }
+
+    fun deleteProfile(){
+        deleteUser(app.auth.currentUser!!.uid) //removes user stats from database
+        deleteUserTrips(app.auth.currentUser!!.uid) //removes user's trips from db
+        removeUserFirebaseAuth() //removes user auth
     }
 
     fun removeUserFirebaseAuth(){
