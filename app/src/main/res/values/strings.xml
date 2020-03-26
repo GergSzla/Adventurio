@@ -71,8 +71,8 @@
     <!--Sample Data-->
     <!--Stats-->
     <string name="sample_category">Walking</string>
-    <string name="sample_steps">2543</string>
-    <string name="sample_time">00:24:45</string>
+    <string name="sample_steps">2543 Steps</string>
+    <string name="sample_time">1 Hours, 05 Minutes , 00 Seconds</string>
     <string name="sample_distance">3.5km</string>
 
 
@@ -96,7 +96,6 @@
     <string name="data_name">Name:</string>
     <string name="data_username">Username:</string>
     <string name="data_email">Email:</string>
-
 
 
 </resources>

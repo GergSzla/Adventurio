@@ -44,7 +44,14 @@ class TripsAdapter constructor(var trips: ArrayList<WalkingTrip>,
             var num = trip.tripDistance
             itemView.tag = trip
             itemView.txtTripName.text = trip.tripName
-            itemView.txtTripType.text = trip.tripType
+
+            if (trip.tripType =="Walking"){
+                itemView.imageView2.setImageResource(R.drawable.ic_walking_category)
+            } else if (trip.tripType =="Driving"){
+                itemView.imageView2.setImageResource(R.drawable.ic_directions_car_black_24dp)
+            } else if (trip.tripType =="Cycling"){
+                itemView.imageView2.setImageResource(R.drawable.ic_cycling_category)
+            }
             itemView.txtTotalSteps.text = (trip.tripSteps).toString()
             itemView.txtDistanceTotal.text = "%.2f".format(num) +"km"
             itemView.txtTimeElapsedTotal.text = trip.tripLength

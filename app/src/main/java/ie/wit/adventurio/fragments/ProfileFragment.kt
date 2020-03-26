@@ -68,7 +68,7 @@ class ProfileFragment : Fragment(), AnkoLogger {
         root.txtStepsProf.text = userProfile!!.stepsGoal.toString()
         root.txtPhoneProf.text = userProfile!!.phoneNo
         root.txtDistanceProf.text = userProfile!!.distanceGoal.toString()+"km"
-        root.imageView.setImageBitmap(readImageFromPath(this.requireContext(), userProfile!!.image))
+        root.imageView.setImageBitmap(readImageFromPath(activity!!, userProfile!!.image))
 
         root.editProfileFab.setOnClickListener {
             navigateTo(ProfileEditFragment.newInstance(userProfile!!))

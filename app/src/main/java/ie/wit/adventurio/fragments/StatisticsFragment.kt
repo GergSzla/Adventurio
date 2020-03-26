@@ -95,10 +95,11 @@ class StatisticsFragment : Fragment(), AnkoLogger {
                         getValue<WalkingTrip>(WalkingTrip::class.java)
 
                         UserTrips.add(trip!!)
-                        updateStats()
                         app.database.child("user-trips").child(userId)
                             .removeEventListener(this)
                     }
+                    updateStats()
+
                 }
             })
     }
@@ -110,29 +111,29 @@ class StatisticsFragment : Fragment(), AnkoLogger {
 
     fun updateStats(){
         if(UserTrips.size > 0){
-            root.txtTotalTrips.setText(UserTrips.size.toString())
+            root.txtTotalTrips.text = UserTrips.size.toString()
             for(trip in UserTrips){
                 totalSteps += trip.tripSteps
                 totalDistance += trip.tripDistance
 
             }
-            root.txtTotalStepsStats.setText(totalSteps.toString())
-            root.txtCurrentStepsGoal.setText(userStats!!.stepsGoal.toString())
-            root.txtAvgSteps.setText((totalSteps/UserTrips.size).toString())
+            root.txtTotalStepsStats.text = totalSteps.toString()
+            root.txtCurrentStepsGoal.text = userStats!!.stepsGoal.toString()
+            root.txtAvgSteps.text = (totalSteps/UserTrips.size).toString()
 
 
-            root.txtTotalDistStats.setText("%.1f".format(totalDistance).toString()+ "km")
-            root.txtCurrentDistGoal.setText("%.1f".format(userStats!!.distanceGoal).toString()+ "km")
-            root.txtAvgDist.setText("%.1f".format(totalDistance/UserTrips.size).toString() + "km")
+            root.txtTotalDistStats.text = "%.1f".format(totalDistance).toString()+ "km"
+            root.txtCurrentDistGoal.text = "%.1f".format(userStats!!.distanceGoal).toString()+ "km"
+            root.txtAvgDist.text = "%.1f".format(totalDistance/UserTrips.size).toString() + "km"
 
 
             if (userStats!!.stepsGoal != 0 ){
-                root.txtTotalTripsPrecentage.setText(getPercentage(totalSteps.toDouble(),userStats!!.stepsGoal.toDouble())+"%")
-                root.progressBar.setProgress(getPercentage(totalSteps.toDouble(),userStats!!.stepsGoal.toDouble()).toInt())
+                root.txtTotalTripsPrecentage.text = getPercentage(totalSteps.toDouble(),userStats!!.stepsGoal.toDouble())+"%"
+                root.progressBar.progress = getPercentage(totalSteps.toDouble(),userStats!!.stepsGoal.toDouble()).toInt()
             }
             if (userStats!!.distanceGoal != 0.0){
-                root.progressBar7.setProgress(getPercentage(totalDistance,userStats!!.distanceGoal).toInt())
-                root.txtTotalDistPrecentage.setText(getPercentage(totalDistance,userStats!!.distanceGoal)+"%")
+                root.progressBar7.progress = getPercentage(totalDistance,userStats!!.distanceGoal).toInt()
+                root.txtTotalDistPrecentage.text = getPercentage(totalDistance,userStats!!.distanceGoal)+"%"
             }
         }
     }

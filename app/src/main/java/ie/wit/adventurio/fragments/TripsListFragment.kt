@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -17,16 +18,15 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import ie.wit.adventurio.R
-import ie.wit.adventurio.adapters.TripsListener
 import ie.wit.adventurio.activities.RecordTripActivity
 import ie.wit.adventurio.adapters.TripsAdapter
+import ie.wit.adventurio.adapters.TripsListener
 import ie.wit.adventurio.fragments.TripsDeleteUpdateFragment
 import ie.wit.adventurio.fragments.ViewTripFragment
 import ie.wit.adventurio.helpers.createLoader
 import ie.wit.adventurio.helpers.hideLoader
 import ie.wit.adventurio.helpers.showLoader
 import ie.wit.adventurio.main.MainApp
-import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.WalkingTrip
 import ie.wit.utils.SwipeToDeleteCallback
 import ie.wit.utils.SwipeToEditCallback
@@ -39,6 +39,7 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
 
     lateinit var app: MainApp
     var trip = WalkingTrip()
+    var tripsList = ArrayList<WalkingTrip>()
     lateinit var root: View
     lateinit var loader : AlertDialog
 
@@ -56,8 +57,6 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
         savedInstanceState: Bundle?
     ): View? {
 
-
-
         var viewTripFragment = ViewTripFragment()
         var tripDeleteUpdateFragment = TripsDeleteUpdateFragment()
         val bundleForTrips = Bundle()
@@ -71,6 +70,60 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
         root.addTripFab.setOnClickListener {
             val intent = Intent(activity, RecordTripActivity::class.java)
             startActivity(intent)
+        }
+
+        root.filterAll.setOnClickListener {
+            root.recyclerView.adapter =
+                TripsAdapter(tripsList, this@TripsListFragment)
+            root.recyclerView.adapter?.notifyDataSetChanged()
+            checkSwipeRefresh()
+            root.filterStatus.text = "Showing All Trips (${tripsList.size})"
+
+        }
+
+        root.filterWalking.setOnClickListener {
+            var filteredList = ArrayList<WalkingTrip>()
+
+            tripsList.forEach{
+                filteredList.add(it)
+            }
+            filteredList.removeIf({n -> n.tripType != "Walking"})
+            root.recyclerView.adapter =
+                TripsAdapter(filteredList, this@TripsListFragment)
+            root.recyclerView.adapter?.notifyDataSetChanged()
+            checkSwipeRefresh()
+            root.filterStatus.text = "Showing Walking Trips (${filteredList.size})"
+
+        }
+
+        root.filterCycling.setOnClickListener {
+            var filteredList = ArrayList<WalkingTrip>()
+
+            tripsList.forEach{
+                filteredList.add(it)
+            }
+            filteredList.removeIf({n -> n.tripType != "Cycling"})
+            root.recyclerView.adapter =
+                TripsAdapter(filteredList, this@TripsListFragment)
+            root.recyclerView.adapter?.notifyDataSetChanged()
+            checkSwipeRefresh()
+            root.filterStatus.text = "Showing Cycling Trips (${filteredList.size})"
+
+        }
+
+        root.filterDriving.setOnClickListener {
+            var filteredList = ArrayList<WalkingTrip>()
+
+            tripsList.forEach{
+                filteredList.add(it)
+            }
+            filteredList.removeIf({n -> n.tripType != "Driving"})
+            root.recyclerView.adapter =
+                TripsAdapter(filteredList, this@TripsListFragment)
+            root.recyclerView.adapter?.notifyDataSetChanged()
+            checkSwipeRefresh()
+            root.filterStatus.text = "Showing Driving Trips (${filteredList.size})"
+
         }
 
         root.recyclerView.layoutManager = LinearLayoutManager(activity)
@@ -130,6 +183,7 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
             override fun onRefresh() {
                 root.swiperefresh.isRefreshing = true
                 getAllTrips(app.auth.currentUser!!.uid)
+                root.filterStatus.text = "Showing All Trips (${tripsList.size})"
             }
         })
     }
@@ -146,7 +200,7 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
     fun getAllTrips(userId: String?) {
         loader = createLoader(activity!!)
         showLoader(loader, "Downloading Trips from Firebase")
-        val tripsList = ArrayList<WalkingTrip>()
+        tripsList = ArrayList<WalkingTrip>()
         app.database.child("user-trips").child(userId!!)
             .addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(error: DatabaseError) {
@@ -165,6 +219,7 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
                             TripsAdapter(tripsList, this@TripsListFragment)
                         root.recyclerView.adapter?.notifyDataSetChanged()
                         checkSwipeRefresh()
+                        root.filterStatus.text = "Showing All Trips (${tripsList.size})"
 
                         app.database.child("user-trips").child(userId)
                             .removeEventListener(this)
