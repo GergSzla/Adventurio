@@ -42,6 +42,8 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
         info("Login Activity started..")
 
 
+        autoSignIn()
+
         //val AccountList = app.users.getAllAccounts() as ArrayList<Account>
 
         btnGoToRegScreen.setOnClickListener{
@@ -83,6 +85,14 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
     }
 
 
+    fun autoSignIn(){
+        app.database = FirebaseDatabase.getInstance().reference
+
+        var user = app.auth.currentUser?.uid
+        if (user != null){
+            startActivity<Home>()
+        }
+    }
 
     private fun signIn(email: String, password: String) {
         /*if (!validateForm()) {

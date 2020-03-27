@@ -95,12 +95,7 @@ class Home : AppCompatActivity(),
         getUser(app.auth.currentUser?.uid)
     }
 
-    override fun onPause() {
-        super.onPause()
-        app.database.child("user-stats")
-            .child(app.auth.currentUser!!.uid)
-            .removeEventListener(eventListener)
-    }
+
 
     fun getUser(userId : String?){
         val uid = FirebaseAuth.getInstance().currentUser!!.uid
@@ -142,8 +137,7 @@ class Home : AppCompatActivity(),
                 navigateTo(ProfileFragment.newInstance(user))
             }
             R.id.nav_logout -> {
-                finish()
-                startActivity<LoginActivity>()
+                signOut()
             }
 
         }
@@ -176,12 +170,10 @@ class Home : AppCompatActivity(),
         }
     }
 
-    fun checkPermissions(){
-        if (ContextCompat.checkSelfPermission(app, Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED) {
-            val permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION)
-            ActivityCompat.requestPermissions(this, permissions,0)
-        }
+    private fun signOut(){
+        finish()
+        app.auth.signOut()
+        startActivity<LoginActivity>()
     }
 
     private fun navigateTo(fragment: Fragment) {
