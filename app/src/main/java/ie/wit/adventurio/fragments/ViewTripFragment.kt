@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.*
@@ -46,6 +47,7 @@ class ViewTripFragment : Fragment(),GoogleMap.OnMarkerClickListener  {
             map = it
             configureMap()
         }
+        addData()
         return root
     }
 
@@ -101,14 +103,59 @@ class ViewTripFragment : Fragment(),GoogleMap.OnMarkerClickListener  {
                 .color(Color.BLUE)
 
         )
-        var num = trip.tripDistance
-        root.txtTripCat.text = trip.tripType
-        root.txtTripSteps.text = trip.tripSteps.toString()
-        root.txtTripDist.text = "%.2f".format(num) +"km"
-        root.txtTripTime.text = trip.tripLength
-        root.txtTripTimeStart.text = trip.tripStartTime
-        root.txtTripTimeEnd.text = trip.tripEndTime
+    }
 
+    fun addData(){
+        if(trip.tripName != ""){
+            root.txtTripName.text = trip.tripName
+        }
+        when (trip.tripType) {
+            "Walking" -> {
+                var num = trip.tripDistance
+                root.txtTripCat.text = trip.tripType
+                root.txtTripSteps.text = trip.tripSteps.toString()
+                root.txtTripDist.text = "%.2f".format(num) +"km"
+                root.txtTripTime.text = trip.tripLength
+                root.txtTripTimeStart.text = trip.tripStartTime
+                root.txtTripTimeEnd.text = trip.tripEndTime
+                root.txtTripCalories.text = trip.caloriesBurned.toString()
+
+                root.steps.isVisible = true
+                root.calories.isVisible = true
+                root.speed.isVisible = false
+                root.vehicle.isVisible = false
+            }
+            "Driving" -> {
+                var num = trip.tripDistance
+                root.txtTripCat.text = trip.tripType
+                root.txtTripDist.text = "%.2f".format(num) +"km"
+                root.txtTripTime.text = trip.tripLength
+                root.txtTripTimeStart.text = trip.tripStartTime
+                root.txtTripTimeEnd.text = trip.tripEndTime
+                root.txtTripSpeed.text = trip.averageSpeed + "km/h"
+                root.txtTripVehicle.text = trip.vehicleUsed
+
+                root.steps.isVisible = false
+                root.calories.isVisible = false
+                root.speed.isVisible = true
+                root.vehicle.isVisible = true
+            }
+            "Cycling" -> {
+                var num = trip.tripDistance
+                root.txtTripCat.text = trip.tripType
+                root.txtTripDist.text = "%.2f".format(num) +"km"
+                root.txtTripTime.text = trip.tripLength
+                root.txtTripTimeStart.text = trip.tripStartTime
+                root.txtTripTimeEnd.text = trip.tripEndTime
+                root.txtTripSpeed.text = trip.averageSpeed + "km/h"
+                root.txtTripCalories.text = trip.caloriesBurned.toString()
+
+                root.steps.isVisible = false
+                root.calories.isVisible = true
+                root.speed.isVisible = true
+                root.vehicle.isVisible = false
+            }
+        }
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {

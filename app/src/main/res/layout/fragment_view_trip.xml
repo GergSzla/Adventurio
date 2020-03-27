@@ -20,14 +20,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.056" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="372dp"
         android:layout_height="223dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="15dp"
         android:background="@drawable/content_layout_bg"
         android:orientation="vertical"
-        android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,154 +33,265 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
+            android:background="@drawable/content_layout_bg"
+            android:orientation="vertical"
+            android:padding="5dp">
+            <LinearLayout
+                android:id="@+id/name"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/data_category"
-                android:textColor="#313131"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:fontFamily="@font/catamaran" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/txtTripCat"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Trip Name:"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#313131"
+                    app:fontFamily="@font/catamaran" />
+
+                <TextView
+                    android:id="@+id/txtTripName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#000000"
+                    android:textDirection="rtl"
+                    app:fontFamily="@font/catamaran" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="#000000"
-                android:textDirection="rtl"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:fontFamily="@font/catamaran" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/data_category"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#313131"
+                    app:fontFamily="@font/catamaran" />
+
+                <TextView
+                    android:id="@+id/txtTripCat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#000000"
+                    android:textDirection="rtl"
+                    app:fontFamily="@font/catamaran" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/steps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/data_steps"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#313131"
+                    app:fontFamily="@font/catamaran" />
+
+                <TextView
+                    android:id="@+id/txtTripSteps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#000000"
+                    android:textDirection="rtl"
+                    app:fontFamily="@font/catamaran" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/speed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Avg. Speed:"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#313131"
+                    app:fontFamily="@font/catamaran" />
+
+                <TextView
+                    android:id="@+id/txtTripSpeed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#000000"
+                    android:textDirection="rtl"
+                    app:fontFamily="@font/catamaran" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/vehicle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vehicle Used:"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#313131"
+                    app:fontFamily="@font/catamaran" />
+
+                <TextView
+                    android:id="@+id/txtTripVehicle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#000000"
+                    android:textDirection="rtl"
+                    app:fontFamily="@font/catamaran" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/calories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Calories Burned:"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#313131"
+                    app:fontFamily="@font/catamaran" />
+
+                <TextView
+                    android:id="@+id/txtTripCalories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#000000"
+                    android:textDirection="rtl"
+                    app:fontFamily="@font/catamaran" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/data_distance"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#313131"
+                    app:fontFamily="@font/catamaran" />
+
+                <TextView
+                    android:id="@+id/txtTripDist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#000000"
+                    android:textDirection="rtl"
+                    app:fontFamily="@font/catamaran" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/data_timeStart"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#313131"
+                    app:fontFamily="@font/catamaran" />
+
+                <TextView
+                    android:id="@+id/txtTripTimeStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#000000"
+                    android:textDirection="rtl"
+                    app:fontFamily="@font/catamaran" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/data_timeEnd"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#313131"
+                    app:fontFamily="@font/catamaran" />
+
+                <TextView
+                    android:id="@+id/txtTripTimeEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#000000"
+                    android:textDirection="rtl"
+                    app:fontFamily="@font/catamaran" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/data_time"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#313131"
+                    app:fontFamily="@font/catamaran" />
+
+                <TextView
+                    android:id="@+id/txtTripTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#000000"
+                    android:textDirection="rtl"
+                    app:fontFamily="@font/catamaran" />
+            </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/data_steps"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#313131"
-                app:fontFamily="@font/catamaran"
-                />
-
-            <TextView
-                android:id="@+id/txtTripSteps"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#000000"
-                android:textDirection="rtl"
-                app:fontFamily="@font/catamaran" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/data_distance"
-                android:textColor="#313131"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:fontFamily="@font/catamaran" />
-
-            <TextView
-                android:id="@+id/txtTripDist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="#000000"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textDirection="rtl"
-                app:fontFamily="@font/catamaran" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/data_timeStart"
-                android:textColor="#313131"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:fontFamily="@font/catamaran" />
-
-            <TextView
-                android:id="@+id/txtTripTimeStart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="#000000"
-                android:textDirection="rtl"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:fontFamily="@font/catamaran" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/data_timeEnd"
-                android:textColor="#313131"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:fontFamily="@font/catamaran" />
-
-            <TextView
-                android:id="@+id/txtTripTimeEnd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="#000000"
-                android:textDirection="rtl"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:fontFamily="@font/catamaran" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/data_time"
-                android:textColor="#313131"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:fontFamily="@font/catamaran" />
-
-            <TextView
-                android:id="@+id/txtTripTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="#000000"
-                android:textDirection="rtl"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:fontFamily="@font/catamaran" />
-        </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

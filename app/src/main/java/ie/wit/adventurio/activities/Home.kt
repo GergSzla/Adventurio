@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import ie.wit.adventurio.R
+import ie.wit.adventurio.fragments.ManualTripFragment
 import ie.wit.adventurio.fragments.ProfileFragment
 import ie.wit.adventurio.fragments.StatisticsFragment
 import ie.wit.adventurio.helpers.readImage
@@ -131,6 +132,10 @@ class Home : AppCompatActivity(),
 
             R.id.nav_record_trips -> {
                 startActivity(intentFor<RecordTripActivity>())
+            }
+
+            R.id.nav_manual_trips -> {
+                navigateTo(ManualTripFragment.newInstance())
             }
 
             R.id.nav_profile -> {

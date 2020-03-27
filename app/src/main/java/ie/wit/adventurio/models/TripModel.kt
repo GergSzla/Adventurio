@@ -5,6 +5,8 @@ import com.google.firebase.database.Exclude
 import com.google.firebase.database.IgnoreExtraProperties
 import kotlinx.android.parcel.Parcelize
 
+
+//change to super and sub classes Trip -> Walking,Cycling,Driving
 @IgnoreExtraProperties
 @Parcelize
 data class WalkingTrip (var tripID:String = "",
@@ -14,6 +16,9 @@ data class WalkingTrip (var tripID:String = "",
                         var tripSteps:Int = 0,
                         var tripLength:String ="",
                         var tripOwner:String = "",
+                        var averageSpeed: String ="",
+                        var caloriesBurned: Int = 0,
+                        var vehicleUsed: String = "",
                         var tripStartTime:String = "",
                         var tripEndTime:String = "",
                         var DayOfWeek:String = "", //eg Wed
@@ -28,21 +33,21 @@ data class WalkingTrip (var tripID:String = "",
 
                         var zoom:Float = 15f) : Parcelable
 
-/*data class DrivingTrip (var tripID:Int,
-                        //var tripType:String,
-                        var tripDistance:Double,
-                        var fuelLevel:Int)*/
 
 {
     @Exclude
     fun toMap(): Map<String, Any?> {
         return mapOf(
             "tripID" to tripID,
+            "tripName" to tripName,
             "tripType" to tripType,
             "tripDistance" to tripDistance,
             "tripSteps" to tripSteps,
             "tripLength" to tripLength,
             "tripOwner" to tripOwner,
+            "averageSpeed" to averageSpeed,
+            "caloriesBurned" to caloriesBurned,
+            "vehicleUsed" to vehicleUsed,
             "tripStartTime" to tripStartTime,
             "tripEndTime" to tripEndTime,
             "DayOfWeek" to DayOfWeek,

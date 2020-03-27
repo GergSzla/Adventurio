@@ -7,9 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,8 +21,7 @@ import ie.wit.adventurio.R
 import ie.wit.adventurio.activities.RecordTripActivity
 import ie.wit.adventurio.adapters.TripsAdapter
 import ie.wit.adventurio.adapters.TripsListener
-import ie.wit.adventurio.fragments.TripsDeleteUpdateFragment
-import ie.wit.adventurio.fragments.ViewTripFragment
+import ie.wit.adventurio.fragments.*
 import ie.wit.adventurio.helpers.createLoader
 import ie.wit.adventurio.helpers.hideLoader
 import ie.wit.adventurio.helpers.showLoader
@@ -58,7 +57,7 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
     ): View? {
 
         var viewTripFragment = ViewTripFragment()
-        var tripDeleteUpdateFragment = TripsDeleteUpdateFragment()
+        var tripDeleteUpdateFragment = WalkingTripsEditFragment()
         val bundleForTrips = Bundle()
         bundleForTrips.putParcelable("trip_key",trip)
         viewTripFragment.arguments = bundleForTrips
@@ -67,9 +66,13 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
 
         root = inflater.inflate(R.layout.fragment_trips_list, container, false)
 
-        root.addTripFab.setOnClickListener {
+        root.recordTripFab.setOnClickListener {
             val intent = Intent(activity, RecordTripActivity::class.java)
             startActivity(intent)
+        }
+
+        root.addTripFab.setOnClickListener{
+            navigateTo(ManualTripFragment.newInstance())
         }
 
         root.filterAll.setOnClickListener {
@@ -142,7 +145,15 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
 
         val swipeEditHandler = object : SwipeToEditCallback(activity!!) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                navigateTo(TripsDeleteUpdateFragment.newInstance(viewHolder.itemView.tag as WalkingTrip))
+
+                var selectedTrip = viewHolder.itemView.tag as WalkingTrip
+                if(selectedTrip.tripType == "Walking"){
+                    navigateTo(WalkingTripsEditFragment.newInstance(selectedTrip))
+                } else if(selectedTrip.tripType == "Cycling"){
+                    navigateTo(CyclingTripsEditFragment.newInstance(selectedTrip))
+                } else if(selectedTrip.tripType == "Driving"){
+                    navigateTo(DrivingTripsEditFragment.newInstance(selectedTrip))
+                }
             }
         }
         val itemTouchEditHelper = ItemTouchHelper(swipeEditHandler)

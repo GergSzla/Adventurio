@@ -17,6 +17,10 @@
             android:icon="@drawable/ic_action_record"
             android:title="@string/menu_record" />
         <item
+            android:id="@+id/nav_manual_trips"
+            android:icon="@drawable/ic_action_manual_trip"
+            android:title="Manual Adventure" />
+        <item
             android:id="@+id/nav_trips_list"
             android:icon="@drawable/ic_action_list"
             android:title="@string/menu_list_trips" />

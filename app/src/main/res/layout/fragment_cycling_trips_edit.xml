@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.TripsDeleteUpdateFragment"
+    tools:context=".fragments.CyclingTripsEditFragment"
     android:background="@color/colorAccent">
 
     <ScrollView
@@ -63,14 +63,31 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Edit Steps" />
+                android:text="Edit Average Speed" />
 
             <EditText
-                android:id="@+id/editSteps"
+                android:id="@+id/editSpeed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Edit Steps"
+                android:hint="Edit Average Speed"
+                android:inputType="textPersonName"
+                android:background="@drawable/edit_text_bg"
+                android:padding="10dp"/>
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Edit Calories Burned" />
+
+            <EditText
+                android:id="@+id/editCaloriesBurned"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Edit Calories Burned"
                 android:inputType="textPersonName"
                 android:background="@drawable/edit_text_bg"
                 android:padding="10dp"/>

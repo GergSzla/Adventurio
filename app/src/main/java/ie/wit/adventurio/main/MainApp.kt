@@ -3,11 +3,6 @@ package ie.wit.adventurio.main
 import android.app.Application
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
-import ie.wit.adventurio.models.TripJsonStore
-import ie.wit.adventurio.models.TripStore
-import ie.wit.adventurio.models.UserJsonStore
-import ie.wit.adventurio.models.UserStore
-import org.jetbrains.anko.AnkoLogger
 
 class MainApp : Application() {
 

@@ -18,11 +18,10 @@ import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.WalkingTrip
 import ie.wit.fragments.TripsListFragment
-import kotlinx.android.synthetic.main.fragment_trips_delete_update.view.*
-import org.jetbrains.anko.info
+import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.*
 
 
-class TripsDeleteUpdateFragment : Fragment() {
+class WalkingTripsEditFragment : Fragment() {
 
     var trip = WalkingTrip()
     var user = Account()
@@ -40,7 +39,7 @@ class TripsDeleteUpdateFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        root = inflater.inflate(R.layout.fragment_trips_delete_update, container, false)
+        root = inflater.inflate(R.layout.fragment_walking_trips_edit, container, false)
         activity?.title = getString(R.string.menu_edit)
 
         val bundle = arguments
@@ -79,7 +78,11 @@ class TripsDeleteUpdateFragment : Fragment() {
         root.editSteps.setText(trip.tripSteps.toString())
         root.amountPickerHours1.value = trip.tripStartTime.substring(0,2).toInt()
         root.amountPickerMinutes1.value = trip.tripStartTime.substring(3,5).toInt()
+        root.editCaloriesBurned.setText(trip.caloriesBurned.toString())
 
+        if(trip.tripName != ""){
+            root.editTripName.setText(trip.tripName.toString())
+        }
 
         root.amountPickerHours2.value = trip.tripEndTime.substring(0,2).toInt()
         root.amountPickerMinutes2.value = trip.tripEndTime.substring(3,5).toInt()
@@ -221,7 +224,7 @@ class TripsDeleteUpdateFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance(trip: WalkingTrip) =
-            TripsDeleteUpdateFragment().apply {
+            WalkingTripsEditFragment().apply {
                 arguments = Bundle().apply {
                     putParcelable("trip_key", trip)
                 }
