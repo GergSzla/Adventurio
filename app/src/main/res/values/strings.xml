@@ -35,10 +35,14 @@
     <string name="menu_stats">Statistics</string>
     <string name="menu_record">Record Adventure</string>
     <string name="menu_manual_record">Record Manual Adventure</string>
+    <string name="menu_add_car">Add Vehicle</string>
     <string name="menu_list_trips">List Adventures</string>
     <string name="menu_logout">Logout</string>
     <string name="editProf">Edit Profile</string>
+    <string name="editCar">Edit Vehicle</string>
     <string name="viewAdv">Your Adventure</string>
+    <string name="menu_list_cars">List Vehicles</string>
+    <string name="menu_add_cars">Add Vehicles</string>
 
 
     <string name="nav_header_desc">Navigation header</string>
@@ -97,6 +101,9 @@
     <string name="data_name">Name:</string>
     <string name="data_username">Username:</string>
     <string name="data_email">Email:</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

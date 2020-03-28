@@ -1,0 +1,227 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.AddVehicleFragment"
+    android:background="@color/colorAccent">
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/content_layout_bg"
+            android:orientation="vertical"
+            android:padding="5dp"
+            >
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/vehicleImage"
+                    android:layout_width="173dp"
+                    android:layout_height="149dp"
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="true"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <Button
+                    android:id="@+id/addImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="52dp"
+                    android:text="@string/btnAddImg"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/profImage"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.495" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Vehicle Name" />
+
+            <EditText
+                android:id="@+id/editName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Vehicle Name"
+                android:autofillHints="textPersonName"
+                android:inputType="textPersonName"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_text_bg"
+                android:padding="10dp"
+                />
+
+            <TextView
+                android:id="@+id/txtBrand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Brand"
+
+                />
+
+            <EditText
+                android:id="@+id/editBrand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Brand"
+                android:autofillHints="textPersonName"
+                android:inputType="textPersonName"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_text_bg"
+                android:padding="10dp"
+                />
+
+            <TextView
+                android:id="@+id/txtModel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Model" />
+
+            <EditText
+                android:id="@+id/editModel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Model"
+                android:autofillHints="textPersonName"
+                android:inputType="textPersonName"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_text_bg"
+                android:padding="10dp"
+                />
+
+            <TextView
+                android:id="@+id/txtReg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="License Plate" />
+
+            <EditText
+                android:id="@+id/editReg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890@.-"
+                android:ems="10"
+                android:hint="License Plate"
+                android:autofillHints="textPersonName"
+                android:inputType="textEmailAddress"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_text_bg"
+                android:padding="10dp"
+                />
+
+            <TextView
+                android:id="@+id/txtYear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Year" />
+
+            <EditText
+                android:id="@+id/editYear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Year"
+                android:inputType="number"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_text_bg"
+                android:padding="10dp"
+                />
+
+            <TextView
+                android:id="@+id/txtFuel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fuel Type" />
+
+            <Spinner
+                android:id="@+id/spinnerFuel"
+                android:layout_width="match_parent"
+                android:layout_height="26dp"
+                android:background="@drawable/edit_text_bg"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:id="@+id/txtTankCapac"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tank Capacity" />
+
+            <EditText
+                android:id="@+id/editTankCapac"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Tank Capacity"
+                android:inputType="number"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_text_bg"
+                android:padding="10dp"
+                />
+
+
+
+            <TextView
+                android:id="@+id/txtOdo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Odometer Count" />
+
+            <EditText
+                android:id="@+id/editOdo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Current Odometer"
+                android:inputType="number"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_text_bg"
+                android:padding="10dp"
+                />
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addVehicleFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
+        app:backgroundTint="#258632"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_action_update" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

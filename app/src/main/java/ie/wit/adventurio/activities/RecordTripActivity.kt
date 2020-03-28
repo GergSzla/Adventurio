@@ -34,7 +34,7 @@ import ie.wit.adventurio.helpers.hideLoader
 import ie.wit.adventurio.helpers.showLoader
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
-import ie.wit.adventurio.models.WalkingTrip
+import ie.wit.adventurio.models.Trip
 import kotlinx.android.synthetic.main.activity_record_trip.*
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.fragment_profile_edit.view.*
@@ -54,7 +54,7 @@ class RecordTripActivity : AppCompatActivity(), SensorEventListener {
     lateinit var app: MainApp
 
     var user = Account()
-    var trip = WalkingTrip()
+    var trip = Trip()
     var dateId: String = ""
 
     var running = false
@@ -367,7 +367,7 @@ class RecordTripActivity : AppCompatActivity(), SensorEventListener {
         finish()
     }
 
-    fun writeNewTrip(trip: WalkingTrip) {
+    fun writeNewTrip(trip: Trip) {
         //showLoader(loader, "Adding User to Firebase")
         //val uid = app.auth.currentUser!!.uid
         val key = dateId

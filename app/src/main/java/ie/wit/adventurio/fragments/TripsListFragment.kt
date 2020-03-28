@@ -26,7 +26,7 @@ import ie.wit.adventurio.helpers.createLoader
 import ie.wit.adventurio.helpers.hideLoader
 import ie.wit.adventurio.helpers.showLoader
 import ie.wit.adventurio.main.MainApp
-import ie.wit.adventurio.models.WalkingTrip
+import ie.wit.adventurio.models.Trip
 import ie.wit.utils.SwipeToDeleteCallback
 import ie.wit.utils.SwipeToEditCallback
 import kotlinx.android.synthetic.main.fragment_trips_list.view.*
@@ -37,8 +37,8 @@ import org.jetbrains.anko.info
 class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
 
     lateinit var app: MainApp
-    var trip = WalkingTrip()
-    var tripsList = ArrayList<WalkingTrip>()
+    var trip = Trip()
+    var tripsList = ArrayList<Trip>()
     lateinit var root: View
     lateinit var loader : AlertDialog
 
@@ -85,7 +85,7 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
         }
 
         root.filterWalking.setOnClickListener {
-            var filteredList = ArrayList<WalkingTrip>()
+            var filteredList = ArrayList<Trip>()
 
             tripsList.forEach{
                 filteredList.add(it)
@@ -100,7 +100,7 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
         }
 
         root.filterCycling.setOnClickListener {
-            var filteredList = ArrayList<WalkingTrip>()
+            var filteredList = ArrayList<Trip>()
 
             tripsList.forEach{
                 filteredList.add(it)
@@ -115,7 +115,7 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
         }
 
         root.filterDriving.setOnClickListener {
-            var filteredList = ArrayList<WalkingTrip>()
+            var filteredList = ArrayList<Trip>()
 
             tripsList.forEach{
                 filteredList.add(it)
@@ -136,7 +136,7 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val adapter = root.recyclerView.adapter as TripsAdapter
                 adapter.removeAt(viewHolder.adapterPosition)
-                deleteTrip((viewHolder.itemView.tag as WalkingTrip).dtID)
+                deleteTrip((viewHolder.itemView.tag as Trip).dtID)
             }
         }
         val itemTouchDeleteHelper = ItemTouchHelper(swipeDeleteHandler)
@@ -146,7 +146,7 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
         val swipeEditHandler = object : SwipeToEditCallback(activity!!) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
-                var selectedTrip = viewHolder.itemView.tag as WalkingTrip
+                var selectedTrip = viewHolder.itemView.tag as Trip
                 if(selectedTrip.tripType == "Walking"){
                     navigateTo(WalkingTripsEditFragment.newInstance(selectedTrip))
                 } else if(selectedTrip.tripType == "Cycling"){
@@ -211,7 +211,7 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
     fun getAllTrips(userId: String?) {
         loader = createLoader(activity!!)
         showLoader(loader, "Downloading Trips from Firebase")
-        tripsList = ArrayList<WalkingTrip>()
+        tripsList = ArrayList<Trip>()
         app.database.child("user-trips").child(userId!!)
             .addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(error: DatabaseError) {
@@ -223,7 +223,7 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
                     val children = snapshot.children
                     children.forEach {
                         val trip = it.
-                        getValue<WalkingTrip>(WalkingTrip::class.java)
+                        getValue<Trip>(Trip::class.java)
 
                         tripsList.add(trip!!)
                         root.recyclerView.adapter =
@@ -246,7 +246,7 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
             .addToBackStack(null)
             .commit()
     }
-    override fun onTripClick(trip: WalkingTrip) {
+    override fun onTripClick(trip: Trip) {
         navigateTo(ViewTripFragment.newInstance(trip))
     }
 }

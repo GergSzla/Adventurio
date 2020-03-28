@@ -17,11 +17,8 @@ import ie.wit.adventurio.helpers.hideLoader
 import ie.wit.adventurio.helpers.showLoader
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
-import ie.wit.adventurio.models.WalkingTrip
-import kotlinx.android.synthetic.main.fragment_profile.*
-import kotlinx.android.synthetic.main.fragment_statistics.*
+import ie.wit.adventurio.models.Trip
 import kotlinx.android.synthetic.main.fragment_statistics.view.*
-import kotlinx.android.synthetic.main.nav_header_home.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import java.util.*
@@ -34,7 +31,7 @@ class StatisticsFragment : Fragment(), AnkoLogger {
     lateinit var eventListener : ValueEventListener
     var ref = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
     var userStats: Account? = null
-    var UserTrips = ArrayList<WalkingTrip>()
+    var UserTrips = ArrayList<Trip>()
     lateinit var loader : AlertDialog
     lateinit var root: View
 
@@ -70,7 +67,7 @@ class StatisticsFragment : Fragment(), AnkoLogger {
         }*/
 
 
-        //var UserTrips= app.trips.getAllUserTripsById(user.id) as ArrayList<WalkingTrip>
+        //var UserTrips= app.trips.getAllUserTripsById(user.id) as ArrayList<Trip>
         getAllTrips(app.auth.currentUser!!.uid)
 
 
@@ -92,7 +89,7 @@ class StatisticsFragment : Fragment(), AnkoLogger {
                     val children = snapshot.children
                     children.forEach {
                         val trip = it.
-                        getValue<WalkingTrip>(WalkingTrip::class.java)
+                        getValue<Trip>(Trip::class.java)
 
                         UserTrips.add(trip!!)
                         app.database.child("user-trips").child(userId)

@@ -5,16 +5,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ie.wit.adventurio.R
-import ie.wit.adventurio.models.WalkingTrip
+import ie.wit.adventurio.models.Trip
 import kotlinx.android.synthetic.main.card_trip.view.*
 
 interface TripsListener {
-    fun onTripClick(trip: WalkingTrip)
+    fun onTripClick(trip: Trip)
 
 }
 
-class TripsAdapter constructor(var trips: ArrayList<WalkingTrip>,
-                             private val listener: TripsListener) : RecyclerView.Adapter<TripsAdapter.MainHolder>() {
+class TripsAdapter constructor(var trips: ArrayList<Trip>,
+                               private val listener: TripsListener) : RecyclerView.Adapter<TripsAdapter.MainHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
@@ -40,7 +40,7 @@ class TripsAdapter constructor(var trips: ArrayList<WalkingTrip>,
 
     class MainHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(trip: WalkingTrip, listener: TripsListener) {
+        fun bind(trip: Trip, listener: TripsListener) {
             var num = trip.tripDistance
             itemView.tag = trip
             itemView.txtTripName.text = trip.tripName

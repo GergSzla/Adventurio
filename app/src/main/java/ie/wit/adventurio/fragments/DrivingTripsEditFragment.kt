@@ -16,7 +16,7 @@ import com.google.firebase.database.ValueEventListener
 import ie.wit.adventurio.R
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
-import ie.wit.adventurio.models.WalkingTrip
+import ie.wit.adventurio.models.Trip
 import ie.wit.fragments.TripsListFragment
 import kotlinx.android.synthetic.main.fragment_cycling_trips_edit.view.*
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.*
@@ -24,7 +24,6 @@ import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPic
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerHours2
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerMinutes1
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerMinutes2
-import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.editCaloriesBurned
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.editDistance
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.editTripName
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.updateTripFab
@@ -32,7 +31,7 @@ import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.updateTri
 
 class DrivingTripsEditFragment : Fragment() {
 
-    var trip = WalkingTrip()
+    var trip = Trip()
     var user = Account()
     lateinit var app: MainApp
     lateinit var root: View
@@ -58,13 +57,6 @@ class DrivingTripsEditFragment : Fragment() {
 
         getUser()
 
-        //val AccountList = app.users.getAllAccounts() as ArrayList<Account>
-
-        //for (account in AccountList){
-        //    if(account.id == trip.tripOwner){
-        //       user = account
-        //   }
-        //}
 
         root.amountPickerHours1.minValue = 0
         root.amountPickerHours1.maxValue = 23
@@ -178,7 +170,7 @@ class DrivingTripsEditFragment : Fragment() {
         return root
     }
 
-    fun updateUserDonation(uid: String?, trip: WalkingTrip) {
+    fun updateUserDonation(uid: String?, trip: Trip) {
         app.database.child("user-trips").child(uid!!).child(trip.dtID)
             .addListenerForSingleValueEvent(
                 object : ValueEventListener {
@@ -197,7 +189,7 @@ class DrivingTripsEditFragment : Fragment() {
                 })
     }
 
-    fun deleteUserTrip(uid: String?, trip: WalkingTrip) {
+    fun deleteUserTrip(uid: String?, trip: Trip) {
         app.database.child("user-trips").child(uid!!).child(trip.dtID)
             .addListenerForSingleValueEvent(
                 object : ValueEventListener {
@@ -231,7 +223,7 @@ class DrivingTripsEditFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(trip: WalkingTrip) =
+        fun newInstance(trip: Trip) =
             DrivingTripsEditFragment().apply {
                 arguments = Bundle().apply {
                     putParcelable("trip_key", trip)

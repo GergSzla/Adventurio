@@ -9,29 +9,29 @@ import kotlinx.android.parcel.Parcelize
 //change to super and sub classes Trip -> Walking,Cycling,Driving
 @IgnoreExtraProperties
 @Parcelize
-data class WalkingTrip (var tripID:String = "",
-                        var tripName:String = "",
-                        var tripType:String = "",
-                        var tripDistance:Double = 0.0,
-                        var tripSteps:Int = 0,
-                        var tripLength:String ="",
-                        var tripOwner:String = "",
-                        var averageSpeed: String ="",
-                        var caloriesBurned: Int = 0,
-                        var vehicleUsed: String = "",
-                        var tripStartTime:String = "",
-                        var tripEndTime:String = "",
-                        var DayOfWeek:String = "", //eg Wed
-                        var Date:String = "", //eg. 5 Feb
-                        var dtID:String = "",
+data class Trip (var tripID:String = "",
+                 var tripName:String = "",
+                 var tripType:String = "",
+                 var tripDistance:Double = 0.0,
+                 var tripSteps:Int = 0,
+                 var tripLength:String ="",
+                 var tripOwner:String = "",
+                 var averageSpeed: String ="",
+                 var caloriesBurned: Int = 0,
+                 var vehicleUsed: String = "",
+                 var tripStartTime:String = "",
+                 var tripEndTime:String = "",
+                 var DayOfWeek:String = "", //eg Wed
+                 var Date:String = "", //eg. 5 Feb
+                 var dtID:String = "",
                         /*var startLat:Double = 0.0,
                         var startLng:Double = 0.0,
                         var endLat:Double = 0.0,
                         var endLng:Double = 0.0,*/
-                        var lng: MutableList<String> = mutableListOf<String>(),
-                        var lat: MutableList<String> = mutableListOf<String>(),
+                 var lng: MutableList<String> = mutableListOf<String>(),
+                 var lat: MutableList<String> = mutableListOf<String>(),
 
-                        var zoom:Float = 15f) : Parcelable
+                 var zoom:Float = 15f) : Parcelable
 
 
 {

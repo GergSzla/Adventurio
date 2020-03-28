@@ -22,12 +22,14 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import ie.wit.adventurio.R
+import ie.wit.adventurio.fragments.AddVehicleFragment
 import ie.wit.adventurio.fragments.ManualTripFragment
 import ie.wit.adventurio.fragments.ProfileFragment
 import ie.wit.adventurio.fragments.StatisticsFragment
 import ie.wit.adventurio.helpers.readImage
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
+import ie.wit.fragments.CarsListFragment
 import ie.wit.fragments.TripsListFragment
 import kotlinx.android.synthetic.main.activity_record_trip.*
 import kotlinx.android.synthetic.main.app_bar_home.*
@@ -140,6 +142,12 @@ class Home : AppCompatActivity(),
 
             R.id.nav_profile -> {
                 navigateTo(ProfileFragment.newInstance(user))
+            }
+            R.id.nav_cars_list -> {
+                navigateTo(CarsListFragment.newInstance())
+            }
+            R.id.nav_cars_add -> {
+                navigateTo(AddVehicleFragment.newInstance())
             }
             R.id.nav_logout -> {
                 signOut()

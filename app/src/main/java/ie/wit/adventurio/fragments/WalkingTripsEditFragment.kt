@@ -16,14 +16,14 @@ import com.google.firebase.database.ValueEventListener
 import ie.wit.adventurio.R
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
-import ie.wit.adventurio.models.WalkingTrip
+import ie.wit.adventurio.models.Trip
 import ie.wit.fragments.TripsListFragment
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.*
 
 
 class WalkingTripsEditFragment : Fragment() {
 
-    var trip = WalkingTrip()
+    var trip = Trip()
     var user = Account()
     lateinit var app: MainApp
     lateinit var root: View
@@ -170,7 +170,7 @@ class WalkingTripsEditFragment : Fragment() {
         return root
     }
 
-    fun updateUserDonation(uid: String?, trip: WalkingTrip) {
+    fun updateUserDonation(uid: String?, trip: Trip) {
         app.database.child("user-trips").child(uid!!).child(trip.dtID)
             .addListenerForSingleValueEvent(
                 object : ValueEventListener {
@@ -189,7 +189,7 @@ class WalkingTripsEditFragment : Fragment() {
                 })
     }
 
-    fun deleteUserTrip(uid: String?, trip: WalkingTrip) {
+    fun deleteUserTrip(uid: String?, trip: Trip) {
         app.database.child("user-trips").child(uid!!).child(trip.dtID)
             .addListenerForSingleValueEvent(
                 object : ValueEventListener {
@@ -223,7 +223,7 @@ class WalkingTripsEditFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(trip: WalkingTrip) =
+        fun newInstance(trip: Trip) =
             WalkingTripsEditFragment().apply {
                 arguments = Bundle().apply {
                     putParcelable("trip_key", trip)

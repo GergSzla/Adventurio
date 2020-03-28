@@ -13,7 +13,7 @@ import com.google.android.gms.maps.model.*
 
 import ie.wit.adventurio.R
 import ie.wit.adventurio.main.MainApp
-import ie.wit.adventurio.models.WalkingTrip
+import ie.wit.adventurio.models.Trip
 import kotlinx.android.synthetic.main.fragment_view_trip.view.*
 
 
@@ -22,7 +22,7 @@ class ViewTripFragment : Fragment(),GoogleMap.OnMarkerClickListener  {
     private lateinit var map: GoogleMap
     lateinit var app: MainApp
     lateinit var root : View
-    var trip = WalkingTrip()
+    var trip = Trip()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -191,7 +191,7 @@ class ViewTripFragment : Fragment(),GoogleMap.OnMarkerClickListener  {
     companion object {
 
         @JvmStatic
-        fun newInstance(trip: WalkingTrip) =
+        fun newInstance(trip: Trip) =
             ViewTripFragment().apply {
                 arguments = Bundle().apply {
                     putParcelable("trip_key", trip)

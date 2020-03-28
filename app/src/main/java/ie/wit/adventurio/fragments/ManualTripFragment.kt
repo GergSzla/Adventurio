@@ -17,24 +17,22 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import ie.wit.adventurio.R
+import ie.wit.adventurio.adapters.VehiclesAdapter
+import ie.wit.adventurio.helpers.createLoader
 import ie.wit.adventurio.helpers.hideLoader
-import ie.wit.adventurio.helpers.showLoader
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
-import ie.wit.adventurio.models.WalkingTrip
+import ie.wit.adventurio.models.Trip
+import ie.wit.adventurio.models.Vehicle
 import ie.wit.fragments.TripsListFragment
-import kotlinx.android.synthetic.main.fragment_cycling_trips_edit.view.*
+import kotlinx.android.synthetic.main.fragment_cars_list.view.*
 import kotlinx.android.synthetic.main.fragment_manual_trip.*
 import kotlinx.android.synthetic.main.fragment_manual_trip.view.*
-import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.*
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerHours1
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerHours2
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerMinutes1
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerMinutes2
-import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.editCaloriesBurned
-import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.editDistance
-import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.editTripName
-import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.updateTripFab
+import org.jetbrains.anko.info
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -43,8 +41,10 @@ import java.util.*
 
 class ManualTripFragment : Fragment() {
 
-    var trip = WalkingTrip()
+    var trip = Trip()
     var user = Account()
+    var vehicles = ArrayList<String>()
+    var vehiclesList = ArrayList<Vehicle>()
     lateinit var app: MainApp
     lateinit var root: View
     lateinit var eventListener : ValueEventListener
@@ -53,6 +53,9 @@ class ManualTripFragment : Fragment() {
     val sdf = SimpleDateFormat("EEEE")
     val cal = Calendar.getInstance()
     val month_date = SimpleDateFormat("MMMM")
+    var carPos = ""
+
+    var vehicleUsed = Vehicle()
 
     var dow = ""
     var date= ""
@@ -92,6 +95,18 @@ class ManualTripFragment : Fragment() {
                     root.DrivingTrip.isVisible = false
                     root.CyclingTrip.isVisible = false
                 } else if (parent.getItemAtPosition(position).toString() == "Driving"){
+                    val cars = vehicles
+
+                    val adapter = ArrayAdapter(
+                        activity!!, // Context
+                        android.R.layout.simple_spinner_item, // Layout
+                        cars // Array
+                    )
+
+                    adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
+
+                    root.editDrivingTripVehicles.adapter = adapter;
+
                     trip.tripType = "Driving"
                     root.WalkingTrip.isVisible = false
                     root.DrivingTrip.isVisible = true
@@ -110,7 +125,7 @@ class ManualTripFragment : Fragment() {
         }
 
         getUser()
-
+        getVehiclesNames()
         root.amountPickerHours1.minValue = 0
         root.amountPickerHours1.maxValue = 23
         root.amountPickerHours1.setFormatter(NumberPicker.Formatter { i -> String.format("%02d", i) })
@@ -206,7 +221,7 @@ class ManualTripFragment : Fragment() {
 
 
                 generateDateID()
-                if(trip.tripType == "Driving" && trip.vehicleUsed == ""){
+                if(trip.tripType == "Driving" && editDrivingTripVehicles.selectedItem.toString() == ""){
                     val toast =
                         Toast.makeText(
                             activity!!.applicationContext,
@@ -216,6 +231,15 @@ class ManualTripFragment : Fragment() {
                     toast.show()
                 } else {
                     addingData()
+                    carPos = vehicles.indexOf(trip.vehicleUsed).toString()
+                    vehiclesList.forEach {
+                        if(it.pos == carPos){
+                            vehicleUsed = it
+                        }
+                    }
+                    var num = trip.tripDistance
+                    vehicleUsed.currentOdometer +=  ("%.0f".format(num)).toInt()
+                    updateVehicle(app.auth.currentUser!!.uid,carPos)
                     createTrip()
                 }
 
@@ -241,6 +265,7 @@ class ManualTripFragment : Fragment() {
                 trip.tripID = UUID.randomUUID().toString()
                 trip.DayOfWeek = dow
                 trip.Date = date
+
             }
             "Driving" -> {
                 trip.tripName = editDrivingTripName.text.toString()
@@ -252,6 +277,7 @@ class ManualTripFragment : Fragment() {
                 trip.tripID = UUID.randomUUID().toString()
                 trip.DayOfWeek = dow
                 trip.Date = date
+
             }
             "Cycling" -> {
                 trip.tripName = editCyclingTripName.text.toString()
@@ -267,7 +293,7 @@ class ManualTripFragment : Fragment() {
         }
     }
 
-    fun writeNewTrip(trip: WalkingTrip) {
+    fun writeNewTrip(trip: Trip) {
         //showLoader(loader, "Adding User to Firebase")
         //val uid = app.auth.currentUser!!.uid
         val key = dateId
@@ -334,6 +360,48 @@ class ManualTripFragment : Fragment() {
             }
         }
         uidRef.addListenerForSingleValueEvent(eventListener)
+    }
+
+    fun getVehiclesNames(){
+        val uid = FirebaseAuth.getInstance().currentUser!!.uid
+        app.database.child("user-stats").child(uid).child("vehicles")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onCancelled(error: DatabaseError) {
+                }
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val children = snapshot.children
+                    children.forEach {
+                        val vehicle = it.
+                        getValue<Vehicle>(Vehicle::class.java)
+
+                        vehicles.add(vehicle!!.vehicleName)
+                        vehiclesList.add(vehicle)
+
+                        app.database.child("user-stats").child(uid).child("vehicles")
+                            .removeEventListener(this)
+                    }
+                }
+            })
+    }
+
+    fun updateVehicle(uid: String?,carPos : String) {
+        app.database.child("user-stats").child(uid!!).child("vehicles").child(carPos)
+            .addListenerForSingleValueEvent(
+                object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.ref.setValue(vehicleUsed)
+                        activity!!.supportFragmentManager.beginTransaction()
+                            .replace(R.id.homeFrame, TripsListFragment.newInstance())
+                            .addToBackStack(null)
+                            .commit()
+                        //hideLoader(loader)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        //info("Firebase Donation error : ${error.message}")
+                    }
+                })
     }
 
     companion object {
