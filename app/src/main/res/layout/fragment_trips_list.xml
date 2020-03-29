@@ -114,7 +114,7 @@
             android:layout_height="wrap_content"
             app:fab_size="mini"
             app:fab_colorNormal="@color/floatBtn"
-            app:fab_icon="@drawable/ic_action_manual_trip"
+            app:fab_icon="@drawable/ic_action_record"
             app:fab_title="Add Trip Manually"/>
 
         <com.getbase.floatingactionbutton.FloatingActionButton
@@ -123,9 +123,26 @@
             android:layout_height="wrap_content"
             app:fab_size="mini"
             app:fab_colorNormal="@color/floatBtn"
-            app:fab_icon="@drawable/ic_action_record"
+            app:fab_icon="@drawable/ic_walking_trip"
+            app:fab_title="Record Walking Trip"/>
 
-            app:fab_title="Record Trip"/>
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/recordDrivingTripFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_size="mini"
+            app:fab_colorNormal="@color/floatBtn"
+            app:fab_icon="@drawable/ic_car_trip"
+            app:fab_title="Record Driving Trip"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/recordCyclingTripFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_size="mini"
+            app:fab_colorNormal="@color/floatBtn"
+            app:fab_icon="@drawable/ic_cycling_trip"
+            app:fab_title="Record Cycling Trip"/>
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

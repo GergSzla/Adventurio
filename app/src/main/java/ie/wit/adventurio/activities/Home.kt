@@ -1,17 +1,10 @@
 package ie.wit.adventurio.activities
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -31,7 +24,6 @@ import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import ie.wit.fragments.CarsListFragment
 import ie.wit.fragments.TripsListFragment
-import kotlinx.android.synthetic.main.activity_record_trip.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.fragment_profile_edit.*
 import kotlinx.android.synthetic.main.home.*
@@ -124,31 +116,44 @@ class Home : AppCompatActivity(),
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
+            R.id.nav_profile -> {
+                navigateTo(ProfileFragment.newInstance(user))
+            }
             R.id.nav_statistics -> {
                 navigateTo(StatisticsFragment.newInstance(user))
             }
 
-            R.id.nav_trips_list -> {
-                navigateTo(TripsListFragment.newInstance())
+
+            //////////////////////////
+            R.id.nav_record_walking -> {
+                startActivity(intentFor<RecordWalkingTripActivity>())
             }
 
-            R.id.nav_record_trips -> {
-                startActivity(intentFor<RecordTripActivity>())
+            R.id.nav_record_driving -> {
+                startActivity(intentFor<RecordDrivingTripActivity>())
+            }
+
+            R.id.nav_record_cycling -> {
+                startActivity(intentFor<RecordCyclingTripActivity>())
             }
 
             R.id.nav_manual_trips -> {
                 navigateTo(ManualTripFragment.newInstance())
             }
 
-            R.id.nav_profile -> {
-                navigateTo(ProfileFragment.newInstance(user))
+            R.id.nav_trips_list -> {
+                navigateTo(TripsListFragment.newInstance())
             }
+
+
+            ///////////////////////////
             R.id.nav_cars_list -> {
                 navigateTo(CarsListFragment.newInstance())
             }
             R.id.nav_cars_add -> {
                 navigateTo(AddVehicleFragment.newInstance())
             }
+            /////////////////////////
             R.id.nav_logout -> {
                 signOut()
             }

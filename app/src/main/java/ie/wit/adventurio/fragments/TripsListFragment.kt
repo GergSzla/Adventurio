@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +17,9 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import ie.wit.adventurio.R
-import ie.wit.adventurio.activities.RecordTripActivity
+import ie.wit.adventurio.activities.RecordCyclingTripActivity
+import ie.wit.adventurio.activities.RecordDrivingTripActivity
+import ie.wit.adventurio.activities.RecordWalkingTripActivity
 import ie.wit.adventurio.adapters.TripsAdapter
 import ie.wit.adventurio.adapters.TripsListener
 import ie.wit.adventurio.fragments.*
@@ -67,12 +68,20 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
         root = inflater.inflate(R.layout.fragment_trips_list, container, false)
 
         root.recordTripFab.setOnClickListener {
-            val intent = Intent(activity, RecordTripActivity::class.java)
+            val intent = Intent(activity, RecordWalkingTripActivity::class.java)
             startActivity(intent)
         }
 
         root.addTripFab.setOnClickListener{
             navigateTo(ManualTripFragment.newInstance())
+        }
+        root.recordDrivingTripFab.setOnClickListener {
+            val intent = Intent(activity, RecordDrivingTripActivity::class.java)
+            startActivity(intent)
+        }
+        root.recordCyclingTripFab.setOnClickListener {
+            val intent = Intent(activity, RecordCyclingTripActivity::class.java)
+            startActivity(intent)
         }
 
         root.filterAll.setOnClickListener {

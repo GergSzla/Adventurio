@@ -12,27 +12,52 @@
             android:id="@+id/nav_statistics"
             android:icon="@drawable/ic_action_statistics"
             android:title="@string/menu_stats" />
-        <item
-            android:id="@+id/nav_record_trips"
-            android:icon="@drawable/ic_action_record"
-            android:title="@string/menu_record" />
-        <item
-            android:id="@+id/nav_manual_trips"
-            android:icon="@drawable/ic_action_manual_trip"
-            android:title="@string/menu_manual_record" />
-        <item
-            android:id="@+id/nav_trips_list"
-            android:icon="@drawable/ic_action_list"
-            android:title="@string/menu_list_trips" />
-        <item
-            android:id="@+id/nav_cars_list"
-            android:icon="@drawable/ic_list_cars"
-            android:title="@string/menu_list_cars" />
-        <item
-            android:id="@+id/nav_cars_add"
-            android:icon="@drawable/ic_add_car"
-            android:title="@string/menu_add_cars" />
+
     </group>
+
+    <item android:title="Adventures">
+        <menu>
+            <item
+                android:id="@+id/nav_record_walking"
+                android:icon="@drawable/ic_walking_trip"
+                android:title="@string/menu_walking_record" />
+            <!--https://freeicons.io/material-icons-map/directions-walk-icon-16605#-->
+            <item
+                android:id="@+id/nav_record_driving"
+                android:icon="@drawable/ic_car_trip"
+                android:title="@string/menu_driving_record" />
+            <!--https://freeicons.io/vehicle-icons-2/car-icon-39353-->
+            <item
+                android:id="@+id/nav_record_cycling"
+                android:icon="@drawable/ic_cycling_trip"
+                android:title="@string/menu_cycling_record" />
+            <!--https://freeicons.io/common-style-icons-16/bicycle-share-icon-18129-->
+
+
+            <item
+                android:id="@+id/nav_manual_trips"
+                android:icon="@drawable/ic_action_record"
+                android:title="@string/menu_manual_record" />
+            <item
+                android:id="@+id/nav_trips_list"
+                android:icon="@drawable/ic_action_list"
+                android:title="@string/menu_list_trips" />
+
+        </menu>
+    </item>
+
+    <item android:title="Vehicles">
+        <menu>
+            <item
+                android:id="@+id/nav_cars_list"
+                android:icon="@drawable/ic_list_cars"
+                android:title="@string/menu_list_cars" />
+            <item
+                android:id="@+id/nav_cars_add"
+                android:icon="@drawable/ic_add_car"
+                android:title="@string/menu_add_cars" />
+        </menu>
+    </item>
 
     <item android:title="@string/account">
         <menu>

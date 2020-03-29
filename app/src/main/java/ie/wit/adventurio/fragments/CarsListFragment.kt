@@ -1,7 +1,6 @@
 package ie.wit.fragments
 
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,22 +16,17 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import ie.wit.adventurio.R
-import ie.wit.adventurio.activities.RecordTripActivity
-import ie.wit.adventurio.adapters.TripsAdapter
-import ie.wit.adventurio.adapters.TripsListener
 import ie.wit.adventurio.adapters.VehiclesAdapter
 import ie.wit.adventurio.adapters.VehiclesListener
 import ie.wit.adventurio.fragments.*
 import ie.wit.adventurio.helpers.createLoader
 import ie.wit.adventurio.helpers.hideLoader
-import ie.wit.adventurio.helpers.showLoader
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Trip
 import ie.wit.adventurio.models.Vehicle
 import ie.wit.utils.SwipeToDeleteCallback
 import ie.wit.utils.SwipeToEditCallback
 import kotlinx.android.synthetic.main.fragment_cars_list.view.*
-import kotlinx.android.synthetic.main.fragment_trips_list.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 

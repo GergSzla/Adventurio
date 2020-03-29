@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.RecordTripActivity"
+    tools:context=".activities.RecordDrivingTripActivity"
     android:background="@color/colorAccent"
     >
 
@@ -35,26 +35,21 @@
                     style="@style/Widget.AppCompat.TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Add a step goal for this journey. \nOr just go with the flow!"
+                    android:text="Vehicle Used:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-                <EditText
-                    android:id="@+id/txtStepGoal"
+                <Spinner
+                    android:id="@+id/spinnerCarPick"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="number"
-                    android:hint="@string/hint_StepGoal"
-                    android:background="@drawable/edit_text_bg"
-                    android:padding="10dp"/>
+                    android:layout_height="40dp"
+                    android:background="@drawable/edit_text_bg" />
 
                 <TextView
                     android:id="@+id/txtWarning"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="testest" />
+                    android:layout_marginEnd="8dp" />
 
             </LinearLayout>
 
@@ -64,13 +59,7 @@
                 android:orientation="vertical"
                 android:id="@+id/linear2">
 
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minWidth="200dp"
-                    android:minHeight="50dp" />
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -143,19 +132,19 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/stepsLbl"
+                        android:id="@+id/speedDrivingLbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-                        android:text="Steps:"
+                        android:text="Speed:"
                         android:textSize="50sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/stepsValue"
+                        android:id="@+id/speedDrivingValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -167,8 +156,44 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/stepsLbl" />
 
+                    <TextView
+                        android:id="@+id/txtspeed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+
+                        android:text="km/h"
+                        android:textSize="35sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/stepsLbl" />
+
                 </LinearLayout>
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.github.anastr.speedviewlib.SpeedView
+                        android:id="@+id/speedView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="197dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        app:sv_maxSpeed="240"
+                        app:sv_backgroundCircleColor="#9E9E9E"
+                        app:sv_speedTextColor="#000000"
+                        app:sv_markColor="#000000"
+                        app:sv_centerCircleColor="#222121"
+                        app:sv_indicatorColor="#3A0101"
+                        app:sv_indicatorLightColor="#8A0000"
+                        app:sv_indicator="KiteIndicator"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>>
 
             </LinearLayout>
 
@@ -178,28 +203,28 @@
                 tools:layout_editor_absoluteY="43dp">
 
                 <Button
-                     android:id="@+id/start_button"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:background="@drawable/button_bg_round"
-                     android:foreground="@drawable/ic_action_start"
-                     android:padding="15dp"
-                     app:layout_constraintBottom_toBottomOf="parent"
-                     app:layout_constraintEnd_toEndOf="parent"
-                     app:layout_constraintStart_toStartOf="parent"
-                     app:layout_constraintTop_toTopOf="parent" />
+                    android:id="@+id/start_driving_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_bg_round"
+                    android:foreground="@drawable/ic_action_start"
+                    android:padding="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                     android:id="@+id/stop_button"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:background="@drawable/button_bg_round2"
-                     android:foreground="@drawable/ic_action_stop"
-                     android:padding="15dp"
-                     app:layout_constraintBottom_toBottomOf="parent"
-                     app:layout_constraintEnd_toEndOf="parent"
-                     app:layout_constraintStart_toStartOf="parent"
-                     app:layout_constraintTop_toTopOf="parent" />
+                    android:id="@+id/stop_driving_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_bg_round2"
+                    android:foreground="@drawable/ic_action_stop"
+                    android:padding="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/txtHint"

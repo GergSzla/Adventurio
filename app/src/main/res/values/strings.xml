@@ -33,7 +33,10 @@
     <string name="menu_cancel">Cancel</string>
     <string name="menu_add">Record Adventure</string>
     <string name="menu_stats">Statistics</string>
-    <string name="menu_record">Record Adventure</string>
+    <string name="menu_walking_record">Record Walking Adventure</string>
+    <string name="menu_driving_record">Record Driving Adventure</string>
+    <string name="menu_cycling_record">Record Cycling Adventure</string>
+
     <string name="menu_manual_record">Record Manual Adventure</string>
     <string name="menu_add_car">Add Vehicle</string>
     <string name="menu_list_trips">List Adventures</string>

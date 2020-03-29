@@ -35,9 +35,7 @@ import ie.wit.adventurio.helpers.showLoader
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.Trip
-import kotlinx.android.synthetic.main.activity_record_trip.*
-import kotlinx.android.synthetic.main.activity_register.*
-import kotlinx.android.synthetic.main.fragment_profile_edit.view.*
+import kotlinx.android.synthetic.main.activity_record_walking_trip.*
 import org.jetbrains.anko.intentFor
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
@@ -45,7 +43,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 
-class RecordTripActivity : AppCompatActivity(), SensorEventListener {
+class RecordWalkingTripActivity : AppCompatActivity(), SensorEventListener {
 
     private var locationManager : LocationManager? = null
     lateinit var loader : AlertDialog
@@ -92,7 +90,7 @@ class RecordTripActivity : AppCompatActivity(), SensorEventListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_record_trip)
+        setContentView(R.layout.activity_record_walking_trip)
 
         val d = Date()
         val sdf = SimpleDateFormat("EEEE")
@@ -193,14 +191,22 @@ class RecordTripActivity : AppCompatActivity(), SensorEventListener {
         }
     }
 
+    var current_total_minutes = 0.0
     private val locationListener: LocationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
             if(stop_button.isVisible == true){
                 lng.add("${location.longitude}")
                 lat.add("${location.latitude}")
+
+                if (hour!!.text.toString().toInt() > 0){
+                    current_total_minutes = (hour!!.text.toString().toDouble() * 60) + minute!!.text.toString().toInt()
+                } else {
+                    current_total_minutes = minute!!.text.toString().toDouble()
+                }
+                var num = 0.029 * (user.weight / 0.45359237) * current_total_minutes
+                calorieWalkingValue.text = "%.0f".format(num)
+
                 ///Test
-
-
                 /*lng.add("-7.251961")
                 lat.add("52.671500")
 
@@ -363,8 +369,7 @@ class RecordTripActivity : AppCompatActivity(), SensorEventListener {
         } else {
             total_minutes = minute!!.text.toString().toInt()
         }
-        var num = 0.029 * (user.weight / 0.45359237) * total_minutes
-        trip.caloriesBurned = ("%.0f".format(num)).toDouble()
+        trip.caloriesBurned = (calorieWalkingValue.text.toString()).toDouble()
         trip.tripStartTime = start
         trip.DayOfWeek = dow
         trip.Date = date
