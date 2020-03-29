@@ -111,6 +111,7 @@ class ManualTripFragment : Fragment() {
                     root.WalkingTrip.isVisible = false
                     root.DrivingTrip.isVisible = true
                     root.CyclingTrip.isVisible = false
+                    getVehiclesNames()
                 } else if (parent.getItemAtPosition(position).toString() == "Cycling"){
                     trip.tripType = "Cycling"
                     root.WalkingTrip.isVisible = false
@@ -231,15 +232,17 @@ class ManualTripFragment : Fragment() {
                     toast.show()
                 } else {
                     addingData()
-                    carPos = vehicles.indexOf(trip.vehicleUsed).toString()
-                    vehiclesList.forEach {
-                        if(it.pos == carPos){
-                            vehicleUsed = it
+                    if(trip.tripType == "Driving"){
+                        carPos = vehicles.indexOf(trip.vehicleUsed).toString()
+                        vehiclesList.forEach {
+                            if(it.pos == carPos){
+                                vehicleUsed = it
+                            }
                         }
+                        var num = trip.tripDistance
+                        vehicleUsed.currentOdometer +=  ("%.0f".format(num)).toInt()
+                        updateVehicle(app.auth.currentUser!!.uid,carPos)
                     }
-                    var num = trip.tripDistance
-                    vehicleUsed.currentOdometer +=  ("%.0f".format(num)).toInt()
-                    updateVehicle(app.auth.currentUser!!.uid,carPos)
                     createTrip()
                 }
 
@@ -258,7 +261,7 @@ class ManualTripFragment : Fragment() {
             "Walking" -> {
                 trip.tripName = editWalkingTripName.text.toString()
                 trip.tripDistance = editWalkingDistance.text.toString().toDouble()
-                trip.caloriesBurned = editWalkingTripCalories.text.toString().toInt()
+                trip.caloriesBurned = editWalkingTripCalories.text.toString().toDouble()
                 trip.tripSteps = editWalkingTripSteps.text.toString().toInt()
                 trip.tripOwner = user.id
                 trip.dtID = dateId
@@ -283,7 +286,7 @@ class ManualTripFragment : Fragment() {
                 trip.tripName = editCyclingTripName.text.toString()
                 trip.tripDistance = editCyclingDistance.text.toString().toDouble()
                 trip.averageSpeed = editCyclingTripSpeed.text.toString()
-                trip.caloriesBurned = editCyclingTripCalories.text.toString().toInt()
+                trip.caloriesBurned = editCyclingTripCalories.text.toString().toDouble()
                 trip.tripOwner = user.id
                 trip.dtID = dateId
                 trip.tripID = UUID.randomUUID().toString()

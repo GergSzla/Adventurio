@@ -98,7 +98,7 @@ class RegisterActivity : AppCompatActivity() {
                     val user = app.auth.currentUser
                     app.database = FirebaseDatabase.getInstance().reference
                     writeNewUserStats(Account(id = UUID.randomUUID().toString(), Email = app.auth.currentUser!!.email.toString(), firstName = txtFirstNameReg.text.toString(),
-                    surname = txtSurnameReg.text.toString(), username = txtUsernameReg.text.toString()))
+                    surname = txtSurnameReg.text.toString(),weight = txtWeight.text.toString().toDouble(), username = txtUsernameReg.text.toString()))
                     startActivity<LoginActivity>()
                 } else {
                     // If sign in fails, display a message to the user.

@@ -3,6 +3,7 @@ package ie.wit.adventurio.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import ie.wit.adventurio.R
 import ie.wit.adventurio.models.Trip
@@ -47,13 +48,23 @@ class TripsAdapter constructor(var trips: ArrayList<Trip>,
 
             if (trip.tripType =="Walking"){
                 itemView.imageView2.setImageResource(R.drawable.ic_walking_category)
+                itemView.txtAvgSpeed.isVisible = false
+                itemView.txtTotalSteps.isVisible = true
+                itemView.txtTotalSteps.text = (trip.tripSteps).toString() + " Steps"
             } else if (trip.tripType =="Driving"){
                 itemView.imageView2.setImageResource(R.drawable.ic_directions_car_black_24dp)
+                itemView.txtAvgSpeed.isVisible = true
+                itemView.txtTotalSteps.isVisible = false
+                itemView.txtAvgSpeed.text = trip.averageSpeed + "km/h"
+
             } else if (trip.tripType =="Cycling"){
                 itemView.imageView2.setImageResource(R.drawable.ic_cycling_category)
+                itemView.txtAvgSpeed.isVisible = true
+                itemView.txtTotalSteps.isVisible = false
+                itemView.txtAvgSpeed.text = trip.averageSpeed + "km/h"
+
             }
-            itemView.txtTotalSteps.text = (trip.tripSteps).toString()
-            itemView.txtDistanceTotal.text = "%.2f".format(num) +"km"
+            itemView.txtDistanceTotal.text = "%.2f".format(num) +" km"
             itemView.txtTimeElapsedTotal.text = trip.tripLength
             itemView.txtTimeAndDate.text = trip.DayOfWeek + ", " + trip.Date + ", " + trip.tripStartTime + " - " + trip.tripEndTime
             //itemView.mapView. = trip.make

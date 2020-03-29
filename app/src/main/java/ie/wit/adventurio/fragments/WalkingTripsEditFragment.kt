@@ -112,6 +112,7 @@ class WalkingTripsEditFragment : Fragment() {
             } else {
                 trip.tripDistance = (root.editDistance.text.toString()).toDouble()
                 trip.tripSteps = (root.editSteps.text.toString()).toInt()
+                trip.caloriesBurned = root.editCaloriesBurned.text.toString().toDouble()
                 trip.tripName = root.editTripName.text.toString()
                 trip.tripLength = ""
 

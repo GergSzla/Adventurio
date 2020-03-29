@@ -94,25 +94,54 @@
                 android:padding="10dp"
                 />
 
-            <TextView
-                android:id="@+id/textView21"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/txtUsername" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/editUsername"
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txtUsername" />
+
+                <TextView
+                    android:id="@+id/textView33"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textDirection="rtl"
+                    android:text="Weight" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890._-"
-                android:ems="10"
-                android:hint="@string/txtUsername"
-                android:autofillHints="textPersonName"
-                android:inputType="textPersonName"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/edit_text_bg"
-                android:padding="10dp"
-                />
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:autofillHints="textPersonName"
+                    android:background="@drawable/edit_text_bg"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890._-"
+                    android:ems="10"
+                    android:hint="@string/txtUsername"
+                    android:inputType="textPersonName"
+                    android:padding="10dp" />
+                <EditText
+                    android:id="@+id/editWeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edit_text_bg"
+                    android:ems="10"
+                    android:hint="Weight"
+                    android:inputType="numberDecimal"
+                    android:padding="10dp" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/textView22"

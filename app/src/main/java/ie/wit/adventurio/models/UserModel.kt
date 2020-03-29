@@ -11,6 +11,7 @@ import com.google.firebase.database.IgnoreExtraProperties
 data class Account(
     var id:String = "" /*UUID*/,
     var uid:String = "",
+    var weight: Double = 0.0,
     var firstName:String = "",
     var surname:String = "",
     var username:String = "",
@@ -32,6 +33,7 @@ data class Account(
             "id" to id,
             "firstName" to firstName,
             "uid" to uid,
+            "weight" to weight,
             "surname" to surname,
             "username" to username,
             "Email" to Email,

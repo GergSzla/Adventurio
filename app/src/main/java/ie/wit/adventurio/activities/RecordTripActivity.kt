@@ -346,7 +346,9 @@ class RecordTripActivity : AppCompatActivity(), SensorEventListener {
         uidRef.addListenerForSingleValueEvent(eventListener)
     }
 
+    var total_minutes = 0
     private fun saveTrip(){
+
         trip.tripLength = "${hour!!.text.toString()}Hours, ${minute!!.text.toString()}Minutes, ${seconds!!.text.toString()}Seconds"
         trip.tripID = UUID.randomUUID().toString()
         trip.tripType = "Walking"
@@ -356,6 +358,13 @@ class RecordTripActivity : AppCompatActivity(), SensorEventListener {
         trip.lng = lng
         trip.lat = lat
         trip.tripEndTime = end
+        if (hour!!.text.toString().toInt() > 0){
+            total_minutes = (hour!!.text.toString().toInt() * 60) + minute!!.text.toString().toInt()
+        } else {
+            total_minutes = minute!!.text.toString().toInt()
+        }
+        var num = 0.029 * (user.weight / 0.45359237) * total_minutes
+        trip.caloriesBurned = ("%.0f".format(num)).toDouble()
         trip.tripStartTime = start
         trip.DayOfWeek = dow
         trip.Date = date

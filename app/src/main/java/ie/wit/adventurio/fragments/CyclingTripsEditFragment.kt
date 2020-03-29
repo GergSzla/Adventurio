@@ -83,7 +83,7 @@ class CyclingTripsEditFragment : Fragment() {
 
         var num = trip.tripDistance
         root.editDistance.setText("%.2f".format(num))
-        root.editSpeed.setText(trip.tripSteps.toString())
+        root.editSpeed.setText(trip.averageSpeed)
         root.amountPickerHours1.value = trip.tripStartTime.substring(0,2).toInt()
         root.amountPickerMinutes1.value = trip.tripStartTime.substring(3,5).toInt()
         root.editCaloriesBurned.setText(trip.caloriesBurned.toString())
@@ -120,6 +120,7 @@ class CyclingTripsEditFragment : Fragment() {
             } else {
                 trip.tripDistance = (root.editDistance.text.toString()).toDouble()
                 trip.averageSpeed = (root.editSpeed.text.toString())
+                trip.caloriesBurned = (root.editCaloriesBurned.text.toString()).toDouble()
                 trip.tripName = root.editTripName.text.toString()
                 trip.tripLength = ""
 

@@ -72,6 +72,7 @@ class ProfileEditFragment : Fragment() {
         root.editUsername.setText(userProfileEdit!!.username)
         root.editStepsGoal.setText(userProfileEdit!!.stepsGoal.toString())
         root.editDistanceGoal.setText(userProfileEdit!!.distanceGoal.toString())
+        root.editWeight.setText(userProfileEdit!!.weight.toString())
         root.profImage.setImageBitmap(readImageFromPath(this.requireContext(), userProfileEdit!!.image))
         if (userProfileEdit!!.image != "") {
             root.addImage.setText(R.string.btnChangeImage)
@@ -138,6 +139,8 @@ class ProfileEditFragment : Fragment() {
                     userProfileEdit!!.stepsGoal = (root.editStepsGoal.text.toString()).toInt()
                     userProfileEdit!!.distanceGoal = (root.editDistanceGoal.text.toString()).toDouble()
                     userProfileEdit!!.phoneNo = root.editPhoneNo.text.toString()
+                    userProfileEdit!!.weight = root.editWeight.text.toString().toDouble()
+
                     userProfileEdit!!.image
                     //app.users.updateAccount(user.copy())
                     updateUserProfile(app.auth.currentUser!!.uid, userProfileEdit!!)
