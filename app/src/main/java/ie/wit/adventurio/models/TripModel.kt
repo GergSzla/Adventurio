@@ -24,6 +24,7 @@ data class Trip (var tripID:String = "",
                  var DayOfWeek:String = "", //eg Wed
                  var Date:String = "", //eg. 5 Feb
                  var dtID:String = "",
+                 var favourite:Boolean = false,
                         /*var startLat:Double = 0.0,
                         var startLng:Double = 0.0,
                         var endLat:Double = 0.0,
@@ -53,6 +54,7 @@ data class Trip (var tripID:String = "",
             "DayOfWeek" to DayOfWeek,
             "Date" to Date,
             "dtID" to dtID,
+            "favourite" to favourite,
             "lng" to lng,
             "lat" to lat,
             "zoom" to zoom

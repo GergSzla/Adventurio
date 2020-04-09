@@ -109,7 +109,7 @@ class RecordDrivingTripActivity : AppCompatActivity(), SensorEventListener {
         app = application as MainApp
         loader = createLoader(this)
 
-        speedView.setMinMaxSpeed(0F, 240F)
+        speedView.setMinMaxSpeed(0F, 140F)
         speedView.sections[0].color = Color.parseColor("#6a6a6a")
         speedView.sections[1].color = Color.parseColor("#3d3232")
         speedView.sections[2].color = Color.parseColor("#321919")
@@ -365,6 +365,10 @@ class RecordDrivingTripActivity : AppCompatActivity(), SensorEventListener {
     }
 
     var total_minutes = 0.0
+    var carPos = ""
+    var vehiclesList = ArrayList<Vehicle>()
+    var vehicleUsed = Vehicle()
+
     private fun saveTrip(){
         trip.tripLength = "${hour!!.text.toString()}Hours, ${minute!!.text.toString()}Minutes, ${seconds!!.text.toString()}Seconds"
         trip.tripID = UUID.randomUUID().toString()
@@ -389,10 +393,34 @@ class RecordDrivingTripActivity : AppCompatActivity(), SensorEventListener {
         trip.Date = date
         trip.dtID = dateId
 
+        carPos = vehicles.indexOf(trip.vehicleUsed).toString()
+        vehiclesList.forEach {
+            if(it.pos == carPos){
+                vehicleUsed = it
+            }
+        }
+        var num2 = trip.tripDistance
+        vehicleUsed.currentOdometer +=  ("%.0f".format(num2)).toInt()
+        updateVehicle(app.auth.currentUser!!.uid,carPos)
+
         //app.trips.create(trip.copy())
         createTrip()
         startActivityForResult(intentFor<Home>().putExtra("user_key", user), 0)
         finish()
+    }
+
+    fun updateVehicle(uid: String?,carPos : String) {
+        app.database.child("user-stats").child(uid!!).child("vehicles").child(carPos)
+            .addListenerForSingleValueEvent(
+                object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.ref.setValue(vehicleUsed)
+                        this@RecordDrivingTripActivity.supportFragmentManager.beginTransaction()
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+                })
     }
 
     fun writeNewTrip(trip: Trip) {
@@ -424,6 +452,7 @@ class RecordDrivingTripActivity : AppCompatActivity(), SensorEventListener {
                         getValue<Vehicle>(Vehicle::class.java)
 
                         vehicles.add(vehicle!!.vehicleName)
+                        vehiclesList.add(vehicle)
 
                         app.database.child("user-stats").child(uid).child("vehicles")
                             .removeEventListener(this)

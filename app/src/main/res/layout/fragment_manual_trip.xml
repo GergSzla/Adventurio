@@ -37,7 +37,7 @@
             <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="match_parent"
-                android:layout_height="26dp"
+                android:layout_height="35dp"
                 android:background="@drawable/edit_text_bg" />
 
             <TextView
@@ -198,7 +198,7 @@
                 <Spinner
                     android:id="@+id/editDrivingTripVehicles"
                     android:layout_width="match_parent"
-                    android:layout_height="26dp"
+                    android:layout_height="35dp"
                     android:background="@drawable/edit_text_bg" />
             </LinearLayout>
 

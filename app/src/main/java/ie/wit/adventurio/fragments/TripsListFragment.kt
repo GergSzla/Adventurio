@@ -138,6 +138,21 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
 
         }
 
+        root.filterFavourites.setOnClickListener {
+            var filteredList = ArrayList<Trip>()
+
+            tripsList.forEach{
+                filteredList.add(it)
+            }
+            filteredList.removeIf({n -> n.favourite != true})
+            root.recyclerView.adapter =
+                TripsAdapter(filteredList, this@TripsListFragment)
+            root.recyclerView.adapter?.notifyDataSetChanged()
+            checkSwipeRefresh()
+            root.filterStatus.text = "Showing Favourites (${filteredList.size})"
+
+        }
+
         root.recyclerView.layoutManager = LinearLayoutManager(activity)
         setSwipeRefresh()
 

@@ -20,10 +20,7 @@ import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.Trip
 import ie.wit.adventurio.models.Vehicle
 import ie.wit.fragments.TripsListFragment
-import kotlinx.android.synthetic.main.fragment_cycling_trips_edit.view.*
 import kotlinx.android.synthetic.main.fragment_driving_trips_edit.view.*
-import kotlinx.android.synthetic.main.fragment_manual_trip.view.*
-import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.*
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerHours1
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerHours2
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerMinutes1
@@ -97,7 +94,7 @@ class DrivingTripsEditFragment : Fragment() {
 
         root.amountPickerHours2.value = trip.tripEndTime.substring(0,2).toInt()
         root.amountPickerMinutes2.value = trip.tripEndTime.substring(3,5).toInt()
-
+        root.cbDrivingAddToFavs.isChecked = trip.favourite
 
 
 
@@ -124,6 +121,7 @@ class DrivingTripsEditFragment : Fragment() {
                 trip.averageSpeed = (root.editAverageSpeed.text.toString())
                 trip.tripName = root.editTripName.text.toString()
                 trip.vehicleUsed = root.editCarsSpinner.selectedItem.toString()
+                trip.favourite = root.cbDrivingAddToFavs.isChecked
                 trip.tripLength = ""
 
                 if ((root.amountPickerHours2.value-root.amountPickerHours1.value) < 10){

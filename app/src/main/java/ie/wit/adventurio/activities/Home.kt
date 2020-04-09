@@ -72,6 +72,7 @@ class Home : AppCompatActivity(),
 
         ft = supportFragmentManager.beginTransaction()
 
+
         //var profileFragment = ProfileFragment()
         /*var tripsListFragment = TripsListFragment()
 

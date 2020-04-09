@@ -181,7 +181,7 @@
                         android:layout_height="197dp"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentEnd="true"
-                        app:sv_maxSpeed="240"
+                        app:sv_maxSpeed="140"
                         app:sv_backgroundCircleColor="#9E9E9E"
                         app:sv_speedTextColor="#000000"
                         app:sv_markColor="#000000"

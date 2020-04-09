@@ -187,59 +187,101 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="25dp"
+                android:layout_marginBottom="10dp"
                 android:background="#80000000" />
 
-            <LinearLayout
+
+            <TextView
+                android:id="@+id/Cat"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:textColor="#313131"
+                android:textSize="25sp"
+                android:layout_height="wrap_content"
+                android:text="Current Goals"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-                <TextView
-                    android:id="@+id/textView25"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/hint_stepGoal"
-                    />
 
-                <TextView
-                    android:id="@+id/textView26"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/hint_distanceGoal"
-                    android:textDirection="rtl" />
-            </LinearLayout>
 
-            <LinearLayout
+
+
+            <TextView
+                android:id="@+id/textView25"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/hint_stepGoal"
+                />
 
                 <EditText
                     android:id="@+id/editStepsGoal"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/hint_stepGoal"
                     android:inputType="number"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/edit_text_bg"
                     android:padding="10dp"/>
 
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/hint_distanceGoal"
+                 />
                 <EditText
                     android:id="@+id/editDistanceGoal"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
+                    android:layout_marginBottom="10dp"
                     android:hint="@string/hint_distanceGoal"
                     android:inputType="number"
                     android:background="@drawable/edit_text_bg"
                     android:padding="10dp"/>
 
-            </LinearLayout>
+            <TextView
+                android:id="@+id/textView27"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/hint_drivingDistanceGoal"
+                />
+            <EditText
+                android:id="@+id/editDrivingDistanceGoal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/hint_drivingDistanceGoal"
+                android:inputType="number"
+                android:background="@drawable/edit_text_bg"
+                android:padding="10dp"/>
+
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/hint_cyclingDistanceGoal"
+                />
+            <EditText
+                android:id="@+id/editCyclingDistanceGoal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/hint_cyclingDistanceGoal"
+                android:inputType="number"
+                android:background="@drawable/edit_text_bg"
+                android:padding="10dp"/>
+
 
             <View
                 android:id="@+id/divider5"

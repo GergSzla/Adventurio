@@ -68,6 +68,9 @@ class ProfileEditFragment : Fragment() {
         root.editEmail.setText(userProfileEdit!!.Email)
         root.editEmail.isEnabled = false
 
+        root.editDrivingDistanceGoal.setText(userProfileEdit!!.drivingDistanceGoal.toString())
+        root.editCyclingDistanceGoal.setText(userProfileEdit!!.cyclingDistanceGoal.toString())
+
         root.editPhoneNo.setText(userProfileEdit!!.phoneNo)
         root.editUsername.setText(userProfileEdit!!.username)
         root.editStepsGoal.setText(userProfileEdit!!.stepsGoal.toString())
@@ -98,7 +101,18 @@ class ProfileEditFragment : Fragment() {
         }
 
         root.updateProfileFab.setOnClickListener {
-            reauthenticateUser(app.auth.currentUser!!.email.toString(),root.editPassword.text.toString())
+            root.editPassword.text
+            if(root.editPassword.text.toString() != ""){
+                reauthenticateUser(app.auth.currentUser!!.email.toString(),root.editPassword.text.toString())
+            } else {
+                val toast =
+                    Toast.makeText(
+                        activity!!.applicationContext,
+                        "Password Required!",
+                        Toast.LENGTH_LONG
+                    )
+                toast.show()
+            }
         }
 
         root.btnResetPass.setOnClickListener {
@@ -140,6 +154,9 @@ class ProfileEditFragment : Fragment() {
                     userProfileEdit!!.distanceGoal = (root.editDistanceGoal.text.toString()).toDouble()
                     userProfileEdit!!.phoneNo = root.editPhoneNo.text.toString()
                     userProfileEdit!!.weight = root.editWeight.text.toString().toDouble()
+                    userProfileEdit!!.drivingDistanceGoal = (root.editDrivingDistanceGoal.text.toString()).toDouble()
+                    userProfileEdit!!.cyclingDistanceGoal = (root.editCyclingDistanceGoal.text.toString()).toDouble()
+
 
                     userProfileEdit!!.image
                     //app.users.updateAccount(user.copy())

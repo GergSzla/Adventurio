@@ -6,10 +6,10 @@
     android:layout_height="match_parent"
     android:id="@+id/root_layout"
     tools:context=".fragments.StatisticsFragment"
-    android:background="@color/colorAccent"
-    >
+    android:background="@color/colorAccent">
 
     <ScrollView
+        android:id="@+id/scrollViewStats"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
@@ -17,268 +17,732 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/content_layout_bg"
+        android:scrollbarSize="0dp"
+        android:transitionGroup="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            >
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView20"
-                android:layout_width="wrap_content"
+                android:id="@+id/walkingCat"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="11dp"
-                android:text="Total Trips:"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#000000"
+                android:text="Walking"
+                android:padding="8dp"
                 app:fontFamily="@font/denk_one"
-                app:layout_constraintBottom_toBottomOf="@+id/progressBar"
-                app:layout_constraintEnd_toStartOf="@+id/progressBar"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.21" />
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:background="@drawable/circle"
-                android:indeterminate="false"
-                android:max="100"
-                android:progress="0"
-                android:progressDrawable="@drawable/loading_circle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/txtTotalTripsPrecentage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0%"
-                android:textColor="#000000"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                app:layout_constraintBottom_toBottomOf="@+id/progressBar"
-                app:layout_constraintEnd_toEndOf="@+id/progressBar"
-                app:layout_constraintStart_toStartOf="@+id/progressBar"
-                app:layout_constraintTop_toTopOf="@+id/progressBar" />
-
-            <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/progressBar">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textView7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#313131"
-                        android:text="Total Steps:"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-                    <TextView
-                        android:id="@+id/txtTotalStepsStats"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="#000000"
-                        android:text="0"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textDirection="rtl" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textView9"
-                        android:textColor="#313131"
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Current Overall Step Goal:"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-                    <TextView
-                        android:id="@+id/txtCurrentStepsGoal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="#000000"
-                        android:text="0"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textDirection="rtl" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textView11"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#313131"
-                        android:text="Average Step Per Trip:"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-                    <TextView
-                        android:id="@+id/txtAvgSteps"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="#000000"
-                        android:text="0"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textDirection="rtl" />
-                </LinearLayout>
-
-                <View
-                    android:id="@+id/divider"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:background="@color/colorAccent" />
-
-            </LinearLayout>
-
-            <ProgressBar
-                android:id="@+id/progressBar7"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:background="@drawable/circle"
-                android:indeterminate="false"
-                android:max="100"
-                android:progress="0"
-                android:progressDrawable="@drawable/loading_circle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.502"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
-
-            <TextView
-                android:id="@+id/txtTotalDistPrecentage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0%"
-                android:textColor="#000000"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                app:layout_constraintBottom_toBottomOf="@+id/progressBar7"
-                app:layout_constraintEnd_toEndOf="@+id/progressBar7"
-                app:layout_constraintStart_toStartOf="@+id/progressBar7"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
-
-            <LinearLayout
-                android:id="@+id/linearLayout4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/progressBar7">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textView14"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#313131"
-                        android:text="Total Distance:"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-                    <TextView
-                        android:id="@+id/txtTotalDistStats"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="#000000"
-                        android:text="0"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textDirection="rtl" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textView16"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Current Distance Goal:"
-                        android:textColor="#313131"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-                    <TextView
-                        android:id="@+id/txtCurrentDistGoal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="#000000"
-                        android:text="0"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textDirection="rtl" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textView18"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#313131"
-                        android:text="Average Distance Per Trip:"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-                    <TextView
-                        android:id="@+id/txtAvgDist"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="#000000"
-                        android:text="0"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textDirection="rtl" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/txtTotalTrips"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="125dp"
-                android:text="0"
-                android:textColor="#000000"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-                app:layout_constraintEnd_toStartOf="@+id/progressBar"
-                app:layout_constraintHorizontal_bias="0.477"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView20"
-                app:layout_constraintVertical_bias="0.0" />
+                />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/textView20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="11dp"
+                    android:text="Total Walking Trips:"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#000000"
+                    app:fontFamily="@font/denk_one"
+                    app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+                    app:layout_constraintEnd_toStartOf="@+id/progressBar"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.21" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:background="@drawable/circle"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressDrawable="@drawable/loading_circle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txtTotalTripsPrecentage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0%"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="#000000"
+                    app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+                    app:layout_constraintEnd_toEndOf="@+id/progressBar"
+                    app:layout_constraintStart_toStartOf="@+id/progressBar"
+                    app:layout_constraintTop_toTopOf="@+id/progressBar" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/progressBar">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Steps:"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#313131" />
+
+                        <TextView
+                            android:id="@+id/txtTotalStepsStats"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#000000"
+                            android:textDirection="rtl" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView9"
+                            android:layout_width="wrap_content"
+
+                            android:layout_height="wrap_content"
+                            android:text="Current Overall Step Goal:"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#313131" />
+
+                        <TextView
+                            android:id="@+id/txtCurrentStepsGoal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#000000"
+                            android:textDirection="rtl" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Average Step Per Trip:"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#313131" />
+
+                        <TextView
+                            android:id="@+id/txtAvgSteps"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#000000"
+                            android:textDirection="rtl" />
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:background="@color/colorAccent" />
+
+                </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/progressBar7"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:background="@drawable/circle"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressDrawable="@drawable/loading_circle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.502"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+                <TextView
+                    android:id="@+id/txtTotalDistPrecentage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0%"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="#000000"
+                    app:layout_constraintBottom_toBottomOf="@+id/progressBar7"
+                    app:layout_constraintEnd_toEndOf="@+id/progressBar7"
+                    app:layout_constraintStart_toStartOf="@+id/progressBar7"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/progressBar7">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Distance:"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#313131" />
+
+                        <TextView
+                            android:id="@+id/txtTotalDistStats"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#000000"
+                            android:textDirection="rtl" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView16"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Current Distance Goal:"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#313131" />
+
+                        <TextView
+                            android:id="@+id/txtCurrentDistGoal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#000000"
+                            android:textDirection="rtl" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView18"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Average Distance Per Trip:"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#313131" />
+
+                        <TextView
+                            android:id="@+id/txtAvgDist"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#000000"
+                            android:textDirection="rtl" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/cal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Calories Burned:"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#313131" />
+
+                        <TextView
+                            android:id="@+id/txtTotalCalories"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#000000"
+                            android:textDirection="rtl" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/avgcal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Average Calories Burned Per Trip:"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#313131" />
+
+                        <TextView
+                            android:id="@+id/txtAvgCalories"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#000000"
+                            android:textDirection="rtl" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txtTotalTrips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="125dp"
+                    android:text="0"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#000000"
+                    app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+                    app:layout_constraintEnd_toStartOf="@+id/progressBar"
+                    app:layout_constraintHorizontal_bias="0.477"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20"
+                    app:layout_constraintVertical_bias="0.0" />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/drivingCat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Driving"
+                android:padding="8dp"
+                app:fontFamily="@font/denk_one"
+                android:layout_marginTop="70dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/DrivingTripConst"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/totalDrivingTrips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Total Driving Trips:"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#000000"
+                    app:fontFamily="@font/denk_one"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/speedView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txtTotalDriving"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="0"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#000000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.511"
+                    app:layout_constraintStart_toEndOf="@+id/speedView"
+                    app:layout_constraintTop_toBottomOf="@+id/totalDrivingTrips" />
+
+                <com.github.anastr.speedviewlib.SpeedView
+                    android:id="@+id/speedView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="197dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.025"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:sv_backgroundCircleColor="#9E9E9E"
+                    app:sv_centerCircleColor="#222121"
+                    app:sv_indicator="KiteIndicator"
+                    app:sv_indicatorColor="#3A0101"
+                    app:sv_indicatorLightColor="#8A0000"
+                    app:sv_markColor="#000000"
+                    app:sv_maxSpeed="140"
+                    app:sv_speedTextColor="#000000" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/speedView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txtAverageSpeed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Average Speed:"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#313131" />
+
+                        <TextView
+                            android:id="@+id/txtAvgSpeedDriving"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#000000"
+                            android:textDirection="rtl" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txtTotalDistance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Distance:"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#313131" />
+
+                        <TextView
+                            android:id="@+id/txtTotalDistanceDriving"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#000000"
+                            android:textDirection="rtl" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txtDistGoalD"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Distance Goal:"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#313131" />
+
+                        <TextView
+                            android:id="@+id/txtDistGoalDriving"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#000000"
+                            android:textDirection="rtl" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txtAverageDist"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Average Distance Per Trip:"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#313131" />
+
+                        <TextView
+                            android:id="@+id/txtAverageDistDriving"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#000000"
+                            android:textDirection="rtl" />
+
+                    </LinearLayout>
+
+                    <ProgressBar
+                        android:id="@+id/drivingdistpb"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minWidth="200dp"
+                        android:minHeight="50dp" />
+
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/cyclingCat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cycling"
+                android:padding="8dp"
+                app:fontFamily="@font/denk_one"
+                android:layout_marginTop="70dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/CyclingTripConst"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/totalCyclingTrips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Total Cycling Trips:"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#000000"
+                    app:fontFamily="@font/denk_one"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/speedViewcycling"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txtTotalCycling"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="0"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#000000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.511"
+                    app:layout_constraintStart_toEndOf="@+id/speedViewcycling"
+                    app:layout_constraintTop_toBottomOf="@+id/totalCyclingTrips" />
+
+                <com.github.anastr.speedviewlib.SpeedView
+                    android:id="@+id/speedViewcycling"
+                    android:layout_width="wrap_content"
+                    android:layout_height="197dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.025"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:sv_backgroundCircleColor="#9E9E9E"
+                    app:sv_centerCircleColor="#222121"
+                    app:sv_indicator="KiteIndicator"
+                    app:sv_indicatorColor="#3A0101"
+                    app:sv_indicatorLightColor="#8A0000"
+                    app:sv_markColor="#000000"
+                    app:sv_maxSpeed="140"
+                    app:sv_speedTextColor="#000000" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/speedViewcycling">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txtAverageSpeedCyc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Average Speed:"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#313131" />
+
+                        <TextView
+                            android:id="@+id/txtAvgSpeedCycling"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#000000"
+                            android:textDirection="rtl" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txtTotalDistanceCyc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Distance:"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#313131" />
+
+                        <TextView
+                            android:id="@+id/txtTotalDistanceCycling"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#000000"
+                            android:textDirection="rtl" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txtDistGoalCyc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Distance Goal:"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#313131" />
+
+                        <TextView
+                            android:id="@+id/txtDistGoalCycling"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#000000"
+                            android:textDirection="rtl" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txtAverageDistCyc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Average Distance Per Trip:"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#313131" />
+
+                        <TextView
+                            android:id="@+id/txtAverageDistCycling"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#000000"
+                            android:textDirection="rtl" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/calc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Calories Burned:"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#313131" />
+
+                        <TextView
+                            android:id="@+id/txtTotalCyclingCalories"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#000000"
+                            android:textDirection="rtl" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/avgCyclingCal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Average Calories Burned Per Trip:"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#313131" />
+
+                        <TextView
+                            android:id="@+id/txtAvgCyclingCalories"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#000000"
+                            android:textDirection="rtl" />
+                    </LinearLayout>
+
+                    <ProgressBar
+                        android:id="@+id/cyclingdistpb"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minWidth="200dp"
+                        android:minHeight="50dp" />
+
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

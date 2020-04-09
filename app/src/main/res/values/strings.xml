@@ -58,7 +58,11 @@
     <string name="btnDelUser">Delete Account</string>
     <string name="btnChangeImage">Change Image</string>
     <string name="hint_stepGoal">Overall Step Goal</string>
-    <string name="hint_distanceGoal">Overall Distance Goal</string>
+    <string name="hint_distanceGoal">Overall Walking Distance Goal</string>
+    <string name="hint_drivingDistanceGoal">Overall Driving Distance Goal</string>
+    <string name="hint_cyclingDistanceGoal">Overall Cycling Distance Goal</string>
+
+
 
 
     <!--Trip-->
@@ -90,7 +94,9 @@
     <!--Data Headers-->
     <!--Stats-->
     <string name="data_steps">Steps:</string>
-    <string name="data_distance">Distance:</string>
+    <string name="data_distance">Walking Distance:</string>
+    <string name="data_ddistance">Driving Distance:</string>
+    <string name="data_cdistance">Cycling Distance:</string>
     <string name="data_time">Time Elapsed:</string>
     <string name="data_category">Category:</string>
     <string name="data_timeStart">Time Initiated:</string>

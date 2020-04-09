@@ -26,32 +26,41 @@
                 android:layout_marginEnd="5dp"
                 android:layout_marginStart="5dp"/>
 
-            <Button
+            <ImageButton
                 android:id="@+id/filterDriving"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/filter_active_buttons"
-                android:textColor="@color/colorAccent"
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="5dp"
-                android:text="Driving" />
+                android:background="@drawable/filter_active_buttons"
+                android:src="@drawable/ic_directions_car_black_24dp"
+                android:textColor="@color/colorAccent" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/filterCycling"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/filter_active_buttons"
-                android:textColor="@color/colorAccent"
-                android:text="Cycling" />
+                android:src="@drawable/ic_cycling_category"
+                android:textColor="@color/colorAccent" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/filterWalking"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/filter_active_buttons"
-                android:textColor="@color/colorAccent"
-                android:text="Walking" />
+                android:src="@drawable/ic_walking_category"
+                android:textColor="@color/colorAccent"/>
+
+            <ImageButton
+                android:id="@+id/filterFavourites"
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/filter_active_buttons"
+                android:src="@drawable/ic_star_black_24dp"
+                android:textColor="@color/colorAccent"/>
         </LinearLayout>
 
     <LinearLayout

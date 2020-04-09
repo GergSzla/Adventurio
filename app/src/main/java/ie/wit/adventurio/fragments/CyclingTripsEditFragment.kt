@@ -95,6 +95,7 @@ class CyclingTripsEditFragment : Fragment() {
         root.amountPickerHours2.value = trip.tripEndTime.substring(0,2).toInt()
         root.amountPickerMinutes2.value = trip.tripEndTime.substring(3,5).toInt()
 
+        root.cbCyclingAddToFavs.isChecked = trip.favourite
         //del button
 
 
@@ -122,6 +123,7 @@ class CyclingTripsEditFragment : Fragment() {
                 trip.averageSpeed = (root.editSpeed.text.toString())
                 trip.caloriesBurned = (root.editCaloriesBurned.text.toString()).toDouble()
                 trip.tripName = root.editTripName.text.toString()
+                trip.favourite = root.cbCyclingAddToFavs.isChecked
                 trip.tripLength = ""
 
                 if ((root.amountPickerHours2.value-root.amountPickerHours1.value) < 10){

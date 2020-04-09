@@ -1,10 +1,13 @@
 package ie.wit.adventurio.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver.OnScrollChangedListener
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -18,7 +21,9 @@ import ie.wit.adventurio.helpers.showLoader
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.Trip
+import kotlinx.android.synthetic.main.fragment_statistics.*
 import kotlinx.android.synthetic.main.fragment_statistics.view.*
+import kotlinx.android.synthetic.main.fragment_statistics.view.scrollViewStats
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import java.util.*
@@ -31,13 +36,28 @@ class StatisticsFragment : Fragment(), AnkoLogger {
     lateinit var eventListener : ValueEventListener
     var ref = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().currentUser!!.uid)
     var userStats: Account? = null
-    var UserTrips = ArrayList<Trip>()
+    var UserTrips =  ArrayList<Trip>()
+    var WalkingTrips = ArrayList<Trip>()
+    var DrivingTrips = ArrayList<Trip>()
+    var CyclingTrips = ArrayList<Trip>()
     lateinit var loader : AlertDialog
     lateinit var root: View
 
 
+    //walking
     var totalSteps=0
     var totalDistance = 0.0
+    var totalCaloriesWalking = 0.0
+    //car
+    var totalDistanceCar = 0.0
+    var avgSpeed = 0.0
+
+    //cycling
+    var totalCaloriesCycling = 0.0
+    var totalDistanceCycling = 0.0
+    var avgSpeedCycling = 0.0
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +80,6 @@ class StatisticsFragment : Fragment(), AnkoLogger {
         activity?.title = getString(R.string.menu_stats)
 
 
-
         /*val bundle = arguments
         if (bundle != null) {
             user = bundle.getParcelable("user_key")
@@ -70,9 +89,9 @@ class StatisticsFragment : Fragment(), AnkoLogger {
         //var UserTrips= app.trips.getAllUserTripsById(user.id) as ArrayList<Trip>
         getAllTrips(app.auth.currentUser!!.uid)
 
-
         return root
     }
+
 
 
     fun getAllTrips(userId: String?) {
@@ -107,21 +126,34 @@ class StatisticsFragment : Fragment(), AnkoLogger {
     }
 
     fun updateStats(){
-        if(UserTrips.size > 0){
-            root.txtTotalTrips.text = UserTrips.size.toString()
-            for(trip in UserTrips){
+        UserTrips.forEach{
+            WalkingTrips.add(it)
+            DrivingTrips.add(it)
+            CyclingTrips.add(it)
+        }
+
+        WalkingTrips.removeIf { n -> n.tripType != "Walking"}
+        DrivingTrips.removeIf { n -> n.tripType != "Driving"}
+        CyclingTrips.removeIf { n -> n.tripType != "Cycling"}
+
+
+        //Update Walking Stats
+        if(WalkingTrips.size > 0){
+            root.txtTotalTrips.text = WalkingTrips.size.toString()
+            for(trip in WalkingTrips){
                 totalSteps += trip.tripSteps
                 totalDistance += trip.tripDistance
-
+                totalCaloriesWalking += trip.caloriesBurned
             }
             root.txtTotalStepsStats.text = totalSteps.toString()
             root.txtCurrentStepsGoal.text = userStats!!.stepsGoal.toString()
-            root.txtAvgSteps.text = (totalSteps/UserTrips.size).toString()
-
+            root.txtAvgSteps.text = (totalSteps/WalkingTrips.size).toString()
+            root.txtTotalCalories.text = "%.1f".format(totalCaloriesWalking).toString() + "kcal"
+            root.txtAvgCalories.text = "%.1f".format(totalCaloriesWalking/WalkingTrips.size).toString() + "kcal"
 
             root.txtTotalDistStats.text = "%.1f".format(totalDistance).toString()+ "km"
             root.txtCurrentDistGoal.text = "%.1f".format(userStats!!.distanceGoal).toString()+ "km"
-            root.txtAvgDist.text = "%.1f".format(totalDistance/UserTrips.size).toString() + "km"
+            root.txtAvgDist.text = "%.1f".format(totalDistance/WalkingTrips.size).toString() + "km"
 
 
             if (userStats!!.stepsGoal != 0 ){
@@ -132,6 +164,56 @@ class StatisticsFragment : Fragment(), AnkoLogger {
                 root.progressBar7.progress = getPercentage(totalDistance,userStats!!.distanceGoal).toInt()
                 root.txtTotalDistPrecentage.text = getPercentage(totalDistance,userStats!!.distanceGoal)+"%"
             }
+        }
+
+        //Update Driving Stats
+        if(DrivingTrips.size > 0){
+            root.txtTotalDriving.text = DrivingTrips.size.toString()
+            for(trip in DrivingTrips){
+                totalDistanceCar += trip.tripDistance
+                avgSpeed += trip.averageSpeed.toDouble()
+            }
+
+            root.speedView.setMinMaxSpeed(0F, 140F)
+            root.speedView.sections[0].color = Color.parseColor("#6a6a6a")
+            root.speedView.sections[1].color = Color.parseColor("#3d3232")
+            root.speedView.sections[2].color = Color.parseColor("#321919")
+            root.speedView.withTremble = false
+
+            root.speedView.speedTo("%.1f".format(avgSpeed/DrivingTrips.size).toFloat())
+            root.txtAvgSpeedDriving.text = "%.1f".format(avgSpeed/DrivingTrips.size).toString()
+            root.txtTotalDistanceDriving.text = "%.1f".format(totalDistanceCar).toString()
+            root.txtDistGoalDriving.text = "%.1f".format(userStats!!.drivingDistanceGoal).toString()+ "km"
+            root.txtAverageDistDriving.text = "%.1f".format(totalDistanceCar/DrivingTrips.size).toString() + "km"
+            if (userStats!!.drivingDistanceGoal != 0.0){
+                root.drivingdistpb.progress = getPercentage(totalDistanceCar,userStats!!.drivingDistanceGoal).toInt()
+            }
+        }
+        //Update Cycling Stats
+        if(CyclingTrips.size > 0){
+            root.txtTotalCycling.text = CyclingTrips.size.toString()
+            for(trip in CyclingTrips){
+                totalDistanceCycling += trip.tripDistance
+                avgSpeedCycling += trip.averageSpeed.toDouble()
+                totalCaloriesCycling += trip.caloriesBurned
+            }
+
+            root.speedViewcycling.setMinMaxSpeed(0F, 70F)
+            root.speedViewcycling.sections[0].color = Color.parseColor("#6a6a6a")
+            root.speedViewcycling.sections[1].color = Color.parseColor("#3d3232")
+            root.speedViewcycling.sections[2].color = Color.parseColor("#321919")
+            root.speedViewcycling.withTremble = false
+
+            root.speedViewcycling.speedTo("%.1f".format(avgSpeedCycling/CyclingTrips.size).toFloat())
+            root.txtAvgSpeedCycling.text = "%.1f".format(avgSpeedCycling/CyclingTrips.size).toString()
+            root.txtTotalDistanceCycling.text = "%.1f".format(totalDistanceCycling).toString()
+            root.txtDistGoalCycling.text = "%.1f".format(userStats!!.cyclingDistanceGoal).toString()+ "km"
+            root.txtAverageDistCycling.text = "%.1f".format(totalDistanceCycling/CyclingTrips.size).toString() + "km"
+            if (userStats!!.cyclingDistanceGoal != 0.0){
+                root.cyclingdistpb.progress = getPercentage(totalDistanceCycling,userStats!!.cyclingDistanceGoal).toInt()
+            }
+            root.txtTotalCyclingCalories.text = "%.1f".format(totalCaloriesCycling).toString() + "kcal"
+            root.txtAvgCyclingCalories.text = "%.1f".format(totalCaloriesCycling/CyclingTrips.size).toString() + "kcal"
         }
     }
 
