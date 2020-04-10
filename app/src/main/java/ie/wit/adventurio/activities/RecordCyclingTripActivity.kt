@@ -169,7 +169,7 @@ class RecordCyclingTripActivity : AppCompatActivity(), SensorEventListener {
             var currentStartDateTime= LocalDateTime.now()
             start = currentStartDateTime.format(DateTimeFormatter.ofPattern("HH:mm"))
             dow = sdf.format(d)
-            date = cal.get(Calendar.DAY_OF_MONTH).toString() + ", " + month_date.format(cal.getTime())
+            date = cal.get(Calendar.DAY_OF_MONTH).toString() + ", " + month_date.format(cal.getTime()) +" "+ cal.get(Calendar.YEAR).toString()
 
             StartTime = SystemClock.uptimeMillis()
             handler?.postDelayed(runnable, 0)

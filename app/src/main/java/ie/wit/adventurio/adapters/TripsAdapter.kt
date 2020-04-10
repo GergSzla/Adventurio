@@ -66,7 +66,7 @@ class TripsAdapter constructor(var trips: ArrayList<Trip>,
             }
             itemView.txtDistanceTotal.text = "%.2f".format(num) +" km"
             itemView.txtTimeElapsedTotal.text = trip.tripLength
-            itemView.txtTimeAndDate.text = trip.DayOfWeek + ", " + trip.Date + ", " + trip.tripStartTime + " - " + trip.tripEndTime
+            itemView.txtTimeAndDate.text = trip.DayOfWeek + ", " + trip.Date + ",   " + trip.tripStartTime + " - " + trip.tripEndTime
             //itemView.mapView. = trip.make
 
 

@@ -36,7 +36,7 @@
 
             <item
                 android:id="@+id/nav_manual_trips"
-                android:icon="@drawable/ic_action_record"
+                android:icon="@drawable/ic_action_manual_trip"
                 android:title="@string/menu_manual_record" />
             <item
                 android:id="@+id/nav_trips_list"

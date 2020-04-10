@@ -54,15 +54,15 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
     private fun resetPassword(email : String){
         FirebaseAuth.getInstance().sendPasswordResetEmail(email)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Log.d(ContentValues.TAG, "Email sent.")
-                    resetStatus2.text = "Reset Email Sent!"
-                    resetStatus2.setTextColor(Color.parseColor("#009705"))
-                } else {
-                    resetStatus2.text = "An Error Has Occurred!"
-                    resetStatus2.setTextColor(Color.parseColor("#970000"))
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.d(ContentValues.TAG, "Email sent.")
+                        resetStatus2.text = "Reset Email Sent!"
+                        resetStatus2.setTextColor(Color.parseColor("#009705"))
+                    } else {
+                        resetStatus2.text = "An Error Has Occurred!"
+                        resetStatus2.setTextColor(Color.parseColor("#970000"))
+                    }
                 }
-            }
     }
 }

@@ -11,28 +11,24 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.google.android.gms.maps.GoogleMap
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import ie.wit.adventurio.R
-import ie.wit.adventurio.adapters.VehiclesAdapter
-import ie.wit.adventurio.helpers.createLoader
-import ie.wit.adventurio.helpers.hideLoader
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.Trip
 import ie.wit.adventurio.models.Vehicle
 import ie.wit.fragments.TripsListFragment
-import kotlinx.android.synthetic.main.fragment_cars_list.view.*
 import kotlinx.android.synthetic.main.fragment_manual_trip.*
 import kotlinx.android.synthetic.main.fragment_manual_trip.view.*
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerHours1
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerHours2
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerMinutes1
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerMinutes2
-import org.jetbrains.anko.info
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -51,7 +47,6 @@ class ManualTripFragment : Fragment() {
     var dateId: String = ""
     val d = Date()
     val sdf = SimpleDateFormat("EEEE")
-    val cal = Calendar.getInstance()
     val month_date = SimpleDateFormat("MMMM")
     var carPos = ""
 
@@ -59,6 +54,9 @@ class ManualTripFragment : Fragment() {
 
     var dow = ""
     var date= ""
+
+    private lateinit var map: GoogleMap
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,7 +83,7 @@ class ManualTripFragment : Fragment() {
 
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
 
-        root.spinner.adapter = adapter;
+        root.spinner.adapter = adapter
 
         root.spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent:AdapterView<*>, view: View, position: Int, id: Long){
@@ -105,7 +103,7 @@ class ManualTripFragment : Fragment() {
 
                     adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
 
-                    root.editDrivingTripVehicles.adapter = adapter;
+                    root.editDrivingTripVehicles.adapter = adapter
 
                     trip.tripType = "Driving"
                     root.WalkingTrip.isVisible = false
@@ -156,11 +154,16 @@ class ManualTripFragment : Fragment() {
         root.amountPickerHours2.value = trip.tripEndTime.substring(0,2).toInt()
         root.amountPickerMinutes2.value = trip.tripEndTime.substring(3,5).toInt()*/
 
-        //del button
-
-
         //update button
         root.createTripFab.setOnClickListener {
+
+            val day: Int = root.date_Picker.dayOfMonth
+            val month: Int = root.date_Picker.month
+            val year: Int = root.date_Picker.year
+            val calendar = Calendar.getInstance()
+            calendar.set(year,month,day)
+            dow = sdf.format(calendar.time)
+            date = "${day}, ${month_date.format(calendar.time)} $year"
 
             if(root.amountPickerHours2.value < root.amountPickerHours1.value){
                 val toast =
@@ -253,9 +256,10 @@ class ManualTripFragment : Fragment() {
         return root
     }
 
+
     fun addingData(){
-        dow = sdf.format(d)
-        date = cal.get(Calendar.DAY_OF_MONTH).toString() + ", " + month_date.format(cal.getTime())
+        //dow = sdf.format(d)
+        //date = cal.get(Calendar.DAY_OF_MONTH).toString() + ", " + month_date.format(cal.time)
 
         when (trip.tripType) {
             "Walking" -> {

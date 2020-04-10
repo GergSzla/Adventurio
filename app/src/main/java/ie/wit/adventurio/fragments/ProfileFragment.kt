@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,14 +19,17 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Picasso
 import ie.wit.adventurio.R
 import ie.wit.adventurio.activities.LoginActivity
 import ie.wit.adventurio.helpers.readImageFromPath
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
+import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import java.io.File
 
 
 class ProfileFragment : Fragment(), AnkoLogger {
@@ -70,8 +74,14 @@ class ProfileFragment : Fragment(), AnkoLogger {
         root.txtDistanceProf.text = userProfile!!.distanceGoal.toString()+"km"
         root.txtDrivingDistanceProf.text = userProfile!!.drivingDistanceGoal.toString()+"km"
         root.txtCyclingDistanceProf.text = userProfile!!.cyclingDistanceGoal.toString()+"km"
+        root.txtWeight.text = userProfile!!.weight.toString()+"kg"
 
-        root.imageView.setImageBitmap(readImageFromPath(activity!!, userProfile!!.image))
+        root.imageView.setImageBitmap(activity?.let { readImageFromPath(it, userProfile!!.image) })
+
+        Picasso.get().load(userProfile!!.image)
+            .resize(190, 190)
+            .transform(CropCircleTransformation())
+            .into(root.linearview.imageView)
 
         root.editProfileFab.setOnClickListener {
             navigateTo(ProfileEditFragment.newInstance(userProfile!!))

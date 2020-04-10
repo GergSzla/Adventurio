@@ -18,7 +18,17 @@ import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.Trip
 import ie.wit.fragments.TripsListFragment
+import kotlinx.android.synthetic.main.fragment_driving_trips_edit.view.*
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.*
+import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerHours1
+import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerHours2
+import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerMinutes1
+import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerMinutes2
+import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.editDistance
+import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.editTripName
+import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.updateTripFab
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class WalkingTripsEditFragment : Fragment() {
@@ -28,6 +38,10 @@ class WalkingTripsEditFragment : Fragment() {
     lateinit var app: MainApp
     lateinit var root: View
     lateinit var eventListener : ValueEventListener
+    val sdf = SimpleDateFormat("EEEE")
+    val month_date = SimpleDateFormat("MMMM")
+    var dow = ""
+    var dateedit= ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -110,12 +124,22 @@ class WalkingTripsEditFragment : Fragment() {
                     )
                 toast.show()
             } else {
+                val day: Int = root.date_picker_walking.dayOfMonth
+                val month: Int = root.date_picker_walking.month
+                val year: Int = root.date_picker_walking.year
+                val calendar = Calendar.getInstance()
+                calendar.set(year,month,day)
+                dow = sdf.format(calendar.time)
+                dateedit = "$day, ${month_date.format(calendar.time)} $year"
+
                 trip.tripDistance = (root.editDistance.text.toString()).toDouble()
                 trip.tripSteps = (root.editSteps.text.toString()).toInt()
                 trip.caloriesBurned = root.editCaloriesBurned.text.toString().toDouble()
                 trip.tripName = root.editTripName.text.toString()
                 trip.favourite = root.cbWalkingAddToFavs.isChecked
                 trip.tripLength = ""
+                trip.DayOfWeek = dow
+                trip.Date = dateedit
 
                 if ((root.amountPickerHours2.value-root.amountPickerHours1.value) < 10){
                     trip.tripLength += (root.amountPickerHours2.value - root.amountPickerHours1.value).toString() + "Hours"

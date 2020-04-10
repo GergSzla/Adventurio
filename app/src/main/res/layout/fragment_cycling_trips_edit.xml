@@ -23,6 +23,18 @@
             android:orientation="vertical"
             android:background="@drawable/content_layout_bg"
             android:padding="10dp">
+            <TextView
+                android:id="@+id/txtDate"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Trip Date" />
+            <DatePicker
+                android:id="@+id/date_picker_cycling"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:datePickerMode = "spinner"
+                android:calendarViewShown="false"/>
 
             <TextView
                 android:id="@+id/textView29"

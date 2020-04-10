@@ -115,7 +115,7 @@ class RecordWalkingTripActivity : AppCompatActivity(), SensorEventListener {
         //checkWarningPermission()
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager?
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        stepsValue.setText("0")
+        stepsValue.text = "0"
         start_button.isVisible = true
         stop_button.isVisible = false
         linear1.isVisible = true
@@ -167,7 +167,7 @@ class RecordWalkingTripActivity : AppCompatActivity(), SensorEventListener {
             var currentStartDateTime= LocalDateTime.now()
             start = currentStartDateTime.format(DateTimeFormatter.ofPattern("HH:mm"))
             dow = sdf.format(d)
-            date = cal.get(Calendar.DAY_OF_MONTH).toString() + ", " + month_date.format(cal.getTime())
+            date = cal.get(Calendar.DAY_OF_MONTH).toString() + ", " + month_date.format(cal.time) +" "+ cal.get(Calendar.YEAR).toString()
 
             StartTime = SystemClock.uptimeMillis()
             handler?.postDelayed(runnable, 0)
@@ -283,14 +283,14 @@ class RecordWalkingTripActivity : AppCompatActivity(), SensorEventListener {
     override fun onSensorChanged(event: SensorEvent) {
         if (running && step_goal != 0 ) {
             currentSteps += (event.values[0].toInt() - event.values[0].toInt()) + 1
-            stepsValue.setText("" + currentSteps + "/${step_goal.toString()}")
+            stepsValue.text = "" + currentSteps + "/$step_goal"
             progressBar!!.max = step_goal.toInt()
             progressBar!!.progress = currentSteps
 
 
         } else if(running && step_goal == 0){
             currentSteps += (event.values[0].toInt() - event.values[0].toInt()) + 1
-            stepsValue.setText("" + currentSteps)
+            stepsValue.text = "" + currentSteps
         }
 
     }
@@ -355,7 +355,7 @@ class RecordWalkingTripActivity : AppCompatActivity(), SensorEventListener {
     var total_minutes = 0
     private fun saveTrip(){
 
-        trip.tripLength = "${hour!!.text.toString()}Hours, ${minute!!.text.toString()}Minutes, ${seconds!!.text.toString()}Seconds"
+        trip.tripLength = "${hour!!.text}Hours, ${minute!!.text}Minutes, ${seconds!!.text}Seconds"
         trip.tripID = UUID.randomUUID().toString()
         trip.tripType = "Walking"
         trip.tripOwner = user.id

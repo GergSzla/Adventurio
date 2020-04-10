@@ -3,8 +3,10 @@ package ie.wit.adventurio.fragments
 import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.method.HideReturnsTransformationMethod
@@ -16,6 +18,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat.checkSelfPermission
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.firebase.auth.EmailAuthProvider
@@ -23,6 +27,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Picasso
 import ie.wit.adventurio.R
 import ie.wit.adventurio.activities.Home
 import ie.wit.adventurio.helpers.createLoader
@@ -31,6 +36,8 @@ import ie.wit.adventurio.helpers.readImageFromPath
 import ie.wit.adventurio.helpers.showLoader
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
+import jp.wasabeef.picasso.transformations.CropCircleTransformation
+import kotlinx.android.synthetic.main.fragment_profile.view.*
 import kotlinx.android.synthetic.main.fragment_profile_edit.*
 import kotlinx.android.synthetic.main.fragment_profile_edit.view.*
 import java.io.IOException
@@ -41,7 +48,6 @@ class ProfileEditFragment : Fragment() {
 
     lateinit var app: MainApp
     //var user = Account()
-    val IMAGE_REQUEST = 1
     var userProfileEdit: Account? = null
     lateinit var loader : AlertDialog
     lateinit var root: View
@@ -76,7 +82,18 @@ class ProfileEditFragment : Fragment() {
         root.editStepsGoal.setText(userProfileEdit!!.stepsGoal.toString())
         root.editDistanceGoal.setText(userProfileEdit!!.distanceGoal.toString())
         root.editWeight.setText(userProfileEdit!!.weight.toString())
-        root.profImage.setImageBitmap(readImageFromPath(this.requireContext(), userProfileEdit!!.image))
+
+        Picasso.get().load(userProfileEdit!!.image)
+            .resize(190, 190)
+            .transform(CropCircleTransformation())
+            .into(root.scrollView2.profImage)
+
+        if (userProfileEdit!!.loginUsed == "google"){
+            root.addImage.isVisible = false
+            root.passConst.isVisible = false
+            root.btnResetPass.isVisible = false
+        }
+
         if (userProfileEdit!!.image != "") {
             root.addImage.setText(R.string.btnChangeImage)
         }else{
@@ -94,24 +111,24 @@ class ProfileEditFragment : Fragment() {
         }
 
         root.addImage.setOnClickListener {
-            val intent = Intent()
-            intent.type = "image/*"
-            intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"), IMAGE_REQUEST)
+            pickImageFromGallery()
         }
 
         root.updateProfileFab.setOnClickListener {
-            root.editPassword.text
-            if(root.editPassword.text.toString() != ""){
-                reauthenticateUser(app.auth.currentUser!!.email.toString(),root.editPassword.text.toString())
-            } else {
-                val toast =
-                    Toast.makeText(
-                        activity!!.applicationContext,
-                        "Password Required!",
-                        Toast.LENGTH_LONG
-                    )
-                toast.show()
+            if(userProfileEdit!!.loginUsed == "firebaseAuth"){
+                if(root.editPassword.text.toString() != ""){
+                    reauthenticateUser(app.auth.currentUser!!.email.toString(),root.editPassword.text.toString())
+                } else {
+                    val toast =
+                        Toast.makeText(
+                            activity!!.applicationContext,
+                            "Password Required!",
+                            Toast.LENGTH_LONG
+                        )
+                    toast.show()
+                }
+            } else if (userProfileEdit!!.loginUsed == "google"){
+                googleAccEdit()
             }
         }
 
@@ -120,6 +137,29 @@ class ProfileEditFragment : Fragment() {
         }
 
         return root
+    }
+    private fun googleAccEdit(){
+        userProfileEdit!!.firstName = root.editFirstName.text.toString()
+        userProfileEdit!!.surname = root.editSurname.text.toString()
+        userProfileEdit!!.username = root.editUsername.text.toString()
+        userProfileEdit!!.Email = root.editEmail.text.toString()
+        userProfileEdit!!.stepsGoal = (root.editStepsGoal.text.toString()).toInt()
+        userProfileEdit!!.distanceGoal = (root.editDistanceGoal.text.toString()).toDouble()
+        userProfileEdit!!.phoneNo = root.editPhoneNo.text.toString()
+        userProfileEdit!!.weight = root.editWeight.text.toString().toDouble()
+        userProfileEdit!!.drivingDistanceGoal = (root.editDrivingDistanceGoal.text.toString()).toDouble()
+        userProfileEdit!!.cyclingDistanceGoal = (root.editCyclingDistanceGoal.text.toString()).toDouble()
+        userProfileEdit!!.image
+
+        //app.users.updateAccount(user.copy())
+        updateUserProfile(app.auth.currentUser!!.uid, userProfileEdit!!)
+    }
+
+    private fun pickImageFromGallery() {
+        //Intent to pick image
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, IMAGE_PICK_CODE)
     }
 
     private fun resetPassword(){
@@ -156,9 +196,8 @@ class ProfileEditFragment : Fragment() {
                     userProfileEdit!!.weight = root.editWeight.text.toString().toDouble()
                     userProfileEdit!!.drivingDistanceGoal = (root.editDrivingDistanceGoal.text.toString()).toDouble()
                     userProfileEdit!!.cyclingDistanceGoal = (root.editCyclingDistanceGoal.text.toString()).toDouble()
-
-
                     userProfileEdit!!.image
+
                     //app.users.updateAccount(user.copy())
                     updateUserProfile(app.auth.currentUser!!.uid, userProfileEdit!!)
                     val toast =
@@ -183,23 +222,29 @@ class ProfileEditFragment : Fragment() {
 
     val home = Home()
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (!(requestCode !== IMAGE_REQUEST || resultCode !== Activity.RESULT_OK || data == null || data.data == null)) {
-            val uri: Uri = data.data!!
-            try {
-                val bitmap =
-                    MediaStore.Images.Media.getBitmap(activity!!.contentResolver, uri)
-                // Log.d(TAG, String.valueOf(bitmap));
-                val imageView: ImageView =
-                    activity!!.findViewById<View>(R.id.profImage) as ImageView
-                imageView.setImageBitmap(bitmap)
-                userProfileEdit!!.image = data.data.toString()
-                addImage.setText(R.string.btnChangeImage)
-
-            } catch (e: IOException) {
-                e.printStackTrace()
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when(requestCode){
+            PERMISSION_CODE -> {
+                if (grantResults.size >0 && grantResults[0] ==
+                    PackageManager.PERMISSION_GRANTED){
+                    //permission from popup granted
+                    pickImageFromGallery()
+                }
+                else{
+                    //permission from popup denied
+                }
             }
+        }
+    }
+
+    //handle result of picked image
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
+            userProfileEdit!!.image = data?.data.toString()
+            Picasso.get().load(data?.data)
+                .resize(190, 190)
+                .transform(CropCircleTransformation())
+                .into(root.scrollView2.profImage)
         }
     }
 
@@ -225,6 +270,11 @@ class ProfileEditFragment : Fragment() {
     }
 
     companion object {
+
+        //image pick code
+        private val IMAGE_PICK_CODE = 1000;
+        //Permission code
+        private val PERMISSION_CODE = 1001;
         @JvmStatic
         fun newInstance(user: Account) =
             ProfileEditFragment().apply {

@@ -28,7 +28,8 @@ import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPic
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.editDistance
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.editTripName
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.updateTripFab
-import java.util.ArrayList
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class DrivingTripsEditFragment : Fragment() {
@@ -39,7 +40,10 @@ class DrivingTripsEditFragment : Fragment() {
     lateinit var root: View
     lateinit var eventListener : ValueEventListener
     var vehicles = ArrayList<String>()
-
+    val sdf = SimpleDateFormat("EEEE")
+    val month_date = SimpleDateFormat("MMMM")
+    var dow = ""
+    var dateedit= ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -117,12 +121,22 @@ class DrivingTripsEditFragment : Fragment() {
                     )
                 toast.show()
             } else {
+                val day: Int = root.date_picker_driving.dayOfMonth
+                val month: Int = root.date_picker_driving.month
+                val year: Int = root.date_picker_driving.year
+                val calendar = Calendar.getInstance()
+                calendar.set(year,month,day)
+                dow = sdf.format(calendar.time)
+                dateedit = "${day}, ${month_date.format(calendar.time)} $year"
+
                 trip.tripDistance = (root.editDistance.text.toString()).toDouble()
                 trip.averageSpeed = (root.editAverageSpeed.text.toString())
                 trip.tripName = root.editTripName.text.toString()
                 trip.vehicleUsed = root.editCarsSpinner.selectedItem.toString()
                 trip.favourite = root.cbDrivingAddToFavs.isChecked
                 trip.tripLength = ""
+                trip.DayOfWeek = dow
+                trip.Date = dateedit
 
                 if ((root.amountPickerHours2.value-root.amountPickerHours1.value) < 10){
                     trip.tripLength += (root.amountPickerHours2.value - root.amountPickerHours1.value).toString() + "Hours"

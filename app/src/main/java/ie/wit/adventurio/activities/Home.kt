@@ -40,7 +40,6 @@ class Home : AppCompatActivity(),
     lateinit var ft: FragmentTransaction
     var user = Account()
     lateinit var eventListener : ValueEventListener
-    val IMAGE_REQUEST = 1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,10 +47,7 @@ class Home : AppCompatActivity(),
         setContentView(R.layout.home)
         setSupportActionBar(toolbar)
         app = application as MainApp
-        /*if (intent.hasExtra("user_key")) {
-            user = intent.extras.getParcelable<Account>("user_key")
-        }*/
-
+        app.auth = FirebaseAuth.getInstance()
 
 
         navView.setNavigationItemSelectedListener(this)
@@ -73,14 +69,6 @@ class Home : AppCompatActivity(),
         ft = supportFragmentManager.beginTransaction()
 
 
-        //var profileFragment = ProfileFragment()
-        /*var tripsListFragment = TripsListFragment()
-
-        val bundle = Bundle()
-        bundle.putParcelable("user_key",user)
-        profileFragment.arguments = bundle
-        statsFragment.arguments = bundle
-        tripsListFragment.arguments = bundle*/
 
 
 
@@ -102,10 +90,7 @@ class Home : AppCompatActivity(),
                 user = dataSnapshot.getValue(Account::class.java)!!
 
                 var statsFragment = StatisticsFragment.newInstance(user)
-                //fragment.arguments = bundle
 
-                ft.replace(R.id.homeFrame, statsFragment)
-                ft.commit()
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -176,18 +161,7 @@ class Home : AppCompatActivity(),
 
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            IMAGE_REQUEST -> {
-                if (data != null) {
-                    user.image = data.getData().toString()
-                    profImage.setImageBitmap(readImage(this, resultCode, data))
-                    addImage.setText(R.string.btnChangeImage)
-                }
-            }
-        }
-    }
+
 
     private fun signOut(){
         finish()
