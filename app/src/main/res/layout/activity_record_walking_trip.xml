@@ -31,11 +31,26 @@
           android:id="@+id/linear1">
 
         <TextView
+            android:id="@+id/walkingTrip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Walking Adventure"
+            android:layout_margin="6dp"
+            android:textColor="@color/accent_2"
+            android:background="@color/accent_1"
+            android:padding="8dp"
+            app:fontFamily="@font/denk_one"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            />
+
+        <TextView
             android:id="@+id/textView15"
             style="@style/Widget.AppCompat.TextView"
             android:layout_width="match_parent"
+            android:textColor="@color/accent_2"
+
             android:layout_height="wrap_content"
-            android:text="Add a step goal for this journey. \nOr just go with the flow!"
+            android:text="Add a step goal for this journey:"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <EditText
@@ -78,7 +93,7 @@
 
           <TextView
               android:id="@+id/TimeLbl"
-
+              android:textColor="@color/accent_2"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_marginStart="8dp"
@@ -93,6 +108,7 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_marginStart="8dp"
+              android:textColor="@color/accent_2"
               android:text="00"
               android:textSize="35sp"
               app:layout_constraintEnd_toEndOf="parent"
@@ -103,6 +119,7 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text=":"
+              android:textColor="@color/accent_2"
               android:textSize="35sp"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintStart_toStartOf="parent"
@@ -112,6 +129,8 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text="00"
+              android:textColor="@color/accent_2"
+
               android:textSize="35sp"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintStart_toStartOf="parent"
@@ -121,6 +140,8 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text=":"
+              android:textColor="@color/accent_2"
+
               android:textSize="35sp"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintStart_toStartOf="parent"
@@ -130,6 +151,8 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text="00"
+              android:textColor="@color/accent_2"
+
               android:textSize="35sp"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintStart_toStartOf="parent"
@@ -147,6 +170,7 @@
               android:layout_height="wrap_content"
               android:layout_marginStart="8dp"
               android:layout_marginEnd="8dp"
+              android:textColor="@color/accent_2"
               android:text="Steps:"
               android:textSize="50sp"
               app:layout_constraintEnd_toEndOf="parent"
@@ -159,6 +183,7 @@
               android:layout_height="wrap_content"
               android:layout_marginStart="8dp"
               android:layout_marginEnd="8dp"
+              android:textColor="@color/accent_2"
 
               android:text="0"
               android:textSize="35sp"
@@ -179,6 +204,8 @@
               android:layout_marginStart="8dp"
               android:layout_marginEnd="8dp"
               android:text="Calories:"
+              android:textColor="@color/accent_2"
+
               android:textSize="50sp"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintStart_toStartOf="parent"
@@ -190,6 +217,7 @@
               android:layout_height="wrap_content"
               android:layout_marginStart="8dp"
               android:layout_marginEnd="8dp"
+              android:textColor="@color/accent_2"
               android:text="0"
               android:textSize="35sp"
               app:layout_constraintEnd_toEndOf="parent"
@@ -237,6 +265,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:textColor="@color/accent_2"
             android:text="@string/play"
             app:layout_constraintBottom_toTopOf="@+id/start_button"
             app:layout_constraintEnd_toEndOf="parent"

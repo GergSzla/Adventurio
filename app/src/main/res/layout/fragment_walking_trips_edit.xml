@@ -26,6 +26,8 @@
             <TextView
                 android:id="@+id/txtDate"
                 android:layout_marginTop="10dp"
+                android:textColor="@color/accent_2"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Trip Date" />
@@ -38,6 +40,8 @@
             <TextView
                 android:id="@+id/textView29"
                 android:layout_marginTop="10dp"
+                android:textColor="@color/accent_2"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Edit Trip Name" />
@@ -56,6 +60,8 @@
                 android:id="@+id/textView27"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
+                android:textColor="@color/accent_2"
+
                 android:layout_height="wrap_content"
                 android:text="Edit Distance" />
 
@@ -72,6 +78,8 @@
             <TextView
                 android:id="@+id/textView28"
                 android:layout_marginTop="10dp"
+                android:textColor="@color/accent_2"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Edit Steps" />
@@ -90,6 +98,8 @@
                 android:id="@+id/textView32"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
+                android:textColor="@color/accent_2"
+
                 android:layout_height="wrap_content"
                 android:text="Edit Calories Burned" />
 
@@ -106,6 +116,8 @@
                 android:id="@+id/cbWalkingAddToFavs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/accent_2"
+
                 android:text="Add to Favourites" />
 
             <LinearLayout
@@ -118,6 +130,8 @@
                 <TextView
                     android:id="@+id/textView30"
                     android:layout_width="wrap_content"
+                    android:textColor="@color/accent_2"
+
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Time Initiated" />
@@ -126,6 +140,8 @@
                     android:id="@+id/textView31"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/accent_2"
+
                     android:layout_weight="1"
                     android:text="Time Finished"
                     android:textDirection="rtl" />
@@ -141,6 +157,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text=":"
+                    android:textColor="@color/accent_2"
+
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/amountPickerHours1"
@@ -181,6 +199,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_weight="1"
+                    android:textColor="@color/accent_2"
+
                     android:text="-"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -207,6 +227,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:layout_weight="1"
+                    android:textColor="@color/accent_2"
+
                     android:text=":"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     app:layout_constraintBottom_toBottomOf="parent"

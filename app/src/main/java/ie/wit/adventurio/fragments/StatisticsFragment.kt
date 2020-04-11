@@ -79,14 +79,6 @@ class StatisticsFragment : Fragment(), AnkoLogger {
         root = inflater.inflate(R.layout.fragment_statistics, container, false)
         activity?.title = getString(R.string.menu_stats)
 
-
-        /*val bundle = arguments
-        if (bundle != null) {
-            user = bundle.getParcelable("user_key")
-        }*/
-
-
-        //var UserTrips= app.trips.getAllUserTripsById(user.id) as ArrayList<Trip>
         getAllTrips(app.auth.currentUser!!.uid)
 
         return root

@@ -51,15 +51,16 @@
 
             <TextView
                 android:id="@+id/txt1"
-                android:textColor="#313131"
+                android:textColor="@color/accent_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:text="@string/data_name"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <TextView
                 android:id="@+id/txtNameProf"
-                android:textColor="#000000"
+                android:textColor="@color/accent_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -75,15 +76,16 @@
             <TextView
                 android:id="@+id/txt2"
                 android:layout_width="wrap_content"
-                android:textColor="#313131"
+                android:textColor="@color/accent_2"
                 android:layout_height="wrap_content"
+
                 android:text="@string/data_username"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <TextView
                 android:id="@+id/txtUsernameProf"
                 android:layout_width="match_parent"
-                android:textColor="#000000"
+                android:textColor="@color/accent_2"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textDirection="rtl" />
@@ -100,7 +102,7 @@
             <TextView
                 android:id="@+id/txt3"
                 android:layout_width="wrap_content"
-                android:textColor="#313131"
+                android:textColor="@color/accent_2"
                 android:layout_height="wrap_content"
                 android:text="@string/data_email"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -108,7 +110,7 @@
             <TextView
                 android:id="@+id/txtEmailProf"
                 android:layout_width="match_parent"
-                android:textColor="#000000"
+                android:textColor="@color/accent_2"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textDirection="rtl" />
@@ -125,7 +127,7 @@
             <TextView
                 android:id="@+id/txt7"
                 android:layout_width="wrap_content"
-                android:textColor="#313131"
+                android:textColor="@color/accent_2"
                 android:layout_height="wrap_content"
                 android:text="@string/data_weight"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -133,7 +135,7 @@
             <TextView
                 android:id="@+id/txtWeight"
                 android:layout_width="match_parent"
-                android:textColor="#000000"
+                android:textColor="@color/accent_2"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textDirection="rtl" />
@@ -157,7 +159,7 @@
             <TextView
                 android:id="@+id/txt4"
                 android:layout_width="wrap_content"
-                android:textColor="#313131"
+                android:textColor="@color/accent_2"
                 android:layout_height="wrap_content"
                 android:text="@string/data_phoneNo"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -165,7 +167,7 @@
             <TextView
                 android:id="@+id/txtPhoneProf"
                 android:layout_width="match_parent"
-                android:textColor="#000000"
+                android:textColor="@color/accent_2"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textDirection="rtl" />
@@ -180,7 +182,7 @@
         <TextView
             android:id="@+id/CatW"
             android:layout_width="match_parent"
-            android:textColor="#313131"
+            android:textColor="@color/accent_2"
             android:textSize="25sp"
             android:layout_marginTop="20dp"
             android:layout_height="wrap_content"
@@ -199,7 +201,7 @@
             <TextView
                 android:id="@+id/txt5"
                 android:layout_width="wrap_content"
-                android:textColor="#313131"
+                android:textColor="@color/accent_2"
                 android:layout_height="wrap_content"
                 android:text="@string/data_steps"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -207,7 +209,7 @@
             <TextView
                 android:id="@+id/txtStepsProf"
                 android:layout_width="match_parent"
-                android:textColor="#000000"
+                android:textColor="@color/accent_2"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textDirection="rtl" />
@@ -223,7 +225,7 @@
             <TextView
                 android:id="@+id/txt6"
                 android:layout_width="wrap_content"
-                android:textColor="#313131"
+                android:textColor="@color/accent_2"
                 android:layout_height="wrap_content"
                 android:text="@string/data_distance"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -231,7 +233,7 @@
             <TextView
                 android:id="@+id/txtDistanceProf"
                 android:layout_width="match_parent"
-                android:textColor="#000000"
+                android:textColor="@color/accent_2"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textDirection="rtl" />
@@ -248,7 +250,7 @@
             <TextView
                 android:id="@+id/drivingDistance"
                 android:layout_width="wrap_content"
-                android:textColor="#313131"
+                android:textColor="@color/accent_2"
                 android:layout_height="wrap_content"
                 android:text="@string/data_ddistance"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -256,7 +258,7 @@
             <TextView
                 android:id="@+id/txtDrivingDistanceProf"
                 android:layout_width="match_parent"
-                android:textColor="#000000"
+                android:textColor="@color/accent_2"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textDirection="rtl" />
@@ -273,7 +275,7 @@
             <TextView
                 android:id="@+id/cyclingDistance"
                 android:layout_width="wrap_content"
-                android:textColor="#313131"
+                android:textColor="@color/accent_2"
                 android:layout_height="wrap_content"
                 android:text="@string/data_cdistance"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -281,7 +283,7 @@
             <TextView
                 android:id="@+id/txtCyclingDistanceProf"
                 android:layout_width="match_parent"
-                android:textColor="#000000"
+                android:textColor="@color/accent_2"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textDirection="rtl" />

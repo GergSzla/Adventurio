@@ -62,17 +62,7 @@ class Home : AppCompatActivity(),
 
         navView.getHeaderView(0).nav_header_email.text = app.auth.currentUser?.email
 
-
-
-
-
         ft = supportFragmentManager.beginTransaction()
-
-        navigateTo(StatisticsFragment.newInstance(user))
-
-
-
-
     }
 
     override fun onResume() {
@@ -89,6 +79,7 @@ class Home : AppCompatActivity(),
         eventListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 user = dataSnapshot.getValue(Account::class.java)!!
+
 
                 var statsFragment = StatisticsFragment.newInstance(user)
 

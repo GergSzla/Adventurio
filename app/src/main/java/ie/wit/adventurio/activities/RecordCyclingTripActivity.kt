@@ -60,6 +60,7 @@ class RecordCyclingTripActivity : AppCompatActivity(), SensorEventListener {
     var speeds = ArrayList<Int>()
 
 
+    var startClickCheck = false
 
     var running = false
     var sensorManager:SensorManager? = null
@@ -133,7 +134,7 @@ class RecordCyclingTripActivity : AppCompatActivity(), SensorEventListener {
         }
 
         start_cycling_button.setOnClickListener {
-
+            startClickCheck = true
             try {
                 // Request location updates
                 locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0L, 0f, locationListener)
@@ -439,7 +440,11 @@ class RecordCyclingTripActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        stopTrip()
+        if(!startClickCheck){
+            finish()
+        } else {
+            stopTrip()
+        }
     }
 
 }

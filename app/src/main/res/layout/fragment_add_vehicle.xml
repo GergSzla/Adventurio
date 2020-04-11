@@ -59,6 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:textColor="@color/accent_2"
                 android:text="Vehicle Name" />
 
             <EditText
@@ -79,6 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Brand"
+                android:textColor="@color/accent_2"
 
                 />
 
@@ -98,6 +100,7 @@
             <TextView
                 android:id="@+id/txtModel"
                 android:layout_width="match_parent"
+                android:textColor="@color/accent_2"
                 android:layout_height="wrap_content"
                 android:text="Model" />
 
@@ -116,6 +119,7 @@
 
             <TextView
                 android:id="@+id/txtReg"
+                android:textColor="@color/accent_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="License Plate" />
@@ -137,6 +141,7 @@
             <TextView
                 android:id="@+id/txtYear"
                 android:layout_width="match_parent"
+                android:textColor="@color/accent_2"
                 android:layout_height="wrap_content"
                 android:text="Year" />
 
@@ -155,6 +160,7 @@
             <TextView
                 android:id="@+id/txtFuel"
                 android:layout_width="match_parent"
+                android:textColor="@color/accent_2"
                 android:layout_height="wrap_content"
                 android:text="Fuel Type" />
 
@@ -167,6 +173,7 @@
 
             <TextView
                 android:id="@+id/txtTankCapac"
+                android:textColor="@color/accent_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Tank Capacity" />
@@ -176,6 +183,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+
                 android:hint="Tank Capacity"
                 android:inputType="number"
                 android:layout_marginBottom="10dp"
@@ -189,6 +197,8 @@
                 android:id="@+id/txtOdo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/accent_2"
+
                 android:text="Odometer Count" />
 
             <EditText

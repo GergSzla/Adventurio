@@ -65,6 +65,7 @@ class RecordDrivingTripActivity : AppCompatActivity(), SensorEventListener {
     var vehicles = ArrayList<String>()
     var speeds = ArrayList<Int>()
 
+    var startClickCheck = false
 
 
     var running = false
@@ -526,7 +527,10 @@ class RecordDrivingTripActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        stopTrip()
+        if(!startClickCheck){
+            finish()
+        } else {
+            stopTrip()
+        }
     }
-
 }

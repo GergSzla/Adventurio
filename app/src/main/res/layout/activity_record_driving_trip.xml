@@ -31,10 +31,24 @@
                 android:id="@+id/linear1">
 
                 <TextView
+                    android:id="@+id/drivingTrip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Driving Adventure"
+                    android:layout_margin="6dp"
+                    android:textColor="@color/accent_2"
+                    android:background="@color/accent_1"
+                    android:padding="8dp"
+                    app:fontFamily="@font/denk_one"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    />
+
+                <TextView
                     android:id="@+id/textView15"
                     style="@style/Widget.AppCompat.TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/accent_2"
                     android:text="Vehicle Used:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -68,7 +82,7 @@
 
                     <TextView
                         android:id="@+id/TimeLbl"
-
+                        android:textColor="@color/accent_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -85,6 +99,8 @@
                         android:layout_marginStart="8dp"
                         android:text="00"
                         android:textSize="35sp"
+                        android:textColor="@color/accent_2"
+
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/stepsLbl" />
@@ -94,6 +110,8 @@
                         android:layout_height="wrap_content"
                         android:text=":"
                         android:textSize="35sp"
+                        android:textColor="@color/accent_2"
+
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/stepsLbl" />
@@ -102,6 +120,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="00"
+                        android:textColor="@color/accent_2"
+
                         android:textSize="35sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -112,6 +132,8 @@
                         android:layout_height="wrap_content"
                         android:text=":"
                         android:textSize="35sp"
+                        android:textColor="@color/accent_2"
+
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/stepsLbl" />
@@ -121,6 +143,8 @@
                         android:layout_height="wrap_content"
                         android:text="00"
                         android:textSize="35sp"
+                        android:textColor="@color/accent_2"
+
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/stepsLbl" />
@@ -135,6 +159,8 @@
                         android:id="@+id/speedDrivingLbl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/accent_2"
+
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
                         android:text="Speed:"
@@ -145,6 +171,8 @@
 
                     <TextView
                         android:id="@+id/speedDrivingValue"
+                        android:textColor="@color/accent_2"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -162,6 +190,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
+                        android:textColor="@color/accent_2"
 
                         android:text="km/h"
                         android:textSize="35sp"
@@ -232,6 +261,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
+                    android:textColor="@color/accent_2"
+
                     android:text="@string/play"
                     app:layout_constraintBottom_toTopOf="@+id/start_button"
                     app:layout_constraintEnd_toEndOf="parent"

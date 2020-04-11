@@ -33,8 +33,6 @@ class ForgotPasswordActivity : AppCompatActivity() {
         setContentView(R.layout.activity_forgot_password)
 
         app = application as MainApp
-        //val AccountList = app.users.getAllAccounts() as ArrayList<Account>
-
 
         btnGetPassword.setOnClickListener{
             validateForm()

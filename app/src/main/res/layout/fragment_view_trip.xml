@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:text="Trip Name:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#313131"
+                    android:textColor="@color/accent_2"
                     app:fontFamily="@font/catamaran" />
 
                 <TextView
@@ -57,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#000000"
+                    android:textColor="@color/accent_2"
                     android:textDirection="rtl"
                     app:fontFamily="@font/catamaran" />
             </LinearLayout>
@@ -73,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/data_category"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#313131"
+                    android:textColor="@color/accent_2"
                     app:fontFamily="@font/catamaran" />
 
                 <TextView
@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#000000"
+                    android:textColor="@color/accent_2"
                     android:textDirection="rtl"
                     app:fontFamily="@font/catamaran" />
             </LinearLayout>
@@ -99,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/data_steps"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#313131"
+                    android:textColor="@color/accent_2"
                     app:fontFamily="@font/catamaran" />
 
                 <TextView
@@ -108,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#000000"
+                    android:textColor="@color/accent_2"
                     android:textDirection="rtl"
                     app:fontFamily="@font/catamaran" />
             </LinearLayout>
@@ -125,7 +125,7 @@
                     android:layout_height="wrap_content"
                     android:text="Avg. Speed:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#313131"
+                    android:textColor="@color/accent_2"
                     app:fontFamily="@font/catamaran" />
 
                 <TextView
@@ -134,7 +134,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#000000"
+                    android:textColor="@color/accent_2"
                     android:textDirection="rtl"
                     app:fontFamily="@font/catamaran" />
             </LinearLayout>
@@ -151,7 +151,7 @@
                     android:layout_height="wrap_content"
                     android:text="Vehicle Used:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#313131"
+                    android:textColor="@color/accent_2"
                     app:fontFamily="@font/catamaran" />
 
                 <TextView
@@ -160,7 +160,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#000000"
+                    android:textColor="@color/accent_2"
                     android:textDirection="rtl"
                     app:fontFamily="@font/catamaran" />
             </LinearLayout>
@@ -177,7 +177,7 @@
                     android:layout_height="wrap_content"
                     android:text="Calories Burned:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#313131"
+                    android:textColor="@color/accent_2"
                     app:fontFamily="@font/catamaran" />
 
                 <TextView
@@ -186,7 +186,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#000000"
+                    android:textColor="@color/accent_2"
                     android:textDirection="rtl"
                     app:fontFamily="@font/catamaran" />
             </LinearLayout>
@@ -202,7 +202,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/data_distance"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#313131"
+                    android:textColor="@color/accent_2"
                     app:fontFamily="@font/catamaran" />
 
                 <TextView
@@ -211,7 +211,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#000000"
+                    android:textColor="@color/accent_2"
                     android:textDirection="rtl"
                     app:fontFamily="@font/catamaran" />
             </LinearLayout>
@@ -227,7 +227,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/data_timeStart"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#313131"
+                    android:textColor="@color/accent_2"
                     app:fontFamily="@font/catamaran" />
 
                 <TextView
@@ -236,7 +236,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#000000"
+                    android:textColor="@color/accent_2"
                     android:textDirection="rtl"
                     app:fontFamily="@font/catamaran" />
             </LinearLayout>
@@ -252,7 +252,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/data_timeEnd"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#313131"
+                    android:textColor="@color/accent_2"
                     app:fontFamily="@font/catamaran" />
 
                 <TextView
@@ -261,7 +261,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#000000"
+                    android:textColor="@color/accent_2"
                     android:textDirection="rtl"
                     app:fontFamily="@font/catamaran" />
             </LinearLayout>
@@ -277,7 +277,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/data_time"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#313131"
+                    android:textColor="@color/accent_2"
                     app:fontFamily="@font/catamaran" />
 
                 <TextView
@@ -286,7 +286,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#000000"
+                    android:textColor="@color/accent_2"
                     android:textDirection="rtl"
                     app:fontFamily="@font/catamaran" />
             </LinearLayout>

@@ -55,6 +55,9 @@ class RecordWalkingTripActivity : AppCompatActivity(), SensorEventListener {
     var trip = Trip()
     var dateId: String = ""
 
+    var startClickCheck = false
+
+
     var running = false
     var sensorManager:SensorManager? = null
     var step_goal = 0
@@ -434,7 +437,11 @@ class RecordWalkingTripActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        stopTrip()
+        if(!startClickCheck){
+            finish()
+        } else {
+            stopTrip()
+        }
     }
 
 }

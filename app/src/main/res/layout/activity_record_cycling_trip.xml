@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,6 +41,18 @@
                 android:orientation="vertical"
                 android:id="@+id/linear2">
 
+                <TextView
+                    android:id="@+id/cyclingTrip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cycling Adventure"
+                    android:layout_margin="6dp"
+                    android:textColor="@color/accent_2"
+                    android:background="@color/accent_1"
+                    android:padding="8dp"
+                    app:fontFamily="@font/denk_one"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    />
 
 
                 <LinearLayout
@@ -49,7 +62,7 @@
 
                     <TextView
                         android:id="@+id/TimeLbl"
-
+                        android:textColor="@color/accent_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -65,6 +78,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:text="00"
+                        android:textColor="@color/accent_2"
                         android:textSize="35sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -74,6 +88,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=":"
+                        android:textColor="@color/accent_2"
                         android:textSize="35sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -83,6 +98,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="00"
+                        android:textColor="@color/accent_2"
                         android:textSize="35sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -92,6 +108,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=":"
+                        android:textColor="@color/accent_2"
                         android:textSize="35sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -101,6 +118,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="00"
+                        android:textColor="@color/accent_2"
                         android:textSize="35sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -119,6 +137,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
                         android:text="Speed:"
+                        android:textColor="@color/accent_2"
                         android:textSize="50sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -130,7 +149,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-
+                        android:textColor="@color/accent_2"
                         android:text="0"
                         android:textSize="35sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -143,7 +162,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-
+                        android:textColor="@color/accent_2"
                         android:text="km/h"
                         android:textSize="35sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -164,6 +183,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
                         android:text="Calories:"
+                        android:textColor="@color/accent_2"
                         android:textSize="50sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -175,7 +195,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
-
+                        android:textColor="@color/accent_2"
                         android:text="0"
                         android:textSize="35sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -218,6 +238,7 @@
                     android:id="@+id/txtHint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/accent_2"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:text="@string/play"

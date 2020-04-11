@@ -34,6 +34,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Walking"
+                android:layout_margin="6dp"
+                android:textColor="@color/accent_2"
+                android:background="@color/accent_1"
                 android:padding="8dp"
                 app:fontFamily="@font/denk_one"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -50,8 +53,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="11dp"
                     android:text="Total Walking Trips:"
+                    android:textColor="@color/accent_2"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#000000"
                     app:fontFamily="@font/denk_one"
                     app:layout_constraintBottom_toBottomOf="@+id/progressBar"
                     app:layout_constraintEnd_toStartOf="@+id/progressBar"
@@ -81,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:text="0%"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="#000000"
+                    android:textColor="@color/accent_2"
                     app:layout_constraintBottom_toBottomOf="@+id/progressBar"
                     app:layout_constraintEnd_toEndOf="@+id/progressBar"
                     app:layout_constraintStart_toStartOf="@+id/progressBar"
@@ -107,7 +110,8 @@
                             android:layout_height="wrap_content"
                             android:text="Total Steps:"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#313131" />
+                            android:textColor="@color/accent_2"
+                            />
 
                         <TextView
                             android:id="@+id/txtTotalStepsStats"
@@ -115,7 +119,7 @@
                             android:layout_height="wrap_content"
                             android:text="0"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#000000"
+                            android:textColor="@color/accent_2"
                             android:textDirection="rtl" />
                     </LinearLayout>
 
@@ -131,7 +135,8 @@
                             android:layout_height="wrap_content"
                             android:text="Current Overall Step Goal:"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#313131" />
+                            android:textColor="@color/accent_2"
+                            />
 
                         <TextView
                             android:id="@+id/txtCurrentStepsGoal"
@@ -139,7 +144,7 @@
                             android:layout_height="wrap_content"
                             android:text="0"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#000000"
+                            android:textColor="@color/accent_2"
                             android:textDirection="rtl" />
                     </LinearLayout>
 
@@ -154,7 +159,8 @@
                             android:layout_height="wrap_content"
                             android:text="Average Step Per Trip:"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#313131" />
+                            android:textColor="@color/accent_2"
+                            />
 
                         <TextView
                             android:id="@+id/txtAvgSteps"
@@ -162,8 +168,9 @@
                             android:layout_height="wrap_content"
                             android:text="0"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#000000"
-                            android:textDirection="rtl" />
+                            android:textColor="@color/accent_2"
+                            android:textDirection="rtl"
+                            android:layout_marginBottom="10dp"/>
                     </LinearLayout>
 
                     <View
@@ -195,7 +202,7 @@
                     android:layout_height="wrap_content"
                     android:text="0%"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="#000000"
+                    android:textColor="@color/accent_2"
                     app:layout_constraintBottom_toBottomOf="@+id/progressBar7"
                     app:layout_constraintEnd_toEndOf="@+id/progressBar7"
                     app:layout_constraintStart_toStartOf="@+id/progressBar7"
@@ -221,7 +228,8 @@
                             android:layout_height="wrap_content"
                             android:text="Total Distance:"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#313131" />
+                            android:textColor="@color/accent_2"
+                            />
 
                         <TextView
                             android:id="@+id/txtTotalDistStats"
@@ -229,7 +237,7 @@
                             android:layout_height="wrap_content"
                             android:text="0"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#000000"
+                            android:textColor="@color/accent_2"
                             android:textDirection="rtl" />
                     </LinearLayout>
 
@@ -241,10 +249,10 @@
                         <TextView
                             android:id="@+id/textView16"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:text="Current Distance Goal:"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#313131" />
+                            android:textColor="@color/accent_2" />
 
                         <TextView
                             android:id="@+id/txtCurrentDistGoal"
@@ -252,7 +260,7 @@
                             android:layout_height="wrap_content"
                             android:text="0"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#000000"
+                            android:textColor="@color/accent_2"
                             android:textDirection="rtl" />
                     </LinearLayout>
 
@@ -267,7 +275,8 @@
                             android:layout_height="wrap_content"
                             android:text="Average Distance Per Trip:"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#313131" />
+                            android:textColor="@color/accent_2"
+                            />
 
                         <TextView
                             android:id="@+id/txtAvgDist"
@@ -275,7 +284,7 @@
                             android:layout_height="wrap_content"
                             android:text="0"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#000000"
+                            android:textColor="@color/accent_2"
                             android:textDirection="rtl" />
                     </LinearLayout>
                     <LinearLayout
@@ -289,7 +298,8 @@
                             android:layout_height="wrap_content"
                             android:text="Total Calories Burned:"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#313131" />
+                            android:textColor="@color/accent_2"
+                            />
 
                         <TextView
                             android:id="@+id/txtTotalCalories"
@@ -297,7 +307,7 @@
                             android:layout_height="wrap_content"
                             android:text="0"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#000000"
+                            android:textColor="@color/accent_2"
                             android:textDirection="rtl" />
                     </LinearLayout>
                     <LinearLayout
@@ -311,7 +321,8 @@
                             android:layout_height="wrap_content"
                             android:text="Average Calories Burned Per Trip:"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#313131" />
+                            android:textColor="@color/accent_2"
+                            />
 
                         <TextView
                             android:id="@+id/txtAvgCalories"
@@ -319,7 +330,7 @@
                             android:layout_height="wrap_content"
                             android:text="0"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#000000"
+                            android:textColor="@color/accent_2"
                             android:textDirection="rtl" />
                     </LinearLayout>
                 </LinearLayout>
@@ -331,7 +342,7 @@
                     android:layout_marginBottom="125dp"
                     android:text="0"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#000000"
+                    android:textColor="@color/accent_2"
                     app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
                     app:layout_constraintEnd_toStartOf="@+id/progressBar"
                     app:layout_constraintHorizontal_bias="0.477"
@@ -349,6 +360,9 @@
                 android:layout_height="wrap_content"
                 android:text="Driving"
                 android:padding="8dp"
+                android:textColor="@color/accent_2"
+                android:background="@color/accent_1"
+                android:layout_marginBottom="10dp"
                 app:fontFamily="@font/denk_one"
                 android:layout_marginTop="70dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -369,7 +383,7 @@
                     android:layout_marginEnd="16dp"
                     android:text="Total Driving Trips:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#000000"
+                    android:textColor="@color/accent_2"
                     app:fontFamily="@font/denk_one"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
@@ -383,7 +397,7 @@
                     android:layout_marginTop="24dp"
                     android:text="0"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#000000"
+                    android:textColor="@color/accent_2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.511"
                     app:layout_constraintStart_toEndOf="@+id/speedView"
@@ -430,7 +444,8 @@
                             android:layout_height="wrap_content"
                             android:text="Average Speed:"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#313131" />
+                            android:textColor="@color/accent_2"
+                            />
 
                         <TextView
                             android:id="@+id/txtAvgSpeedDriving"
@@ -438,7 +453,7 @@
                             android:layout_height="wrap_content"
                             android:text="0"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#000000"
+                            android:textColor="@color/accent_2"
                             android:textDirection="rtl" />
                     </LinearLayout>
                     <LinearLayout
@@ -452,7 +467,8 @@
                             android:layout_height="wrap_content"
                             android:text="Total Distance:"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#313131" />
+                            android:textColor="@color/accent_2"
+                            />
 
                         <TextView
                             android:id="@+id/txtTotalDistanceDriving"
@@ -460,7 +476,7 @@
                             android:layout_height="wrap_content"
                             android:text="0"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#000000"
+                            android:textColor="@color/accent_2"
                             android:textDirection="rtl" />
                     </LinearLayout>
                     <LinearLayout
@@ -474,7 +490,8 @@
                             android:layout_height="wrap_content"
                             android:text="Total Distance Goal:"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#313131" />
+                            android:textColor="@color/accent_2"
+                            />
 
                         <TextView
                             android:id="@+id/txtDistGoalDriving"
@@ -482,7 +499,7 @@
                             android:layout_height="wrap_content"
                             android:text="0"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#000000"
+                            android:textColor="@color/accent_2"
                             android:textDirection="rtl" />
                     </LinearLayout>
                     <LinearLayout
@@ -496,7 +513,8 @@
                             android:layout_height="wrap_content"
                             android:text="Average Distance Per Trip:"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#313131" />
+                            android:textColor="@color/accent_2"
+                            />
 
                         <TextView
                             android:id="@+id/txtAverageDistDriving"
@@ -504,7 +522,7 @@
                             android:layout_height="wrap_content"
                             android:text="0"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#000000"
+                            android:textColor="@color/accent_2"
                             android:textDirection="rtl" />
 
                     </LinearLayout>
@@ -526,8 +544,11 @@
                 android:layout_height="wrap_content"
                 android:text="Cycling"
                 android:padding="8dp"
+                android:background="@color/accent_1"
+                android:textColor="@color/accent_2"
                 app:fontFamily="@font/denk_one"
                 android:layout_marginTop="70dp"
+                android:layout_marginBottom="10dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 />
 
@@ -546,7 +567,7 @@
                     android:layout_marginEnd="16dp"
                     android:text="Total Cycling Trips:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#000000"
+                    android:textColor="@color/accent_2"
                     app:fontFamily="@font/denk_one"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
@@ -560,7 +581,7 @@
                     android:layout_marginTop="24dp"
                     android:text="0"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="#000000"
+                    android:textColor="@color/accent_2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.511"
                     app:layout_constraintStart_toEndOf="@+id/speedViewcycling"
@@ -607,7 +628,8 @@
                             android:layout_height="wrap_content"
                             android:text="Average Speed:"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#313131" />
+                            android:textColor="@color/accent_2"
+                            />
 
                         <TextView
                             android:id="@+id/txtAvgSpeedCycling"
@@ -615,7 +637,7 @@
                             android:layout_height="wrap_content"
                             android:text="0"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#000000"
+                            android:textColor="@color/accent_2"
                             android:textDirection="rtl" />
                     </LinearLayout>
                     <LinearLayout
@@ -629,7 +651,8 @@
                             android:layout_height="wrap_content"
                             android:text="Total Distance:"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#313131" />
+                            android:textColor="@color/accent_2"
+                            />
 
                         <TextView
                             android:id="@+id/txtTotalDistanceCycling"
@@ -637,7 +660,7 @@
                             android:layout_height="wrap_content"
                             android:text="0"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#000000"
+                            android:textColor="@color/accent_2"
                             android:textDirection="rtl" />
                     </LinearLayout>
                     <LinearLayout
@@ -651,7 +674,8 @@
                             android:layout_height="wrap_content"
                             android:text="Total Distance Goal:"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#313131" />
+                            android:textColor="@color/accent_2"
+                            />
 
                         <TextView
                             android:id="@+id/txtDistGoalCycling"
@@ -659,7 +683,7 @@
                             android:layout_height="wrap_content"
                             android:text="0"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#000000"
+                            android:textColor="@color/accent_2"
                             android:textDirection="rtl" />
                     </LinearLayout>
                     <LinearLayout
@@ -673,7 +697,8 @@
                             android:layout_height="wrap_content"
                             android:text="Average Distance Per Trip:"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#313131" />
+                            android:textColor="@color/accent_2"
+                            />
 
                         <TextView
                             android:id="@+id/txtAverageDistCycling"
@@ -681,7 +706,7 @@
                             android:layout_height="wrap_content"
                             android:text="0"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#000000"
+                            android:textColor="@color/accent_2"
                             android:textDirection="rtl" />
 
                     </LinearLayout>
@@ -697,7 +722,8 @@
                             android:layout_height="wrap_content"
                             android:text="Total Calories Burned:"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#313131" />
+                            android:textColor="@color/accent_2"
+                            />
 
                         <TextView
                             android:id="@+id/txtTotalCyclingCalories"
@@ -705,7 +731,7 @@
                             android:layout_height="wrap_content"
                             android:text="0"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#000000"
+                            android:textColor="@color/accent_2"
                             android:textDirection="rtl" />
                     </LinearLayout>
                     <LinearLayout
@@ -719,7 +745,8 @@
                             android:layout_height="wrap_content"
                             android:text="Average Calories Burned Per Trip:"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#313131" />
+                            android:textColor="@color/accent_2"
+                            />
 
                         <TextView
                             android:id="@+id/txtAvgCyclingCalories"
@@ -727,7 +754,7 @@
                             android:layout_height="wrap_content"
                             android:text="0"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="#000000"
+                            android:textColor="@color/accent_2"
                             android:textDirection="rtl" />
                     </LinearLayout>
 

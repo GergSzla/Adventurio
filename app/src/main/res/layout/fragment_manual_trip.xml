@@ -31,6 +31,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/accent_2"
+
                 android:text="Trip Type" />
 
 
@@ -45,6 +47,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/accent_2"
+
                 android:text="Trip Date" />
 
             <DatePicker
@@ -66,6 +70,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:textColor="@color/accent_2"
+
                     android:text="Edit Name" />
 
                 <EditText
@@ -81,6 +87,8 @@
                 <TextView
                     android:id="@+id/txtWalkingTripDistance"
                     android:layout_width="match_parent"
+                    android:textColor="@color/accent_2"
+
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="Edit Distance" />
@@ -98,6 +106,8 @@
                 <TextView
                     android:id="@+id/txtWalkingTripSteps"
                     android:layout_width="match_parent"
+                    android:textColor="@color/accent_2"
+
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="Edit Steps" />
@@ -116,6 +126,8 @@
                     android:id="@+id/txtWalkingTripCalories"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/accent_2"
+
                     android:layout_marginTop="10dp"
                     android:text="Edit Calories Burned" />
 
@@ -141,6 +153,8 @@
                     android:id="@+id/txtDrivingTripName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/accent_2"
+
                     android:layout_marginTop="10dp"
                     android:text="Edit Name" />
 
@@ -158,6 +172,8 @@
                     android:id="@+id/txtDrivingTripDistance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/accent_2"
+
                     android:layout_marginTop="10dp"
                     android:text="Edit Distance" />
 
@@ -174,6 +190,8 @@
                 <TextView
                     android:id="@+id/txtDrivingTripSpeed"
                     android:layout_width="match_parent"
+                    android:textColor="@color/accent_2"
+
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="Edit Average Speed" />
@@ -190,6 +208,8 @@
 
                 <TextView
                     android:id="@+id/txtDrivingTripVehicles"
+                    android:textColor="@color/accent_2"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -210,6 +230,8 @@
 
                 <TextView
                     android:id="@+id/txtCyclingTripName"
+                    android:textColor="@color/accent_2"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -229,6 +251,8 @@
                     android:id="@+id/txtCyclingTripDistance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/accent_2"
+
                     android:layout_marginTop="10dp"
                     android:text="Edit Distance" />
 
@@ -246,6 +270,8 @@
                     android:id="@+id/txtCyclingTripSpeed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/accent_2"
+
                     android:layout_marginTop="10dp"
                     android:text="Edit Average Speed" />
 
@@ -262,6 +288,8 @@
                 <TextView
                     android:id="@+id/txtCyclingTripCalories"
                     android:layout_marginTop="10dp"
+                    android:textColor="@color/accent_2"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Edit Calories Burned" />
@@ -288,6 +316,8 @@
                 <TextView
                     android:id="@+id/textView30"
                     android:layout_width="wrap_content"
+                    android:textColor="@color/accent_2"
+
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Time Initiated" />
@@ -295,6 +325,8 @@
                 <TextView
                     android:id="@+id/textView31"
                     android:layout_width="wrap_content"
+                    android:textColor="@color/accent_2"
+
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Time Finished"
@@ -311,6 +343,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text=":"
+                    android:textColor="@color/accent_2"
+
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/amountPickerHours1"
@@ -351,6 +385,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_weight="1"
+                    android:textColor="@color/accent_2"
+
                     android:text="-"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -376,6 +412,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
+                    android:textColor="@color/accent_2"
+
                     android:layout_weight="1"
                     android:text=":"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
