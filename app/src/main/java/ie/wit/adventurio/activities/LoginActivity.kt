@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
         info("Login Activity started..")
 
 
-        autoSignIn()
+        //autoSignIn()
 
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -125,14 +125,14 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
 
 
 
-    fun autoSignIn(){
+    /*fun autoSignIn(){
         app.auth = FirebaseAuth.getInstance()
 
         var user = app.auth.currentUser?.uid
         if (user != null){
             startActivity<Home>()
         }
-    }
+    }*/
 
     companion object {
         private const val TAG = "EmailPassword"

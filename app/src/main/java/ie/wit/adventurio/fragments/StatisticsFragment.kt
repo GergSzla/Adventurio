@@ -136,6 +136,17 @@ class StatisticsFragment : Fragment(), AnkoLogger {
         DrivingTrips.removeIf { n -> n.tripType != "Driving"}
         CyclingTrips.removeIf { n -> n.tripType != "Cycling"}
 
+        root.speedViewcycling.setMinMaxSpeed(0F, 70F)
+        root.speedViewcycling.sections[0].color = Color.parseColor("#6a6a6a")
+        root.speedViewcycling.sections[1].color = Color.parseColor("#3d3232")
+        root.speedViewcycling.sections[2].color = Color.parseColor("#321919")
+        root.speedViewcycling.withTremble = false
+
+        root.speedView.setMinMaxSpeed(0F, 140F)
+        root.speedView.sections[0].color = Color.parseColor("#6a6a6a")
+        root.speedView.sections[1].color = Color.parseColor("#3d3232")
+        root.speedView.sections[2].color = Color.parseColor("#321919")
+        root.speedView.withTremble = false
 
         //Update Walking Stats
         if(WalkingTrips.size > 0){
@@ -174,11 +185,7 @@ class StatisticsFragment : Fragment(), AnkoLogger {
                 avgSpeed += trip.averageSpeed.toDouble()
             }
 
-            root.speedView.setMinMaxSpeed(0F, 140F)
-            root.speedView.sections[0].color = Color.parseColor("#6a6a6a")
-            root.speedView.sections[1].color = Color.parseColor("#3d3232")
-            root.speedView.sections[2].color = Color.parseColor("#321919")
-            root.speedView.withTremble = false
+
 
             root.speedView.speedTo("%.1f".format(avgSpeed/DrivingTrips.size).toFloat())
             root.txtAvgSpeedDriving.text = "%.1f".format(avgSpeed/DrivingTrips.size).toString()
@@ -198,11 +205,7 @@ class StatisticsFragment : Fragment(), AnkoLogger {
                 totalCaloriesCycling += trip.caloriesBurned
             }
 
-            root.speedViewcycling.setMinMaxSpeed(0F, 70F)
-            root.speedViewcycling.sections[0].color = Color.parseColor("#6a6a6a")
-            root.speedViewcycling.sections[1].color = Color.parseColor("#3d3232")
-            root.speedViewcycling.sections[2].color = Color.parseColor("#321919")
-            root.speedViewcycling.withTremble = false
+
 
             root.speedViewcycling.speedTo("%.1f".format(avgSpeedCycling/CyclingTrips.size).toFloat())
             root.txtAvgSpeedCycling.text = "%.1f".format(avgSpeedCycling/CyclingTrips.size).toString()

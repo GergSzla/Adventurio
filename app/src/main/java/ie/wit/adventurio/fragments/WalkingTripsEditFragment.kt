@@ -90,16 +90,16 @@ class WalkingTripsEditFragment : Fragment() {
         var num = trip.tripDistance
         root.editDistance.setText("%.2f".format(num))
         root.editSteps.setText(trip.tripSteps.toString())
-        root.amountPickerHours1.value = trip.tripStartTime.substring(0,2).toInt()
-        root.amountPickerMinutes1.value = trip.tripStartTime.substring(3,5).toInt()
+        root.amountPickerHours1.value = trip.tripStartTime.substringBefore(":").toInt()
+        root.amountPickerMinutes1.value = trip.tripStartTime.substringAfter(":").toInt()
         root.editCaloriesBurned.setText(trip.caloriesBurned.toString())
 
         if(trip.tripName != ""){
             root.editTripName.setText(trip.tripName.toString())
         }
 
-        root.amountPickerHours2.value = trip.tripEndTime.substring(0,2).toInt()
-        root.amountPickerMinutes2.value = trip.tripEndTime.substring(3,5).toInt()
+        root.amountPickerHours2.value = trip.tripEndTime.substringBefore(":").toInt()
+        root.amountPickerMinutes2.value = trip.tripEndTime.substringAfter(":").toInt()
         root.cbWalkingAddToFavs.isChecked = trip.favourite
         //del button
 

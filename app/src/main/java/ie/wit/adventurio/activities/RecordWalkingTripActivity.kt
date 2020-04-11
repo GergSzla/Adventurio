@@ -333,6 +333,8 @@ class RecordWalkingTripActivity : AppCompatActivity(), SensorEventListener {
             }
 
             handler?.postDelayed(this, 0)
+            locationListener
+            onResume()
         }
 
     }

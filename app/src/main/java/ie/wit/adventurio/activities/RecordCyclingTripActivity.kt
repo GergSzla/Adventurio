@@ -329,6 +329,12 @@ class RecordCyclingTripActivity : AppCompatActivity(), SensorEventListener {
             }
 
             handler?.postDelayed(this, 0)
+            try {
+                // Request location updates
+                locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0L, 0f, locationListener)
+            } catch(ex: SecurityException) {
+                Log.d("myTag", "Security Exception, no location available")
+            }
         }
 
     }
@@ -366,7 +372,13 @@ class RecordCyclingTripActivity : AppCompatActivity(), SensorEventListener {
         var num = 0.029 * (user.weight / 0.45359237) * total_minutes
         var speedsAvg =speeds.average()
         var minToHr = total_minutes / 60
-        trip.tripDistance = speedsAvg * minToHr
+        var dist = speedsAvg * minToHr
+
+        if(dist.isNaN() || dist == null){
+            trip.tripDistance = 0.0
+        } else {
+            trip.tripDistance = speedsAvg * minToHr
+        }
         trip.caloriesBurned = (calorieCyclingValue.text.toString()).toDouble()
         trip.tripStartTime = start
         trip.DayOfWeek = dow

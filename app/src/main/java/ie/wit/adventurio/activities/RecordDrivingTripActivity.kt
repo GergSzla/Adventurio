@@ -1,7 +1,12 @@
 package ie.wit.adventurio.activities
 
 import android.Manifest
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.hardware.Sensor
@@ -11,17 +16,16 @@ import android.hardware.SensorManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.SystemClock
 import android.util.Log
-import android.widget.ArrayAdapter
-import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.github.anastr.speedviewlib.SpeedView
@@ -53,7 +57,6 @@ class RecordDrivingTripActivity : AppCompatActivity(), SensorEventListener {
     private var locationManager : LocationManager? = null
     lateinit var loader : AlertDialog
     lateinit var eventListener : ValueEventListener
-
     lateinit var app: MainApp
 
     var user = Account()
@@ -161,14 +164,14 @@ class RecordDrivingTripActivity : AppCompatActivity(), SensorEventListener {
             onPause()
         }
 
+
+
+
         start_driving_button.setOnClickListener {
             if(spinnerCarPick.selectedItem != null){
-                try {
-                    // Request location updates
-                    locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0L, 0f, locationListener)
-                } catch(ex: SecurityException) {
-                    Log.d("myTag", "Security Exception, no location available")
-                }
+
+
+
                 currentSteps = 0
                 start_driving_button.isVisible = false
                 stop_driving_button.isVisible = true
@@ -195,6 +198,8 @@ class RecordDrivingTripActivity : AppCompatActivity(), SensorEventListener {
 
 
     }
+
+
 
     fun checkWarningPermission(){
         var permissionEnabled =
@@ -269,6 +274,7 @@ class RecordDrivingTripActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onResume() {
         super.onResume()
+
         running = true
         var stepsSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
 
@@ -345,6 +351,12 @@ class RecordDrivingTripActivity : AppCompatActivity(), SensorEventListener {
             }
 
             handler?.postDelayed(this, 0)
+            try {
+                // Request location updates
+                locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0L, 0f, locationListener)
+            } catch(ex: SecurityException) {
+                Log.d("myTag", "Security Exception, no location available")
+            }
         }
 
     }
@@ -385,9 +397,17 @@ class RecordDrivingTripActivity : AppCompatActivity(), SensorEventListener {
         }
         var num = 0.029 * (user.weight / 0.45359237) * total_minutes
         trip.vehicleUsed = spinnerCarPick.selectedItem.toString()
-        var speedsAvg =speeds.average()
+        var speedsAvg = speeds.average()
         var minToHr = total_minutes / 60
-        trip.tripDistance = speedsAvg * minToHr
+
+        var dist = speedsAvg * minToHr
+
+        if(dist.isNaN() || dist == null){
+            trip.tripDistance = 0.0
+        } else {
+            trip.tripDistance = speedsAvg * minToHr
+        }
+
         trip.tripStartTime = start
         trip.DayOfWeek = dow
         trip.Date = date

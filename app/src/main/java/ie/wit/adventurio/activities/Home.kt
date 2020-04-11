@@ -91,6 +91,7 @@ class Home : AppCompatActivity(),
 
                 var statsFragment = StatisticsFragment.newInstance(user)
 
+                navigateTo(StatisticsFragment.newInstance(user))
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
