@@ -1,46 +1,34 @@
 package ie.wit.adventurio.fragments
 
 import android.app.Activity
-import android.content.ContentValues.TAG
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.text.method.HideReturnsTransformationMethod
-import android.text.method.PasswordTransformationMethod
-import android.util.Log
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.google.firebase.auth.EmailAuthProvider
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Picasso
 import ie.wit.adventurio.R
-import ie.wit.adventurio.activities.Home
-import ie.wit.adventurio.helpers.createLoader
-import ie.wit.adventurio.helpers.hideLoader
-import ie.wit.adventurio.helpers.readImageFromPath
-import ie.wit.adventurio.helpers.showLoader
+import ie.wit.adventurio.helpers.*
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
-import ie.wit.adventurio.models.Trip
 import ie.wit.adventurio.models.Vehicle
 import ie.wit.fragments.CarsListFragment
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
+import kotlinx.android.synthetic.main.card_vehicle.view.*
 import kotlinx.android.synthetic.main.fragment_add_vehicle.view.*
 import kotlinx.android.synthetic.main.fragment_add_vehicle.view.vehicleImage
 import kotlinx.android.synthetic.main.fragment_car_edit.view.*
-import kotlinx.android.synthetic.main.fragment_profile_edit.*
-import kotlinx.android.synthetic.main.fragment_profile_edit.view.*
-import kotlinx.android.synthetic.main.fragment_profile_edit.view.addImage
 import java.io.IOException
 
 
@@ -93,27 +81,49 @@ class CarEditFragment : Fragment() {
         root.editVehTankCapac.setText(vehicle.tankCapacity.toString())
         root.editVehOdo.setText(vehicle.currentOdometer.toString())
 
-        root.vehicleImage.setImageBitmap(readImageFromPath(this.requireContext(), vehicle!!.vehicleImage))
-        if (vehicle!!.vehicleImage != "") {
-            root.addImage.setText(R.string.btnChangeImage)
-        }else{
-            root.addImage.setText(R.string.btnAddImg)
+        root.vehicleImage.setImageBitmap(readImageFromPath(activity!!, vehicle!!.vehicleImage))
+
+        if (vehicle.vehicleImage == ""){
+            root.vehicleImage.setImageBitmap(readImageFromPath(activity!!, vehicle!!.vehicleImage))
+        } else {
+            Picasso.get().load(vehicle.vehicleImage)
+                .fit()
+                .centerInside()
+                .transform(RoundedCornersTransformation(50,0))
+                .into(root.vehicleImage)
         }
 
         root.editVehicleFab.setOnClickListener {
-            vehicle.vehicleName = root.editVehName.text.toString()
-            vehicle.vehicleBrand = root.editVehBrand.text.toString()
-            vehicle.vehicleModel = root.editVehModel.text.toString()
-            vehicle.vehicleReg = root.editVehReg.text.toString()
-            vehicle.fuelType = root.spinnerVehFuel.selectedItem.toString()
-            vehicle.vehicleYear = root.editVehYear.text.toString()
-            vehicle.tankCapacity = root.editVehTankCapac.text.toString().toDouble()
-            vehicle.currentOdometer = root.editVehOdo.text.toString().toInt()
-            updateVehicle(app.auth.currentUser!!.uid)
+            validateForm()
+            if(!(root.editVehOdo.text.toString() == "" ||
+                        root.editVehName.text.toString() == "" ||
+                        root.editVehBrand.text.toString() == "" ||
+                        root.editVehModel.text.toString() == "" ||
+                        root.editVehReg.text.toString() == "" ||
+                        root.editVehYear.text.toString() == ""||
+                        root.editVehTankCapac.text.toString() == "")) {
+
+                vehicle.vehicleName = root.editVehName.text.toString()
+                vehicle.vehicleBrand = root.editVehBrand.text.toString()
+                vehicle.vehicleModel = root.editVehModel.text.toString()
+                vehicle.vehicleReg = root.editVehReg.text.toString()
+                vehicle.fuelType = root.spinnerVehFuel.selectedItem.toString()
+                vehicle.vehicleYear = root.editVehYear.text.toString()
+                vehicle.tankCapacity = root.editVehTankCapac.text.toString().toDouble()
+                vehicle.currentOdometer = root.editVehOdo.text.toString().toInt()
+                updateVehicle(app.auth.currentUser!!.uid)
+            }
+
+        }
+
+        root.addCarImage.setOnClickListener {
+            showImagePicker(this, IMAGE_REQUEST)
         }
 
         return root
     }
+
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -122,12 +132,11 @@ class CarEditFragment : Fragment() {
             try {
                 val bitmap =
                     MediaStore.Images.Media.getBitmap(activity!!.contentResolver, uri)
-                // Log.d(TAG, String.valueOf(bitmap));
                 val imageView: ImageView =
-                    activity!!.findViewById<View>(R.id.profImage) as ImageView
+                    activity!!.findViewById<View>(R.id.vehicleImage) as ImageView
                 imageView.setImageBitmap(bitmap)
-                userProfileEdit!!.image = data.data.toString()
-                addImage.setText(R.string.btnChangeImage)
+                vehicle!!.vehicleImage = data.data.toString()
+                root.addCarImage.setText(R.string.btnChangeImage)
 
             } catch (e: IOException) {
                 e.printStackTrace()
@@ -135,6 +144,73 @@ class CarEditFragment : Fragment() {
         }
     }
 
+    private fun validateForm(): Boolean {
+        var valid = true
+
+        //validate Name
+        val carname = root.editVehName.text.toString()
+        if (TextUtils.isEmpty(carname)) {
+            root.editVehName.error = "Required."
+            valid = false
+        } else {
+            root.editVehName.error = null
+        }
+
+        //validate Brand
+        val brand = root.editVehBrand.text.toString()
+        if (TextUtils.isEmpty(brand)) {
+            root.editVehBrand.error = "Required (To Calculate Calories Burned!)."
+            valid = false
+        } else {
+            root.editVehBrand.error = null
+        }
+
+        //validate model
+        val model = root.editVehModel.text.toString()
+        if (TextUtils.isEmpty(model)) {
+            root.editVehModel.error = "Required."
+            valid = false
+        } else {
+            root.editVehModel.error = null
+        }
+
+        //validate reg
+        val reg = root.editVehReg.text.toString()
+        if (TextUtils.isEmpty(reg)) {
+            root.editVehReg.error = "Required."
+            valid = false
+        } else {
+            root.editVehReg.error = null
+        }
+
+        //validate year
+        val year = root.editVehYear.text.toString()
+        if (TextUtils.isEmpty(year)) {
+            root.editVehYear.error = "Required."
+            valid = false
+        } else {
+            root.editVehYear.error = null
+        }
+
+        //validated tank
+        val tank = root.editVehTankCapac.text.toString()
+        if (TextUtils.isEmpty(tank)) {
+            root.editVehTankCapac.error = "Required."
+            valid = false
+        } else {
+            root.editVehTankCapac.error = null
+        }
+
+        //validated odo
+        val odo = root.editVehOdo.text.toString()
+        if (TextUtils.isEmpty(odo)) {
+            root.editVehOdo.error = "Required."
+            valid = false
+        } else {
+            root.editVehOdo.error = null
+        }
+        return valid
+    }
 
 
     fun updateVehicle(uid: String?) {

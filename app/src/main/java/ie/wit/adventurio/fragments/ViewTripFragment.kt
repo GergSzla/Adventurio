@@ -188,6 +188,7 @@ class ViewTripFragment : Fragment(),GoogleMap.OnMarkerClickListener  {
         root.mapView2.onSaveInstanceState(outState)
     }
 
+
     companion object {
 
         @JvmStatic

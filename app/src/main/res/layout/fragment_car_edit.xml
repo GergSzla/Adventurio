@@ -41,7 +41,7 @@
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <Button
-                    android:id="@+id/addImage"
+                    android:id="@+id/addCarImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="52dp"
@@ -161,7 +161,7 @@
             <Spinner
                 android:id="@+id/spinnerVehFuel"
                 android:layout_width="match_parent"
-                android:layout_height="26dp"
+                android:layout_height="35dp"
                 android:background="@drawable/edit_text_bg"
                 android:layout_marginBottom="10dp"/>
 

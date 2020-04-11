@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -36,6 +37,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
 
         btnGetPassword.setOnClickListener{
+            validateForm()
             if (txtEmailPWRem.text.toString() != "") {
                 resetPassword(txtEmailPWRem.text.toString())
             } else {
@@ -50,6 +52,19 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
 
 
+    }
+
+    private fun validateForm(): Boolean {
+        var valid = true
+
+        val email = txtEmail.text.toString()
+        if (TextUtils.isEmpty(email)) {
+            txtEmail.error = "Required."
+            valid = false
+        } else {
+            txtEmail.error = null
+        }
+        return valid
     }
 
     private fun resetPassword(email : String){

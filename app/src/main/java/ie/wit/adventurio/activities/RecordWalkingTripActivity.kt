@@ -124,25 +124,7 @@ class RecordWalkingTripActivity : AppCompatActivity(), SensorEventListener {
 
 
         stop_button.setOnClickListener {
-            var currentEndDateTime= LocalDateTime.now()
-            end = currentEndDateTime.format(DateTimeFormatter.ofPattern("HH:mm"))
-
-            generateDateID()
-            saveTrip()
-
-            currentSteps = 0
-            start_button.isVisible = true
-            stop_button.isVisible = false
-            linear1.isVisible = true
-            linear2.isVisible = false
-
-
-
-            handler?.removeCallbacks(runnable)
-            flag=false
-            txtHint.isVisible = true
-
-            onPause()
+            stopTrip()
         }
 
         start_button.setOnClickListener {
@@ -190,6 +172,28 @@ class RecordWalkingTripActivity : AppCompatActivity(), SensorEventListener {
             txtWarning.text = ""
         }
     }
+
+
+    private fun stopTrip(){
+        var currentEndDateTime= LocalDateTime.now()
+        end = currentEndDateTime.format(DateTimeFormatter.ofPattern("HH:mm"))
+
+        generateDateID()
+        saveTrip()
+
+        currentSteps = 0
+        start_button.isVisible = true
+        stop_button.isVisible = false
+        linear1.isVisible = true
+        linear2.isVisible = false
+
+        handler?.removeCallbacks(runnable)
+        flag=false
+        txtHint.isVisible = true
+
+        onPause()
+    }
+
 
     var current_total_minutes = 0.0
     private val locationListener: LocationListener = object : LocationListener {
@@ -333,7 +337,12 @@ class RecordWalkingTripActivity : AppCompatActivity(), SensorEventListener {
             }
 
             handler?.postDelayed(this, 0)
-            locationListener
+            try {
+                // Request location updates
+                locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0L, 0f, locationListener)
+            } catch(ex: SecurityException) {
+                Log.d("myTag", "Security Exception, no location available")
+            }
             onResume()
         }
 
@@ -417,22 +426,15 @@ class RecordWalkingTripActivity : AppCompatActivity(), SensorEventListener {
     }
 
     private fun createTrip() {
-        /*if (!validateForm()) {
-            return
-        }*/
-
         showLoader(loader, "Creating Account...")
-
-        //val user = app.auth.currentUser
         app.database = FirebaseDatabase.getInstance().reference
         writeNewTrip(trip)
-        //startActivity<LoginActivity>()
-
-        // [START_EXCLUDE]
         hideLoader(loader)
-        // [END_EXCLUDE]
+    }
 
-        // [END create_user_with_email]
+    override fun onBackPressed() {
+        super.onBackPressed()
+        stopTrip()
     }
 
 }

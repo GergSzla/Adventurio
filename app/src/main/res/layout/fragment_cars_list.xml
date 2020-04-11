@@ -57,7 +57,7 @@
             app:fab_size="mini"
             app:fab_colorNormal="@color/floatBtn"
             app:fab_icon="@drawable/ic_list_cars"
-            app:fab_title="Add Trip Manually"/>
+            app:fab_title="Add Vehicle Manually"/>
 
 
 

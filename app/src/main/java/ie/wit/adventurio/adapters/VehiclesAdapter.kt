@@ -4,9 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import ie.wit.adventurio.R
 import ie.wit.adventurio.models.Trip
 import ie.wit.adventurio.models.Vehicle
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
 import kotlinx.android.synthetic.main.card_trip.view.*
 import kotlinx.android.synthetic.main.card_vehicle.view.*
 
@@ -50,7 +52,11 @@ class VehiclesAdapter constructor(var vehicles: ArrayList<Vehicle>,
             if (vehicle.vehicleImage == ""){
                 itemView.imgVehicle.setImageResource(R.drawable.ic_directions_car_black_24dp)
             } else {
-                itemView.imgVehicle.setImageResource(vehicle.vehicleImage.toInt()) //TODO: fix images, change this
+                Picasso.get().load(vehicle.vehicleImage)
+                    .fit()
+                    .centerInside()
+                    .transform(RoundedCornersTransformation(50,0))
+                    .into(itemView.imgVehicle)
             }
         }
     }

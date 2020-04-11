@@ -2,6 +2,7 @@ package ie.wit.adventurio.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.widget.Toast
@@ -40,6 +41,8 @@ class RegisterActivity : AppCompatActivity() {
         btnRegisterAccount.setOnClickListener{
             //val AccountList = app.users.getAllAccounts() as ArrayList<Account>
 
+            validateForm()
+
             if(!(txtUsernameReg.text.toString() == "" ||
                     txtEmailReg.text.toString() == "" ||
                     txtFirstNameReg.text.toString() == "" ||
@@ -67,6 +70,75 @@ class RegisterActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    private fun validateForm(): Boolean {
+        var valid = true
+
+        //validate Username
+        val un = txtUsernameReg.text.toString()
+        if (TextUtils.isEmpty(un)) {
+            txtUsernameReg.error = "Required."
+            valid = false
+        } else {
+            txtUsernameReg.error = null
+        }
+
+        //validate Weight
+        val weight = txtWeight.text.toString()
+        if (TextUtils.isEmpty(weight)) {
+            txtWeight.error = "Required (To Calculate Calories Burned!)."
+            valid = false
+        } else {
+            txtWeight.error = null
+        }
+
+        //validate Fname
+        val fname = txtFirstNameReg.text.toString()
+        if (TextUtils.isEmpty(fname)) {
+            txtFirstNameReg.error = "Required."
+            valid = false
+        } else {
+            txtFirstNameReg.error = null
+        }
+
+        //validate Sname
+        val sname = txtSurnameReg.text.toString()
+        if (TextUtils.isEmpty(sname)) {
+            txtSurnameReg.error = "Required."
+            valid = false
+        } else {
+            txtSurnameReg.error = null
+        }
+
+        //validate Email
+        val email = txtEmailReg.text.toString()
+        if (TextUtils.isEmpty(email)) {
+            txtEmailReg.error = "Required."
+            valid = false
+        } else {
+            txtEmailReg.error = null
+        }
+
+        //validated pw
+        val password = txtPasswordReg.text.toString()
+        if (TextUtils.isEmpty(password)) {
+            txtPasswordReg.error = "Required."
+            valid = false
+        } else {
+            txtPasswordReg.error = null
+        }
+
+        //validated confpw
+        val confpassword = txtConfPasswordReg.text.toString()
+        if (TextUtils.isEmpty(confpassword)) {
+            txtConfPasswordReg.error = "Required."
+            valid = false
+        } else {
+            txtConfPasswordReg.error = null
+        }
+
+        return valid
     }
 
     fun writeNewUserStats(user: Account) {

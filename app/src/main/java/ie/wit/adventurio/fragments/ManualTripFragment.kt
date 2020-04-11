@@ -1,6 +1,7 @@
 package ie.wit.adventurio.fragments
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -234,27 +235,41 @@ class ManualTripFragment : Fragment() {
                         )
                     toast.show()
                 } else {
-                    addingData()
-                    if(trip.tripType == "Driving"){
-                        carPos = vehicles.indexOf(trip.vehicleUsed).toString()
-                        vehiclesList.forEach {
-                            if(it.pos == carPos){
-                                vehicleUsed = it
-                            }
+                    if(trip.tripType == "Walking"){
+                        validateWalkingForm()
+                        if(!(root.editWalkingTripName.text.toString() == "" ||
+                                    root.editWalkingDistance.text.toString() == "" ||
+                                    root.editWalkingTripSteps.text.toString() == "" ||
+                                    root.editWalkingTripCalories.text.toString() == "" )){
+                            addingData()
+                            createTrip()
                         }
-                        var num = trip.tripDistance
-                        vehicleUsed.currentOdometer +=  ("%.0f".format(num)).toInt()
-                        updateVehicle(app.auth.currentUser!!.uid,carPos)
+                    } else if(trip.tripType == "Driving"){
+                        validateDrivingForm()
+                        if(!(root.editDrivingTripName.text.toString() == "" ||
+                                    root.editDrivingDistance.text.toString() == "" ||
+                                    root.editDrivingTripSpeed.text.toString() == "")){
+                            addingData()
+                            createTrip()
+                        }
+                    } else if(trip.tripType == "Cycling"){
+                        validateCyclingForm()
+                        if(!(root.editCyclingTripName.text.toString() == "" ||
+                                    root.editCyclingDistance.text.toString() == "" ||
+                                    root.editCyclingTripSpeed.text.toString() == "" ||
+                                    root.editCyclingTripCalories.text.toString() == "" )){
+                            addingData()
+                            createTrip()
+                        }
                     }
-                    createTrip()
                 }
-
             }
         }
 
 
         return root
     }
+
 
 
     fun addingData(){
@@ -284,7 +299,16 @@ class ManualTripFragment : Fragment() {
                 trip.tripID = UUID.randomUUID().toString()
                 trip.DayOfWeek = dow
                 trip.Date = date
+                carPos = vehicles.indexOf(trip.vehicleUsed).toString()
 
+                vehiclesList.forEach {
+                    if(it.pos == carPos){
+                        vehicleUsed = it
+                    }
+                }
+                var num = trip.tripDistance
+                vehicleUsed.currentOdometer +=  ("%.0f".format(num)).toInt()
+                updateVehicle(app.auth.currentUser!!.uid,carPos)
             }
             "Cycling" -> {
                 trip.tripName = editCyclingTripName.text.toString()
@@ -337,20 +361,9 @@ class ManualTripFragment : Fragment() {
         /*if (!validateForm()) {
             return
         }*/
-
-        //showLoader(loader, "Creating Account...")
-
-        //val user = app.auth.currentUser
         app.database = FirebaseDatabase.getInstance().reference
         writeNewTrip(trip)
         navigateTo(TripsListFragment.newInstance())
-        //startActivity<LoginActivity>()
-
-        // [START_EXCLUDE]
-        //hideLoader(loader)
-        // [END_EXCLUDE]
-
-        // [END create_user_with_email]
     }
 
 
@@ -409,6 +422,123 @@ class ManualTripFragment : Fragment() {
                         //info("Firebase Donation error : ${error.message}")
                     }
                 })
+    }
+
+    private fun validateWalkingForm(): Boolean {
+        var valid = true
+
+        //validate tripName
+        val tripname = root.editWalkingTripName.text.toString()
+        if (TextUtils.isEmpty(tripname)) {
+            root.editWalkingTripName.error = "Required."
+            valid = false
+        } else {
+            root.editWalkingTripName.error = null
+        }
+
+        //validate distance
+        val distance = root.editWalkingDistance.text.toString()
+        if (TextUtils.isEmpty(distance)) {
+            root.editWalkingDistance.error = "Required (To Calculate Calories Burned!)."
+            valid = false
+        } else {
+            root.editWalkingDistance.error = null
+        }
+
+        //validate steps
+        val steps = root.editWalkingTripSteps.text.toString()
+        if (TextUtils.isEmpty(steps)) {
+            root.editWalkingTripSteps.error = "Required."
+            valid = false
+        } else {
+            root.editWalkingTripSteps.error = null
+        }
+
+        //validate cal
+        val cal = root.editWalkingTripCalories.text.toString()
+        if (TextUtils.isEmpty(cal)) {
+            root.editWalkingTripCalories.error = "Required."
+            valid = false
+        } else {
+            root.editWalkingTripCalories.error = null
+        }
+
+        return valid
+    }
+
+    private fun validateDrivingForm(): Boolean {
+        var valid = true
+
+        //validate tripName
+        val tripname = root.editDrivingTripName.text.toString()
+        if (TextUtils.isEmpty(tripname)) {
+            root.editDrivingTripName.error = "Required."
+            valid = false
+        } else {
+            root.editDrivingTripName.error = null
+        }
+
+        //validate distance
+        val distance = root.editDrivingDistance.text.toString()
+        if (TextUtils.isEmpty(distance)) {
+            root.editDrivingDistance.error = "Required (To Calculate Calories Burned!)."
+            valid = false
+        } else {
+            root.editDrivingDistance.error = null
+        }
+
+        //validate speed
+        val speed = root.editDrivingTripSpeed.text.toString()
+        if (TextUtils.isEmpty(speed)) {
+            root.editDrivingTripSpeed.error = "Required."
+            valid = false
+        } else {
+            root.editDrivingTripSpeed.error = null
+        }
+
+        return valid
+    }
+
+    private fun validateCyclingForm(): Boolean {
+        var valid = true
+
+        //validate tripName
+        val tripname = root.editCyclingTripName.text.toString()
+        if (TextUtils.isEmpty(tripname)) {
+            root.editCyclingTripName.error = "Required."
+            valid = false
+        } else {
+            root.editCyclingTripName.error = null
+        }
+
+        //validate distance
+        val distance = root.editCyclingDistance.text.toString()
+        if (TextUtils.isEmpty(distance)) {
+            root.editCyclingDistance.error = "Required (To Calculate Calories Burned!)."
+            valid = false
+        } else {
+            root.editCyclingDistance.error = null
+        }
+
+        //validate speed
+        val speed = root.editCyclingTripSpeed.text.toString()
+        if (TextUtils.isEmpty(speed)) {
+            root.editCyclingTripSpeed.error = "Required."
+            valid = false
+        } else {
+            root.editCyclingTripSpeed.error = null
+        }
+
+        //validate cal
+        val cal = root.editCyclingTripCalories.text.toString()
+        if (TextUtils.isEmpty(cal)) {
+            root.editCyclingTripCalories.error = "Required."
+            valid = false
+        } else {
+            root.editCyclingTripCalories.error = null
+        }
+
+        return valid
     }
 
     companion object {

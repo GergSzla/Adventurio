@@ -78,10 +78,20 @@ class ProfileFragment : Fragment(), AnkoLogger {
 
         root.imageView.setImageBitmap(activity?.let { readImageFromPath(it, userProfile!!.image) })
 
-        Picasso.get().load(userProfile!!.image)
-            .resize(190, 190)
-            .transform(CropCircleTransformation())
-            .into(root.linearview.imageView)
+        if(app.auth.currentUser!!.photoUrl != null){
+            Picasso.get().load(app.auth.currentUser!!.photoUrl)
+                .fit()
+                .centerCrop()
+                .transform(CropCircleTransformation())
+                .into(root.linearview.imageView)
+        } else {
+            Picasso.get().load(R.mipmap.ic_avatar)
+                .fit()
+                .centerCrop()
+                .transform(CropCircleTransformation())
+                .into(root.linearview.imageView)
+        }
+
 
         root.editProfileFab.setOnClickListener {
             navigateTo(ProfileEditFragment.newInstance(userProfile!!))

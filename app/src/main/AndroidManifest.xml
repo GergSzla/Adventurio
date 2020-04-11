@@ -15,8 +15,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.RecordCyclingTripActivity"></activity>
-        <activity android:name=".activities.RecordDrivingTripActivity" />
+        <activity
+            android:name=".activities.RecordCyclingTripActivity"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"
+            ></activity>
+        <activity
+            android:name=".activities.RecordDrivingTripActivity"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -28,29 +35,35 @@
         <activity
             android:name=".activities.RecordWalkingTripActivity"
             tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.ForgotPasswordActivity"
             tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.Home"
             tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.RegisterActivity"
             android:label="@string/title_activity_register"
             tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.LoginActivity"
             android:label="@string/title_activity_register"
             tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.SplashActivity"
             android:label="@string/app_name"
             tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

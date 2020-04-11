@@ -1,6 +1,7 @@
 package ie.wit.adventurio.fragments
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,7 @@ import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.Trip
 import ie.wit.adventurio.models.Vehicle
+import ie.wit.fragments.CarsListFragment
 import ie.wit.fragments.TripsListFragment
 import kotlinx.android.synthetic.main.fragment_add_vehicle.view.*
 import kotlinx.android.synthetic.main.fragment_manual_trip.*
@@ -84,32 +86,108 @@ class AddVehicleFragment : Fragment() {
         getUser()
 
         root.addVehicleFab.setOnClickListener {
+            validateForm()
+            if(!(root.editName.text.toString() == "" ||
+                        root.editOdo.text.toString() == "" ||
+                        root.editReg.text.toString() == "" ||
+                        root.editBrand.text.toString() == "" ||
+                        root.editModel.text.toString() == "" ||
+                        root.editYear.text.toString() == ""||
+                        root.editTankCapac.text.toString() == "")) {
 
-            vehicle.vehicleOwner = user.id
-            vehicle.currentOdometer = root.editOdo.text.toString().toInt()
-            vehicle.vehicleName = root.editName.text.toString()
-            vehicle.vehicleReg = root.editReg.text.toString().toUpperCase()
-            vehicle.vehicleBrand = root.editBrand.text.toString()
-            vehicle.vehicleModel = root.editModel.text.toString()
-            vehicle.vehicleYear = root.editYear.text.toString()
-            vehicle.tankCapacity = root.editTankCapac.text.toString().toDouble()
-            vehicle.fuelType = root.spinnerFuel.selectedItem.toString()
-            generateDateID()
-            vehicle.vehicleId = autoId
+                vehicle.vehicleOwner = user.id
+                vehicle.currentOdometer = root.editOdo.text.toString().toInt()
+                vehicle.vehicleName = root.editName.text.toString()
+                vehicle.vehicleReg = root.editReg.text.toString().toUpperCase()
+                vehicle.vehicleBrand = root.editBrand.text.toString()
+                vehicle.vehicleModel = root.editModel.text.toString()
+                vehicle.vehicleYear = root.editYear.text.toString()
+                vehicle.tankCapacity = root.editTankCapac.text.toString().toDouble()
+                vehicle.fuelType = root.spinnerFuel.selectedItem.toString()
+                generateDateID()
+                vehicle.vehicleId = autoId
 
-            user.vehicles.add(vehicle)
-            vehicle.pos = (user.vehicles.size - 1).toString()
-            user.vehicles.removeAt(user.vehicles.size - 1)
-            user.vehicles.add(vehicle)
+                user.vehicles.add(vehicle)
+                vehicle.pos = (user.vehicles.size - 1).toString()
+                user.vehicles.removeAt(user.vehicles.size - 1)
+                user.vehicles.add(vehicle)
 
-            //vehicle.vehicleImage  //TODO: FIX IMAGE
-            updateUserProfile(app.auth.currentUser!!.uid,user)
+                updateUserProfile(app.auth.currentUser!!.uid,user)
+            }
+
         }
 
         return root
     }
 
+    private fun validateForm(): Boolean {
+        var valid = true
 
+        //validate Name
+        val carname = root.editName.text.toString()
+        if (TextUtils.isEmpty(carname)) {
+            root.editName.error = "Required."
+            valid = false
+        } else {
+            root.editName.error = null
+        }
+
+        //validate Brand
+        val brand = root.editBrand.text.toString()
+        if (TextUtils.isEmpty(brand)) {
+            root.editBrand.error = "Required (To Calculate Calories Burned!)."
+            valid = false
+        } else {
+            root.editBrand.error = null
+        }
+
+        //validate model
+        val model = root.editModel.text.toString()
+        if (TextUtils.isEmpty(model)) {
+            root.editModel.error = "Required."
+            valid = false
+        } else {
+            root.editModel.error = null
+        }
+
+        //validate reg
+        val reg = root.editReg.text.toString()
+        if (TextUtils.isEmpty(reg)) {
+            root.editReg.error = "Required."
+            valid = false
+        } else {
+            root.editReg.error = null
+        }
+
+        //validate year
+        val year = root.editYear.text.toString()
+        if (TextUtils.isEmpty(year)) {
+            root.editYear.error = "Required."
+            valid = false
+        } else {
+            root.editYear.error = null
+        }
+
+        //validated tank
+        val tank = root.editTankCapac.text.toString()
+        if (TextUtils.isEmpty(tank)) {
+            root.editTankCapac.error = "Required."
+            valid = false
+        } else {
+            root.editTankCapac.error = null
+        }
+
+        //validated odo
+        val odo = root.editOdo.text.toString()
+        if (TextUtils.isEmpty(odo)) {
+            root.editOdo.error = "Required."
+            valid = false
+        } else {
+            root.editOdo.error = null
+        }
+
+        return valid
+    }
 
     fun updateUserProfile(uid: String?, user: Account) {
         app.database.child("user-stats").child(uid!!)
@@ -118,7 +196,7 @@ class AddVehicleFragment : Fragment() {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         snapshot.ref.setValue(user)
                         activity!!.supportFragmentManager.beginTransaction()
-                            .replace(R.id.homeFrame, ProfileFragment.newInstance(user!!))
+                            .replace(R.id.homeFrame, CarsListFragment.newInstance())
                             .addToBackStack(null)
                             .commit()
                         //hideLoader(loader)

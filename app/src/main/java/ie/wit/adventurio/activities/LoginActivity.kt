@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
@@ -69,7 +70,6 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
-        // [END config_signin]
 
         app.googleSignInClient = GoogleSignIn.getClient(this, gso)
 
@@ -77,17 +77,8 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
             startActivity<RegisterActivity>()
         }
         btnLoginToAccount.setOnClickListener{
-            if(!(txtEmail.text.toString() == "" &&
-                        txtPassword.text.toString() == "")){
-                /*var existingUser = AccountList.find { p -> p.Email.toLowerCase() == txtEmail.text.toString().toLowerCase() }
-                if (existingUser != null){
-                    if (existingUser.Email == txtEmail.text.toString().toLowerCase() && existingUser.Password == txtPassword.text.toString().toLowerCase()){
-                        loginToAccount(existingUser)
-                    }
-                } else {
-                    longToast("Error: The account ${txtEmail.text.toString()} does not exist!")
-                }*/
-
+            validateForm()
+            if(!(txtEmail.text.toString() == "" || txtPassword.text.toString() == "")){
                 signIn(txtEmail.text.toString(), txtPassword.text.toString())
             } else {
                 toast("Email and Password fields are required to login!")
@@ -123,7 +114,27 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
+    private fun validateForm(): Boolean {
+        var valid = true
 
+        val email = txtEmail.text.toString()
+        if (TextUtils.isEmpty(email)) {
+            txtEmail.error = "Required."
+            valid = false
+        } else {
+            txtEmail.error = null
+        }
+
+        val password = txtPassword.text.toString()
+        if (TextUtils.isEmpty(password)) {
+            txtPassword.error = "Required."
+            valid = false
+        } else {
+            txtPassword.error = null
+        }
+
+        return valid
+    }
 
     /*fun autoSignIn(){
         app.auth = FirebaseAuth.getInstance()
@@ -142,26 +153,19 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
-                // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account!!)
             } catch (e: ApiException) {
-                // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e)
-                // [START_EXCLUDE]
-                // [END_EXCLUDE]
             }
         }
     }
 
     fun writeNewUserStats(user: Account) {
         showLoader(loader, "Adding User to Firebase")
-        //val uid = app.auth.currentUser!!.uid
-        //val key = app.database.child("user-stats").push().key
 
         val uid = app.auth.currentUser!!.uid
         val userValues = user.toMap()
@@ -174,7 +178,6 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
                     if (!snapshot.hasChild(uid)){
                         val childUpdates = HashMap<String, Any>()
                         childUpdates["/user-stats/$uid"] = userValues
-                        //childUpdates["/user-trips/${user.Email}/$key"] = userValues
 
                         app.database.updateChildren(childUpdates)
                         hideLoader(loader)
@@ -188,15 +191,11 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
 
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.id!!)
-        // [START_EXCLUDE silent]
         showLoader(loader, "Logging In with Google...")
-        // [END_EXCLUDE]
-
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
         app.auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
                     val user = app.auth.currentUser!!
                     val fname = user.displayName!!.substringBefore(" ")
@@ -204,44 +203,27 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
                     writeNewUserStats(Account(id = UUID.randomUUID().toString(), Email = app.auth.currentUser!!.email.toString(), firstName = fname,
                         surname = sname,weight = 0.0, username = fname+"_"+sname, image = user.photoUrl.toString() , loginUsed = "google"))
                 } else {
-                    // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
-                    //Snackbar.make(main_layout, "Authentication Failed.", Snackbar.LENGTH_SHORT).show()
                 }
-
-                // [START_EXCLUDE]
                 hideLoader(loader)
-                // [END_EXCLUDE]
             }
     }
 
     private fun signIn(email: String, password: String) {
-        /*if (!validateForm()) {
-            return
-        }*/
         showLoader(loader, "Logging In...")
-        // [START sign_in_with_email]
         app.auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
                     val user = app.auth.currentUser
                     app.database = FirebaseDatabase.getInstance().reference
                     startActivity<Home>()
 
                 } else {
-                    // If sign in fails, display a message to the user.
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
                 }
-                // [START_EXCLUDE]
-                /*if (!task.isSuccessful) {
-                    status.setText(R.string.auth_failed)
-                }*/
                 hideLoader(loader)
-                // [END_EXCLUDE]
             }
-        // [END sign_in_with_email]
     }
 
     override fun onBackPressed() {

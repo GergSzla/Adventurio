@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.TextUtils
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
@@ -83,22 +84,25 @@ class ProfileEditFragment : Fragment() {
         root.editDistanceGoal.setText(userProfileEdit!!.distanceGoal.toString())
         root.editWeight.setText(userProfileEdit!!.weight.toString())
 
-        Picasso.get().load(userProfileEdit!!.image)
-            .resize(190, 190)
-            .transform(CropCircleTransformation())
-            .into(root.scrollView2.profImage)
+        if(app.auth.currentUser!!.photoUrl != null){
+            Picasso.get().load(app.auth.currentUser!!.photoUrl)
+                .fit()
+                .centerCrop()
+                .transform(CropCircleTransformation())
+                .into(root.scrollView2.profImage)
+        } else {
+            Picasso.get().load(R.mipmap.ic_avatar)
+                .fit()
+                .centerCrop()
+                .transform(CropCircleTransformation())
+                .into(root.scrollView2.profImage)
+        }
 
         if (userProfileEdit!!.loginUsed == "google"){
-            root.addImage.isVisible = false
             root.passConst.isVisible = false
             root.btnResetPass.isVisible = false
         }
 
-        if (userProfileEdit!!.image != "") {
-            root.addImage.setText(R.string.btnChangeImage)
-        }else{
-            root.addImage.setText(R.string.btnAddImg)
-        }
 
         root.btnLoginPass.setOnClickListener {
             if(root.btnLoginPass.text.toString().equals("Show")){
@@ -110,12 +114,10 @@ class ProfileEditFragment : Fragment() {
             }
         }
 
-        root.addImage.setOnClickListener {
-            pickImageFromGallery()
-        }
 
         root.updateProfileFab.setOnClickListener {
             if(userProfileEdit!!.loginUsed == "firebaseAuth"){
+                validateForm()
                 if(root.editPassword.text.toString() != ""){
                     reauthenticateUser(app.auth.currentUser!!.email.toString(),root.editPassword.text.toString())
                 } else {
@@ -138,6 +140,21 @@ class ProfileEditFragment : Fragment() {
 
         return root
     }
+
+    private fun validateForm(): Boolean {
+        var valid = true
+
+        val password = root.editPassword.text.toString()
+        if (TextUtils.isEmpty(password)) {
+            root.editPassword.error = "Required."
+            valid = false
+        } else {
+            root.editPassword.error = null
+        }
+
+        return valid
+    }
+
     private fun googleAccEdit(){
         userProfileEdit!!.firstName = root.editFirstName.text.toString()
         userProfileEdit!!.surname = root.editSurname.text.toString()
@@ -155,12 +172,7 @@ class ProfileEditFragment : Fragment() {
         updateUserProfile(app.auth.currentUser!!.uid, userProfileEdit!!)
     }
 
-    private fun pickImageFromGallery() {
-        //Intent to pick image
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent, IMAGE_PICK_CODE)
-    }
+
 
     private fun resetPassword(){
         loader = createLoader(activity!!)
@@ -222,31 +234,10 @@ class ProfileEditFragment : Fragment() {
 
     val home = Home()
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        when(requestCode){
-            PERMISSION_CODE -> {
-                if (grantResults.size >0 && grantResults[0] ==
-                    PackageManager.PERMISSION_GRANTED){
-                    //permission from popup granted
-                    pickImageFromGallery()
-                }
-                else{
-                    //permission from popup denied
-                }
-            }
-        }
-    }
+
 
     //handle result of picked image
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
-            userProfileEdit!!.image = data?.data.toString()
-            Picasso.get().load(data?.data)
-                .resize(190, 190)
-                .transform(CropCircleTransformation())
-                .into(root.scrollView2.profImage)
-        }
-    }
+
 
 
 
@@ -270,11 +261,6 @@ class ProfileEditFragment : Fragment() {
     }
 
     companion object {
-
-        //image pick code
-        private val IMAGE_PICK_CODE = 1000;
-        //Permission code
-        private val PERMISSION_CODE = 1001;
         @JvmStatic
         fun newInstance(user: Account) =
             ProfileEditFragment().apply {

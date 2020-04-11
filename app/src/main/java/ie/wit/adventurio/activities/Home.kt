@@ -68,6 +68,7 @@ class Home : AppCompatActivity(),
 
         ft = supportFragmentManager.beginTransaction()
 
+        navigateTo(StatisticsFragment.newInstance(user))
 
 
 
@@ -91,7 +92,6 @@ class Home : AppCompatActivity(),
 
                 var statsFragment = StatisticsFragment.newInstance(user)
 
-                navigateTo(StatisticsFragment.newInstance(user))
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
