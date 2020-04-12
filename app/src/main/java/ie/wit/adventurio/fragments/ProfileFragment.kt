@@ -124,9 +124,9 @@ class ProfileFragment : Fragment(), AnkoLogger {
     }
 
     fun deleteProfile(){
+        removeUserFirebaseAuth() //removes user auth
         deleteUser(app.auth.currentUser!!.uid) //removes user stats from database
         deleteUserTrips(app.auth.currentUser!!.uid) //removes user's trips from db
-        removeUserFirebaseAuth() //removes user auth
     }
 
     fun removeUserFirebaseAuth(){
@@ -141,7 +141,6 @@ class ProfileFragment : Fragment(), AnkoLogger {
                             Toast.LENGTH_LONG
                         )
                     toast.show()
-                    restartApp()
                 }
             }
 
@@ -167,6 +166,7 @@ class ProfileFragment : Fragment(), AnkoLogger {
                 object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         snapshot.ref.removeValue()
+                        restartApp()
                     }
 
                     override fun onCancelled(error: DatabaseError) {
