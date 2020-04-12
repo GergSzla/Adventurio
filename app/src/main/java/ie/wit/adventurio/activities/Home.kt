@@ -1,6 +1,5 @@
 package ie.wit.adventurio.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -21,16 +20,13 @@ import ie.wit.adventurio.fragments.AddVehicleFragment
 import ie.wit.adventurio.fragments.ManualTripFragment
 import ie.wit.adventurio.fragments.ProfileFragment
 import ie.wit.adventurio.fragments.StatisticsFragment
-import ie.wit.adventurio.helpers.readImage
-import ie.wit.adventurio.helpers.readImageUri
 import ie.wit.adventurio.helpers.uploadImageView
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import ie.wit.fragments.CarsListFragment
-import ie.wit.fragments.TripsListFragment
+import ie.wit.adventurio.fragments.TripsListFragment
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.app_bar_home.*
-import kotlinx.android.synthetic.main.fragment_profile_edit.*
 import kotlinx.android.synthetic.main.home.*
 import kotlinx.android.synthetic.main.nav_header_home.view.*
 import org.jetbrains.anko.intentFor

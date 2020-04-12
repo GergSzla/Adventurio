@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_architecture"
+    app:startDestination="@id/statisticsFragment">
+
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="ie.wit.adventurio.fragments.StatisticsFragment"
+        android:label="fragment_statistics"
+        tools:layout="@layout/fragment_statistics" >
+        <action
+            android:id="@+id/action_statisticsFragment_to_tripsListFragment"
+            app:destination="@id/tripsListFragment" />
+        <action
+            android:id="@+id/action_statisticsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_statisticsFragment_to_carsListFragment"
+            app:destination="@id/carsListFragment" />
+        <action
+            android:id="@+id/action_statisticsFragment_to_recordDrivingTripActivity"
+            app:destination="@id/recordDrivingTripActivity" />
+        <action
+            android:id="@+id/action_statisticsFragment_to_recordWalkingTripActivity"
+            app:destination="@id/recordWalkingTripActivity" />
+        <action
+            android:id="@+id/action_statisticsFragment_to_recordCyclingTripActivity"
+            app:destination="@id/recordCyclingTripActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/tripsListFragment"
+        android:name="ie.wit.adventurio.fragments.TripsListFragment"
+        android:label="TripsListFragment" >
+        <action
+            android:id="@+id/action_tripsListFragment_to_walkingTripsEditFragment"
+            app:destination="@id/walkingTripsEditFragment" />
+        <action
+            android:id="@+id/action_tripsListFragment_to_cyclingTripsEditFragment"
+            app:destination="@id/cyclingTripsEditFragment" />
+        <action
+            android:id="@+id/action_tripsListFragment_to_drivingTripsEditFragment"
+            app:destination="@id/drivingTripsEditFragment" />
+        <action
+            android:id="@+id/action_tripsListFragment_to_viewTripFragment"
+            app:destination="@id/viewTripFragment" />
+        <action
+            android:id="@+id/action_tripsListFragment_to_manualTripFragment"
+            app:destination="@id/manualTripFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/walkingTripsEditFragment"
+        android:name="ie.wit.adventurio.fragments.WalkingTripsEditFragment"
+        android:label="fragment_walking_trips_edit"
+        tools:layout="@layout/fragment_walking_trips_edit" />
+    <fragment
+        android:id="@+id/cyclingTripsEditFragment"
+        android:name="ie.wit.adventurio.fragments.CyclingTripsEditFragment"
+        android:label="fragment_cycling_trips_edit"
+        tools:layout="@layout/fragment_cycling_trips_edit" />
+    <fragment
+        android:id="@+id/drivingTripsEditFragment"
+        android:name="ie.wit.adventurio.fragments.DrivingTripsEditFragment"
+        android:label="fragment_driving_trips_edit"
+        tools:layout="@layout/fragment_driving_trips_edit" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="ie.wit.adventurio.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_profileEditFragment"
+            app:destination="@id/profileEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileEditFragment"
+        android:name="ie.wit.adventurio.fragments.ProfileEditFragment"
+        android:label="fragment_profile_edit"
+        tools:layout="@layout/fragment_profile_edit" />
+    <fragment
+        android:id="@+id/viewTripFragment"
+        android:name="ie.wit.adventurio.fragments.ViewTripFragment"
+        android:label="fragment_view_trip"
+        tools:layout="@layout/fragment_view_trip" />
+    <fragment
+        android:id="@+id/carsListFragment"
+        android:name="ie.wit.fragments.CarsListFragment"
+        android:label="CarsListFragment" >
+        <action
+            android:id="@+id/action_carsListFragment_to_carEditFragment"
+            app:destination="@id/carEditFragment" />
+        <action
+            android:id="@+id/action_carsListFragment_to_addVehicleFragment"
+            app:destination="@id/addVehicleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/carEditFragment"
+        android:name="ie.wit.adventurio.fragments.CarEditFragment"
+        android:label="fragment_car_edit"
+        tools:layout="@layout/fragment_car_edit" />
+    <fragment
+        android:id="@+id/addVehicleFragment"
+        android:name="ie.wit.adventurio.fragments.AddVehicleFragment"
+        android:label="fragment_add_vehicle"
+        tools:layout="@layout/fragment_add_vehicle" />
+    <activity
+        android:id="@+id/recordDrivingTripActivity"
+        android:name="ie.wit.adventurio.activities.RecordDrivingTripActivity"
+        android:label="activity_record_cycling_trip"
+        tools:layout="@layout/activity_record_cycling_trip" />
+    <activity
+        android:id="@+id/recordWalkingTripActivity"
+        android:name="ie.wit.adventurio.activities.RecordWalkingTripActivity"
+        android:label="activity_record_walking_trip"
+        tools:layout="@layout/activity_record_walking_trip" />
+    <activity
+        android:id="@+id/recordCyclingTripActivity"
+        android:name="ie.wit.adventurio.activities.RecordCyclingTripActivity"
+        android:label="activity_record_cycling_trip"
+        tools:layout="@layout/activity_record_cycling_trip"/>
+    <fragment
+        android:id="@+id/manualTripFragment"
+        android:name="ie.wit.adventurio.fragments.ManualTripFragment"
+        android:label="fragment_manual_trip"
+        tools:layout="@layout/fragment_manual_trip" />
+</navigation>

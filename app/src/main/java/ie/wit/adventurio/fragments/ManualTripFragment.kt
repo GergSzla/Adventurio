@@ -23,7 +23,6 @@ import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.Trip
 import ie.wit.adventurio.models.Vehicle
-import ie.wit.fragments.TripsListFragment
 import kotlinx.android.synthetic.main.fragment_manual_trip.*
 import kotlinx.android.synthetic.main.fragment_manual_trip.view.*
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerHours1

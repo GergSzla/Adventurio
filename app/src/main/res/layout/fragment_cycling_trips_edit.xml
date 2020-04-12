@@ -28,7 +28,7 @@
                 android:id="@+id/cyclingEditTrip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Edit Cycling Adventure"
+                android:text="@string/cycCat"
                 android:layout_margin="6dp"
                 android:textColor="@color/accent_2"
                 android:background="@color/accent_1"
@@ -43,7 +43,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Trip Date" />
+                android:text="@string/date" />
             <DatePicker
                 android:id="@+id/date_picker_cycling"
                 android:layout_width="match_parent"
@@ -59,14 +59,14 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Edit Trip Name" />
+                android:text="@string/name" />
 
             <EditText
                 android:id="@+id/editTripName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Edit Trip Name"
+                android:hint="@string/name"
                 android:inputType="textPersonName"
                 android:background="@drawable/edit_text_bg"
                 android:padding="10dp"/>
@@ -78,14 +78,14 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/accent_2"
 
-                android:text="Edit Distance" />
+                android:text="@string/distance" />
 
             <EditText
                 android:id="@+id/editDistance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Edit Distance"
+                android:hint="@string/distance"
                 android:inputType="textPersonName"
                 android:background="@drawable/edit_text_bg"
                 android:padding="10dp"/>
@@ -97,14 +97,14 @@
                 android:textColor="@color/accent_2"
 
                 android:layout_height="wrap_content"
-                android:text="Edit Average Speed" />
+                android:text="@string/speed" />
 
             <EditText
                 android:id="@+id/editSpeed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Edit Average Speed"
+                android:hint="@string/speed"
                 android:inputType="textPersonName"
                 android:background="@drawable/edit_text_bg"
                 android:padding="10dp"/>
@@ -116,14 +116,14 @@
                 android:textColor="@color/accent_2"
 
                 android:layout_height="wrap_content"
-                android:text="Edit Calories Burned" />
+                android:text="@string/cals" />
 
             <EditText
                 android:id="@+id/editCaloriesBurned"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Edit Calories Burned"
+                android:hint="@string/cals"
                 android:inputType="textPersonName"
                 android:background="@drawable/edit_text_bg"
                 android:padding="10dp"/>
@@ -133,7 +133,7 @@
                 android:textColor="@color/accent_2"
 
                 android:layout_height="wrap_content"
-                android:text="Add to Favourites" />
+                android:text="@string/favs" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -148,7 +148,7 @@
                     android:layout_weight="1"
                     android:textColor="@color/accent_2"
 
-                    android:text="Time Initiated" />
+                    android:text="@string/start" />
 
                 <TextView
                     android:id="@+id/textView31"
@@ -156,7 +156,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/accent_2"
-                    android:text="Time Finished"
+                    android:text="@string/date"
                     android:textDirection="rtl" />
             </LinearLayout>
 

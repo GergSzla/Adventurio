@@ -44,8 +44,57 @@
     <string name="editProf">Edit Profile</string>
     <string name="editCar">Edit Vehicle</string>
     <string name="viewAdv">Your Adventure</string>
+    <string name="tripsList">Adventures List</string>
     <string name="menu_list_cars">List Vehicles</string>
     <string name="menu_add_cars">Add Vehicles</string>
+
+    <string name="record_speed">Speed: </string>
+    <string name="record_time">Time: </string>
+    <string name="record_steps">Steps: </string>
+    <string name="record_cals">Calories: </string>
+
+    <!--Record Categories-->
+    <string name="rec_cyc">Cycling Adventure</string>
+    <string name="rec_drive">Driving Adventure</string>
+    <string name="rec_walk">Walking Adventure</string>
+
+    <string name="veh_pick">Vehicle Used</string>
+
+    <string name="stepgoal">Add a step goal for this journey:</string>
+    <string name="weightinput">Weight in Kg</string>
+
+
+    <!--Vehicle Add/Edit-->
+    <string name="formVehName">Vehicle Name</string>
+    <string name="formVehBrand">Brand</string>
+    <string name="formVehModel">Model</string>
+    <string name="formVehReg">License Plate</string>
+    <string name="formVehYear">Year</string>
+    <string name="formVehFuel">Fuel Type</string>
+    <string name="formVehTank">Year</string>
+    <string name="formVehOdo">Odometer Count</string>
+
+    <!--Trip Edit Form-->
+    <string name="cycCat">Edit Cycling Adventure</string>
+    <string name="driveCat">Edit Cycling Adventure</string>
+    <string name="walkCat">Edit Walking Adventure</string>
+    <string name="date">Edit Trip Date</string>
+    <string name="name">Edit Trip Name</string>
+    <string name="distance">Edit Distance</string>
+    <string name="speed">Edit Average Speed</string>
+    <string name="cals">Edit Calories Burned</string>
+    <string name="steps">Edit Steps</string>
+
+    <string name="favs">Add to Favourites</string>
+    <string name="start">Time Initiated</string>
+    <string name="end">Time Finished</string>
+
+
+
+
+
+
+
 
 
     <string name="nav_header_desc">Navigation header</string>

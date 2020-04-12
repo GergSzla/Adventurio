@@ -28,7 +28,7 @@
                 android:id="@+id/walkingEditTrip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Edit Walking Adventure"
+                android:text="@string/walkCat"
                 android:layout_margin="6dp"
                 android:textColor="@color/accent_2"
                 android:background="@color/accent_1"
@@ -44,7 +44,7 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Trip Date" />
+                android:text="@string/date" />
             <DatePicker
                 android:id="@+id/date_picker_walking"
                 android:layout_width="match_parent"
@@ -58,14 +58,14 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Edit Trip Name" />
+                android:text="@string/name" />
 
             <EditText
                 android:id="@+id/editTripName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Edit Trip Name"
+                android:hint="@string/name"
                 android:inputType="textPersonName"
                 android:background="@drawable/edit_text_bg"
                 android:padding="10dp"/>
@@ -77,14 +77,14 @@
                 android:textColor="@color/accent_2"
 
                 android:layout_height="wrap_content"
-                android:text="Edit Distance" />
+                android:text="@string/distance" />
 
             <EditText
                 android:id="@+id/editDistance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Edit Distance"
+                android:hint="@string/distance"
                 android:inputType="textPersonName"
                 android:background="@drawable/edit_text_bg"
                 android:padding="10dp"/>
@@ -96,14 +96,14 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Edit Steps" />
+                android:text="@string/steps" />
 
             <EditText
                 android:id="@+id/editSteps"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Edit Steps"
+                android:hint="@string/steps"
                 android:inputType="textPersonName"
                 android:background="@drawable/edit_text_bg"
                 android:padding="10dp"/>
@@ -115,14 +115,14 @@
                 android:textColor="@color/accent_2"
 
                 android:layout_height="wrap_content"
-                android:text="Edit Calories Burned" />
+                android:text="@string/cals" />
 
             <EditText
                 android:id="@+id/editCaloriesBurned"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Edit Calories Burned"
+                android:hint="@string/cals"
                 android:inputType="textPersonName"
                 android:background="@drawable/edit_text_bg"
                 android:padding="10dp"/>
@@ -132,7 +132,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/accent_2"
 
-                android:text="Add to Favourites" />
+                android:text="@string/favs" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -148,7 +148,7 @@
 
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Time Initiated" />
+                    android:text="@string/start" />
 
                 <TextView
                     android:id="@+id/textView31"
@@ -157,7 +157,7 @@
                     android:textColor="@color/accent_2"
 
                     android:layout_weight="1"
-                    android:text="Time Finished"
+                    android:text="@string/end"
                     android:textDirection="rtl" />
             </LinearLayout>
 

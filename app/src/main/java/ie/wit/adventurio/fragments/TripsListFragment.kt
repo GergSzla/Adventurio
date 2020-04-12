@@ -1,4 +1,4 @@
-package ie.wit.fragments
+package ie.wit.adventurio.fragments
 
 
 import android.content.Intent
@@ -22,7 +22,6 @@ import ie.wit.adventurio.activities.RecordDrivingTripActivity
 import ie.wit.adventurio.activities.RecordWalkingTripActivity
 import ie.wit.adventurio.adapters.TripsAdapter
 import ie.wit.adventurio.adapters.TripsListener
-import ie.wit.adventurio.fragments.*
 import ie.wit.adventurio.helpers.createLoader
 import ie.wit.adventurio.helpers.hideLoader
 import ie.wit.adventurio.helpers.showLoader
@@ -66,6 +65,7 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
 
 
         root = inflater.inflate(R.layout.fragment_trips_list, container, false)
+        activity?.title = getString(R.string.tripsList)
 
         root.recordTripFab.setOnClickListener {
             val intent = Intent(activity, RecordWalkingTripActivity::class.java)

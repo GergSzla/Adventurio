@@ -69,6 +69,11 @@ class TripsAdapter constructor(var trips: ArrayList<Trip>,
             itemView.txtTimeAndDate.text = trip.DayOfWeek + ", " + trip.Date + ",   " + trip.tripStartTime + " - " + trip.tripEndTime
             //itemView.mapView. = trip.make
 
+            if(trip.favourite){
+                itemView.favStatus.setImageResource(R.drawable.ic_star_black_24dp)
+            } else {
+                itemView.favStatus.setImageResource(R.drawable.ic_not_fav)
+            }
 
             itemView.setOnClickListener {
                 listener.onTripClick(trip)

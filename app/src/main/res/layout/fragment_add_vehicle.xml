@@ -60,14 +60,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/accent_2"
-                android:text="Vehicle Name" />
+                android:text="@string/formVehName" />
 
             <EditText
                 android:id="@+id/editName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Vehicle Name"
+                android:hint="@string/formVehName"
                 android:autofillHints="textPersonName"
                 android:inputType="textPersonName"
                 android:layout_marginBottom="10dp"
@@ -79,7 +79,7 @@
                 android:id="@+id/txtBrand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Brand"
+                android:text="@string/formVehBrand"
                 android:textColor="@color/accent_2"
 
                 />
@@ -89,7 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Brand"
+                android:hint="@string/formVehBrand"
                 android:autofillHints="textPersonName"
                 android:inputType="textPersonName"
                 android:layout_marginBottom="10dp"
@@ -102,14 +102,14 @@
                 android:layout_width="match_parent"
                 android:textColor="@color/accent_2"
                 android:layout_height="wrap_content"
-                android:text="Model" />
+                android:text="@string/formVehModel" />
 
             <EditText
                 android:id="@+id/editModel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Model"
+                android:hint="@string/formVehModel"
                 android:autofillHints="textPersonName"
                 android:inputType="textPersonName"
                 android:layout_marginBottom="10dp"
@@ -122,7 +122,7 @@
                 android:textColor="@color/accent_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="License Plate" />
+                android:text="@string/formVehReg" />
 
             <EditText
                 android:id="@+id/editReg"
@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890@.-"
                 android:ems="10"
-                android:hint="License Plate"
+                android:hint="@string/formVehReg"
                 android:autofillHints="textPersonName"
                 android:inputType="textEmailAddress"
                 android:layout_marginBottom="10dp"
@@ -143,14 +143,14 @@
                 android:layout_width="match_parent"
                 android:textColor="@color/accent_2"
                 android:layout_height="wrap_content"
-                android:text="Year" />
+                android:text="@string/formVehYear" />
 
             <EditText
                 android:id="@+id/editYear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Year"
+                android:hint="@string/formVehYear"
                 android:inputType="number"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/edit_text_bg"
@@ -162,7 +162,7 @@
                 android:layout_width="match_parent"
                 android:textColor="@color/accent_2"
                 android:layout_height="wrap_content"
-                android:text="Fuel Type" />
+                android:text="@string/formVehFuel" />
 
             <Spinner
                 android:id="@+id/spinnerFuel"
@@ -176,7 +176,7 @@
                 android:textColor="@color/accent_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tank Capacity" />
+                android:text="@string/formVehTank" />
 
             <EditText
                 android:id="@+id/editTankCapac"
@@ -184,7 +184,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
 
-                android:hint="Tank Capacity"
+                android:hint="@string/formVehTank"
                 android:inputType="number"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/edit_text_bg"
@@ -199,14 +199,14 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/accent_2"
 
-                android:text="Odometer Count" />
+                android:text="@string/formVehOdo" />
 
             <EditText
                 android:id="@+id/editOdo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Current Odometer"
+                android:hint="@string/formVehOdo"
                 android:inputType="number"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/edit_text_bg"
