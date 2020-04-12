@@ -23,6 +23,20 @@
             android:orientation="vertical"
             android:background="@drawable/content_layout_bg"
             android:padding="10dp">
+
+            <TextView
+                android:id="@+id/drivingEditTrip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Edit Driving Adventure"
+                android:layout_margin="6dp"
+                android:textColor="@color/accent_2"
+                android:background="@color/accent_1"
+                android:padding="6dp"
+                app:fontFamily="@font/denk_one"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                />
+
             <TextView
                 android:id="@+id/txtDate"
                 android:layout_marginTop="10dp"

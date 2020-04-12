@@ -1,14 +1,15 @@
 package ie.wit.adventurio.fragments
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.NumberPicker
-import android.widget.Toast
+import android.widget.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -18,6 +19,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import ie.wit.adventurio.R
+import ie.wit.adventurio.helpers.showImagePicker
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.Trip
@@ -25,12 +27,14 @@ import ie.wit.adventurio.models.Vehicle
 import ie.wit.fragments.CarsListFragment
 import ie.wit.fragments.TripsListFragment
 import kotlinx.android.synthetic.main.fragment_add_vehicle.view.*
+import kotlinx.android.synthetic.main.fragment_car_edit.view.*
 import kotlinx.android.synthetic.main.fragment_manual_trip.*
 import kotlinx.android.synthetic.main.fragment_manual_trip.view.*
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerHours1
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerHours2
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerMinutes1
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerMinutes2
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -43,6 +47,7 @@ class AddVehicleFragment : Fragment() {
     var vehicle = Vehicle()
     lateinit var app: MainApp
     lateinit var root: View
+    val IMAGE_REQUEST = 1
     lateinit var eventListener : ValueEventListener
     var autoId: String = ""
 
@@ -117,7 +122,30 @@ class AddVehicleFragment : Fragment() {
 
         }
 
+        root.addImageAdd.setOnClickListener {
+            showImagePicker(this, IMAGE_REQUEST)
+        }
+
         return root
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (!(requestCode !== IMAGE_REQUEST || resultCode !== Activity.RESULT_OK || data == null || data.data == null)) {
+            val uri: Uri = data.data!!
+            try {
+                val bitmap =
+                    MediaStore.Images.Media.getBitmap(activity!!.contentResolver, uri)
+                val imageView: ImageView =
+                    activity!!.findViewById<View>(R.id.vehicleImageAdd) as ImageView
+                imageView.setImageBitmap(bitmap)
+                vehicle!!.vehicleImage = data.data.toString()
+                root.addImageAdd.setText(R.string.btnChangeImage)
+
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
     }
 
     private fun validateForm(): Boolean {

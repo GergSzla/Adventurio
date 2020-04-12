@@ -63,16 +63,17 @@ class Home : AppCompatActivity(),
         navView.getHeaderView(0).nav_header_email.text = app.auth.currentUser?.email
 
         ft = supportFragmentManager.beginTransaction()
-    }
-
-    override fun onResume() {
-        super.onResume()
         getUser(app.auth.currentUser?.uid)
+
     }
 
+    /*override fun onResume() {
+        super.onResume()
+    }*/
 
 
-    fun getUser(userId : String?){
+
+    private fun getUser(userId : String?){
         val uid = FirebaseAuth.getInstance().currentUser!!.uid
         val rootRef = FirebaseDatabase.getInstance().reference
         val uidRef = rootRef.child("user-stats").child(uid)
@@ -80,15 +81,16 @@ class Home : AppCompatActivity(),
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 user = dataSnapshot.getValue(Account::class.java)!!
 
-
                 var statsFragment = StatisticsFragment.newInstance(user)
-
+                navigateTo(StatisticsFragment.newInstance(user))
+                uidRef.removeEventListener(this)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
             }
         }
         uidRef.addListenerForSingleValueEvent(eventListener)
+
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

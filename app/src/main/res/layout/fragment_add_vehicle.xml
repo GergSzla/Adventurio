@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/vehicleImage"
+                    android:id="@+id/vehicleImageAdd"
                     android:layout_width="173dp"
                     android:layout_height="149dp"
                     android:adjustViewBounds="true"
@@ -41,7 +41,7 @@
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <Button
-                    android:id="@+id/addImage"
+                    android:id="@+id/addImageAdd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="52dp"

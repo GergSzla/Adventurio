@@ -27,7 +27,6 @@ import ie.wit.fragments.CarsListFragment
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
 import kotlinx.android.synthetic.main.card_vehicle.view.*
 import kotlinx.android.synthetic.main.fragment_add_vehicle.view.*
-import kotlinx.android.synthetic.main.fragment_add_vehicle.view.vehicleImage
 import kotlinx.android.synthetic.main.fragment_car_edit.view.*
 import java.io.IOException
 
@@ -223,11 +222,9 @@ class CarEditFragment : Fragment() {
                             .replace(R.id.homeFrame, CarsListFragment.newInstance())
                             .addToBackStack(null)
                             .commit()
-                        //hideLoader(loader)
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        //info("Firebase Donation error : ${error.message}")
                     }
                 })
     }
