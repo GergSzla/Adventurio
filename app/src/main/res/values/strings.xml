@@ -71,7 +71,7 @@
     <string name="formVehReg">License Plate</string>
     <string name="formVehYear">Year</string>
     <string name="formVehFuel">Fuel Type</string>
-    <string name="formVehTank">Year</string>
+    <string name="formVehTank">Tank Capacity</string>
     <string name="formVehOdo">Odometer Count</string>
 
     <!--Trip Edit Form-->
@@ -107,9 +107,9 @@
     <string name="btnDelUser">Delete Account</string>
     <string name="btnChangeImage">Change Image</string>
     <string name="hint_stepGoal">Overall Step Goal</string>
-    <string name="hint_distanceGoal">Overall Walking Distance Goal</string>
-    <string name="hint_drivingDistanceGoal">Overall Driving Distance Goal</string>
-    <string name="hint_cyclingDistanceGoal">Overall Cycling Distance Goal</string>
+    <string name="hint_distanceGoal">Overall Walking Distance Goal (km)</string>
+    <string name="hint_drivingDistanceGoal">Overall Driving Distance Goal (km)</string>
+    <string name="hint_cyclingDistanceGoal">Overall Cycling Distance Goal(km)</string>
 
 
 

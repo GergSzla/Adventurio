@@ -26,6 +26,7 @@ import ie.wit.adventurio.helpers.readImageFromPath
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
@@ -78,17 +79,18 @@ class ProfileFragment : Fragment(), AnkoLogger {
 
         root.imageView.setImageBitmap(activity?.let { readImageFromPath(it, userProfile!!.image) })
 
+
         if(app.auth.currentUser!!.photoUrl != null){
             Picasso.get().load(app.auth.currentUser!!.photoUrl)
                 .fit()
                 .centerCrop()
-                .transform(CropCircleTransformation())
+                .transform(RoundedCornersTransformation(50,0))
                 .into(root.linearview.imageView)
         } else {
             Picasso.get().load(R.mipmap.ic_avatar)
                 .fit()
                 .centerCrop()
-                .transform(CropCircleTransformation())
+                .transform(RoundedCornersTransformation(50,0))
                 .into(root.linearview.imageView)
         }
 

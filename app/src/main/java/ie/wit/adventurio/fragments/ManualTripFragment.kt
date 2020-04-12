@@ -109,7 +109,6 @@ class ManualTripFragment : Fragment() {
                     root.WalkingTrip.isVisible = false
                     root.DrivingTrip.isVisible = true
                     root.CyclingTrip.isVisible = false
-                    getVehiclesNames()
                 } else if (parent.getItemAtPosition(position).toString() == "Cycling"){
                     trip.tripType = "Cycling"
                     root.WalkingTrip.isVisible = false
@@ -119,7 +118,7 @@ class ManualTripFragment : Fragment() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>){
-                // Another interface callback
+
             }
         }
 
@@ -139,20 +138,6 @@ class ManualTripFragment : Fragment() {
         root.amountPickerMinutes2.minValue = 0
         root.amountPickerMinutes2.maxValue = 59
         root.amountPickerMinutes2.setFormatter(NumberPicker.Formatter { i -> String.format("%02d", i) })
-
-
-        /*var num = trip.tripDistance
-        root.editDistance.setText("%.2f".format(num))
-        root.editSteps.setText(trip.tripSteps.toString())
-        root.amountPickerHours1.value = trip.tripStartTime.substring(0,2).toInt()
-        root.amountPickerMinutes1.value = trip.tripStartTime.substring(3,5).toInt()
-
-        if(trip.tripName != ""){
-            root.editTripName.setText(trip.tripName.toString())
-        }
-
-        root.amountPickerHours2.value = trip.tripEndTime.substring(0,2).toInt()
-        root.amountPickerMinutes2.value = trip.tripEndTime.substring(3,5).toInt()*/
 
         //update button
         root.createTripFab.setOnClickListener {
@@ -354,6 +339,7 @@ class ManualTripFragment : Fragment() {
 
 
         dateId = year+month+day+hour+minutes+seconds
+        trip.orderByID = 100000000000000 - dateId.toLong()
     }
 
     private fun createTrip() {

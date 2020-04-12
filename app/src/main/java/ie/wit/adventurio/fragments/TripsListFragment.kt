@@ -236,7 +236,7 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
         loader = createLoader(activity!!)
         showLoader(loader, "Downloading Trips from Firebase")
         tripsList = ArrayList<Trip>()
-        app.database.child("user-trips").child(userId!!)
+        app.database.child("user-trips").child(userId!!).orderByChild("orderByID")
             .addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(error: DatabaseError) {
                     info("Firebase Donation error : ${error.message}")

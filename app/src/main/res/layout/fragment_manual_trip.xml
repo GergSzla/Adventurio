@@ -64,6 +64,7 @@
                 android:text="Trip Date" />
 
             <DatePicker
+                android:background="@drawable/edit_text_bg"
                 android:id="@+id/date_Picker"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -92,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_text_bg"
                     android:ems="10"
-                    android:hint="Edit Trip Name"
+                    android:hint="Trip Name"
                     android:inputType="textPersonName"
                     android:padding="10dp" />
 
@@ -103,7 +104,7 @@
 
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Edit Distance" />
+                    android:text="Distance" />
 
                 <EditText
                     android:id="@+id/editWalkingDistance"
@@ -111,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_text_bg"
                     android:ems="10"
-                    android:hint="Edit Distance"
+                    android:hint="Distance"
                     android:inputType="textPersonName"
                     android:padding="10dp" />
 
@@ -122,7 +123,7 @@
 
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Edit Steps" />
+                    android:text="Steps" />
 
                 <EditText
                     android:id="@+id/editWalkingTripSteps"
@@ -130,7 +131,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_text_bg"
                     android:ems="10"
-                    android:hint="Edit Steps"
+                    android:hint="Steps"
                     android:inputType="textPersonName"
                     android:padding="10dp" />
 
@@ -141,7 +142,7 @@
                     android:textColor="@color/accent_2"
 
                     android:layout_marginTop="10dp"
-                    android:text="Edit Calories Burned" />
+                    android:text="Calories Burned" />
 
                 <EditText
                     android:id="@+id/editWalkingTripCalories"
@@ -149,7 +150,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_text_bg"
                     android:ems="10"
-                    android:hint="Edit Calories Burned"
+                    android:hint="Calories Burned"
                     android:inputType="textPersonName"
                     android:padding="10dp" />
 
@@ -168,7 +169,7 @@
                     android:textColor="@color/accent_2"
 
                     android:layout_marginTop="10dp"
-                    android:text="Edit Name" />
+                    android:text="Name" />
 
                 <EditText
                     android:id="@+id/editDrivingTripName"
@@ -176,7 +177,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_text_bg"
                     android:ems="10"
-                    android:hint="Edit Trip Name"
+                    android:hint="Trip Name"
                     android:inputType="textPersonName"
                     android:padding="10dp" />
 
@@ -187,7 +188,7 @@
                     android:textColor="@color/accent_2"
 
                     android:layout_marginTop="10dp"
-                    android:text="Edit Distance" />
+                    android:text="Distance" />
 
                 <EditText
                     android:id="@+id/editDrivingDistance"
@@ -195,7 +196,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_text_bg"
                     android:ems="10"
-                    android:hint="Edit Distance"
+                    android:hint="Distance"
                     android:inputType="textPersonName"
                     android:padding="10dp" />
 
@@ -206,7 +207,7 @@
 
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Edit Average Speed" />
+                    android:text="Average Speed" />
 
                 <EditText
                     android:id="@+id/editDrivingTripSpeed"
@@ -214,7 +215,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_text_bg"
                     android:ems="10"
-                    android:hint="Edit Average Speed"
+                    android:hint="Average Speed"
                     android:inputType="textPersonName"
                     android:padding="10dp" />
 
@@ -225,7 +226,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Trip Type" />
+                    android:text="Vehicle Used" />
 
                 <Spinner
                     android:id="@+id/editDrivingTripVehicles"
@@ -247,7 +248,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Edit Name" />
+                    android:text="Name" />
 
                 <EditText
                     android:id="@+id/editCyclingTripName"
@@ -255,7 +256,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_text_bg"
                     android:ems="10"
-                    android:hint="Edit Trip Name"
+                    android:hint="Trip Name"
                     android:inputType="textPersonName"
                     android:padding="10dp" />
 
@@ -266,7 +267,7 @@
                     android:textColor="@color/accent_2"
 
                     android:layout_marginTop="10dp"
-                    android:text="Edit Distance" />
+                    android:text="Distance" />
 
                 <EditText
                     android:id="@+id/editCyclingDistance"
@@ -274,7 +275,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_text_bg"
                     android:ems="10"
-                    android:hint="Edit Distance"
+                    android:hint="Distance"
                     android:inputType="textPersonName"
                     android:padding="10dp" />
 
@@ -285,7 +286,7 @@
                     android:textColor="@color/accent_2"
 
                     android:layout_marginTop="10dp"
-                    android:text="Edit Average Speed" />
+                    android:text="Average Speed" />
 
                 <EditText
                     android:id="@+id/editCyclingTripSpeed"
@@ -293,7 +294,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_text_bg"
                     android:ems="10"
-                    android:hint="Edit Average Speed"
+                    android:hint="Average Speed"
                     android:inputType="textPersonName"
                     android:padding="10dp" />
 
@@ -304,14 +305,14 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Edit Calories Burned" />
+                    android:text="Calories Burned" />
 
                 <EditText
                     android:id="@+id/editCyclingTripCalories"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Edit Calories Burned"
+                    android:hint="Calories Burned"
                     android:inputType="textPersonName"
                     android:background="@drawable/edit_text_bg"
                     android:padding="10dp"/>
@@ -347,7 +348,9 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@drawable/edit_text_bg"
+                >
 
                 <TextView
                     android:id="@+id/textView"
@@ -355,7 +358,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text=":"
-                    android:textColor="@color/accent_2"
+                    android:textColor="@color/colorAccent"
 
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -364,6 +367,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <NumberPicker
+
                     android:id="@+id/amountPickerMinutes1"
                     style="@android:style/Widget.Material.NumberPicker"
                     android:layout_width="wrap_content"
@@ -397,7 +401,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_weight="1"
-                    android:textColor="@color/accent_2"
+                    android:textColor="@color/colorAccent"
 
                     android:text="-"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -424,7 +428,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
-                    android:textColor="@color/accent_2"
+                    android:textColor="@color/colorAccent"
 
                     android:layout_weight="1"
                     android:text=":"

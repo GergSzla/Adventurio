@@ -429,6 +429,7 @@ class RecordCyclingTripActivity : AppCompatActivity(), SensorEventListener {
 
 
         dateId = year+month+day+hour+minutes+seconds
+        trip.orderByID = 100000000000000 - dateId.toLong()
     }
 
     private fun createTrip() {
