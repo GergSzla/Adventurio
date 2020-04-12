@@ -26,6 +26,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import ie.wit.adventurio.R
 import ie.wit.adventurio.adapters.TripsAdapter
 import ie.wit.adventurio.fragments.StatisticsFragment
@@ -55,6 +56,7 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
 
         app.auth = FirebaseAuth.getInstance()
         app.database = FirebaseDatabase.getInstance().reference
+        app.storage = FirebaseStorage.getInstance().reference
 
         loader = createLoader(this)
 

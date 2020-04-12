@@ -14,16 +14,21 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 import ie.wit.adventurio.R
 import ie.wit.adventurio.fragments.AddVehicleFragment
 import ie.wit.adventurio.fragments.ManualTripFragment
 import ie.wit.adventurio.fragments.ProfileFragment
 import ie.wit.adventurio.fragments.StatisticsFragment
 import ie.wit.adventurio.helpers.readImage
+import ie.wit.adventurio.helpers.readImageUri
+import ie.wit.adventurio.helpers.uploadImageView
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import ie.wit.fragments.CarsListFragment
 import ie.wit.fragments.TripsListFragment
+import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.fragment_profile_edit.*
 import kotlinx.android.synthetic.main.home.*
@@ -60,11 +65,36 @@ class Home : AppCompatActivity(),
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        navView.getHeaderView(0).nav_header_email.text = app.auth.currentUser?.email
+        //navView.getHeaderView(0).nav_header_email.text = app.auth.currentUser?.email
 
         ft = supportFragmentManager.beginTransaction()
         getUser(app.auth.currentUser?.uid)
 
+
+        if(app.auth.currentUser?.photoUrl != null){
+            Picasso.get().load(app.auth.currentUser?.photoUrl)
+                .resize(180, 180)
+                .transform(CropCircleTransformation())
+                .into(navView.getHeaderView(0).homeProfImage, object : Callback {
+                    override fun onSuccess() {
+                        // Drawable is ready
+                        uploadImageView(app,navView.getHeaderView(0).homeProfImage)
+                    }
+                    override fun onError(e: Exception) {}
+                })
+        } else {
+            Picasso.get().load(R.mipmap.ic_avatar)
+                .resize(180, 180)
+                .transform(CropCircleTransformation())
+                .into(navView.getHeaderView(0).homeProfImage, object : Callback {
+                    override fun onSuccess() {
+                        // Drawable is ready
+                        uploadImageView(app, navView.getHeaderView(0).homeProfImage)
+                    }
+
+                    override fun onError(e: Exception) {}
+                })
+        }
     }
 
     /*override fun onResume() {
@@ -83,6 +113,8 @@ class Home : AppCompatActivity(),
 
                 var statsFragment = StatisticsFragment.newInstance(user)
                 navigateTo(StatisticsFragment.newInstance(user))
+                navView.getHeaderView(0).nav_header_name.text = "${user.firstName} ${user.surname}"
+
                 uidRef.removeEventListener(this)
             }
 
@@ -154,6 +186,8 @@ class Home : AppCompatActivity(),
             navigateTo(StatisticsFragment.newInstance(user))
 
     }
+
+
 
 
 
