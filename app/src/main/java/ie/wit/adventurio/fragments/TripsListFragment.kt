@@ -3,9 +3,11 @@ package ie.wit.adventurio.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -66,6 +68,9 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
 
         root = inflater.inflate(R.layout.fragment_trips_list, container, false)
         activity?.title = getString(R.string.tripsList)
+        val animltr = AnimationUtils.loadAnimation(context,R.anim.swipe_lr)
+        root.linearLayoutTrips.startAnimation(animltr)
+
 
         root.recordTripFab.setOnClickListener {
             val intent = Intent(activity, RecordWalkingTripActivity::class.java)
@@ -73,7 +78,13 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
         }
 
         root.addTripFab.setOnClickListener{
-            navigateTo(ManualTripFragment.newInstance())
+            val animrtl = AnimationUtils.loadAnimation(context,R.anim.swipe_rl)
+            root.linearLayoutTrips.startAnimation(animrtl)
+
+            Handler().postDelayed({
+                navigateTo(ManualTripFragment.newInstance())
+            },500)
+
         }
         root.recordDrivingTripFab.setOnClickListener {
             val intent = Intent(activity, RecordDrivingTripActivity::class.java)

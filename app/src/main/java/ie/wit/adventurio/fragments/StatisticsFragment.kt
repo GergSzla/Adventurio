@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver.OnScrollChangedListener
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -64,7 +65,6 @@ class StatisticsFragment : Fragment(), AnkoLogger {
         app = activity?.application as MainApp
 
 
-
         /**/
 
         arguments?.let {
@@ -78,7 +78,8 @@ class StatisticsFragment : Fragment(), AnkoLogger {
     ): View? {
         root = inflater.inflate(R.layout.fragment_statistics, container, false)
         activity?.title = getString(R.string.menu_stats)
-
+        val anim = AnimationUtils.loadAnimation(context,R.anim.slide_down)
+        root.statsLayout.startAnimation(anim)
         getAllTrips(app.auth.currentUser!!.uid)
 
         return root
@@ -123,6 +124,7 @@ class StatisticsFragment : Fragment(), AnkoLogger {
             DrivingTrips.add(it)
             CyclingTrips.add(it)
         }
+
 
         WalkingTrips.removeIf { n -> n.tripType != "Walking"}
         DrivingTrips.removeIf { n -> n.tripType != "Driving"}

@@ -2,9 +2,11 @@ package ie.wit.fragments
 
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -62,7 +64,8 @@ class CarsListFragment : Fragment(), AnkoLogger, VehiclesListener {
 
 
         root = inflater.inflate(R.layout.fragment_cars_list, container, false)
-
+        val animltr = AnimationUtils.loadAnimation(context,R.anim.swipe_lr)
+        root.linearLayout.startAnimation(animltr)
 
 
         root.recyclerView2.layoutManager = LinearLayoutManager(activity)
@@ -91,7 +94,13 @@ class CarsListFragment : Fragment(), AnkoLogger, VehiclesListener {
 
 
         root.addCarFab.setOnClickListener {
-            navigateTo(AddVehicleFragment.newInstance())
+            val animrtl = AnimationUtils.loadAnimation(context,R.anim.swipe_rl)
+            root.linearLayout.startAnimation(animrtl)
+
+            Handler().postDelayed({
+                navigateTo(AddVehicleFragment.newInstance())
+            },500)
+
         }
 
         return root

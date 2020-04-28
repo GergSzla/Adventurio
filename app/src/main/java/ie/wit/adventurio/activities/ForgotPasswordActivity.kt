@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.EmailAuthProvider
@@ -33,6 +34,8 @@ class ForgotPasswordActivity : AppCompatActivity() {
         setContentView(R.layout.activity_forgot_password)
 
         app = application as MainApp
+        val animltr = AnimationUtils.loadAnimation(this,R.anim.swipe_lr)
+        forgotPWScrollview.startAnimation(animltr)
 
         btnGetPassword.setOnClickListener{
             validateForm()

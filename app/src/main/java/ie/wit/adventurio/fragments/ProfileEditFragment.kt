@@ -16,6 +16,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -69,6 +70,8 @@ class ProfileEditFragment : Fragment() {
     ): View? {
         root = inflater.inflate(R.layout.fragment_profile_edit, container, false)
         activity?.title = getString(R.string.editProf)
+        val anim = AnimationUtils.loadAnimation(context,R.anim.swipe_lr)
+        root.scrollView2.startAnimation(anim)
 
         root.editFirstName.setText(userProfileEdit!!.firstName)
         root.editSurname.setText(userProfileEdit!!.surname)

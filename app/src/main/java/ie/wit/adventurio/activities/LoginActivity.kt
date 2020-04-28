@@ -5,11 +5,13 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.text.TextUtils
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -38,6 +40,7 @@ import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.Trip
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.android.synthetic.main.fragment_trips_list.view.*
 import org.jetbrains.anko.*
 import java.util.*
@@ -76,7 +79,12 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
         app.googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         btnGoToRegScreen.setOnClickListener{
-            startActivity<RegisterActivity>()
+            val animrtl = AnimationUtils.loadAnimation(this,R.anim.swipe_rl)
+            scrollView3.startAnimation(animrtl)
+            Handler().postDelayed({
+                startActivity<RegisterActivity>()
+            },650)
+
         }
         btnLoginToAccount.setOnClickListener{
             validateForm()
@@ -104,7 +112,13 @@ class LoginActivity : AppCompatActivity(),AnkoLogger {
         }
 
         btnForgotPW.setOnClickListener{
-            startActivity<ForgotPasswordActivity>()
+            val animrlr = AnimationUtils.loadAnimation(this,R.anim.swipe_rl)
+            scrollView3.startAnimation(animrlr)
+
+            Handler().postDelayed({
+                startActivity<ForgotPasswordActivity>()
+            },650)
+
         }
 
         sign_in_button.setSize(SignInButton.SIZE_WIDE)

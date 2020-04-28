@@ -5,6 +5,7 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.NumberPicker
@@ -25,6 +26,7 @@ import ie.wit.adventurio.models.Trip
 import ie.wit.adventurio.models.Vehicle
 import kotlinx.android.synthetic.main.fragment_manual_trip.*
 import kotlinx.android.synthetic.main.fragment_manual_trip.view.*
+import kotlinx.android.synthetic.main.fragment_profile_edit.view.*
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerHours1
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerHours2
 import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerMinutes1
@@ -70,7 +72,8 @@ class ManualTripFragment : Fragment() {
     ): View? {
         root = inflater.inflate(R.layout.fragment_manual_trip, container, false)
         activity?.title = getString(R.string.menu_manual_record)
-
+        val anim = AnimationUtils.loadAnimation(context,R.anim.swipe_lr)
+        root.addTripScroll.startAnimation(anim)
 
         //https://android--code.blogspot.com/2018/02/android-kotlin-spinner-example.html
         val categories = arrayOf("Walking","Driving","Cycling")

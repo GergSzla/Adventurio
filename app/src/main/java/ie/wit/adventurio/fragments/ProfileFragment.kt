@@ -8,9 +8,11 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -58,7 +60,8 @@ class ProfileFragment : Fragment(), AnkoLogger {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_profile, container, false)
         activity?.title = getString(R.string.menu_prof)
-
+        val animltr = AnimationUtils.loadAnimation(context,R.anim.swipe_lr)
+        root.profLinear.startAnimation(animltr)
 
         /*val bundle = arguments
         if (bundle != null) {
@@ -96,7 +99,13 @@ class ProfileFragment : Fragment(), AnkoLogger {
 
 
         root.editProfileFab.setOnClickListener {
-            navigateTo(ProfileEditFragment.newInstance(userProfile!!))
+            val animrtl = AnimationUtils.loadAnimation(context,R.anim.swipe_rl)
+            root.profLinear.startAnimation(animrtl)
+
+            Handler().postDelayed({
+                navigateTo(ProfileEditFragment.newInstance(userProfile!!))
+            },500)
+
         }
 
         root.deleteProfileFab.setOnClickListener {

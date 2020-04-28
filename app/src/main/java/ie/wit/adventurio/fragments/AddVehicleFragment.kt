@@ -9,6 +9,7 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -53,7 +54,8 @@ class AddVehicleFragment : Fragment() {
     ): View? {
         root = inflater.inflate(R.layout.fragment_add_vehicle, container, false)
         activity?.title = getString(R.string.menu_add_car)
-
+        val anim = AnimationUtils.loadAnimation(context,R.anim.swipe_lr)
+        root.scrollView2.startAnimation(anim)
 
         //https://android--code.blogspot.com/2018/02/android-kotlin-spinner-example.html
         val categories = arrayOf("Petrol","Diesel","Electric")
