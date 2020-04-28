@@ -26,10 +26,7 @@ data class Trip (var tripID:String = "",
                  var dtID:String = "",
                  var orderByID: Long = 0,
                  var favourite:Boolean = false,
-                        /*var startLat:Double = 0.0,
-                        var startLng:Double = 0.0,
-                        var endLat:Double = 0.0,
-                        var endLng:Double = 0.0,*/
+
                  var lng: MutableList<String> = mutableListOf<String>(),
                  var lat: MutableList<String> = mutableListOf<String>(),
 

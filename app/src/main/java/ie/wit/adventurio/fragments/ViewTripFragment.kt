@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.core.view.isVisible
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -14,6 +15,7 @@ import com.google.android.gms.maps.model.*
 import ie.wit.adventurio.R
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Trip
+import kotlinx.android.synthetic.main.fragment_manual_trip.view.*
 import kotlinx.android.synthetic.main.fragment_view_trip.view.*
 
 
@@ -23,6 +25,8 @@ class ViewTripFragment : Fragment(),GoogleMap.OnMarkerClickListener  {
     lateinit var app: MainApp
     lateinit var root : View
     var trip = Trip()
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +40,9 @@ class ViewTripFragment : Fragment(),GoogleMap.OnMarkerClickListener  {
     ): View? {
         root = inflater.inflate(R.layout.fragment_view_trip, container, false)
         activity?.title = getString(R.string.viewAdv)
+        val anim = AnimationUtils.loadAnimation(context,R.anim.swipe_lr)
+        root.viewTripLayout.startAnimation(anim)
+
 
         val bundle = arguments
         if (bundle != null) {
@@ -103,6 +110,7 @@ class ViewTripFragment : Fragment(),GoogleMap.OnMarkerClickListener  {
                 .color(Color.BLUE)
 
         )
+
     }
 
     fun addData(){

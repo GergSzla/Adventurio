@@ -282,6 +282,12 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
             .commit()
     }
     override fun onTripClick(trip: Trip) {
-        navigateTo(ViewTripFragment.newInstance(trip))
+        val animrtl = AnimationUtils.loadAnimation(context,R.anim.swipe_rl)
+        root.linearLayoutTrips.startAnimation(animrtl)
+
+        Handler().postDelayed({
+            navigateTo(ViewTripFragment.newInstance(trip))
+        },500)
+
     }
 }
