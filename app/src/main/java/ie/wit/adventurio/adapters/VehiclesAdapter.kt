@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import ie.wit.adventurio.R
 import ie.wit.adventurio.models.Trip
@@ -52,12 +53,16 @@ class VehiclesAdapter constructor(var vehicles: ArrayList<Vehicle>,
             if (vehicle.vehicleImage == ""){
                 itemView.imgVehicle.setImageResource(R.drawable.ic_directions_car_black_24dp)
             } else {
-                Picasso.get().load(vehicle.vehicleImage)
-                    .fit()
-                    .centerInside()
-                    .transform(RoundedCornersTransformation(50,0))
-                    .into(itemView.imgVehicle)
+                var ref = FirebaseStorage.getInstance().getReference("vehicleImages/${vehicle.vehicleId}.jpg")
+                ref.downloadUrl.addOnSuccessListener {
+                    Picasso.get().load(it)
+                        .fit()
+                        .centerInside()
+                        .transform(RoundedCornersTransformation(50,0))
+                        .into(itemView.imgVehicle)
+                }
             }
+
         }
     }
 }

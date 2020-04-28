@@ -38,6 +38,19 @@ fun uploadImageView(app: MainApp, imageView: ImageView) {
  var uploadTask = imageRef.putBytes(data)
 }
 
+fun uploadVehicleImageView(app: MainApp, imageView: ImageView, vehID: String) {
+ // Get the data from an ImageView as bytes
+ val uid = app.auth.currentUser!!.uid
+ val imageRef = app.storage.child("vehicleImages").child("${vehID}.jpg")
+ val bitmap = (imageView.drawable as BitmapDrawable).bitmap
+ val baos = ByteArrayOutputStream()
+
+ bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+ val data = baos.toByteArray()
+
+ var uploadTask = imageRef.putBytes(data)
+}
+
 fun readImageUri(resultCode: Int, data: Intent?): Uri? {
  var uri: Uri? = null
  if (resultCode == Activity.RESULT_OK && data != null && data.data != null) {

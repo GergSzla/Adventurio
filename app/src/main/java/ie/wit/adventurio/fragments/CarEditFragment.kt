@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentManager
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import ie.wit.adventurio.R
 import ie.wit.adventurio.helpers.*
@@ -85,11 +86,14 @@ class CarEditFragment : Fragment() {
         if (vehicle.vehicleImage == ""){
             root.vehicleImage.setImageBitmap(readImageFromPath(activity!!, vehicle!!.vehicleImage))
         } else {
-            Picasso.get().load(vehicle.vehicleImage)
-                .fit()
-                .centerInside()
-                .transform(RoundedCornersTransformation(50,0))
-                .into(root.vehicleImage)
+            var ref = FirebaseStorage.getInstance().getReference("vehicleImages/${vehicle.vehicleId}.jpg")
+            ref.downloadUrl.addOnSuccessListener {
+                Picasso.get().load(it)
+                    .fit()
+                    .centerInside()
+                    .transform(RoundedCornersTransformation(50, 0))
+                    .into(root.vehicleImage)
+            }
         }
 
         root.editVehicleFab.setOnClickListener {
@@ -110,6 +114,9 @@ class CarEditFragment : Fragment() {
                 vehicle.vehicleYear = root.editVehYear.text.toString()
                 vehicle.tankCapacity = root.editVehTankCapac.text.toString().toDouble()
                 vehicle.currentOdometer = root.editVehOdo.text.toString().toInt()
+
+                uploadVehicleImageView(app,root.vehicleImage,vehicle.vehicleId)
+
                 updateVehicle(app.auth.currentUser!!.uid)
             }
 

@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import ie.wit.adventurio.R
 import ie.wit.adventurio.helpers.showImagePicker
+import ie.wit.adventurio.helpers.uploadVehicleImageView
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.Vehicle
@@ -106,6 +107,7 @@ class AddVehicleFragment : Fragment() {
                 user.vehicles.removeAt(user.vehicles.size - 1)
                 user.vehicles.add(vehicle)
 
+                uploadVehicleImageView(app,root.vehicleImageAdd,vehicle.vehicleId)
                 updateUserProfile(app.auth.currentUser!!.uid,user)
             }
 
