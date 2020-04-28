@@ -1,6 +1,7 @@
 package ie.wit.adventurio.fragments
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,14 +19,7 @@ import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import ie.wit.adventurio.models.Trip
 import kotlinx.android.synthetic.main.fragment_cycling_trips_edit.view.*
-import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerHours1
-import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerHours2
-import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerMinutes1
-import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.amountPickerMinutes2
-import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.editCaloriesBurned
-import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.editDistance
-import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.editTripName
-import kotlinx.android.synthetic.main.fragment_walking_trips_edit.view.updateTripFab
+
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -106,94 +100,146 @@ class CyclingTripsEditFragment : Fragment() {
 
         //update button
         root.updateTripFab.setOnClickListener {
+            validateCyclingForm()
+            if(!(root.editTripName.text.toString() == "" ||
+                        root.editDistance.text.toString() == "" ||
+                        root.editSpeed.text.toString() == "" ||
+                        root.editCaloriesBurned.text.toString() == "" )) {
+                if (root.amountPickerHours2.value < root.amountPickerHours1.value) {
+                    val toast =
+                        Toast.makeText(
+                            activity!!.applicationContext,
+                            "Time Ended is less than Time Initiated",
+                            Toast.LENGTH_LONG
+                        )
+                    toast.show()
+                } else if ((root.amountPickerHours2.value == root.amountPickerHours1.value) && (root.amountPickerMinutes2.value < root.amountPickerMinutes1.value)) {
+                    val toast =
+                        Toast.makeText(
+                            activity!!.applicationContext,
+                            "Time Ended is less than Time Initiated",
+                            Toast.LENGTH_LONG
+                        )
+                    toast.show()
+                } else {
+                    val day: Int = root.date_picker_cycling.dayOfMonth
+                    val month: Int = root.date_picker_cycling.month
+                    val year: Int = root.date_picker_cycling.year
+                    val calendar = Calendar.getInstance()
+                    calendar.set(year, month, day)
+                    dow = sdf.format(calendar.time)
+                    dateedit = "${day}, ${month_date.format(calendar.time)} $year"
 
-            if(root.amountPickerHours2.value < root.amountPickerHours1.value){
-                val toast =
-                    Toast.makeText(
-                        activity!!.applicationContext,
-                        "Time Ended is less than Time Initiated",
-                        Toast.LENGTH_LONG
-                    )
-                toast.show()
-            } else if((root.amountPickerHours2.value == root.amountPickerHours1.value) && (root.amountPickerMinutes2.value < root.amountPickerMinutes1.value)) {
-                val toast =
-                    Toast.makeText(
-                        activity!!.applicationContext,
-                        "Time Ended is less than Time Initiated",
-                        Toast.LENGTH_LONG
-                    )
-                toast.show()
-            } else {
-                val day: Int = root.date_picker_cycling.dayOfMonth
-                val month: Int = root.date_picker_cycling.month
-                val year: Int = root.date_picker_cycling.year
-                val calendar = Calendar.getInstance()
-                calendar.set(year,month,day)
-                dow = sdf.format(calendar.time)
-                dateedit = "${day}, ${month_date.format(calendar.time)} $year"
+                    trip.tripDistance = (root.editDistance.text.toString()).toDouble()
+                    trip.averageSpeed = (root.editSpeed.text.toString())
+                    trip.caloriesBurned = (root.editCaloriesBurned.text.toString()).toDouble()
+                    trip.tripName = root.editTripName.text.toString()
+                    trip.favourite = root.cbCyclingAddToFavs.isChecked
+                    trip.tripLength = ""
+                    trip.DayOfWeek = dow
+                    trip.Date = dateedit
 
-                trip.tripDistance = (root.editDistance.text.toString()).toDouble()
-                trip.averageSpeed = (root.editSpeed.text.toString())
-                trip.caloriesBurned = (root.editCaloriesBurned.text.toString()).toDouble()
-                trip.tripName = root.editTripName.text.toString()
-                trip.favourite = root.cbCyclingAddToFavs.isChecked
-                trip.tripLength = ""
-                trip.DayOfWeek = dow
-                trip.Date = dateedit
-
-                if ((root.amountPickerHours2.value-root.amountPickerHours1.value) < 10){
-                    trip.tripLength += (root.amountPickerHours2.value - root.amountPickerHours1.value).toString() + "Hours"
-                }else{
-                    trip.tripLength += (root.amountPickerHours2.value - root.amountPickerHours1.value).toString() + "Hours"
-                }
-
-                if(root.amountPickerMinutes2.value < root.amountPickerMinutes1.value){
-                    if ((root.amountPickerMinutes1.value - root.amountPickerMinutes2.value) < 10){
-
-                        trip.tripLength = ((root.amountPickerHours2.value - root.amountPickerHours1.value) - 1).toString() + "Hours"
-                        trip.tripLength += ", " +(0 + (root.amountPickerMinutes1.value - root.amountPickerMinutes2.value)).toString() + "Minutes"
-
-
-
-                    }else{
-                        trip.tripLength = ((root.amountPickerHours2.value - root.amountPickerHours1.value) - 1).toString()+ "Hours"
-                        trip.tripLength += ", " + (60-(root.amountPickerMinutes1.value - root.amountPickerMinutes2.value)).toString() + "Minutes"
+                    if ((root.amountPickerHours2.value - root.amountPickerHours1.value) < 10) {
+                        trip.tripLength += (root.amountPickerHours2.value - root.amountPickerHours1.value).toString() + "Hours"
+                    } else {
+                        trip.tripLength += (root.amountPickerHours2.value - root.amountPickerHours1.value).toString() + "Hours"
                     }
-                }else{
-                    if ((root.amountPickerMinutes2.value - root.amountPickerMinutes1.value) < 10){
-                        trip.tripLength += ", " +(root.amountPickerMinutes2.value - root.amountPickerMinutes1.value).toString() + "Minutes"
-                    }else{
-                        trip.tripLength += ", " + (root.amountPickerMinutes2.value - root.amountPickerMinutes1.value).toString() + "Minutes"
+
+                    if (root.amountPickerMinutes2.value < root.amountPickerMinutes1.value) {
+                        if ((root.amountPickerMinutes1.value - root.amountPickerMinutes2.value) < 10) {
+
+                            trip.tripLength =
+                                ((root.amountPickerHours2.value - root.amountPickerHours1.value) - 1).toString() + "Hours"
+                            trip.tripLength += ", " + (0 + (root.amountPickerMinutes1.value - root.amountPickerMinutes2.value)).toString() + "Minutes"
+
+
+                        } else {
+                            trip.tripLength =
+                                ((root.amountPickerHours2.value - root.amountPickerHours1.value) - 1).toString() + "Hours"
+                            trip.tripLength += ", " + (60 - (root.amountPickerMinutes1.value - root.amountPickerMinutes2.value)).toString() + "Minutes"
+                        }
+                    } else {
+                        if ((root.amountPickerMinutes2.value - root.amountPickerMinutes1.value) < 10) {
+                            trip.tripLength += ", " + (root.amountPickerMinutes2.value - root.amountPickerMinutes1.value).toString() + "Minutes"
+                        } else {
+                            trip.tripLength += ", " + (root.amountPickerMinutes2.value - root.amountPickerMinutes1.value).toString() + "Minutes"
+                        }
                     }
+
+
+                    if (root.amountPickerMinutes1.value < 10) {
+                        trip.tripStartTime =
+                            root.amountPickerHours1.value.toString() + ":0" + root.amountPickerMinutes1.value.toString()
+                    } else {
+                        trip.tripStartTime =
+                            root.amountPickerHours1.value.toString() + ":" + root.amountPickerMinutes1.value.toString()
+                    }
+                    if (root.amountPickerMinutes2.value < 10) {
+                        trip.tripEndTime =
+                            root.amountPickerHours2.value.toString() + ":0" + root.amountPickerMinutes2.value.toString()
+                    } else {
+                        trip.tripEndTime =
+                            root.amountPickerHours2.value.toString() + ":" + root.amountPickerMinutes2.value.toString()
+                    }
+
+
+
+                    updateUserDonation(app.auth.currentUser!!.uid, trip)
+                    val toast =
+                        Toast.makeText(
+                            activity!!.applicationContext,
+                            "Adventure Updated!",
+                            Toast.LENGTH_LONG
+                        )
+                    toast.show()
                 }
-
-
-                if ( root.amountPickerMinutes1.value < 10){
-                    trip.tripStartTime = root.amountPickerHours1.value.toString() + ":0" + root.amountPickerMinutes1.value.toString()
-                }else{
-                    trip.tripStartTime = root.amountPickerHours1.value.toString() + ":" + root.amountPickerMinutes1.value.toString()
-                }
-                if(root.amountPickerMinutes2.value < 10){
-                    trip.tripEndTime = root.amountPickerHours2.value.toString() + ":0" + root.amountPickerMinutes2.value.toString()
-                }else{
-                    trip.tripEndTime = root.amountPickerHours2.value.toString() + ":" + root.amountPickerMinutes2.value.toString()
-                }
-
-
-
-                updateUserDonation(app.auth.currentUser!!.uid,trip)
-                val toast =
-                    Toast.makeText(
-                        activity!!.applicationContext,
-                        "Adventure Updated!",
-                        Toast.LENGTH_LONG
-                    )
-                toast.show()
             }
         }
 
 
         return root
+    }
+
+    private fun validateCyclingForm(): Boolean {
+        var valid = true
+
+        //validate tripName
+        val tripname = root.editTripName.text.toString()
+        if (TextUtils.isEmpty(tripname)) {
+            root.editTripName.error = "Required."
+            valid = false
+        } else {
+            root.editTripName.error = null
+        }
+
+        //validate distance
+        val distance = root.editDistance.text.toString()
+        if (TextUtils.isEmpty(distance)) {
+            root.editDistance.error = "Required (To Calculate Calories Burned!)."
+            valid = false
+        } else {
+            root.editDistance.error = null
+        }
+
+        //validate speed
+        val speed = root.editSpeed.text.toString()
+        if (TextUtils.isEmpty(speed)) {
+            root.editSpeed.error = "Required."
+            valid = false
+        } else {
+            root.editSpeed.error = null
+        }
+
+        //validate cal
+        val cal = root.editCaloriesBurned.text.toString()
+        if (TextUtils.isEmpty(cal)) {
+            root.editCaloriesBurned.error = "Required."
+            valid = false
+        } else {
+            root.editCaloriesBurned.error = null
+        }
+
+        return valid
     }
 
     fun updateUserDonation(uid: String?, trip: Trip) {

@@ -76,7 +76,7 @@
 
     <!--Trip Edit Form-->
     <string name="cycCat">Edit Cycling Adventure</string>
-    <string name="driveCat">Edit Cycling Adventure</string>
+    <string name="driveCat">Edit Driving Adventure</string>
     <string name="walkCat">Edit Walking Adventure</string>
     <string name="date">Edit Trip Date</string>
     <string name="name">Edit Trip Name</string>
