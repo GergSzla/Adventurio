@@ -14,13 +14,8 @@ class MainApp : Application() {
     lateinit var googleSignInClient: GoogleSignInClient
     lateinit var storage: StorageReference
     lateinit var userImage: Uri
-    //lateinit var users: UserStore
-    //lateinit var trips: TripStore
-
 
     override fun onCreate() {
         super.onCreate()
-        //users = UserJsonStore(applicationContext)
-        //trips = TripJsonStore(applicationContext)
     }
 }

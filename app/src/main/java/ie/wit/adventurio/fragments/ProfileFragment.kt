@@ -80,7 +80,6 @@ class ProfileFragment : Fragment(), AnkoLogger {
         root.txtCyclingDistanceProf.text = userProfile!!.cyclingDistanceGoal.toString()+"km"
         root.txtWeight.text = userProfile!!.weight.toString()+"kg"
 
-        root.imageView.setImageBitmap(activity?.let { readImageFromPath(it, userProfile!!.image) })
 
 
         if(app.auth.currentUser!!.photoUrl != null){

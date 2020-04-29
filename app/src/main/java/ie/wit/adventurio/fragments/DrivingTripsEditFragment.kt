@@ -186,7 +186,7 @@ class DrivingTripsEditFragment : Fragment() {
 
 
 
-                    updateUserDonation(app.auth.currentUser!!.uid, trip)
+                    updateUserTrip(app.auth.currentUser!!.uid, trip)
                     val toast =
                         Toast.makeText(
                             activity!!.applicationContext,
@@ -236,7 +236,7 @@ class DrivingTripsEditFragment : Fragment() {
         return valid
     }
 
-    fun updateUserDonation(uid: String?, trip: Trip) {
+    fun updateUserTrip(uid: String?, trip: Trip) {
         app.database.child("user-trips").child(uid!!).child(trip.dtID)
             .addListenerForSingleValueEvent(
                 object : ValueEventListener {
@@ -246,11 +246,9 @@ class DrivingTripsEditFragment : Fragment() {
                             .replace(R.id.homeFrame, TripsListFragment.newInstance())
                             .addToBackStack(null)
                             .commit()
-                        //hideLoader(loader)
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        //info("Firebase Donation error : ${error.message}")
                     }
                 })
     }
@@ -288,23 +286,6 @@ class DrivingTripsEditFragment : Fragment() {
 
             })
 
-    }
-
-    fun deleteUserTrip(uid: String?, trip: Trip) {
-        app.database.child("user-trips").child(uid!!).child(trip.dtID)
-            .addListenerForSingleValueEvent(
-                object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        snapshot.ref.removeValue()
-                        activity!!.supportFragmentManager.beginTransaction()
-                            .replace(R.id.homeFrame, TripsListFragment.newInstance())
-                            .addToBackStack(null)
-                            .commit()
-                    }
-
-                    override fun onCancelled(error: DatabaseError) {
-                    }
-                })
     }
 
     fun getUser(){

@@ -13,6 +13,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import ie.wit.adventurio.R
@@ -66,38 +67,20 @@ class Home : AppCompatActivity(),
         ft = supportFragmentManager.beginTransaction()
         getUser(app.auth.currentUser?.uid)
 
-
-        if(app.auth.currentUser?.photoUrl != null){
-            Picasso.get().load(app.auth.currentUser?.photoUrl)
-                .resize(180, 180)
-                .transform(CropCircleTransformation())
-                .into(navView.getHeaderView(0).homeProfImage, object : Callback {
-                    override fun onSuccess() {
-                        // Drawable is ready
-                        uploadImageView(app,navView.getHeaderView(0).homeProfImage)
-                    }
-                    override fun onError(e: Exception) {}
-                })
-        } else {
-            Picasso.get().load(R.mipmap.ic_avatar)
-                .resize(180, 180)
-                .transform(CropCircleTransformation())
-                .into(navView.getHeaderView(0).homeProfImage, object : Callback {
-                    override fun onSuccess() {
-                        // Drawable is ready
-                        uploadImageView(app, navView.getHeaderView(0).homeProfImage)
-                    }
-
-                    override fun onError(e: Exception) {}
-                })
-        }
     }
 
-    /*override fun onResume() {
-        super.onResume()
-    }*/
+    fun updateUserProfile(uid: String?, image: Int) {
+        app.database.child("user-stats").child(uid!!).child("image")
+            .addListenerForSingleValueEvent(
+                object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.ref.setValue(image)
+                    }
 
-
+                    override fun onCancelled(error: DatabaseError) {
+                    }
+                })
+    }
 
     private fun getUser(userId : String?){
         val uid = FirebaseAuth.getInstance().currentUser!!.uid
@@ -112,6 +95,46 @@ class Home : AppCompatActivity(),
                 navView.getHeaderView(0).nav_header_name.text = "${user.firstName} ${user.surname}"
 
                 uidRef.removeEventListener(this)
+
+                if(user.image == 0) {
+                    if (app.auth.currentUser?.photoUrl != null) {
+                        Picasso.get().load(app.auth.currentUser?.photoUrl)
+                            .resize(180, 180)
+                            .transform(CropCircleTransformation())
+                            .into(navView.getHeaderView(0).homeProfImage, object : Callback {
+                                override fun onSuccess() {
+                                    // Drawable is ready
+                                    uploadImageView(app, navView.getHeaderView(0).homeProfImage)
+                                    user.image = 1
+                                    updateUserProfile(app.auth.currentUser!!.uid, user.image)
+                                }
+
+                                override fun onError(e: Exception) {}
+                            })
+                    } else {
+                        Picasso.get().load(R.mipmap.ic_avatar)
+                            .resize(180, 180)
+                            .transform(CropCircleTransformation())
+                            .into(navView.getHeaderView(0).homeProfImage, object : Callback {
+                                override fun onSuccess() {
+                                    // Drawable is ready
+                                    uploadImageView(app, navView.getHeaderView(0).homeProfImage)
+                                    user.image = 1
+                                    updateUserProfile(app.auth.currentUser!!.uid, user.image)
+                                }
+
+                                override fun onError(e: Exception) {}
+                            })
+                    }
+                } else if (user.image == 1){
+                    var ref = FirebaseStorage.getInstance().getReference("photos/${app.auth.currentUser!!.uid}.jpg")
+                    ref.downloadUrl.addOnSuccessListener {
+                        Picasso.get().load(it)
+                            .resize(180, 180)
+                            .transform(CropCircleTransformation())
+                            .into(navView.getHeaderView(0).homeProfImage)
+                    }
+                }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {

@@ -250,7 +250,7 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
         app.database.child("user-trips").child(userId!!).orderByChild("orderByID")
             .addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(error: DatabaseError) {
-                    info("Firebase Donation error : ${error.message}")
+                    info("Firebase Trips error : ${error.message}")
                 }
 
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -281,6 +281,7 @@ class TripsListFragment : Fragment(), AnkoLogger, TripsListener {
             .addToBackStack(null)
             .commit()
     }
+
     override fun onTripClick(trip: Trip) {
         val animrtl = AnimationUtils.loadAnimation(context,R.anim.swipe_rl)
         root.linearLayoutTrips.startAnimation(animrtl)

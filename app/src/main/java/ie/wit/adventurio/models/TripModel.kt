@@ -26,10 +26,8 @@ data class Trip (var tripID:String = "",
                  var dtID:String = "",
                  var orderByID: Long = 0,
                  var favourite:Boolean = false,
-
                  var lng: MutableList<String> = mutableListOf<String>(),
                  var lat: MutableList<String> = mutableListOf<String>(),
-
                  var zoom:Float = 15f) : Parcelable
 
 

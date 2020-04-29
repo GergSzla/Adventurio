@@ -169,7 +169,6 @@ class ProfileEditFragment : Fragment() {
         userProfileEdit!!.weight = root.editWeight.text.toString().toDouble()
         userProfileEdit!!.drivingDistanceGoal = (root.editDrivingDistanceGoal.text.toString()).toDouble()
         userProfileEdit!!.cyclingDistanceGoal = (root.editCyclingDistanceGoal.text.toString()).toDouble()
-        userProfileEdit!!.image
 
         //app.users.updateAccount(user.copy())
         updateUserProfile(app.auth.currentUser!!.uid, userProfileEdit!!)
@@ -211,7 +210,6 @@ class ProfileEditFragment : Fragment() {
                     userProfileEdit!!.weight = root.editWeight.text.toString().toDouble()
                     userProfileEdit!!.drivingDistanceGoal = (root.editDrivingDistanceGoal.text.toString()).toDouble()
                     userProfileEdit!!.cyclingDistanceGoal = (root.editCyclingDistanceGoal.text.toString()).toDouble()
-                    userProfileEdit!!.image
 
                     //app.users.updateAccount(user.copy())
                     updateUserProfile(app.auth.currentUser!!.uid, userProfileEdit!!)
@@ -238,12 +236,6 @@ class ProfileEditFragment : Fragment() {
     val home = Home()
 
 
-
-    //handle result of picked image
-
-
-
-
     fun updateUserProfile(uid: String?, user: Account) {
         app.database.child("user-stats").child(uid!!)
             .addListenerForSingleValueEvent(
@@ -258,7 +250,6 @@ class ProfileEditFragment : Fragment() {
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        //info("Firebase Donation error : ${error.message}")
                     }
                 })
     }

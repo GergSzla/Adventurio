@@ -407,7 +407,6 @@ class ManualTripFragment : Fragment() {
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        //info("Firebase Donation error : ${error.message}")
                     }
                 })
     }
