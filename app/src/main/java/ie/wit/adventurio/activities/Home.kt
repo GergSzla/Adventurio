@@ -188,8 +188,9 @@ class Home : AppCompatActivity(),
 
 
     private fun signOut(){
-        finish()
         app.auth.signOut()
+        app.googleSignInClient.signOut()
+        finish()
         startActivity<LoginActivity>()
     }
 

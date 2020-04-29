@@ -133,9 +133,7 @@ class ProfileFragment : Fragment(), AnkoLogger {
     }
 
     fun deleteProfile(){
-        removeUserFirebaseAuth() //removes user auth
-        deleteUser(app.auth.currentUser!!.uid) //removes user stats from database
-        deleteUserTrips(app.auth.currentUser!!.uid) //removes user's trips from db
+        restartApp()
     }
 
     fun removeUserFirebaseAuth(){
@@ -148,6 +146,7 @@ class ProfileFragment : Fragment(), AnkoLogger {
                             activity!!.applicationContext,
                             "Account Removed! Application Restarting . . .",
                             Toast.LENGTH_LONG
+
                         )
                     toast.show()
                 }
@@ -161,6 +160,7 @@ class ProfileFragment : Fragment(), AnkoLogger {
                 object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         snapshot.ref.removeValue()
+                        deleteUserTrips(app.auth.currentUser!!.uid) //removes user's trips from db
                     }
 
                     override fun onCancelled(error: DatabaseError) {
@@ -175,7 +175,7 @@ class ProfileFragment : Fragment(), AnkoLogger {
                 object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         snapshot.ref.removeValue()
-                        restartApp()
+                        removeUserFirebaseAuth() //removes user auth
                     }
 
                     override fun onCancelled(error: DatabaseError) {
@@ -195,7 +195,8 @@ class ProfileFragment : Fragment(), AnkoLogger {
         )
         val mgr = context!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         mgr[AlarmManager.RTC, System.currentTimeMillis() + 100] = mPendingIntent
-        System.exit(0)
+        deleteUser(app.auth.currentUser!!.uid) //removes user stats from database
+        //System.exit(0)
     }
 
 
