@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import ie.wit.adventurio.R
 import ie.wit.adventurio.activities.LoginActivity
@@ -82,14 +83,11 @@ class ProfileFragment : Fragment(), AnkoLogger {
 
 
 
-        if(app.auth.currentUser!!.photoUrl != null){
-            Picasso.get().load(app.auth.currentUser!!.photoUrl)
-                .fit()
-                .centerCrop()
-                .transform(RoundedCornersTransformation(50,0))
-                .into(root.linearview.imageView)
-        } else {
-            Picasso.get().load(R.mipmap.ic_avatar)
+
+
+        var ref = FirebaseStorage.getInstance().getReference("photos/${app.auth.currentUser!!.uid}.jpg")
+        ref.downloadUrl.addOnSuccessListener {
+            Picasso.get().load(it)
                 .fit()
                 .centerCrop()
                 .transform(RoundedCornersTransformation(50,0))

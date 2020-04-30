@@ -29,16 +29,15 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import ie.wit.adventurio.R
 import ie.wit.adventurio.activities.Home
-import ie.wit.adventurio.helpers.createLoader
-import ie.wit.adventurio.helpers.hideLoader
-import ie.wit.adventurio.helpers.readImageFromPath
-import ie.wit.adventurio.helpers.showLoader
+import ie.wit.adventurio.helpers.*
 import ie.wit.adventurio.main.MainApp
 import ie.wit.adventurio.models.Account
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import kotlinx.android.synthetic.main.fragment_profile_edit.*
 import kotlinx.android.synthetic.main.fragment_profile_edit.view.*
@@ -49,7 +48,7 @@ class ProfileEditFragment : Fragment() {
 
 
     lateinit var app: MainApp
-    //var user = Account()
+    val IMAGE_REQUEST = 1
     var userProfileEdit: Account? = null
     lateinit var loader : AlertDialog
     lateinit var root: View
@@ -87,16 +86,10 @@ class ProfileEditFragment : Fragment() {
         root.editDistanceGoal.setText(userProfileEdit!!.distanceGoal.toString())
         root.editWeight.setText(userProfileEdit!!.weight.toString())
 
-        if(app.auth.currentUser!!.photoUrl != null){
-            Picasso.get().load(app.auth.currentUser!!.photoUrl)
-                .fit()
-                .centerCrop()
-                .transform(CropCircleTransformation())
-                .into(root.scrollView2.profImage)
-        } else {
-            Picasso.get().load(R.mipmap.ic_avatar)
-                .fit()
-                .centerCrop()
+        var ref = FirebaseStorage.getInstance().getReference("photos/${app.auth.currentUser!!.uid}.jpg")
+        ref.downloadUrl.addOnSuccessListener {
+            Picasso.get().load(it)
+                .resize(180, 180)
                 .transform(CropCircleTransformation())
                 .into(root.scrollView2.profImage)
         }
@@ -137,6 +130,10 @@ class ProfileEditFragment : Fragment() {
             }
         }
 
+        root.addProfImage.setOnClickListener {
+            showImagePicker(this, IMAGE_REQUEST)
+        }
+
         root.btnResetPass.setOnClickListener {
             resetPassword()
         }
@@ -169,12 +166,31 @@ class ProfileEditFragment : Fragment() {
         userProfileEdit!!.weight = root.editWeight.text.toString().toDouble()
         userProfileEdit!!.drivingDistanceGoal = (root.editDrivingDistanceGoal.text.toString()).toDouble()
         userProfileEdit!!.cyclingDistanceGoal = (root.editCyclingDistanceGoal.text.toString()).toDouble()
+        uploadImageView(app,root.profImage)
 
         //app.users.updateAccount(user.copy())
         updateUserProfile(app.auth.currentUser!!.uid, userProfileEdit!!)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (!(requestCode !== IMAGE_REQUEST || resultCode !== Activity.RESULT_OK || data == null || data.data == null)) {
+            val uri: Uri = data.data!!
+            try {
+                val bitmap =
+                    MediaStore.Images.Media.getBitmap(activity!!.contentResolver, uri)
+                Picasso.get().load(uri)
+                    .fit()
+                    .centerCrop()
+                    .transform(RoundedCornersTransformation(50,0))
+                    .into(root.scrollView2.profImage)
+                root.addProfImage.setText(R.string.btnChangeImage)
 
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+    }
 
     private fun resetPassword(){
         loader = createLoader(activity!!)
@@ -210,6 +226,7 @@ class ProfileEditFragment : Fragment() {
                     userProfileEdit!!.weight = root.editWeight.text.toString().toDouble()
                     userProfileEdit!!.drivingDistanceGoal = (root.editDrivingDistanceGoal.text.toString()).toDouble()
                     userProfileEdit!!.cyclingDistanceGoal = (root.editCyclingDistanceGoal.text.toString()).toDouble()
+                    uploadImageView(app,root.profImage)
 
                     //app.users.updateAccount(user.copy())
                     updateUserProfile(app.auth.currentUser!!.uid, userProfileEdit!!)
