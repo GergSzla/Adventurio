@@ -22,6 +22,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
 import ie.wit.adventurio.R
 import ie.wit.adventurio.activities.LoginActivity
@@ -42,7 +43,7 @@ class ProfileFragment : Fragment(), AnkoLogger {
     lateinit var eventListener : ValueEventListener
     var user = Account()
     var userProfile: Account? = null
-
+    lateinit var ref: StorageReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,8 +85,7 @@ class ProfileFragment : Fragment(), AnkoLogger {
 
 
 
-
-        var ref = FirebaseStorage.getInstance().getReference("photos/${app.auth.currentUser!!.uid}.jpg")
+        ref = FirebaseStorage.getInstance().getReference("photos/${app.auth.currentUser!!.uid}.jpg")
         ref.downloadUrl.addOnSuccessListener {
             Picasso.get().load(it)
                 .fit()
@@ -172,13 +172,20 @@ class ProfileFragment : Fragment(), AnkoLogger {
                 object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         snapshot.ref.removeValue()
-                        removeUserFirebaseAuth() //removes user auth
+                        deleteUserPhoto()
                     }
 
                     override fun onCancelled(error: DatabaseError) {
                         info("Firebase User error : ${error.message}")
                     }
                 })
+    }
+
+    fun deleteUserPhoto(){
+        ref.delete().addOnSuccessListener {
+            removeUserFirebaseAuth() //removes user auth
+        }
+
     }
 
     private fun restartApp() {
